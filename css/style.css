@@ -1,0 +1,32 @@
+h1, #description {
+	padding-left: 10%; 
+}
+.btn-group {
+	float: right;
+}
+.add {
+	line-height: 34px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.times, .lengthlabel{
+	line-height: 34px;;
+}
+.length, .times {
+	margin-right: 10px;
+	float: left;
+}
+.repeattime, .length {
+	width: 50%;
+	margin-right: 10px;
+	float: left;
+}
+.row {
+	padding-top: 10px;
+}
+.repeat {
+	display: inline;
+}
+input, option {
+	text-align: center;
+}
