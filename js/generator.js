@@ -91,11 +91,11 @@
 
   function generateFloat(floatObject) {
     var
-    precision = floatObject.precision, 
+    precision = floatObject.floatprecision, 
     min = floatObject.numbermin, 
     max = floatObject.numbermax;
 
-    var number = Math.random() * (max - min) + min;
+    var number = new Number(Math.random() * (max - min) + min);
 
     return number.toFixed(precision);
   }
