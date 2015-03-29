@@ -8,7 +8,7 @@ $(function(){
 					+"</div>");
 
 	var number_type = ("<div class='col-sm-2'>"
-					+	"<select class='form-control numbertype'>"
+					+	"<select class='numbertype form-control'>"
 					+		"<option selected disabled hidden value=''>Number type</option>"
 					+		"<option value='integer'>Integer</option>"
 					+		"<option value='float'>Float</option"
@@ -16,23 +16,23 @@ $(function(){
 					+"</div>");
 
 	var number_min = ("<div class='col-sm-2'>"
-					+	"<input class='form-control numbermin' type='text' placeholder='min'>"
+					+	"<input class='numbermin form-control' type='text' placeholder='min'>"
 					+"</div>");
 
 	var number_max = ("<div class='col-sm-2'>"
-					+	"<input class='form-control numbermax' type='text' placeholder='max'>"
+					+	"<input class='numbermax form-control' type='text' placeholder='max'>"
 					+"</div>");
 
 	var float_precision = ("<div class='col-sm-2'>"
-						+		"<input class='form-control floatprecision' type='text' placeholder='precision'>"
+						+		"<input class='floatprecision form-control' type='text' placeholder='precision'>"
 						+	"</div>");
 	
 	var string_length = ("<div class='col-sm-2'>"
-						+	"<input class='form-control stringlength' type='text' placeholder='String length'>"
+						+	"<input class='stringlength form-control' type='text' placeholder='String length'>"
 						+"</div>");
 
 	var choose_charset = ("<div class='col-sm-2'>"
-						+	"<select class='form-control choosecharset'>"
+						+	"<select class='choosecharset form-control'>"
 						+		"<option value='' hidden disabled selected>Charset</option>"
 						+		"<option value='ascii'>ASCII</option> "
 						+		"<option value='unicode'>Unicode</option>"
@@ -40,24 +40,24 @@ $(function(){
 						+"</div>");
 
 	var line_length = ("<div class='col-sm-2'>"
-					+		"<input class='form-control linelength' type='text' placeholder='Line length'>"
+					+		"<input class='linelength form-control' type='text' placeholder='Line length'>"
 					+	"</div>");
 
 	var line_break = ("<div class='col-sm-2'>"
-					+		"<input class='form-control linebreak' type='text' placeholder='Line break'>"
+					+		"<input class='linebreak form-control' type='text' placeholder='Line break'>"
 					+"</div>");
 
 	var word_length = ("<div class='col-sm-2'>"
-					+		"<input class='form-control wordlength' type='text' placeholder='Word length'>"
+					+		"<input class='wordlength form-control' type='text' placeholder='Word length'>"
 					+	"</div>");
 
 	var word_break = ("<div class='col-sm-2'>"
-					+		"<input class='form-control wordbreak' type='text' placeholder='Word break'>"
+					+		"<input class='wordbreak form-control' type='text' placeholder='Word break'>"
 					+	"</div>");
 
 	var repeat = ("<div class='col-sm-2 repeat'>"
 				+ 	"<span class='times'>x</span>"
-				+		"<input class='form-control repeattime' type='text' value='1'>"
+				+	"<input class='repeattime form-control' type='text' value='1'>"
 				+	"<span class='times'>times</span>"
 				+"</div>");
 
@@ -90,10 +90,10 @@ $(function(){
 		console.log(number_type_dom);
 		switch(number_type_dom.val()) {
 			case "integer":
-				number_type_dom.parent().after(number_min, number_max);
+				number_type_dom.parent().after(number_min, number_max, repeat);
 				break;
 			case "float":
-				number_type_dom.parent().after(float_precision, number_min, number_max);
+				number_type_dom.parent().after(float_precision, number_min, number_max, repeat);
 				break;
 		}
 	});
@@ -104,7 +104,7 @@ $(function(){
 	$("#datafield").on("change", ".choosecharset", function(event){
 		console.log("chosen charset changed");
 		var charset_dom = $(event.target);
-		charset_dom.parent().after(line_length, line_break, word_length, word_break);
+		charset_dom.parent().after(line_length, line_break, word_length, word_break, repeat);
 	});
 
 	$("#datafield").on("focus", ".wordbreak", function(event){	
@@ -134,8 +134,25 @@ $(function(){
 	});
 
 	$("#generate").on("click", function() {
-		var containers = $("#datafield").find(".row");
-
+		var rows = $("#datafield").find(".row");
+		var arrJson = [];
+		for(var i=0; i<rows.length; i++) {
+			var divs = $(rows[i]).children();
+			var json = {};
+			for(var j=0; j<divs.length; j++) {
+				var k=0
+				if (j == divs.length-1) {
+					k=1;
+				}
+				var className = $($(divs[j]).children()[k]).attr('class').split(/\s+/)[0];
+				console.log(className);
+				var value = $($(divs[j]).children()[k]).val();
+				console.log(value);
+				json[className] = value;
+			}
+			arrJson.push(json);
+		}
+		generator.generate(arrJson);
 	});
 
 });
