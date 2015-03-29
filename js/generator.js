@@ -86,7 +86,9 @@
     min = integerObject.numbermin, 
     max = integerObject.numbermax;
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    var number = new Number(Math.floor(Math.random() * (max - min + 1)) + min);
+
+    return number.toFixed(0);
   }
 
   function generateFloat(floatObject) {

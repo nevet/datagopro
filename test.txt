@@ -1,0 +1,52 @@
+[{
+	"datatype" : "string",
+	"stringlength": 100,
+	"choosecharset" : "ascii",
+	"linelength" : 20,
+	"linebreak" : "\n",
+	"wordlength" : 6,
+	"wordbreak" : " ",
+	"repeattime" : 3
+},
+{
+	"datatype" : "number",
+	"numbertype" : "integer",
+	"min" : 100,
+	"max" : 10000,
+	"repeattime" : 300
+},
+{
+	"datatype" : "number",
+	"numbertype" : "float",
+	"precision" : 5,
+	"min" : 100,
+	"max" : 10000,
+	"repeattime" : 300
+}]
+
+
+[{
+	"datatype" : "string",
+	"stringlength": 100,
+	"choosecharset" : "ascii",
+	"linelength" : 33,
+	"linebreak" : "\n",
+	"wordlength" : 6,
+	"wordbreak" : " ",
+	"repeattime" : 3
+},
+{
+	"datatype" : "number",
+	"numbertype" : "integer",
+	"min" : 100,
+	"max" : 10000,
+	"repeattime" : 300
+},
+{
+	"datatype" : "number",
+	"numbertype" : "float",
+	"precision" : 5,
+	"min" : 100,
+	"max" : 10000,
+	"repeattime" : 300
+}]
