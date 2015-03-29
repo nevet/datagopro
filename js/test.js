@@ -1,95 +1,143 @@
 $(function(){
-	var data_type_number = ("<div class='col-sm-2'>"
-							+	"<select class='datatype form-control '>"
-							+		"<option value='number' selected>Number</option> "
-							+		"<option value='string'>String</option>"
-							+	"</select>"
-							+"</div>");
+	var data_type = ("<div class='col-sm-2'>"
+					+	"<select class='datatype form-control '>"
+					+		"<option selected disabled hidden value=''>Data type</option>"
+					+		"<option value='number'>Number</option> "
+					+		"<option value='string'>String</option>"
+					+	"</select>"
+					+"</div>");
 
-	var data_type_string = ("<div class='col-sm-2'>"
-							+	"<select class='datatype form-control '>"
-							+		"<option value='number'>Number</option> "
-							+		"<option value='string' selected>String</option>"
-							+	"</select>"
-							+"</div>");
-
-	var number_type_integer = ("<div class='col-sm-2'>"
-								+	"<select class='form-control numbertype'>"
-								+		"<option value='integer' selected>Integer</option>"
-								+		"<option value='float'>Float</option>"
-								+	"</select>"
-								+"</div>");
-
-	var number_type_float = ("<div class='col-sm-2'>"
-								+	"<select class='form-control numbertype'>"
-								+		"<option value='integer'>Integer</option>"
-								+		"<option value='float'selected>Float</option>"
-								+	"</select>"
-								+"</div>");
+	var number_type = ("<div class='col-sm-2'>"
+					+	"<select class='form-control numbertype'>"
+					+		"<option selected disabled hidden value=''>Number type</option>"
+					+		"<option value='integer'>Integer</option>"
+					+		"<option value='float'>Float</option"
+					+	"</select>"
+					+"</div>");
 
 	var number_min = ("<div class='col-sm-2'>"
-					+		"<input class='form-control numbermin' type='text' placeholder='min'>"
-					+	"</div>");
+					+	"<input class='form-control numbermin' type='text' placeholder='min'>"
+					+"</div>");
 
 	var number_max = ("<div class='col-sm-2'>"
-					+		"<input class='form-control numbermax' type='text' placeholder='max'>"
-					+	"</div>");
+					+	"<input class='form-control numbermax' type='text' placeholder='max'>"
+					+"</div>");
 
 	var float_precision = ("<div class='col-sm-2'>"
 						+		"<input class='form-control floatprecision' type='text' placeholder='precision'>"
 						+	"</div>");
 	
 	var string_length = ("<div class='col-sm-2'>"
-						+	"<input class='form-control length' type='text'>"
-						+	"<span class='lengthlabel'>length</span>"
+						+	"<input class='form-control stringlength' type='text' placeholder='String length'>"
 						+"</div>");
 
-	var repeat = ("<div class='col-sm-2 repeat'>"
-				  + 	"<span class='times'>x</span>"
-				  +		"<input class='form-control repeattime' type='text' value='1'>"
-				  +		"<span class='times'>times</span>"
-				  +"</div>");
+	var choose_charset = ("<div class='col-sm-2'>"
+						+	"<select class='form-control choosecharset'>"
+						+		"<option value='' hidden disabled selected>Charset</option>"
+						+		"<option value='ascii'>ASCII</option> "
+						+		"<option value='unicode'>Unicode</option>"
+						+	"</select>"
+						+"</div>");
 
-	var number_integer = (data_type_number + number_type_integer + number_min + number_max + repeat);
-	var number_float = (data_type_number + number_type_float + number_min + number_max + float_precision + repeat);
-	var string = (data_type_string + string_length + repeat);
+	var line_length = ("<div class='col-sm-2'>"
+					+		"<input class='form-control linelength' type='text' placeholder='Line length'>"
+					+	"</div>");
+
+	var line_break = ("<div class='col-sm-2'>"
+					+		"<input class='form-control linebreak' type='text' placeholder='Line break'>"
+					+"</div>");
+
+	var word_length = ("<div class='col-sm-2'>"
+					+		"<input class='form-control wordlength' type='text' placeholder='Word length'>"
+					+	"</div>");
+
+	var word_break = ("<div class='col-sm-2'>"
+					+		"<input class='form-control wordbreak' type='text' placeholder='Word break'>"
+					+	"</div>");
+
+	var repeat = ("<div class='col-sm-2 repeat'>"
+				+ 	"<span class='times'>x</span>"
+				+		"<input class='form-control repeattime' type='text' value='1'>"
+				+	"<span class='times'>times</span>"
+				+"</div>");
+
 	var new_data = ("<div class='row'></div>");
 	$(document.body).on("click", ".add", function(){
-		console.log("add clicked!");
-		$(".addrow").before(new_data);
-		$($("#datafield").children()[$("#datafield").children().length-2]).html(number_integer);
+		$("#datafield").append(new_data);
+		$($("#datafield").children()[$("#datafield").children().length-1]).html(data_type);
 	});
 
-	$("#datafield").on("change", ".datatype", function(event){
+	$("#datafield").on("change", ".datatype", function(event){ 
+		// add or change other input fields after data type specification
 		console.log("datatype changed!");
-		var data_type = $(event.target).val();
-		console.log(data_type);
-		switch (data_type) {
+		var data_type_dom = $(event.target);
+		console.log(data_type_dom);
+		switch (data_type_dom.val()) {
 			case "number": 
-				$(this).closest(".row").html(number_integer);
-			break;
+				if(data_type_dom.parent().parent().find(".numbertype").length == 0)
+					data_type_dom.parent().after(number_type);
+				break;
 			case "string":
-				$(this).closest(".row").html(string);
-			break;
+				data_type_dom.parent().after(string_length, choose_charset);
+				break;
 		}
 	});
 
 	$("#datafield").on("change", ".numbertype", function(event){
+		// add other input fields after number type specification
 		console.log("numbertype changed");
-		var number_type = $(event.target).val();
-		console.log(number_type);
-		switch(number_type) {
+		var number_type_dom = $(event.target);
+		console.log(number_type_dom);
+		switch(number_type_dom.val()) {
 			case "integer":
-				$(this).closest(".row").html(number_integer);
-			break;
+				number_type_dom.parent().after(number_min, number_max);
+				break;
 			case "float":
-				$(this).closest(".row").html(number_float);
-			break;
+				number_type_dom.parent().after(float_precision, number_min, number_max);
+				break;
 		}
 	});
-	$(".integer").closest(".row").draggable({
-		helper: "clone"
+
+	// $(".integer").closest(".row").draggable({
+	// 	helper: "clone"
+	// });
+	$("#datafield").on("change", ".choosecharset", function(event){
+		console.log("chosen charset changed");
+		var charset_dom = $(event.target);
+		charset_dom.parent().after(line_length, line_break, word_length, word_break);
 	});
+
+	$("#datafield").on("focus", ".wordbreak", function(event){	
+		var charset = $(event.target).parent().parent().find(".choosecharset:first").val();
+		console.log(charset);
+		showCharsetTable(charset);
+	});
+
+	$("#datafield").on("focus", ".linebreak", function(event){	
+		var charset = $(event.target).parent().parent().find(".choosecharset:first").val();
+		console.log(charset);
+		showCharsetTable(charset);
+	});
+
+	function showCharsetTable(charset) {
+		$("#tablecontainer").css('z-index', 100);
+		$("#tablecontainer").children().css('z-index', -1);
+		$("#tablecontainer").children().hide();
+		$("#"+charset).css('z-index', 101);
+		$("#"+charset).show();
+		$("#tablecontainer").show();
+	}
+	$("#tablecontainer").on("click", function() {
+		$(this).css('z-index', -1);
+		$(this).children().css('z-index', -1);
+		$(this).hide();
+	});
+
+	$("#generate").on("click", function() {
+		var containers = $("#datafield").find(".row");
+
+	});
+
 });
 
 
