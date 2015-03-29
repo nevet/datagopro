@@ -155,6 +155,33 @@ $(function(){
 		generator.generate(arrJson);
 	});
 
+	var isCollapse = false;
+
+	$(document).on("click", ".coll", function(){
+		var row = $(this).parent();
+		var divs = $(row).children();
+		if (isCollapse) {
+			isCollapse = false;
+			for (var i = 1; i <= divs.length; i++) {
+				if (i > 1) {
+					$(divs[i]).collapse('show');
+					$("#collicon").attr("class", "glyphicon glyphicon-triangle-right");
+					}
+				}
+		}
+		else{
+			isCollapse = true;
+			for (var j = 1; j <= divs.length; j++) {
+				if (j > 1) {	
+					console.log(j);		
+					$(divs[j]).collapse('hide');
+					$("#collicon").attr("class", "glyphicon glyphicon-triangle-bottom");
+				}
+			}
+		}
+	});
+
+
 });
 
 
