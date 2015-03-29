@@ -83,8 +83,8 @@
 
   function generateInteger(integerObject) {
     var
-    min = integerObject.numbermin, 
-    max = integerObject.numbermax;
+    min = new Number(integerObject.numbermin), 
+    max = new Number(integerObject.numbermax);
 
     var number = new Number(Math.floor(Math.random() * (max - min + 1)) + min);
 
@@ -93,9 +93,9 @@
 
   function generateFloat(floatObject) {
     var
-    precision = floatObject.floatprecision, 
-    min = floatObject.numbermin, 
-    max = floatObject.numbermax;
+    precision = new Number(floatObject.floatprecision), 
+    min = new Number(floatObject.numbermin), 
+    max = new Number(floatObject.numbermax);
 
     var number = new Number(Math.random() * (max - min) + min);
 
