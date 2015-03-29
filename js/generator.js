@@ -36,9 +36,23 @@
     stringLength = stringObject.stringlength,
     charset = stringObject.choosecharset, 
     lineLength = stringObject.linelength,
-    lineBreak = stringObject.linebreak,
+    lineBreak = stringObject.linebreak.replace(/\\n/g, "\n")
+                                      .replace(/\\'/g, "\'")
+                                      .replace(/\\"/g, '\"')
+                                      .replace(/\\&/g, "\&")
+                                      .replace(/\\r/g, "\r")
+                                      .replace(/\\t/g, "\t")
+                                      .replace(/\\b/g, "\b")
+                                      .replace(/\\f/g, "\f"),
     wordLength = stringObject.wordlength,
-    wordBreak = stringObject.wordbreak;
+    wordBreak = stringObject.wordbreak.replace(/\\n/g, "\n")
+                                      .replace(/\\'/g, "\'")
+                                      .replace(/\\"/g, '\"')
+                                      .replace(/\\&/g, "\&")
+                                      .replace(/\\r/g, "\r")
+                                      .replace(/\\t/g, "\t")
+                                      .replace(/\\b/g, "\b")
+                                      .replace(/\\f/g, "\f");
 
     var
     text = "",
@@ -54,7 +68,7 @@
           Math.floor(Math.random() * possible.length));
       };
     };
-    
+
     if (stringLength % lineLength != 0) { text += lineBreak;};
 
     return text;
@@ -83,19 +97,21 @@
 
   function generateInteger(integerObject) {
     var
-    min = integerObject.min, 
-    max = integerObject.max;
+    min = new Number(integerObject.numbermin), 
+    max = new Number(integerObject.numbermax);
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    var number = new Number(Math.floor(Math.random() * (max - min + 1)) + min);
+
+    return number.toFixed(0);
   }
 
   function generateFloat(floatObject) {
     var
-    precision = floatObject.precision, 
-    min = floatObject.min, 
-    max = floatObject.max;
+    precision = new Number(floatObject.floatprecision), 
+    min = new Number(floatObject.numbermin), 
+    max = new Number(floatObject.numbermax);
 
-    var number = Math.random() * (max - min) + min;
+    var number = new Number(Math.random() * (max - min) + min);
 
     return number.toFixed(precision);
   }

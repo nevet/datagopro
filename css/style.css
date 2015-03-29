@@ -63,3 +63,10 @@ input, option {
 	margin-left: -15%;
 	display: none;
 }
+
+
+.coll{
+	width:25px;
+	height: 20px;
+	padding-top: 7px;
+}
