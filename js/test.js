@@ -64,7 +64,11 @@ $(function(){
 	var new_data = ("<div class='row'></div>");
 	$(document.body).on("click", ".add", function(){
 		$("#datafield").append(new_data);
-		$($("#datafield").children()[$("#datafield").children().length-1]).html(data_type);
+		$($("#datafield").children()[$("#datafield").children().length-1]).html(
+			"<div class='coll col-sm-1'>" 
+				+"<a data-toggle='collapse' href='#collapsediv'><span class='glyphicon glyphicon-triangle-right' id= 'collicon'>"
+				+"</span></a></div>"
+				+data_type);
 	});
 
 	$("#datafield").on("change", ".datatype", function(event){ 
@@ -127,6 +131,7 @@ $(function(){
 		$("#"+charset).show();
 		$("#tablecontainer").show();
 	}
+
 	$("#tablecontainer").on("click", function() {
 		$(this).css('z-index', -1);
 		$(this).children().css('z-index', -1);
@@ -139,8 +144,8 @@ $(function(){
 		for(var i=0; i<rows.length; i++) {
 			var divs = $(rows[i]).children();
 			var json = {};
-			for(var j=0; j<divs.length; j++) {
-				var k=0
+			for(var j=1; j<divs.length; j++) {
+				var k=0;
 				if (j == divs.length-1) {
 					k=1;
 				}
