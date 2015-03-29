@@ -54,7 +54,7 @@
           Math.floor(Math.random() * possible.length));
       };
     };
-    
+
     if (stringLength % lineLength != 0) { text += lineBreak;};
 
     return text;
@@ -83,19 +83,21 @@
 
   function generateInteger(integerObject) {
     var
-    min = integerObject.min, 
-    max = integerObject.max;
+    min = integerObject.numbermin, 
+    max = integerObject.numbermax;
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    var number = new Number(Math.floor(Math.random() * (max - min + 1)) + min);
+
+    return number.toFixed(0);
   }
 
   function generateFloat(floatObject) {
     var
-    precision = floatObject.precision, 
-    min = floatObject.min, 
-    max = floatObject.max;
+    precision = floatObject.floatprecision, 
+    min = floatObject.numbermin, 
+    max = floatObject.numbermax;
 
-    var number = Math.random() * (max - min) + min;
+    var number = new Number(Math.random() * (max - min) + min);
 
     return number.toFixed(precision);
   }
