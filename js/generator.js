@@ -36,9 +36,23 @@
     stringLength = stringObject.stringlength,
     charset = stringObject.choosecharset, 
     lineLength = stringObject.linelength,
-    lineBreak = stringObject.linebreak,
+    lineBreak = stringObject.linebreak.replace(/\\n/g, "\\n")
+                                      .replace(/\\'/g, "\\'")
+                                      .replace(/\\"/g, '\\"')
+                                      .replace(/\\&/g, "\\&")
+                                      .replace(/\\r/g, "\\r")
+                                      .replace(/\\t/g, "\\t")
+                                      .replace(/\\b/g, "\\b")
+                                      .replace(/\\f/g, "\\f"),
     wordLength = stringObject.wordlength,
-    wordBreak = stringObject.wordbreak;
+    wordBreak = stringObject.wordbreak.replace(/\\n/g, "\\n")
+                                      .replace(/\\'/g, "\\'")
+                                      .replace(/\\"/g, '\\"')
+                                      .replace(/\\&/g, "\\&")
+                                      .replace(/\\r/g, "\\r")
+                                      .replace(/\\t/g, "\\t")
+                                      .replace(/\\b/g, "\\b")
+                                      .replace(/\\f/g, "\\f");
 
     var
     text = "",
