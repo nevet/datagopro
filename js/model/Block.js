@@ -4,6 +4,7 @@ var Block = function (id, undefined) {
   _blockId = id,
   _type = undefined,
   _succ = undefined,
+  _inner = undefined,
   _primitive = undefined,
   _repeat = undefined; // this one need to be implemented!!!
 
@@ -15,12 +16,14 @@ var Block = function (id, undefined) {
     if (_block) {
       view.removeElement(_block);
     }
-  };
+  },
 
-  var dump = function () {
-    if (_primitive.type() == "dec") {
-      _primitive.dump();
-    }
+  dump = function () {
+    _primitive.dump();
+  },
+
+  setSucc = function (nextBlk) {
+    _succ = nextBlk;
   };
 
   (function () {
@@ -44,10 +47,10 @@ var Block = function (id, undefined) {
 
   return {
     id: function () { return _blockId; },
+    inner: function () { return _inner; },
     succ: function () { return _succ; },
-    primitive: function () { return _primitive; },
-    repeat: function () { return _repeat; },
     dispose: dispose,
-    dump: dump
+    dump: dump,
+    setSucc: setSucc
   }
 }

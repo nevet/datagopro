@@ -15,8 +15,7 @@ var NumberType = function (parent, type, undefined) {
   },
 
   dump = function () {
-    console.log(_range.lower());
-    _range.dump();
+    console.log(_range.lower() + " " + _range.upper());
   };
 
   (function () {
