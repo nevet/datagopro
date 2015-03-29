@@ -1,7 +1,8 @@
-var NumberType = function (type, undefined) {
+var NumberType = function (parent, type, undefined) {
   var
+  _parent = parent,
   _type = type,
-  _range = new Range(),
+  _range = new Range(_parent, "text"),
   _precision = undefined,
   _precisionInput = undefined;
 

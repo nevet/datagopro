@@ -1,10 +1,14 @@
 (function (doc, $, undefined) {
-  var headBlock = new BLock();
+  var contentArea = view.addContentArea();
+  var headBlock = new Block(-1);
   var selectedBlocks = [];
+  var blockCount = 0;
+  var blockId = 1;
 
   doc.addBlock = function (type) {
-    view.addRow();
-    headBlock.succ = new Block(type);
+    blockCount ++;
+    blockId ++;
+    headBlock.succ = new Block(blockId, type);
   }
 
   doc.removeBlock = function (blockIds) {

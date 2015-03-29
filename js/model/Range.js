@@ -1,17 +1,35 @@
-var Range = function (lower, upper, undefined) {
+var Range = function (parent, displayMode, lower, upper, undefined) {
   var
+  _parent = parent,
   _lower = lower,
   _upper = upper,
-  
-  _lowerInput = new Input('int', function (text) {
-    _lower = parseInt(text, 10);
-  }),
-  _upperInput = new Input('int', function (text) {
-    _upper = parseInt(text, 10);
-  });
+  _lowerInput = undefined,
+  _upperInput = undefined,
+  _tableInput = undefined;
+
+  var
+  dispose = function () {
+    view.removeElement(_lowerInput);
+    view.removeElement(_upperInput);
+  };
+
+  (function () {
+    if (displayMode == "text") {
+      _lowerInput = new Input(_parent, 'int', function (text) {
+        _lower = text;
+      }),
+      _upperInput = new Input(_parent, 'int', function (text) {
+        _upper = text;
+      });
+    } else
+    if (displayMode == "table") {
+      // display a table input here
+    }
+  }) ();
 
   return {
     lower: _lower,
-    upper: _upper
+    upper: _upper,
+    dispose: dispose
   }
 }
