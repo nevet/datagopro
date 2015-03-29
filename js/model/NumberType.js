@@ -1,8 +1,7 @@
 var NumberType = function (parent, type, undefined) {
   var
-  _parent = parent,
   _type = type,
-  _range = new Range(_parent, "text"),
+  _range = new Range(parent, "int"),
   _precision = undefined,
   _precisionInput = undefined;
 
@@ -13,6 +12,11 @@ var NumberType = function (parent, type, undefined) {
     if (_precisionInput) {
       _precisionInput.dispose();
     }
+  },
+
+  dump = function () {
+    console.log(_range.lower());
+    _range.dump();
   };
 
   (function () {
@@ -24,10 +28,11 @@ var NumberType = function (parent, type, undefined) {
   }) ();
 
   return {
-    type: _type,
-    precision: _precision,
-    upper: _range.upper,
-    lower: _range.lower,
-    dispose: dispose
+    type: function () { return _type; },
+    precision: function () { return _precision; },
+    upper: function () { return _range.upper(); },
+    lower: function () { return _range.lower(); },
+    dispose: dispose,
+    dump: dump
   }
 }

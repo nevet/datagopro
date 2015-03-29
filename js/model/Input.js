@@ -1,24 +1,20 @@
-var Input = function (parent, inputType, inputFinish, undefined) {
+var Input = function (parent, inputType, cueWord, inputFinish, undefined) {
   var
+  _type = inputType,
   _parent = parent,
   _textBox = undefined,
-  _type = inputType,
   _backRefId = -1,
   _text = "",
 
-  inputChangedHandler = function (curText, curBackRef) {
-    if (curBackRef) {
-      _backRefId = curBackRef;
-    } else {
-      _text = curText;
-    }
-  },
-
   inputFinishHandler = function () {
-    if (_type == 'int') {
+    // TODO: back reference needs to be taken into account
+    // TODO: handle other input type: text, table
+    _text = _textBox.find("input").val();
+
+    if (_type == "int") {
       inputFinish(parseInt(_text, 10));
     } else
-    if (_type == 'float') {
+    if (_type == "float") {
       inputFinish(parseFloat(_text));
     }
   };
@@ -28,17 +24,17 @@ var Input = function (parent, inputType, inputFinish, undefined) {
     view.removeElement(_textBox);
   };
 
-  (function (inputType) {
+  (function () {
     _type = inputType;
 
-    _textBox = view.addInput(_parent, _type, 
-                             inputChangedHandler, inputFinishHandler);
+    if (inputType == "int") {
+      _textBox = view.addInput(_parent, _type, cueWord, inputFinishHandler);
+    }
   }) ();
 
   return {
-    type: _type,
-    text: _text,
-    backRefId: _backRefId,
+    text: function () { return _text; },
+    backRefId: function () { return _backRefId; },
     dispose: dispose
   }
 }

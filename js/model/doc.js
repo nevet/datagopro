@@ -5,10 +5,10 @@
   var blockCount = 0;
   var blockId = 1;
 
-  doc.addBlock = function (type) {
+  doc.addBlock = function () {
+    headBlock.succ = new Block(blockId);
     blockCount ++;
     blockId ++;
-    headBlock.succ = new Block(blockId, type);
   }
 
   doc.removeBlock = function (blockIds) {
@@ -44,6 +44,6 @@
   }
 
   doc.generate = function () {
-    // generate data for current document
+    headBlock.succ.dump();
   }
 }) (window.doc = window.doc || {}, jQuery);
