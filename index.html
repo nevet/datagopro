@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
-	<link rel='stylesheet' href='css/bootstrap-social.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.min.css'>
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-	<link rel='stylesheet' href='css/style.css'>
-	<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
-	<script type='text/javascript' src='http://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
-	<script src='js/bootstrap.min.js'></script>
-	<script src='js/bootstrap.js'></script>
+  <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='css/bootstrap-social.css'>
+  <link rel='stylesheet' href='css/bootstrap-theme.css'>
+  <link rel='stylesheet' href='css/bootstrap-theme.min.css'>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='css/style.css'>
+  <script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
+  <script type='text/javascript' src='http://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
+  <script src='js/bootstrap.min.js'></script>
+  <script src='js/bootstrap.js'></script>
 </head>
 <body>
-	<div class='panel panel-default'>
-		<div class='panel-heading'>
-			<h1>Datagopro</h1>
-			<div class='btn-group'>
-				<button type='button' class='btn btn-primary'>Login</button>
-				<button type='button' class='btn btn-default'>Contacts</button>
-				<button type='button' class='btn btn-default'>Help</button>
-			</div>
-		</div>
-		<div class='panel-body'>
-			<p id='description'>Are you bothered when you want some data to test your programme?<br>Try Datagopro and generate your testing data now!</p>
-		</div>
-	</div>
-	<div id='datafield' class='container'>
-		<div class='row'>
-			<div class='coll col-sm-1'> 
-				<a data-toggle='collapse' href='#collapsediv'> <span class="glyphicon glyphicon-triangle-right" id="collicon"></span>
-				</a>
-			</div>
-			<div class='col-sm-2'>
-				<select class='datatype form-control '>
-					<option selected disabled hidden value=''>Data type</option>
-					<option value='number'>Number</option> 
-					<option value='string'>String</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class='container'>
-		<div class='row addrow'>
-			<div class='col-sm-3'><img src='img/add.jpg' class='add'><span>Add more data...</span></div>
-		</div>
-		<div class='row'>
-			<button id='generate' class='btn btn-success'>Generate</button>
-		</div>
-	</div>
-		
-	<p class='text-center'>
-		Share this via...
-		<span>
-			<a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
-				<i class='fa fa-twitter'></i>
-				Twitter
-			</a>
-			<a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
-				<i class='fa fa-facebook'></i>
-				Facebook
-			</a>
-			<a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
-				<i class='fa fa-google-plus'></i>
-				Google+
-			</a>
-		</span>
-	</p>
-	<div id='tablecontainer'> 
-		<table id='ascii'>
-			<caption for='ascii'>ASCII</caption>
-		</table>
-		<table id='unicode'>
-			<caption for='unicode'>UNICODE</caption>
-		</table>
-	</div>
-	
-	
-	<script type='text/javascript' src='js/test.js'></script>
-	<script type='text/javascript' src='js/generator.js'></script>
+  <div class='panel panel-default'>
+   <div class='panel-heading'>
+     <h1>Datagopro</h1>
+     <div class='btn-group'>
+      <button type='button' class='btn btn-primary'>Login</button>
+      <button type='button' class='btn btn-default'>Contacts</button>
+      <button type='button' class='btn btn-default'>Help</button>
+     </div>
+   </div>
+   <div class='panel-body'>
+     <p id='description'>Are you bothered when you want some data to test your programme?<br>Try Datagopro and generate your testing data now!</p>
+   </div>
+  </div>
+  <div id='datafield' class='container'>
+   <div class='row'>
+     <div class='coll col-sm-1'> 
+      <a data-toggle='collapse' href='#collapsediv'> <span class="glyphicon glyphicon-triangle-right" id="collicon"></span>
+      </a>
+     </div>
+     <div class='col-sm-2'>
+      <select class='datatype form-control '>
+        <option selected disabled hidden value=''>Data type</option>
+        <option value='number'>Number</option> 
+        <option value='string'>String</option>
+      </select>
+     </div>
+   </div>
+  </div>
+  <div class='container'>
+   <div class='row addrow'>
+     <div class='col-sm-3'><img src='img/add.jpg' class='add'><span>Add more data...</span></div>
+   </div>
+   <div class='row'>
+     <button id='generate' class='btn btn-success'>Generate</button>
+   </div>
+  </div>
+   
+  <p class='text-center'>
+   Share this via...
+   <span>
+     <a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
+      <i class='fa fa-twitter'></i>
+      Twitter
+     </a>
+     <a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
+      <i class='fa fa-facebook'></i>
+      Facebook
+     </a>
+     <a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
+      <i class='fa fa-google-plus'></i>
+      Google+
+     </a>
+   </span>
+  </p>
+  <div id='tablecontainer'> 
+   <table id='ascii'>
+     <caption for='ascii'>ASCII</caption>
+   </table>
+   <table id='unicode'>
+     <caption for='unicode'>UNICODE</caption>
+   </table>
+  </div>
+  
+  
+  <script type='text/javascript' src='js/test.js'></script>
+  <script type='text/javascript' src='js/generator.js'></script>
 
 </body>
 </html>

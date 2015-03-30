@@ -2,7 +2,9 @@
   var inputId = 1;
   var contentArea;
 
+  var row = "<div class='row'></div>";
   var colSm2 = "<div class='col-sm-2'></div>";
+  var selection = "<select class='form-control'></select>";
 
   var dataTypeSelection = "<select class='form-control'>"
           +   "<option selected disabled hidden value=''>Data type</option>"
@@ -18,17 +20,46 @@
           +"</div>";
 
   function getNextRow(rowId) {
-    var row = "<div class='row' id='block" + rowId + "'></div>";
+    var rowObj = $(row);
+
+    rowObj.attr("id": "block" + rowId);
 
     return $(row);
   }
 
   function getNextInputBox(cueWord) {
-    var textInput = "<div class='col-sm-2'><input type='text' id='input" +
-                    inputId + "' placeholder='" + cueWord + "'></div>";
+    var controlCol = $(colSm2);
+    var textInput = $("<input>");
 
+    textInput.attr({
+      "type": "text",
+      "id": "input" + inputId,
+      "placeholder": cueWord
+    });
+    
     inputId ++;
-    return $(textInput);
+
+    textInput.appendTo(controlCol);
+
+    return textInput;
+  }
+
+  function getSelection(options, cueIndex) {
+    var selectionObj = $(selection);
+
+    for (var i = 0; i < options.length; i ++) {
+      var optionObj = $("<option>" + options[i] + "</option>");
+
+      optionObj.attr("value", options[i].toLowerCase());
+
+      if (i == cueIndex) {
+        optionObj.attr({"selected", "disabled", "hidden"});
+      }
+
+      optionObj.appendTo(selectionObj);
+    }
+
+    return selectionObj;
   }
 
   view.addContentArea = function () {
@@ -41,13 +72,6 @@
 
   view.addRow = function (rowId, typeSelectionHandler) {
     var row = getNextRow(rowId);
-    var selectionCol = $(colSm2);
-    var selection = $(dataTypeSelection);
-
-    selection.on("change", typeSelectionHandler);
-    selection.appendTo(selectionCol);
-
-    selectionCol.appendTo(row);
 
     row.appendTo(contentArea);
 
@@ -57,11 +81,23 @@
   view.addInput = function (block, type, cueWord, inputLeaveFocusHandler) {
     var inputBox = getNextInputBox(cueWord);
     
-    inputBox.appendTo(block);
+    inputBox.parent().appendTo(block);
 
     inputBox.on("focusout", inputLeaveFocusHandler);
 
     return inputBox;
+  }
+
+  view.addSelection = function (block, options, cueIndex, selectionChangedHandler) {
+    var controlCol = $(colSm2);
+    var selection = getSelection(options, cueIndex);
+
+    selection.appendTo(controlCol);
+    controlCol.appendTo(block);
+
+    selection.on("change", selectionChangedHandler);
+
+    return selection;
   }
 
   view.removeElement = function (element) {

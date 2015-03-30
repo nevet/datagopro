@@ -1,5 +1,8 @@
 var NumberType = function (parent, type, undefined) {
   var
+  NumberOptions = ["Data Type", "Decimal", "Float"];
+  
+  var
   _type = type,
   _range = new Range(parent, "int"),
   _precision = undefined,
