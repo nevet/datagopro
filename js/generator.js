@@ -25,7 +25,7 @@
   }
 
   function dealWithString(stringObject) {
-    for (var i = stringObject.repeattime - 1; i >= 0; i--) {
+    for (var i = stringObject.repeattime; i > 0; i--) {
       var string = generateString(stringObject);
       generatedData = generatedData+string;
     };
@@ -77,14 +77,14 @@
   function dealWithNumber(numberObject) {
     switch (numberObject.numbertype) {
       case "integer":
-        for (var i = numberObject.repeattime; i >= 0; i--) {
+        for (var i = numberObject.repeattime; i > 0; i--) {
           var string = generateInteger(numberObject).toString();
           generatedData = generatedData+string+" ";
         };
         break;
 
       case "float":
-        for (var i = numberObject.repeattime; i >= 0; i--) {
+        for (var i = numberObject.repeattime; i > 0; i--) {
           var string = generateFloat(numberObject).toString();
           generatedData = generatedData+string+" ";
         };
