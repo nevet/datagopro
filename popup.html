@@ -25,17 +25,122 @@
 		    <li><a href="#graph">Graph</a></li>
 		</ul>
 		<div class="tabcontents">
-		    <div id="number">
-		        Number
-		        <button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
+		    <div id="number" class="container popup">
+		    	<div class="row">
+		    		<div class='col-sm-6'>
+						<select class='numbertype form-control'>
+							<option selected disabled hidden value=''>Number type</option>
+							<option value='integer'>Integer</option>
+							<option value='float'>Float</option>
+						</select>
+					</div>
+					<div class='col-sm-6'>
+						<input class='floatprecision form-control' type='text' placeholder='precision'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-6'>
+						<input class='numbermin form-control' type='text' placeholder='min'>
+					</div>
+					<div class='col-sm-6'>
+						<input class='numbermax form-control' type='text' placeholder='max'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row">
+		    		<button class="btn btn-primary col-sm-offset-8" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
+		        </div>
 		    </div>
-		    <div id="string">
-		        String
-		        <button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
+		    <div id="string" class="container popup">
+		    	<div class="row">
+		    		<div class='col-sm-6'>
+						<input class='stringlength form-control' type='text' placeholder='String length'>
+					</div>
+
+					<div class='col-sm-6'>
+						<select class='choosecharset form-control'>
+							<option value='' hidden disabled selected>Charset</option>
+							<option value='ascii'>ASCII</option>
+							<option value='unicode'>Unicode</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-6'>
+						<input class='linelength form-control' type='text' placeholder='Line length'>
+					</div>
+
+					<div class='col-sm-6'>
+						<input class='linebreak form-control' type='text' placeholder='Line break'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-6'>
+						<input class='wordlength form-control' type='text' placeholder='Word length'>
+					</div>
+
+					<div class='col-sm-6'>
+						<input class='wordbreak form-control' type='text' placeholder='Word break'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row">
+		    		<button class="btn btn-primary col-sm-offset-8" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
+		        </div>
 		    </div>
-		    <div id="graph">
-		        Graph
-		        <button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
+		    <div id="graph" class="container popup">
+		    	<div class="row">
+					<div class='col-sm-6'>
+						<select class='numbertype form-control'>
+							<option selected disabled hidden value=''>Connection</option>
+							<option value='integer'>Connected Graph</option>
+							<option value='float'>Unconnected Graph</option>
+						</select>
+					</div>
+					<div class='col-sm-6'>
+						<select class='numbertype form-control'>
+							<option selected disabled hidden value=''>Direction</option>
+							<option value='integer'>Directed Graph</option>
+							<option value='float'>Undirected Graph</option>
+						</select>
+					</div>
+		    	</div>
+		    	<div class="row">
+					<div class='col-sm-6'>
+						<input class='numbermin form-control' type='text' placeholder='Number of Nodes'>
+					</div>
+					<div class='col-sm-6'>
+						<input class='numbermax form-control' type='text' placeholder='Number of Edges'>
+					</div>
+		    	</div>
+		    	<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row">
+		    		<button class="btn btn-primary col-sm-offset-8" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
+		        </div>
 		    </div>
 		</div>
 	</div>
@@ -54,7 +159,7 @@
 		</div>
 	</div>
 	<div id='datafield' class='container'>
-		<button class="btn btn-primary" onclick="chooseDataType(this)">Data Type</button>
+		<button id="data1" class="btn btn-primary" onclick="chooseDataType(this)">Data Type</button>
 	</div>
 	<div class='container'>
 		<div class='row addrow'>

@@ -70,3 +70,7 @@ input, option {
 	height: 20px;
 	padding-top: 7px;
 }
+
+.popup {
+	width: 400px;
+}

@@ -1,27 +1,32 @@
+var chosebutton;
+
 $(function () {
   $("#popup").hide();
 });
 
+function cancelClicked(e) {
+  Popup.hide("popup");
+}
+
 function chooseDataType(e) {
+  chosebutton = $(e);
   Popup.showModal("popup");
-  console.log(e);
 }
 
 function okclicked(e) {
   Popup.hide("popup");
-  console.log(e);
   var element = $(e);
   switch (element.val()) {
     case "number":
-      console.log("number");
+      chosebutton.html("Number");
       break;
 
     case "string":
-      console.log("string");
+      chosebutton.html("String");
       break;
 
     case "graph":
-      console.log("graph");
+      chosebutton.html("Graph");
       break;
 
     default:
