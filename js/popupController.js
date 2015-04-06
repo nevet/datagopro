@@ -18,15 +18,15 @@ function okclicked(e) {
   var element = $(e);
   switch (element.val()) {
     case "number":
-      chosebutton.html("Number");
+      chosebutton.attr("value","Number");
       break;
 
     case "string":
-      chosebutton.html("String");
+      chosebutton.attr("value","String");
       break;
 
     case "graph":
-      chosebutton.html("Graph");
+      chosebutton.attr("value","Graph");
       break;
 
     default:
