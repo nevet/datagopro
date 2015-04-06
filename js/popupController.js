@@ -10,7 +10,7 @@ function cancelClicked(e) {
 
 function chooseDataType(e) {
   chosebutton = $(e);
-  Popup.showModal("popup");
+  Popup.show("popup");
 }
 
 function okclicked(e) {

@@ -282,8 +282,17 @@ div.timeline-content>a>i {
 	cursor: pointer;
 }
 
+#popup {
+	border-radius: 7px;
+	padding-top: 40px;
+	background-color: #C0BFC0;
+}
 .popup {
 	width: 400px;
+	border-radius: 5px;
+}
+div.popup .col-sm-1 {
+	padding: 0 5px;
 }
 .repeattime {
 	display: inline;

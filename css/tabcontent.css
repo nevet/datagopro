@@ -26,7 +26,7 @@ ul.tabs li a
     border-bottom-color:#B7B7B7;
     color: #000;
     background: #F0F0F0 url(tabbg.gif) 0 0 repeat-x;
-    border-radius: 3px 3px 0 0;
+    border-radius: 5px 5px 0 0;
     outline:none;
 }
         
@@ -62,5 +62,5 @@ div.tabcontents
 {
     border: 1px solid #B7B7B7; padding: 30px;
     background-color:#FFF;
-    border-radius: 0 3px 3px 3px;
+    border-radius: 0 0 7px 7px;
 }
