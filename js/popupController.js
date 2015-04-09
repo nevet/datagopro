@@ -2,6 +2,7 @@ var chosebutton;
 
 $(function () {
   $("#popup").hide();
+  $("#precision").hide();
 });
 
 function cancelClicked(e) {
@@ -11,6 +12,15 @@ function cancelClicked(e) {
 function chooseDataType(e) {
   chosebutton = $(e);
   Popup.show("popup");
+}
+
+function numberChanged(e) {
+  var element = $(e);
+  if (element.val() == "float") {
+    $("#precision").show();
+  } else {
+    $("#precision").hide();
+  }
 }
 
 function okclicked(e) {

@@ -169,13 +169,13 @@
 		    <div id="number" class="container popup">
 		    	<div class="row">
 		    		<div class='col-sm-6'>
-						<select class='numbertype form-control'>
+						<select class='numbertype form-control' onchange="numberChanged(this)">
 							<option selected disabled hidden value=''>Number type</option>
 							<option value='integer'>Integer</option>
 							<option value='float'>Float</option>
 						</select>
 					</div>
-					<div class='col-sm-6'>
+					<div id="precision" class='col-sm-6'>
 						<input class='floatprecision form-control' type='text' placeholder='precision'>
 					</div>
 				</div>
