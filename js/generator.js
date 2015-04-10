@@ -191,8 +191,6 @@
       };
     };
     
-    console.log(graph);
-
     return graph;
   }
 
