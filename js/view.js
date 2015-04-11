@@ -6,19 +6,6 @@
   var colSm2 = "<div class='col-sm-2'></div>";
   var selection = "<select class='form-control'></select>";
 
-  var dataTypeSelection = "<select class='form-control'>"
-          +   "<option selected disabled hidden value=''>Data type</option>"
-          +   "<option value='number'>Number</option> "
-          + "</select>";
-
-  var numberTypeSelection = "<div class='col-sm-2'>"
-          + "<select class='form-control numbertype'>"
-          +   "<option selected disabled hidden value=''>Number type</option>"
-          +   "<option value='integer'>Integer</option>"
-          +   "<option value='float'>Float</option"
-          + "</select>"
-          +"</div>";
-
   function getNextRow(rowId) {
     var rowObj = $(row);
 
