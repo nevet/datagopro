@@ -1,0 +1,83 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+#element_to_pop_up{
+	display: none;
+}
+
+*{margin:0;padding:0;}
+
+body{
+  background:#567;
+  font-family:'Open Sans',sans-serif;
+}
+
+
+
+#logindiv{
+  width:400px;
+  margin:0 auto;
+  margin-top:10px;
+  border-radius: 5px 5px 0px 0px ;
+  background:#f0f0f0;
+}
+
+
+#triangle{
+  width:400px;
+  border-top:70px solid #f0f0f0;
+  border-right:200px solid transparent;
+  border-left:200px solid transparent;
+}
+#continue{
+	margin-top: -60px;
+	margin-left: 120px;
+}
+
+#logindiv h1{
+  background:#3399cc;
+  padding:20px 0;
+  font-size:140%;
+  font-weight:300;
+  text-align:center;
+  color:#fff;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#logform{
+  background:#f0f0f0;
+  padding:8% 8%;
+  border-radius: 5px;
+}
+
+#input1{
+  width:92%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+
+#input2{
+  width:100%;
+  background:#3399cc;
+  border:0;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+span{
+	font-family:'Open Sans',sans-serif;
+	font-size:120%;
+}
+
+#input2:hover{
+  background:#2288bb;
+}
