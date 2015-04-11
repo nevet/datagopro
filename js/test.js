@@ -179,8 +179,7 @@ $(function(){
 		else{
 			isCollapse = true;
 			for (var j = 1; j <= divs.length; j++) {
-				if (j > 1) {	
-					console.log(j);		
+				if (j > 1) {		
 					$(divs[j]).collapse('hide');
 					$("#collicon").attr("class", "glyphicon glyphicon-triangle-bottom");
 				}

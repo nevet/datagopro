@@ -6,12 +6,12 @@ $(function () {
 });
 
 function cancelClicked(e) {
-  Popup.hide("popup");
+  $("#popup").bPopup().close();
 }
 
 function chooseDataType(e) {
   chosebutton = $(e);
-  Popup.show("popup");
+  $("#popup").bPopup();
 }
 
 function numberChanged(e) {
@@ -24,19 +24,22 @@ function numberChanged(e) {
 }
 
 function okclicked(e) {
-  Popup.hide("popup");
+  $("#popup").bPopup().close();
   var element = $(e);
   switch (element.val()) {
     case "number":
       chosebutton.attr("value","Number");
+      inputInfo.createNewInfo("number");
       break;
 
     case "string":
       chosebutton.attr("value","String");
+      inputInfo.createNewInfo("string");
       break;
 
     case "graph":
       chosebutton.attr("value","Graph");
+      inputInfo.createNewInfo("graph");
       break;
 
     default:
