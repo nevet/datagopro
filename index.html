@@ -308,32 +308,32 @@
 		    <div id="graph" class="container popup">
 		    	<div class="row">
 					<div class='col-sm-6'>
-						<select class='numbertype form-control'>
+						<select id="connect" class='numbertype form-control'>
 							<option selected disabled hidden value=''>Connection</option>
-							<option value='integer'>Connected Graph</option>
-							<option value='float'>Unconnected Graph</option>
+							<option value='connected'>Connected Graph</option>
+							<option value='unconnected'>Unconnected Graph</option>
 						</select>
 					</div>
 					<div class='col-sm-6'>
-						<select class='numbertype form-control'>
+						<select id="direct" class='numbertype form-control'>
 							<option selected disabled hidden value=''>Direction</option>
-							<option value='integer'>Directed Graph</option>
-							<option value='float'>Undirected Graph</option>
+							<option value='directed'>Directed Graph</option>
+							<option value='undirected'>Undirected Graph</option>
 						</select>
 					</div>
 		    	</div>
 		    	<div class="row">
 					<div class='col-sm-6'>
-						<input class='numbermin form-control' type='text' placeholder='Number of Nodes'>
+						<input id="node" class='numbermin form-control' type='text' placeholder='Number of Nodes'></input>
 					</div>
 					<div class='col-sm-6'>
-						<input class='numbermax form-control' type='text' placeholder='Number of Edges'>
+						<input id="edge" class='numbermax form-control' type='text' placeholder='Number of Edges'></input>
 					</div>
 		    	</div>
 		    	<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input class='repeattime form-control' type='text' value='1'>
+						<input id="repeatGraph" class='repeattime form-control' type='text' value='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
