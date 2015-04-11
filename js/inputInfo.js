@@ -32,14 +32,13 @@
   }
 
   inputInfo.getElement = function (index) {
-    console.log(inputList);
     return inputList[index];
   }
 
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "type": "number",
+      "dataType": "number",
       "numbertype": document.getElementById("numbertype").selectedIndex,
       "precision": $("#precision").val(),
       "min": $("#min").val(),
@@ -64,9 +63,9 @@
   function createNewString(element) {
     var newObject = {
       "identifier" : element,
-      "type": "string",
+      "dataType": "string",
       "stringlength": $("#stringlength").val(),
-      "charset": document.getElementById("charset").selectedIndex,
+      "chartype": document.getElementById("chartype").selectedIndex,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
@@ -75,7 +74,7 @@
     }
 
     $("#stringlength").val("");
-    document.getElementById("charset").selectedIndex = 0;
+    document.getElementById("chartype").selectedIndex = 0;
     $("#linelength").val("");
     $("#linebreak").val("");
     $("#wordlength").val("");
@@ -93,7 +92,7 @@
   function createNewGraph(element) {
     var newObject = {
       "identifier" : element,
-      "type": "graph",
+      "dataType": "graph",
       "connect": document.getElementById("connect").selectedIndex,
       "direct": document.getElementById("direct").selectedIndex,
       "node": $("#node").val(),
