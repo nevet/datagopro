@@ -47,6 +47,12 @@
       "repeatNumber": $("#repeatNumber").val()
     }
 
+    document.getElementById("numbertype").selectedIndex = 0;
+    $("#precision").val("");
+    $("#min").val("");
+    $("#max").val("");
+    $("#repeatNumber").val("");
+
     var index = inputInfo.checkExistence(element);
     if (index >= 0) {
       inputList.splice(index, 1);
@@ -68,6 +74,14 @@
       "repeatString": $("#repeatString").val()
     }
 
+    $("#stringlength").val("");
+    document.getElementById("charset").selectedIndex = 0;
+    $("#linelength").val("");
+    $("#linebreak").val("");
+    $("#wordlength").val("");
+    $("#wordbreak").val("");
+    $("#repeatString").val("");
+
     var index = inputInfo.checkExistence(element);
     if (index >= 0) {
       inputList.splice(index, 1);
@@ -86,6 +100,12 @@
       "edge": $("#edge").val(),
       "repeatGraph": $("#repeatGraph").val()
     }
+     
+    document.getElementById("connect").selectedIndex= 0;
+    document.getElementById("direct").selectedIndex = 0;
+    $("#node").val("");
+    $("#edge").val("");
+    $("#repeatGraph").val("");
 
     var index = inputInfo.checkExistence(element);
     if (index >= 0) {
