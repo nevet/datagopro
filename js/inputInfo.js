@@ -1,18 +1,19 @@
 (function (inputInfo, $, undefined) {
   var inputList=[];
 
-  inputInfo.createNewInfo = function (type) {
-    switch (type) {
+  inputInfo.createNewInfo = function (element) {
+    console.log(element);
+    switch (element.val()) {
       case "number":
-        createNewNumber();
+        createNewNumber(element);
         break;
 
       case "string":
-        createNewString();
+        createNewString(element);
         break;
 
       case "graph":
-        createNewGraph();
+        createNewGraph(element);
         break;
 
       default:
@@ -20,15 +21,25 @@
     }
   }
 
-  function createNewNumber() {
+  function createNewNumber(element) {
     console.log("number info");
+    var newObject = {
+      "id" : element,
+      "numbertype": document.getElementById("numbertype").selectedIndex,
+      "precision": $("#precision").val(),
+      "min": $("#min").val(),
+      "max": $("#max").val(),
+      "repeat": $("#repeatNumber").val()
+    }
+    console.log(newObject);
+    inputList.push(newObject);
   }
 
-  function createNewString() {
+  function createNewString(elementId) {
     console.log("string info");
   }
 
-  function createNewGraph() {
+  function createNewGraph(elementId) {
     console.log("graph info");
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);

@@ -311,6 +311,7 @@ div.timeline-content>a>i {
 	border-radius: 7px;
 	padding-top: 40px;
 	background-color: #C0BFC0;
+	visibility: hidden;
 }
 .popup {
 	width: 400px;
