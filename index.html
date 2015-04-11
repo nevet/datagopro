@@ -25,7 +25,7 @@
 	<script type="text/javascript">
 	  (function() {
 	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-	    po.src = 'https://apis.google.com/js/plusone.js?onload=OnLoadCallback';
+	    po.src = 'https://apis.google.com/js/plusone.js';
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 	  })();
 	  	
@@ -58,11 +58,11 @@
             <span id='logintext'> Please log in via <br> </span>
             
 
-            <div class=" btn btn-block btn-social btn-facebook" onclick="fb_login()">
+            <a href='#' class=" btn btn-block btn-social btn-facebook" onclick="fb_login();">
             	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
-            </div>
+            </a>
 		
-            <div class="btn btn-block btn-social btn-google-plus">
+            <a href='#' class="btn btn-block btn-social btn-google-plus">
 				<i class="fa fa-google-plus"></i> <span id="signinButton"> 
 													<span
 													    class="g-signin"
@@ -73,7 +73,7 @@
 													    data-scope="https://www.googleapis.com/auth/plus.login">
 					  									Sign in with Google</span>
 													</span>
-			</div>
+			</a>
 
 
             <div class="btn btn-block btn-social btn-twitter">
