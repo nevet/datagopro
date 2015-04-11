@@ -73,7 +73,7 @@ body{
   -webkit-transition:background .3s;
 }
 
-span{
+#logintext{
 	font-family:'Open Sans',sans-serif;
 	font-size:120%;
 }

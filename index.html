@@ -32,6 +32,14 @@
 
 	</script>
 
+	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	    po.src = 'https://apis.google.com/js/plusone.js?onload=OnLoadCallback';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	</script>
+
 	 <script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -47,7 +55,7 @@
         <div id="logindiv">
           <h1 id='loginh1'>Log in to Datagopro</h1>
           <div id='logform'>
-            <span> Please log in via <br> </span>
+            <span id='logintext'> Please log in via <br> </span>
             
             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false">
             </div>
@@ -56,13 +64,23 @@
             	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
             </div>
 		
-            <a class="btn btn-block btn-social btn-google-plus" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google-plus']);">
-            <i class="fa fa-google-plus"></i> Sign in with Google
-            </a>
-          
-            <a class="btn btn-block btn-social btn-twitter" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-twitter']);">
-            <i class="fa fa-twitter"></i> Sign in with Twitter
-            </a>
+            <div class="btn btn-block btn-social btn-google-plus">
+				<i class="fa fa-google-plus"></i> <span id="signinButton"> 
+													<span
+													    class="g-signin"
+													    data-callback="signinCallback"
+													    data-clientid="980224079160-bmsd1d9rpiatcfguc987a32appn6j58k.apps.googleusercontent.com"
+													    data-cookiepolicy="single_host_origin"
+													    data-requestvisibleactions="http://schemas.google.com/AddActivity"
+													    data-scope="https://www.googleapis.com/auth/plus.login">
+					  									Sign in with Google</span>
+													</span>
+			</div>
+
+
+            <div class="btn btn-block btn-social btn-twitter">
+            <i class="fa fa-twitter"></i> <span>Sign in with Twitter</span>
+            </div>
           </div>
       </div>
       <div id='triangle'></div>
@@ -380,6 +398,7 @@
 	</ul>
 
 
+	<script src="https://apis.google.com/js/plus.js"></script>
 	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
