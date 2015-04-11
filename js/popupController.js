@@ -2,7 +2,7 @@ var chosebutton;
 
 $(function () {
   $("#popup").hide();
-  $("#precision").hide();
+  $("#precisionDiv").hide();
 });
 
 function cancelClicked(e) {
@@ -17,9 +17,9 @@ function chooseDataType(e) {
 function numberChanged(e) {
   var element = $(e);
   if (element.val() == "float") {
-    $("#precision").show();
+    $("#precisionDiv").show();
   } else {
-    $("#precision").hide();
+    $("#precisionDiv").hide();
   }
 }
 
@@ -29,17 +29,17 @@ function okclicked(e) {
   switch (element.val()) {
     case "number":
       chosebutton.attr("value","Number");
-      inputInfo.createNewInfo("number");
+      inputInfo.createNewInfo(element);
       break;
 
     case "string":
       chosebutton.attr("value","String");
-      inputInfo.createNewInfo("string");
+      inputInfo.createNewInfo(element);
       break;
 
     case "graph":
       chosebutton.attr("value","Graph");
-      inputInfo.createNewInfo("graph");
+      inputInfo.createNewInfo(element);
       break;
 
     default:
