@@ -1,8 +1,9 @@
-body {
-	font-family: 'Josefin Sans', sans-serif;
+html body {
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	min-height: 800px;
 	font-weight: 400;
+	background-color: #DCDCDC;
 }
 div#banner>ol>li[class="active"]>a {
 	cursor: inherit;
@@ -15,6 +16,7 @@ div#banner>ol>li>a {
 	color: #0858B2;
 }
 @media (max-width: 767px) {
+	/*small screen*/
 	div#banner {
 		width: 100%;
 		min-height: 120px;
@@ -91,6 +93,7 @@ div#banner>ol>li>a {
 		float: left;
 		width: 56%;
 		height: 90%;
+		min-height: 500px;
 		background-color: #A1CDFF;
 		margin: 2% 2%;
 		padding: 2em;
@@ -102,6 +105,7 @@ div#banner>ol>li>a {
 		float: left;
 		width: 38%;
 		height: 90%;
+		min-height: 500px;
 		background-color: #E9F0F5;
 		margin: 2% 2% 2% 0;
 		padding: 1% 1%;
@@ -114,19 +118,14 @@ div#banner>ol>li>a {
 
 div#mainbody {
 	width: 100%;
+	min-height: 555px;
 	overflow: hidden;
 	background-color: #EBEBEB;
-	color: #2272CB;
+	color: #0858B2;
 }
 div#editor .fa {
 	color: #0858B2;
-	opacity: 0.8;
-}
-div#editor .form-control {
-	font-size: 18px;
-}
-div#data-field .btn  {
-	font-size: 16px;
+	/*opacity: 0.8;*/
 }
 div#data-field {
 	margin: 2% 0.5% 1%;
@@ -155,18 +154,22 @@ div.column {
 	text-align: left;
 	margin: 0 1%; 
 }
-
+div#add {
+	width: 200px;
+}
 div#add>i {
-	margin: 0 0.5%;
+	margin: 0 4px;
 	padding-left: 2px;
 	float: left;
 	cursor: pointer;
 }
 div#add>p {
 	margin-top: 1%;
-	margin-left: 6%;
+	margin-left: 40px;
   	line-height: 34px;
   	font-size: 18px;
+  	font-family: 'Open Sans',sans-serif;
+  	cursor: pointer;
 }
 
 div#export{
@@ -203,7 +206,9 @@ div.setting {
 	clear: both;
 	background-color: #E1E6FA;
 }
-div.setting>p {
+div.setting>p,span {
+	font-size: 14px;
+	font-family: 'Open Sans',sans-serif;
 	margin-bottom: 5px;
 }
 div.setting>input {
@@ -235,7 +240,7 @@ div#generate .fa-play:before{
 div#generate>i {
 	position: absolute;
 	top:14px;
-	left: 80%;
+	left: 85%;
 	cursor: pointer;
 }
 div#timeline {
@@ -296,7 +301,7 @@ div.timeline-content>a {
 	background-color: #ACB7C0;
 	color: white;
 	float: right;
-	padding: 7px 10px;
+	padding: 7px 8px;
 	margin-left: 7px;
 	cursor: pointer;
 }
@@ -341,7 +346,7 @@ div#footer {
 	padding-top: 1%;
 	clear: left;
 	width: 100%;
-	height: 90px;
+	min-height: 90px;
 	background-color: #DCDCDC;
   	border-top: 3px solid white;
 	text-align: center;
