@@ -3,29 +3,33 @@
 
   generator.generate = function (array) {
     generatedData = "";
+    if (array) {
+      for (var i = 0; i<=array.length - 1; i++) {
+        var object = array[i];
+        switch (object.datatype) {
+          case "string":
+            dealWithString(object);
+            break;
 
-    for (var i = 0; i<=array.length - 1; i++) {
-      var object = array[i];
-      switch (object.datatype) {
-        case "string":
-          dealWithString(object);
-          break;
+          case "number":
+            dealWithNumber(object);
+            generatedData = generatedData + "\n";
+            break;
 
-        case "number":
-          dealWithNumber(object);
-          generatedData = generatedData + "\n";
-          break;
+          case "graph":
+            dealWithGraph(object);
+            break;
 
-        case "graph":
-          dealWithGraph(object);
-          break;
+          default:
+            break;
+        }
+      };
 
-        default:
-          break;
+      if (generatedData!="") {
+        save();
       }
     };
 
-    save();
   }
 
   function dealWithString(stringObject) {
@@ -130,10 +134,11 @@
       } else {
         graph = generateDisconnectGraph(graphObject);
       }
-
+      console.log(string);
       string = string + graphToString(graph);
 
       generatedData = generatedData+string;
+      console.log(generatedData);
     };
   }
 
@@ -153,7 +158,7 @@
   function generateConnectGraph(graphObject) {
     var n = graphObject.numberOfNode;
     var e = graphObject.numberOfEdge;
-    // var isDirected = graphObject.isDirected;
+    var isDirected = graphObject.isDirected;
     var nodes = [];
     var graph = [];
     for (var i=0; i<n; i++) {
@@ -165,10 +170,13 @@
 
     for (var i = 0; i < nodes.length - 1 ; i++) {
       graph[nodes[i]].push(nodes[i+1]);
-      // if (!isDirected) {
-      //   graph[nodes[i+1]].push(nodes[i]);
-      // };
     };
+    
+    if (isDirected && e > n*(n-1)) {
+      e = n*(n-1);
+    } else if (!isDirected && e > n*(n-1)/2) {
+      e = n*(n-1)/2;
+    }
 
     if (e > n-1) {
       var i = 0;
@@ -180,17 +188,21 @@
 
         for (var j = nodes.length - 1; j >= 0; j--) {
           if (randomIndex != nodes[j] && graph[randomIndex].indexOf(nodes[j]) === -1) {
-            graph[randomIndex].push(nodes[j]);
-            // if (!isDirected) {
-            //   graph[nodes[j]].push(randomIndex);
-            // };
-            i++;
-            break;
+            if (isDirected) {
+              graph[randomIndex].push(nodes[j]);
+              i++;
+              break;
+            } else if (graph[nodes[j]].indexOf(randomIndex) === -1){
+              graph[randomIndex].push(nodes[j]);
+              i++;
+              break;
+            };
           }
         };
       };
     };
     
+    console.log(graph);
     return graph;
   }
 
