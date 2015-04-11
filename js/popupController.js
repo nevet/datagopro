@@ -8,7 +8,7 @@ function cancelClicked(e) {
 }
 
 function chooseDataType(e) {
-  chosebutton = $(e);
+  chosebutton = e;
   $("#popup").bPopup();
 }
 
@@ -26,18 +26,18 @@ function okclicked(e) {
   var element = $(e);
   switch (element.val()) {
     case "number":
-      chosebutton.attr("value","Number");
-      inputInfo.createNewInfo(element);
+      $(chosebutton).attr("value","Number");
+      inputInfo.createNewInfo("number",chosebutton);
       break;
 
     case "string":
-      chosebutton.attr("value","String");
-      inputInfo.createNewInfo(element);
+      $(chosebutton).attr("value","String");
+      inputInfo.createNewInfo("string", chosebutton);
       break;
 
     case "graph":
-      chosebutton.attr("value","Graph");
-      inputInfo.createNewInfo(element);
+      $(chosebutton).attr("value","Graph");
+      inputInfo.createNewInfo("graph", chosebutton);
       break;
 
     default:
