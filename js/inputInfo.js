@@ -49,7 +49,11 @@
     clearData();
 
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
@@ -72,7 +76,11 @@
     clearData();
 
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
@@ -93,7 +101,11 @@
     clearData();
     
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
@@ -105,7 +117,7 @@
     $("#precision").val("");
     $("#min").val("");
     $("#max").val("");
-    $("#repeatNumber").val("");
+    $("#repeatNumber").val(1);
 
     $("#stringlength").val("");
     $("#chartype")[0].selectedIndex = 0;
@@ -113,12 +125,12 @@
     $("#linebreak").val("");
     $("#wordlength").val("");
     $("#wordbreak").val("");
-    $("#repeatString").val("");
+    $("#repeatString").val(1);
 
     $("#connect")[0].selectedIndex = 0;
     $("#direct")[0].selectedIndex = 0;
     $("#node").val("");
     $("#edge").val("");
-    $("#repeatGraph").val("");
+    $("#repeatGraph").val(1);
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);
