@@ -1,84 +1,308 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	<link rel='stylesheet' href='css/bootstrap-social.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.min.css'>
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-	<link rel='stylesheet' href='css/style.css'>
-	<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
-	<script type='text/javascript' src='http://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
-	<script src='js/bootstrap.min.js'></script>
-	<script src='js/bootstrap.js'></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="css/tabcontent.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+	<style></style>
 </head>
 <body>
-	<div class='panel panel-default'>
-		<div class='panel-heading'>
-			<h1>Datagopro</h1>
-			<div class='btn-group'>
-				<button type='button' class='btn btn-primary'>Login</button>
-				<button type='button' class='btn btn-default'>Contacts</button>
-				<button type='button' class='btn btn-default'>Help</button>
+	 <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-61563497-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+	<div id='banner'>
+		<img src="img/logo2.png">
+		<ol id="nav" class="breadcrumb">
+		  <li class="active"><a data-target="#editor">New Data</a></li>
+		  <li><a data-target="#timeline">My Input</a></li>
+		  <li><a data-target="#popular">Popular Input</a></li>
+		  <li><a data-target="#help">Help</a></li>
+		  <li><a data-target="#loginwindow">Login</a><li>
+		</ol> 
+	</div>
+	<div id="mainbody">
+		<div id="editor">
+			<input class="form-control" type="text" placeholder="Your data set name here...">
+			<div id="data-field">
+				<div class='data-block'> 
+					<span class="order fa-stack">
+						<i class="fa fa-circle-thin fa-stack-2x"></i>
+						<i class="fa fa-stack-1x">1</i>
+					</span>
+					<div class="column">
+						<input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
+						<i class="fa fa-folder-open"></i>
+					</div>
+				</div>
+			</div>
+			<div id="add">
+				<i class="fa fa-plus-circle fa-2x"></i>
+				<p>Add more data...</p>
+			</div>
+			<div id="export">
+				<p>Export Types</p>
+				<ul>
+					<li class="active">TXT</li>
+					<li>CSV</li>
+					<li>JSON</li>
+				</ul>
+				<div class="setting" id="txt">
+					<p>No additional export type settings.</p>
+				</div>
+				<div class="setting" id="csv" style="display:none">
+					<span>Delimiter char(s)</span><input class="form-control" type="text">
+				</div>
+				<div class="setting" id="json" style="display:none">
+					<p>No additional export type settings.</p>
+				</div>
+			</div>
+			<div id="generate">
+				<button type='button' class='btn'>Generate</button>
+				<i class="fa fa-play"></i>
+			</div> 
+		</div>
+		<div id="timeline" style="display:none">
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 1</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="1" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 2</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="2" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 3</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="3" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 4</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="4" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 5</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="5" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 6</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="6" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
 			</div>
 		</div>
-		<div class='panel-body'>
-			<p id='description'>Are you bothered when you want some data to test your programme?<br>Try Datagopro and generate your testing data now!</p>
+		<div id="preview">
+			preview
 		</div>
 	</div>
-	<div id='datafield' class='container'>
-		<div class='row'>
-			<div class='coll col-sm-1'> 
-				<a data-toggle='collapse' href='#collapsediv'> <span class="glyphicon glyphicon-triangle-right" id="collicon"></span>
+	<div id="footer">
+		<p class='text-center'>
+			Share this via...
+			<span>
+				<a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
+					<i class='fa fa-twitter'></i>
+					Twitter
 				</a>
-			</div>
-			<div class='col-sm-2'>
-				<select class='datatype form-control '>
-					<option selected disabled hidden value=''>Data type</option>
-					<option value='number'>Number</option> 
-					<option value='string'>String</option>
-				</select>
-			</div>
+				<a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
+					<i class='fa fa-facebook'></i>
+					Facebook
+				</a>
+				<a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
+					<i class='fa fa-google-plus'></i>
+					Google+
+				</a>
+			</span>
+		</p>© 2015 Datagopro, Group 11 CP3101B, NUS
+
+	</div>
+	<div id="popup">
+		<ul class="tabs">
+		    <li><a href="#number">Number</a></li>
+		    <li><a href="#string">String</a></li>
+		    <li><a href="#graph">Graph</a></li>
+		</ul>
+		<div class="tabcontents">
+		    <div id="number" class="container popup">
+		    	<div class="row">
+		    		<div class='col-sm-6'>
+						<select class='numbertype form-control' onchange="numberChanged(this)">
+							<option selected disabled hidden value=''>Number type</option>
+							<option value='integer'>Integer</option>
+							<option value='float'>Float</option>
+						</select>
+					</div>
+					<div id="precision" class='col-sm-6'>
+						<input class='floatprecision form-control' type='text' placeholder='precision'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-6'>
+						<input class='numbermin form-control' type='text' placeholder='min'>
+					</div>
+					<div class='col-sm-6'>
+						<input class='numbermax form-control' type='text' placeholder='max'>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
+		    <div id="string" class="container popup">
+		    	<div class="row">
+		    		<div class='col-sm-5'>
+						<input class='stringlength form-control' type='text' placeholder='String length'>
+					</div>
+					<div class='col-sm-1'>
+						<i class="fa fa-question-circle fa-2x" title="[String length] specifies the length of this long string."></i>
+					</div>
+					<div class='col-sm-6'>
+						<select class='choosecharset form-control'>
+							<option value='' hidden disabled selected>Charset</option>
+							<option value='ascii'>ASCII</option>
+							<option value='unicode'>Unicode</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-5'>
+						<input class='linelength form-control' type='text' placeholder='Line length'>
+					</div>
+					<div class='col-sm-1'>
+						<i class="fa fa-question-circle fa-2x" title="[Line length] specifies the length of each line in this long string."></i>
+					</div>
+					<div class='col-sm-5'>
+						<input class='linebreak form-control' type='text' placeholder='Line break'>
+					</div>
+					<div class='col-sm-1'>
+						<i class="fa fa-question-circle fa-2x" title="Each line ends with [Line break]."></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-5'>
+						<input class='wordlength form-control' type='text' placeholder='Word length'>
+					</div>
+					<div class='col-sm-1'>
+						<i class="fa fa-question-circle fa-2x" title="[Word length] specifies the length of each word."></i>
+					</div>
+					<div class='col-sm-5'>
+						<input class='wordbreak form-control' type='text' placeholder='Word break'>
+					</div>
+					<div class='col-sm-1'>
+						<i class="fa fa-question-circle fa-2x" title="Each word ends with [Word break]."></i>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
+		    <div id="graph" class="container popup">
+		    	<div class="row">
+					<div class='col-sm-6'>
+						<select class='numbertype form-control'>
+							<option selected disabled hidden value=''>Connection</option>
+							<option value='integer'>Connected Graph</option>
+							<option value='float'>Unconnected Graph</option>
+						</select>
+					</div>
+					<div class='col-sm-6'>
+						<select class='numbertype form-control'>
+							<option selected disabled hidden value=''>Direction</option>
+							<option value='integer'>Directed Graph</option>
+							<option value='float'>Undirected Graph</option>
+						</select>
+					</div>
+		    	</div>
+		    	<div class="row">
+					<div class='col-sm-6'>
+						<input class='numbermin form-control' type='text' placeholder='Number of Nodes'>
+					</div>
+					<div class='col-sm-6'>
+						<input class='numbermax form-control' type='text' placeholder='Number of Edges'>
+					</div>
+		    	</div>
+		    	<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input class='repeattime form-control' type='text' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
 		</div>
 	</div>
-	<div class='container'>
-		<div class='row addrow'>
-			<div class='col-sm-3'><img src='img/add.jpg' class='add'><span>Add more data...</span></div>
-		</div>
-		<div class='row'>
-			<button id='generate' class='btn btn-success'>Generate</button>
-		</div>
-	</div>
-		
-	<p class='text-center'>
-		Share this via...
-		<span>
-			<a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
-				<i class='fa fa-twitter'></i>
-				Twitter
-			</a>
-			<a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
-				<i class='fa fa-facebook'></i>
-				Facebook
-			</a>
-			<a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
-				<i class='fa fa-google-plus'></i>
-				Google+
-			</a>
-		</span>
-	</p>
-	<div id='tablecontainer'> 
-		<table id='ascii'>
-			<caption for='ascii'>ASCII</caption>
-		</table>
-		<table id='unicode'>
-			<caption for='unicode'>UNICODE</caption>
-		</table>
-	</div>
-	
-	
-	<script type='text/javascript' src='js/test.js'></script>
-	<script type='text/javascript' src='js/generator.js'></script>
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
+	<script src='js/popup.js'></script>
+	<script src='js/popupController.js'></script>
+	<script src="js/tabcontent.js" type="text/javascript"></script>
 
 </body>
 </html>
