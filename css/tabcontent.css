@@ -18,7 +18,8 @@ ul.tabs li
         
 ul.tabs li a
 {
-    font: normal 12px Verdana;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
     text-decoration: none;
     position: relative;
     padding: 7px 16px;
@@ -47,7 +48,7 @@ ul.tabs li.selected a, ul.tabs li.selected a:hover
     top: 0px;
     font-weight:bold;
     background: white;
-    border: 1px solid #B7B7B7;
+    border: 2px solid #B7B7B7;
     border-bottom-color: white;
 }
         
@@ -57,10 +58,45 @@ ul.tabs li.selected a:hover
     text-decoration: none;
 }
      
-
 div.tabcontents
 {
     border: 1px solid #B7B7B7; padding: 30px;
     background-color:#FFF;
     border-radius: 0 0 7px 7px;
+}
+div.tabcontents>i 
+{
+    float: right;
+}
+
+.fa-angle-double-down, .fa-angle-double-up 
+{
+    margin: 0 10px;
+    cursor: pointer; 
+}
+
+div.tabcontents .form-inline .form-control
+{
+    margin: 0 10px 0 5px;
+    display: inline-block;
+    width: 78px;
+    vertical-align: middle;
+}
+div.tabcontents label {
+    font-family: 'Open Sans',sans-serif;
+    line-height: 34px;
+    margin-bottom: 0;
+}
+div.tabcontents .form-inline select.form-control 
+{
+    width: 130px;
+}
+div.tabcontents .form-inline 
+{
+    padding-top: 10px;
+}
+
+div.tabcontents .checkbox 
+{
+    margin-right: 20px;
 }
