@@ -4,7 +4,6 @@
 	    tl.pg.init({
 	    	auto_show_first: true,
 	     	custom_open_button: "#help",
-	     	default_zindex: 100
 	 	});
 	});
 
