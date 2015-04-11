@@ -16,6 +16,10 @@
           generatedData = generatedData + "\n";
           break;
 
+        case "graph":
+          dealWithGraph(object);
+          break;
+
         default:
           break;
       }
@@ -114,6 +118,99 @@
     var number = new Number(Math.random() * (max - min) + min);
 
     return number.toFixed(precision);
+  }
+
+  function dealWithGraph(graphObject) {
+    for (var i = graphObject.repeattime; i > 0; i--) {
+      var graph = [];
+      var string = graphObject.numberOfNode + " " + graphObject.numberOfEdge + "\n";
+
+      if (graphObject.isConnected) {
+        graph = generateConnectGraph(graphObject);
+      } else {
+        graph = generateDisconnectGraph(graphObject);
+      }
+
+      string = string + graphToString(graph);
+
+      generatedData = generatedData+string;
+    };
+  }
+
+  function graphToString(graph) {
+    var string = "";
+
+    for (var i=0; i<graph.length; i++) {
+      // graph[i].sort();
+      for (var j=0; j<graph[i].length; j++) {
+        string = string + (i+1) + " " + (graph[i][j]+1) + "\n";
+      }
+    }
+
+    return string;
+  }
+
+  function generateConnectGraph(graphObject) {
+    var n = graphObject.numberOfNode;
+    var e = graphObject.numberOfEdge;
+    // var isDirected = graphObject.isDirected;
+    var nodes = [];
+    var graph = [];
+    for (var i=0; i<n; i++) {
+      nodes[i] = i;
+      graph[i] = [];
+    }
+    
+    nodes = shuffle(nodes);
+
+    for (var i = 0; i < nodes.length - 1 ; i++) {
+      graph[nodes[i]].push(nodes[i+1]);
+      // if (!isDirected) {
+      //   graph[nodes[i+1]].push(nodes[i]);
+      // };
+    };
+
+    if (e > n-1) {
+      var i = 0;
+      while (i <= e-n) {
+        var randomIndex = Math.floor(Math.random() * n);
+        if (i % n == 0) {
+          nodes = shuffle(nodes);
+        }
+
+        for (var j = nodes.length - 1; j >= 0; j--) {
+          if (randomIndex != nodes[j] && graph[randomIndex].indexOf(nodes[j]) === -1) {
+            graph[randomIndex].push(nodes[j]);
+            // if (!isDirected) {
+            //   graph[nodes[j]].push(randomIndex);
+            // };
+            i++;
+            break;
+          }
+        };
+      };
+    };
+    
+    return graph;
+  }
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex > 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  function generateDisconnectGraph(graphObject) {
+
   }
 
   function save() {
