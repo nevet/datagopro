@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>DataGoPro</title>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	
@@ -214,28 +216,28 @@
 		    <div id="number" class="container popup">
 		    	<div class="row">
 		    		<div class='col-sm-6'>
-						<select class='numbertype form-control' onchange="numberChanged(this)">
+						<select id="numbertype" class='numbertype form-control' onchange="numberChanged(this)">
 							<option selected disabled hidden value=''>Number type</option>
 							<option value='integer'>Integer</option>
 							<option value='float'>Float</option>
 						</select>
 					</div>
-					<div id="precision" class='col-sm-6'>
-						<input class='floatprecision form-control' type='text' placeholder='precision'>
+					<div id="precisionDiv" class='col-sm-6'>
+						<input id="precision" class='floatprecision form-control' type='text' placeholder='precision'></input>
 					</div>
 				</div>
 				<div class="row">
 					<div class='col-sm-6'>
-						<input class='numbermin form-control' type='text' placeholder='min'>
+						<input id="min" class='numbermin form-control' type='text' placeholder='min'></input>
 					</div>
 					<div class='col-sm-6'>
-						<input class='numbermax form-control' type='text' placeholder='max'>
+						<input id="max" class='numbermax form-control' type='text' placeholder='max'></input>
 					</div>
 				</div>
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input class='repeattime form-control' type='text' value='1'>
+						<input id="repeatNumber" class='repeattime form-control' type='text' value='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -248,13 +250,13 @@
 		    <div id="string" class="container popup">
 		    	<div class="row">
 		    		<div class='col-sm-5'>
-						<input class='stringlength form-control' type='text' placeholder='String length'>
+						<input id="stringlength" class='stringlength form-control' type='text' placeholder='String length'></input>
 					</div>
 					<div class='col-sm-1'>
 						<i class="fa fa-question-circle fa-2x" title="[String length] specifies the length of this long string."></i>
 					</div>
 					<div class='col-sm-6'>
-						<select class='choosecharset form-control'>
+						<select id="charset" class='choosecharset form-control'>
 							<option value='' hidden disabled selected>Charset</option>
 							<option value='ascii'>ASCII</option>
 							<option value='unicode'>Unicode</option>
@@ -263,13 +265,13 @@
 				</div>
 				<div class="row">
 					<div class='col-sm-5'>
-						<input class='linelength form-control' type='text' placeholder='Line length'>
+						<input id="linelength" class='linelength form-control' type='text' placeholder='Line length'></input>
 					</div>
 					<div class='col-sm-1'>
 						<i class="fa fa-question-circle fa-2x" title="[Line length] specifies the length of each line in this long string."></i>
 					</div>
 					<div class='col-sm-5'>
-						<input class='linebreak form-control' type='text' placeholder='Line break'>
+						<input id="linebreak" class='linebreak form-control' type='text' placeholder='Line break'></input>
 					</div>
 					<div class='col-sm-1'>
 						<i class="fa fa-question-circle fa-2x" title="Each line ends with [Line break]."></i>
@@ -277,13 +279,13 @@
 				</div>
 				<div class="row">
 					<div class='col-sm-5'>
-						<input class='wordlength form-control' type='text' placeholder='Word length'>
+						<input id="wordlength" class='wordlength form-control' type='text' placeholder='Word length'></input>
 					</div>
 					<div class='col-sm-1'>
 						<i class="fa fa-question-circle fa-2x" title="[Word length] specifies the length of each word."></i>
 					</div>
 					<div class='col-sm-5'>
-						<input class='wordbreak form-control' type='text' placeholder='Word break'>
+						<input id="wordbreak" class='wordbreak form-control' type='text' placeholder='Word break'></input>
 					</div>
 					<div class='col-sm-1'>
 						<i class="fa fa-question-circle fa-2x" title="Each word ends with [Word break]."></i>
@@ -292,7 +294,7 @@
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input class='repeattime form-control' type='text' value='1'>
+						<input id="repeatString" class='repeattime form-control' type='text' value='1'>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -379,8 +381,8 @@
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/pageguide.min.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
-	<script src='js/popup.js'></script>
 	<script src='js/popupController.js'></script>
+	<script src='js/inputInfo.js'></script>
 	<script src="js/tabcontent.js" type="text/javascript"></script>
 	<script src='js/login.js'></script>
 	<script src='js/help.js'></script>

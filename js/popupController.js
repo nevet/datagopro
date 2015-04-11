@@ -1,42 +1,43 @@
 var chosebutton;
 
-$(function () {
-  $("#popup").hide();
-  $("#precision").hide();
-});
+$("#popup").hide();
+$("#precisionDiv").hide();
 
 function cancelClicked(e) {
-  Popup.hide("popup");
+  $("#popup").bPopup().close();
 }
 
 function chooseDataType(e) {
   chosebutton = $(e);
-  Popup.show("popup");
+  $("#popup").bPopup();
 }
 
 function numberChanged(e) {
   var element = $(e);
   if (element.val() == "float") {
-    $("#precision").show();
+    $("#precisionDiv").show();
   } else {
-    $("#precision").hide();
+    $("#precisionDiv").hide();
   }
 }
 
 function okclicked(e) {
-  Popup.hide("popup");
+  $("#popup").bPopup().close();
   var element = $(e);
   switch (element.val()) {
     case "number":
       chosebutton.attr("value","Number");
+      inputInfo.createNewInfo(element);
       break;
 
     case "string":
       chosebutton.attr("value","String");
+      inputInfo.createNewInfo(element);
       break;
 
     case "graph":
       chosebutton.attr("value","Graph");
+      inputInfo.createNewInfo(element);
       break;
 
     default:

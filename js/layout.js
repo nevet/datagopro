@@ -20,19 +20,21 @@ $(function(){
 	    		tlHeight();
 	    	}
     	}
-	    $("#nav li:not(last-child)>a").click(function(e){
+	    $("#nav li>a").click(function(e){
 	        e.preventDefault();
-
-	        var prev = $("#nav li.active");
-	        prev.removeClass();
-	        $(this).parent().addClass("active");
-	        $($(this).attr("data-target")).css("display", "block");
-	        if ($(this).attr("data-target") == "#timeline") {
-	        	tlHeight();
+	        if (this.id != "mybutton") {
+	        	console.log("fired!");
+		        var prev = $("#nav li.active");
+		        prev.removeClass();
+		        $(this).parent().addClass("active");
+		        $($(this).attr("data-target")).css("display", "block");
+		        if ($(this).attr("data-target") == "#timeline") {
+		        	tlHeight();
+		        }
+		        var sibling = $($(this).parent().siblings()[0]);
+		        $($(prev.find("a")[0]).attr("data-target")).css("display", "none");
 	        }
-	        var sibling = $($(this).parent().siblings()[0]);
-	        $($(prev.find("a")[0]).attr("data-target")).css("display", "none");
-
+	        
 	    });
 	    function tlHeight() {
 	    	var sHeight = document.getElementById("timeline").scrollHeight * 0.97;
