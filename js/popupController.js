@@ -1,9 +1,7 @@
 var chosebutton;
 
-$(function () {
-  $("#popup").hide();
-  $("#precisionDiv").hide();
-});
+$("#popup").hide();
+$("#precisionDiv").hide();
 
 function cancelClicked(e) {
   $("#popup").bPopup().close();

@@ -32,6 +32,7 @@
       "repeat": $("#repeatNumber").val()
     }
     console.log(newObject);
+    checkExistence(element);
     inputList.push(newObject);
   }
 
@@ -41,5 +42,15 @@
 
   function createNewGraph(elementId) {
     console.log("graph info");
+  }
+
+  function checkExistence(element) {
+    for (var i = inputList.length - 1; i >= 0; i--) {
+      if (inputList[i] === element) {
+        console.log("the element is existing");
+        inputList.splice(i, 1);
+        break;
+      }
+    };
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);
