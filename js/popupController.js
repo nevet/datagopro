@@ -46,8 +46,10 @@ function preparePopup(index) {
 }
 
 function prepareNumber(object) {
-  // $("#popup").tabs({selected: 0});
-  document.getElementById("numbertype").selectedIndex = object.numbertype;
+  $("#anumber").addClass("selected").siblings().removeClass("selected");
+  $("#number").css("display","block").siblings().css("display", "none");
+
+  $("#numbertype")[0].selectedIndex = object.numbertype;
   $("#precision").val(object.precision);
   $("#min").val(object.min);
   $("#max").val(object.max);
@@ -55,9 +57,11 @@ function prepareNumber(object) {
 }
 
 function prepareString(object) {
-  // $("#popup").tabs({selected: 1});
+  $("#astring").addClass("selected").siblings().removeClass("selected");
+  $("#string").css("display","block").siblings().css("display", "none");
+
   $("#stringlength").val(object.stringlength);
-  document.getElementById("chartype").selectedIndex = object.chartype;
+  $("#chartype")[0].selectedIndex = object.chartype;
   $("#linelength").val(object.linelength);
   $("#linebreak").val(object.linebreak);
   $("#wordlength").val(object.wordlength);
@@ -66,9 +70,11 @@ function prepareString(object) {
 }
 
 function prepareGraph(object) {
-  // $("#popup").tabs({selected: 2});
-  document.getElementById("connect").selectedIndex= object.connect;
-  document.getElementById("direct").selectedIndex = object.direct;
+  $("#agraph").addClass("selected").siblings().removeClass("selected");
+  $("#graph").css("display","block").siblings().css("display", "none");
+  
+  $("#connect")[0].selectedIndex = object.connect;
+  $("#direct")[0].selectedIndex = object.direct;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
   $("#repeatGraph").val(object.repeatGraph);
