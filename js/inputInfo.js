@@ -31,19 +31,29 @@
     return -1;
   }
 
+  inputInfo.getElement = function (index) {
+    return inputList[index];
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "type": "number",
-      "numbertype": document.getElementById("numbertype").selectedIndex,
+      "dataType": "number",
+      "numbertype": $("#numbertype")[0].selectedIndex,
       "precision": $("#precision").val(),
       "min": $("#min").val(),
       "max": $("#max").val(),
       "repeatNumber": $("#repeatNumber").val()
     }
 
+    clearData();
+
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
@@ -53,18 +63,24 @@
   function createNewString(element) {
     var newObject = {
       "identifier" : element,
-      "type": "string",
+      "dataType": "string",
       "stringlength": $("#stringlength").val(),
-      "charset": document.getElementById("charset").selectedIndex,
+      "chartype": $("#chartype")[0].selectedIndex,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeatString": $("#repeatString").val();
+      "repeatString": $("#repeatString").val()
     }
 
+    clearData();
+
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
@@ -74,19 +90,47 @@
   function createNewGraph(element) {
     var newObject = {
       "identifier" : element,
-      "type": "graph",
-      "connect": document.getElementById("connect").selectedIndex,
-      "direct": document.getElementById("direct").selectedIndex,
+      "dataType": "graph",
+      "connect": $("#connect")[0].selectedIndex,
+      "direct": $("#direct")[0].selectedIndex,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
       "repeatGraph": $("#repeatGraph").val()
     }
 
+    clearData();
+    
     var index = inputInfo.checkExistence(element);
+    var object = inputInfo.getElement(index);
     if (index >= 0) {
+      if (object.dataType != newObject.dataType) {
+        alert("Different dataType");
+      };
       inputList.splice(index, 1);
     }
 
     inputList.push(newObject);
+  }
+
+  function clearData() {
+    $("#numbertype")[0].selectedIndex = 0;
+    $("#precision").val("");
+    $("#min").val("");
+    $("#max").val("");
+    $("#repeatNumber").val(1);
+
+    $("#stringlength").val("");
+    $("#chartype")[0].selectedIndex = 0;
+    $("#linelength").val("");
+    $("#linebreak").val("");
+    $("#wordlength").val("");
+    $("#wordbreak").val("");
+    $("#repeatString").val(1);
+
+    $("#connect")[0].selectedIndex = 0;
+    $("#direct")[0].selectedIndex = 0;
+    $("#node").val("");
+    $("#edge").val("");
+    $("#repeatGraph").val(1);
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);

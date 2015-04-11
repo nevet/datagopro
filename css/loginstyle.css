@@ -30,7 +30,7 @@ body{
 }
 #continue{
 	margin-top: -60px;
-	margin-left: 120px;
+	margin-left: 130px;
 }
 
 #logindiv h1{
@@ -73,7 +73,7 @@ body{
   -webkit-transition:background .3s;
 }
 
-span{
+#logintext{
 	font-family:'Open Sans',sans-serif;
 	font-size:120%;
 }

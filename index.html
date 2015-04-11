@@ -16,19 +16,86 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="css/tabcontent.css" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+	<script src="https://apis.google.com/js/plus.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script src='js/login.js'></script>
 	<style></style>
 </head>
 <body>
 
+
 	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1567423636871440";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+	<script type="text/javascript">
+
+	window.fbAsyncInit = function() {
+	    FB.init({
+	        appId   : '1567423636871440',
+	        oauth   : true,
+	        status  : true, // check login status
+	        cookie  : true, // enable cookies to allow the server to access the session
+	        xfbml   : true, // parse XFBML
+	        version    : 'v2.3'
+	    }); };
+
+	    (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+    function fb_login(){
+    FB.login(function(response) {
+
+        if (response.authResponse) {
+            console.log('Welcome!  Fetching your information.... ');
+            //console.log(response); // dump complete info
+            access_token = response.authResponse.accessToken; //get access token
+            user_id = response.authResponse.userID; //get FB UID
+
+            FB.api('/me', function(response) {
+                user_email = response.email; //get user email
+          // you can store this data into your database             
+            });
+
+        } else {
+            //user hit cancel button
+            console.log('User cancelled login or did not fully authorize.');
+
+        }
+        }, {
+        scope: 'publish_stream,email'
+      });
+    }   
+    
+    (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        $('#fb-root').append(e);
+    }());
 	</script>
+
+	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	    po.src = 'https://apis.google.com/js/plusone.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	  	
+	  	function signinCallback(authResult) {
+  			if (authResult['access_token']) {	
+    		document.getElementById('signinButton').setAttribute('style', 'display: none');
+	  } else if (authResult['error']) {
+	    console.log('somthing is wrong：' + authResult['error']);
+	  }
+	}
+	</script>
+
+
 
 	 <script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -45,20 +112,30 @@
         <div id="logindiv">
           <h1 id='loginh1'>Log in to Datagopro</h1>
           <div id='logform'>
-            <span> Please log in via <br> </span>
-            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false">
-            	<a class="btn btn-block btn-social btn-facebook">
-            	<i class="fa fa-facebook"></i> Sign in with Facebook
-            </a>
-            </div>
+            <span id='logintext'> Please log in via <br> </span>
+            
 
-            <a class="btn btn-block btn-social btn-google-plus" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-google-plus']);">
-            <i class="fa fa-google-plus"></i> Sign in with Google
+            <a href='#' class=" btn btn-block btn-social btn-facebook" onclick="fb_login();">
+            	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
             </a>
-          
-            <a class="btn btn-block btn-social btn-twitter" onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-twitter']);">
-            <i class="fa fa-twitter"></i> Sign in with Twitter
-            </a>
+		
+            <a href='#' class="btn btn-block btn-social btn-google-plus">
+				<i class="fa fa-google-plus"></i> <span id="signinButton"> 
+				<span
+				    class="g-signin"
+				    data-callback="signinCallback"
+				    data-clientid="980224079160-bmsd1d9rpiatcfguc987a32appn6j58k.apps.googleusercontent.com"
+				    data-cookiepolicy="single_host_origin"
+				    data-requestvisibleactions="http://schemas.google.com/AddActivity"
+				    data-scope="https://www.googleapis.com/auth/plus.login">
+						Sign in with Google</span>
+				</span>
+			</a>
+
+
+            <div class="btn btn-block btn-social btn-twitter">
+            <i class="fa fa-twitter"></i> <span>Sign in with Twitter</span>
+            </div>
           </div>
       </div>
       <div id='triangle'></div>
@@ -208,9 +285,9 @@
 	</div>
 	<div id="popup">
 		<ul class="tabs">
-		    <li><a href="#number">Number</a></li>
-		    <li><a href="#string">String</a></li>
-		    <li><a href="#graph">Graph</a></li>
+		    <li id="anumber"><a id="anumber" href="#number">Number</a></li>
+		    <li id="astring"><a id="astring" href="#string">String</a></li>
+		    <li id="agraph"><a id="agraph" href="#graph">Graph</a></li>
 		</ul>
 		<div class="tabcontents">
 			<!-- <i class="fa fa-question-circle fa-2x"></i>  -->
@@ -271,7 +348,6 @@
 		    			<label for="stringlength" >String length</label>
 						<input id="stringlength" class='stringlength form-control' type='number'></input>
 					</div>
-					
 					<div class='form-group'>
 						<select id="charset" class='choosecharset form-control'>
 							<option value='' hidden disabled selected>Charset</option>
@@ -408,8 +484,6 @@
 	  </li>
 	</ul>
 
-
-	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
 	<script src="js/pageguide.min.js"></script>
@@ -420,11 +494,5 @@
 	<script src='js/login.js'></script>
 	<script src='js/help.js'></script>
 
-
-
 </body>
-
-
-
-
 </html>
