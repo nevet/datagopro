@@ -101,16 +101,10 @@
             	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
             </a>
 		
-            <a href='#' class="btn btn-block btn-social btn-google-plus">
-				<i class="fa fa-google-plus"></i> <span id="signinButton"> 
-				<span
-				    class="g-signin"
-				    data-callback="signinCallback"
-				    data-clientid="980224079160-bmsd1d9rpiatcfguc987a32appn6j58k.apps.googleusercontent.com"
-				    data-cookiepolicy="single_host_origin"
-				    data-requestvisibleactions="http://schemas.google.com/AddActivity"
-				    data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
-						Sign in with Google</span>
+            <a href='#' class="btn btn-block btn-social btn-google-plus" onclick="google_login();">
+				<i class="fa fa-google-plus"></i>
+				<span>
+						Sign in with Google
 				</span>
 			</a>
 
@@ -128,6 +122,7 @@
 
 	<div id='banner'>
 		<img src="img/logo2.png">
+		<div id="profile"> </div>
 		<ol id="nav" class="breadcrumb">
 		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
 		  <li id='second_element'><a data-target="#timeline">My Input</a></li>
