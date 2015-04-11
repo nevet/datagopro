@@ -31,6 +31,11 @@
     return -1;
   }
 
+  inputInfo.getElement = function (index) {
+    console.log(inputList);
+    return inputList[index];
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
@@ -60,7 +65,7 @@
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeatString": $("#repeatString").val();
+      "repeatString": $("#repeatString").val()
     }
 
     var index = inputInfo.checkExistence(element);
