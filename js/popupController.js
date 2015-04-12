@@ -66,7 +66,7 @@ function prepareString(object) {
   $("#string").css("display","block").siblings().css("display", "none");
 
   $("#stringlength").val(object.stringlength);
-  $("#chartype")[0].selectedIndex = object.chartype;
+  $("#chartset")[0].selectedIndex = object.chartype;
   $("#linelength").val(object.linelength);
   $("#linebreak").val(object.linebreak);
   $("#wordlength").val(object.wordlength);
