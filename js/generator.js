@@ -1,38 +1,29 @@
 var generatedData;
 
-generateBatch = function (array) {
+generate = function (array) {
   generatedData = "";
   if (array) {
     for (var i = 0; i<=array.length - 1; i++) {
       var object = array[i];
-      generate(object);
-    };
+      
+      switch (object.datatype) {
+        case "string":
+          dealWithString(object);
+          break;
 
-    if (generatedData!="") {
-      save();
+        case "number":
+          dealWithNumber(object);
+          generatedData = generatedData + "\n";
+          break;
+
+        case "graph":
+          dealWithGraph(object);
+          break;
+
+        default:
+          break;
+      }
     }
-  };
-}
-
-generate = function (object) {
-  generatedData = "";
-  
-  switch (object.datatype) {
-    case "string":
-      dealWithString(object);
-      break;
-
-    case "number":
-      dealWithNumber(object);
-      generatedData = generatedData + "\n";
-      break;
-
-    case "graph":
-      dealWithGraph(object);
-      break;
-
-    default:
-      break;
   }
 
   return generatedData;
@@ -227,20 +218,4 @@ function shuffle(array) {
 
 function generateDisconnectGraph(graphObject) {
 
-}
-
-function save() {
-  console.log(generatedData);
-
-  var textToWrite = generatedData;
-  var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-  var downloadLink = document.createElement("a");
-
-  downloadLink.download = "textFile";
-  downloadLink.innerHTML = "Download File";
-  if (window.URL != null) {
-    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-  }
-
-  downloadLink.click();
 }

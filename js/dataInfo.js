@@ -8,7 +8,7 @@ onmessage = function (event) {
   switch (data.cmd) {
     case "start":
       var json = JSON.parse(data.data);
-      var generatedData = generate(json);
+      var generatedData = generate([json]);
 
       postMessage(generatedData);
       break;

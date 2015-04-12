@@ -46,10 +46,18 @@ $(function(){
 	    var order=1;
 	    $("#add>i").on("click", createData);
 	    $("#add>p").on("click", createData);
+
 	    function createData(e) {
+	    	var lastChild = $("#data-field").children().last();
+	    	var lastInputButton = lastChild.find("input").last();
+	    	// the last one has not been specified, we need to add a place holder
+	    	// in preview
+	    	if (lastInputButton.val() == "") {
+	    		preview.render(lastInputButton[0], "");
+	    	}
+
 	    	order++;
-	    	$($("#data-field").children()[$("#data-field").children().length-1])
-	    	.after($("<div class='data-block'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
+	    	lastChild.append($("<div class='data-block'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
 	    		+order+"</i> </span> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'> <i class='fa fa-folder-open'></i> </div><span id='data-block-info'><span></div>"));
 			
 			document.getElementById("data-field").scrollTop = document.getElementById("data-field").scrollHeight;

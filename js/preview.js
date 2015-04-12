@@ -5,18 +5,16 @@
   var previewPadding;
 
   var divs = [];
+  var allData = [];
 
   function exist(element) {
-    for (var i = 0; i < divs; i ++) {
+    for (var i = 0; i < divs.length; i ++) {
       if (divs[i].identifier === element) {
-        var result = divs[i].div;
-        divs.splice(i, 1);
-        
-        return result;
+        return [divs[i], i];
       }
     }
 
-    return undefined;
+    return [undefined, -1];
   }
 
   function getDivId() {
@@ -42,6 +40,19 @@
     return id;
   }
 
+  function save(textToWrite) {
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+    var downloadLink = document.createElement("a");
+
+    downloadLink.download = "textFile";
+    downloadLink.innerHTML = "Download File";
+    if (window.URL != null) {
+      downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    }
+
+    downloadLink.click();
+  }
+
   preview.startLoading = function () {
     display.removeClass("showContent");
     display.addClass("loading");
@@ -53,27 +64,52 @@
   }
 
   preview.render = function (element, data) {
-    var newDiv = exist(element);
+    var check = exist(element);
+    console.log(check);
+    var newDiv = check[0];
     var divId = getDivId();
+    var collapseButton = $(button);
+    var dataDiv = $(div);
 
     if (newDiv == undefined) {
       newDiv = $(div);
+      newDiv.css("margin-top", "-20px");
+
+      collapseButton.attr("data-target", "#" + divId);
+      collapseButton.appendTo(newDiv);
+
+      dataDiv.css("padding-left", "10px");
+
+      dataDiv.appendTo(newDiv);
+      newDiv.appendTo(display);
+
+      var object = {
+        "identifier": element,
+        "div": newDiv,
+        "divId": divId
+      }
+
+      if (divs.length) {
+        newDiv.css({
+          "padding-top": "10px"
+        });
+      }
+
+      divs.push(object);
+    } else {
+      newDiv = newDiv.div;
+      collapseButton = $(newDiv).find("button");
+      dataDiv = $(newDiv).children("div");
+      dataDiv.html("");
+      divId = check[0].divId;
+      allData[check[1]] = data;
     }
 
-    newDiv.css("margin-top", "-20px");
-
-    var newButton = $(button);
-
-    newButton.attr("data-target", "#" + divId);
-    newButton.appendTo(newDiv);
-
-    var dataDiv = $(div);
-    dataDiv.css("padding-left", "10px");
-
-    if (data.length < 65) {
-      newButton.css("visibility", "hidden");
+    if (data.length < 65 && data.length != 0) {
+      collapseButton.css("visibility", "hidden");
       dataDiv.html(data);
     } else {
+      collapseButton.css("visibility", "visible");
       var previewData = data.substr(0, 64);
       var previewDataSpan = $("<span></span>");
       
@@ -81,7 +117,11 @@
       previewDataSpan.html(previewData);
       previewDataSpan.appendTo(dataDiv);
 
-      var collapseData = data.substr(65);
+      if (data.length == 0) {
+        previewDataSpan.html("unspecified");
+      }
+
+      var collapseData = data.substr(64);
       var collapseDataDiv = $(div);
       
       collapseDataDiv.attr("id", divId);
@@ -91,24 +131,6 @@
       collapseDataDiv.html(collapseData);
       collapseDataDiv.appendTo(dataDiv);
     }
-
-    dataDiv.appendTo(newDiv);
-
-    newDiv.appendTo(display);
-
-    var object = {
-      "identifier": element,
-      "div": newDiv,
-      "divId": divId
-    }
-
-    if (divs.length) {
-      newDiv.css({
-        "padding-top": "10px"
-      });
-    }
-
-    divs.push(object);
   }
 
   $("#preview button").on("click", function () {
@@ -122,6 +144,20 @@
     } else {
       button.removeClass("fa-angle-right");
       button.addClass("fa-angle-down");
+    }
+  });
+
+  $("#generate button").on("click", function () {
+    if (allData.length) {
+      var output = "";
+
+      for (var i = 0; i < allData.length; i ++) {
+        output += allData[i];
+      }
+
+      save(output);
+    } else {
+      alert("There's no input so far!");
     }
   });
 }) (window.preview = window.preview || {}, jQuery);
