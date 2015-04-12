@@ -92,7 +92,7 @@ function okclicked(e) {
   var element = $(e);
 
   worker.onmessage = function(event) {
-    preview.render(element, event.data);
+    preview.render(chosebutton, event.data);
     preview.endLoading();
   };
 
@@ -126,8 +126,6 @@ function okclicked(e) {
 
   preview.startLoading();
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
-
-  element.html(string);
 }
 
 function changeInfoMessage(type) {
