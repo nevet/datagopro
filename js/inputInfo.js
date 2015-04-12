@@ -35,7 +35,8 @@
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "datatype": "number",
+      "dataType": "number",
+      "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
       "numbermin": $("#min").val(),
