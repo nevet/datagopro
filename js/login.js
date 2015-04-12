@@ -66,7 +66,7 @@ window.fbAsyncInit = function() {
                 var user_name = response.name;
                 $("div#profile span").html("Welcome, "+user_name+"!");
                 $("#mybutton").css("display","none");
-                $("#logoutbutton").css("display","block");              
+                $("#logoutbutton").css("display","");              
             });
 
             
@@ -141,7 +141,7 @@ window.fbAsyncInit = function() {
                 //str += "Email:" + email + "<br>";
                 $("div#profile span").html("Welcome, "+resp['displayName']+"!");
                 $("#mybutton").css("display","none");
-                $("#logoutbutton").css("display","block");
+                $("#logoutbutton").css("display","");
                 var bPopup = $("#element_to_pop_up").bPopup();
                     bPopup.close({
                        transitionClose: 'slideUp'
