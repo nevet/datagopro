@@ -26,6 +26,9 @@
         }); 
 })();
 
+var logintype = undefined;
+
+//facebook log in
 window.fbAsyncInit = function() {
         FB.init({
             appId   : '1567423636871440',
@@ -51,18 +54,20 @@ window.fbAsyncInit = function() {
             console.log('Welcome!  Fetching your information.... ');
             //console.log(response); // dump complete info
             access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
-
-            FB.api('/me', function(response) {
-                user_email = response.email; 
-                //get user email
-          // you can store this data into your database             
-            });
+            var user_id = response.authResponse.userID; //get FB UID
 
             var bPopup = $("#element_to_pop_up").bPopup();
-            bPopup.close({
-               transitionClose: 'slideUp'
+                bPopup.close({
+                   transitionClose: 'slideUp'
+                });
+
+            FB.api('/me', function(response) {
+                var user_email = response.email; 
+                var user_name = response.name;
+                $("div#profile span").html("Welcome, "+user_name+"!");              
             });
+
+            
 
         } else {
             //user hit cancel button
@@ -133,6 +138,10 @@ window.fbAsyncInit = function() {
                 // str += "<img src='" + resp['image']['url'] + "' /><br>";
                 //str += "Email:" + email + "<br>";
                 $("div#profile span").html("Welcome, "+resp['displayName']+"!");
+                var bPopup = $("#element_to_pop_up").bPopup();
+                    bPopup.close({
+                       transitionClose: 'slideUp'
+                    });
             });
         }   
      
