@@ -163,7 +163,6 @@ window.fbAsyncInit = function() {
     function google_logout()
     {
         gapi.auth.signOut();
-        location.reload();
     }
 
     $(document).on("click", "#logoutbutton", function(event){
