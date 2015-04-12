@@ -130,10 +130,7 @@ window.fbAsyncInit = function() {
                 }
              
                 var str = "Name:" + resp['displayName'] + "<br>";
-                str += "Image:" + resp['image']['url'] + "<br>";
                 str += "<img src='" + resp['image']['url'] + "' /><br>";
-             
-                str += "URL:" + resp['url'] + "<br>";
                 str += "Email:" + email + "<br>";
                 document.getElementById("profile").innerHTML = str;
             });
