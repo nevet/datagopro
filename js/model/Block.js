@@ -1,5 +1,8 @@
 var Block = function (id, undefined) {
   var
+  DataType = ["Number", "String"];
+  
+  var
   _block = undefined,
   _blockId = id,
   _type = undefined,
