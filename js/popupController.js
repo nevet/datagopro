@@ -23,8 +23,10 @@ function numberChanged(e) {
   var element = $(e);
   if (element.val() == "float") {
     $("#precisionDiv").show();
+    $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
+    $("#parity").prop("disabled", false);
   }
 }
 
@@ -151,21 +153,21 @@ function changeInfoMessage(type) {
       break;
   }
 
-  element.html(string);
+  element.html(string+" <b>X "+object.repeattime);
 }
 
 function numberInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X ";
+  var string;
 
   switch (object.numbertype) {
     case "integer":
-      string = string + "Integer</b>" + 
+      string = "<b>Integer</b>" + 
         " from " + object.numbermin + 
         " to " + object.numbermax;
       break;
 
     case "float":
-      string = string + "Float</b>" + 
+      string = "<b>Float</b>" + 
         " from " + object.numbermin + 
         " to " + object.numbermax + 
         " with precision " + object.precision;
@@ -176,17 +178,17 @@ function numberInfoMessage(object) {
 }
 
 function stringInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X ";
+  var string;
 
-  string = string + "String</b> with length of " + object.stringlength;
+  string = "<b>String</b> with length of " + object.stringlength;
 
   return string;
 }
 
 function graphInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X ";
+  var string;
 
-  string = string + "Graph</b> with " + object.node + 
+  string = "<b>Graph</b> with " + object.node + 
         " nodes and " + object.edge + " edges";
 
   return string;
