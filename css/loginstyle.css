@@ -7,7 +7,7 @@
 *{margin:0;padding:0;}
 
 body{
-  background:#567;
+  background:#DCDCDC;
   font-family:'Open Sans',sans-serif;
 }
 
@@ -20,7 +20,7 @@ body{
 #logindiv{
   width:400px;
   margin:0 auto;
-  margin-top:10px;
+  margin-top:3px;
   border-radius: 5px 5px 0px 0px ;
   background:#f0f0f0;
 }
@@ -38,12 +38,12 @@ body{
 }
 
 #logindiv h1{
-  background:#3399cc;
+  background: #E1E6FA;
   padding:20px 0;
   font-size:140%;
   font-weight:300;
   text-align:center;
-  color:#fff;
+  color:#0858B2;
   border-radius: 5px 5px 0px 0px;
 }
 
