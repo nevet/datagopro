@@ -1,6 +1,6 @@
 var generatedData;
 
-generateBatch = function (array) {
+generate = function (array) {
   generatedData = "";
   if (array) {
     for (var i = 0; i<=array.length - 1; i++) {
@@ -23,8 +23,10 @@ generateBatch = function (array) {
         default:
           break;
       }
-    };
-  };
+    }
+  }
+
+  return generatedData;
 }
 
 function dealWithString(stringObject) {

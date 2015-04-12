@@ -8,13 +8,13 @@
   var allData = [];
 
   function exist(element) {
-    for (var i = 0; i < divs; i ++) {
+    for (var i = 0; i < divs.length; i ++) {
       if (divs[i].identifier === element) {
-        return [result.div, i];
+        return [divs[i], i];
       }
     }
 
-    return undefined;
+    return [undefined, -1];
   }
 
   function getDivId() {
@@ -65,6 +65,7 @@
 
   preview.render = function (element, data) {
     var check = exist(element);
+    console.log(check);
     var newDiv = check[0];
     var divId = getDivId();
     var collapseButton = $(button);
@@ -96,16 +97,19 @@
 
       divs.push(object);
     } else {
-      collapseButton = $(newDiv).find("button")[0];
-      dataDiv = $(newDiv).children("div")[0];
+      newDiv = newDiv.div;
+      collapseButton = $(newDiv).find("button");
+      dataDiv = $(newDiv).children("div");
       dataDiv.html("");
-      allData[i] = data;
+      divId = check[0].divId;
+      allData[check[1]] = data;
     }
 
-    if (data.length < 65) {
+    if (data.length < 65 && data.length != 0) {
       collapseButton.css("visibility", "hidden");
       dataDiv.html(data);
     } else {
+      collapseButton.css("visibility", "visible");
       var previewData = data.substr(0, 64);
       var previewDataSpan = $("<span></span>");
       
@@ -113,7 +117,11 @@
       previewDataSpan.html(previewData);
       previewDataSpan.appendTo(dataDiv);
 
-      var collapseData = data.substr(65);
+      if (data.length == 0) {
+        previewDataSpan.html("unspecified");
+      }
+
+      var collapseData = data.substr(64);
       var collapseDataDiv = $(div);
       
       collapseDataDiv.attr("id", divId);
@@ -140,12 +148,16 @@
   });
 
   $("#generate button").on("click", function () {
-    var output = "";
+    if (allData.length) {
+      var output = "";
 
-    for (var i = 0; i < allData.length; i ++) {
-      output += allData[i] + "\n";
+      for (var i = 0; i < allData.length; i ++) {
+        output += allData[i];
+      }
+
+      save(output);
+    } else {
+      alert("There's no input so far!");
     }
-
-    save(output);
   });
 }) (window.preview = window.preview || {}, jQuery);

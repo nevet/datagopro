@@ -170,7 +170,7 @@ function numberInfoMessage(object) {
       string = "<b>Float</b>" + 
         " from " + object.numbermin + 
         " to " + object.numbermax + 
-        " with precision " + object.precision;
+        " with precision " + object.floatprecision;
       break;
   }
 

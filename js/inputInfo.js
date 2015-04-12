@@ -36,7 +36,7 @@
       "datatype": "number",
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
-      "precision": $("#precision").val(),
+      "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
       "repeattime": $("#repeatNumber").val()
