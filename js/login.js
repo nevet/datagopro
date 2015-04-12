@@ -10,11 +10,17 @@
 
 
         $(document).ready(function(){
-             $("#element_to_pop_up").bPopup({//uses jQuery easing plugin
+
+            if(localStorage.getItem('firstVisit')!='true'){   
+                localStorage.setItem('firstVisit', 'true');
+                $("#element_to_pop_up").bPopup({//uses jQuery easing plugin
                 speed: 500,
                 transition: 'slideDown',
                 transitionClose: 'slideUp'
-            });
+                });
+            }
+            else{}
+
         });
 
         $(document).on('click','#logclose',function(event){
@@ -181,8 +187,7 @@ window.fbAsyncInit = function() {
                 $("#mybutton").css("display","");
                 $("#logoutbutton").css("display","none");
             }
-            location.reload();
-        });
+    });
 
 
 
