@@ -62,6 +62,7 @@ div#profile{
  		border: 3px solid white;
 	}
 	div#preview {
+		font-family: 'Abel', sans-serif;
 		width: 90%;
 		height: 500px;
 		background-color: #E9F0F5;
@@ -113,6 +114,7 @@ div#profile{
  		border: 3px solid white;
 	}
 	div#preview {
+		font-family: 'Abel', sans-serif;
 		float: left;
 		width: 38%;
 		height: 90%;
@@ -362,6 +364,14 @@ div#footer {
 	background-color: #DCDCDC;
   	border-top: 3px solid white;
 	text-align: center;
+}
+
+/* dataset preview*/
+.dataCollapseButton {
+	position: relative;
+	top: 19px;
+	width: 13px;
+	margin-left: -10px;
 }
 
 /* preview loading settings*/

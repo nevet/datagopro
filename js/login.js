@@ -64,9 +64,11 @@ window.fbAsyncInit = function() {
             FB.api('/me', function(response) {
                 var user_email = response.email; 
                 var user_name = response.name;
+                logintype = "facebook";
                 $("div#profile span").html("Welcome, "+user_name+"!");
                 $("#mybutton").css("display","none");
-                $("#logoutbutton").css("display","");              
+                $("#logoutbutton").css("display",""); 
+                $(".logininput").css("display","");             
             });
 
             
@@ -88,6 +90,11 @@ window.fbAsyncInit = function() {
         $('#fb-root').append(e);
     }());
 
+
+    function facebook_logout(){
+        FB.logout(function(response) { });
+    }
+  
 
 //google login functions
     (function() {
@@ -142,6 +149,8 @@ window.fbAsyncInit = function() {
                 $("div#profile span").html("Welcome, "+resp['displayName']+"!");
                 $("#mybutton").css("display","none");
                 $("#logoutbutton").css("display","");
+                $(".logininput").css("display","");
+                logintype="google";
                 var bPopup = $("#element_to_pop_up").bPopup();
                     bPopup.close({
                        transitionClose: 'slideUp'
@@ -154,7 +163,25 @@ window.fbAsyncInit = function() {
     function google_logout()
     {
         gapi.auth.signOut();
-        location.reload();
     }
+
+    $(document).on("click", "#logoutbutton", function(event){
+            event.preventDefault();
+            if (logintype=="google") {
+                google_logout();
+                $(".logininput").css("display","none");
+                $("div#profile span").html("");
+                $("#mybutton").css("display","");
+                $("#logoutbutton").css("display","none");
+            }
+            else {
+                facebook_logout();
+                $(".logininput").css("display","none");
+                $("div#profile span").html("");
+                $("#mybutton").css("display","");
+                $("#logoutbutton").css("display","none");
+            }
+        });
+
 
 

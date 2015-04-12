@@ -96,15 +96,7 @@ function okclicked(e) {
   switch (element.val()) {
     case "number":
       $(chosebutton).attr("value","Number");
-      inputInfo.createNewInfo("number", chosebutton);
-      changeInfoMessage("number");
-
-      var obj = jQuery.extend({}, inputInfo.getLastElement());
-      console.log(obj);
-      obj.identifier = undefined;
-
-      preview.startLoading();
-      worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
+      inputInfo.createNewInfo("number",chosebutton);
 
       break;
 
@@ -146,6 +138,14 @@ function changeInfoMessage(type) {
     default:
       break;
   }
+
+  var obj = inputInfo.getLastElement();
+
+  console.log(obj);
+  obj.identifier = undefined;
+
+  preview.startLoading();
+  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 
   element.html(string);
 }

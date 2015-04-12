@@ -1,7 +1,3 @@
-// (function (generator, $, undefined) {
-
-// }) (window.generator = window.generator || {}, jQuery);
-
 var generatedData;
 
 generateBatch = function (array) {
