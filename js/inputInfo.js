@@ -35,7 +35,8 @@
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "datatype": "number",
+      "dataType": "number",
+      "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
       "numbermin": $("#min").val(),
@@ -62,12 +63,12 @@
       "identifier" : element,
       "dataType": "string",
       "stringlength": $("#stringlength").val(),
-      "chartype": $("#chartype")[0].selectedIndex,
+      "chartype": $("#charset")[0].selectedIndex,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeatString": $("#repeatString").val()
+      "repeattime": $("#repeatString").val()
     }
 
     clearData();
@@ -92,7 +93,7 @@
       "direct": $("#direct")[0].selectedIndex,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
-      "repeatGraph": $("#repeatGraph").val()
+      "repeattime": $("#repeatGraph").val()
     }
 
     clearData();

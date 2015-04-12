@@ -26,6 +26,9 @@
         }); 
 })();
 
+var logintype = undefined;
+
+//facebook log in
 window.fbAsyncInit = function() {
         FB.init({
             appId   : '1567423636871440',
@@ -51,12 +54,24 @@ window.fbAsyncInit = function() {
             console.log('Welcome!  Fetching your information.... ');
             //console.log(response); // dump complete info
             access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
+            var user_id = response.authResponse.userID; //get FB UID
+
+            var bPopup = $("#element_to_pop_up").bPopup();
+                bPopup.close({
+                   transitionClose: 'slideUp'
+                });
 
             FB.api('/me', function(response) {
-                user_email = response.email; //get user email
-          // you can store this data into your database             
+                var user_email = response.email; 
+                var user_name = response.name;
+                logintype = "facebook";
+                $("div#profile span").html("Welcome, "+user_name+"!");
+                $("#mybutton").css("display","none");
+                $("#logoutbutton").css("display",""); 
+                $(".logininput").css("display","");             
             });
+
+            
 
         } else {
             //user hit cancel button
@@ -75,6 +90,11 @@ window.fbAsyncInit = function() {
         $('#fb-root').append(e);
     }());
 
+
+    function facebook_logout(){
+        FB.logout(function(response) { });
+    }
+  
 
 //google login functions
     (function() {
@@ -123,22 +143,46 @@ window.fbAsyncInit = function() {
                     }
                 }
              
-                var str = "Name:" + resp['displayName'] + "<br>";
-                str += "Image:" + resp['image']['url'] + "<br>";
-                str += "<img src='" + resp['image']['url'] + "' /><br>";
-             
-                str += "URL:" + resp['url'] + "<br>";
-                str += "Email:" + email + "<br>";
-                document.getElementById("profile").innerHTML = str;
+                //var str = "Name:" + resp['displayName'] + "<br>";
+                // str += "<img src='" + resp['image']['url'] + "' /><br>";
+                //str += "Email:" + email + "<br>";
+                $("div#profile span").html("Welcome, "+resp['displayName']+"!");
+                $("#mybutton").css("display","none");
+                $("#logoutbutton").css("display","");
+                $(".logininput").css("display","");
+                logintype="google";
+                var bPopup = $("#element_to_pop_up").bPopup();
+                    bPopup.close({
+                       transitionClose: 'slideUp'
+                    });
             });
         }   
      
     }
 
-    function logout()
+    function google_logout()
     {
         gapi.auth.signOut();
         location.reload();
     }
+
+    $(document).on("click", "#logoutbutton", function(event){
+            event.preventDefault();
+            if (logintype=="google") {
+                google_logout();
+                $(".logininput").css("display","none");
+                $("div#profile span").html("");
+                $("#mybutton").css("display","");
+                $("#logoutbutton").css("display","none");
+            }
+            else {
+                facebook_logout();
+                $(".logininput").css("display","none");
+                $("div#profile span").html("");
+                $("#mybutton").css("display","");
+                $("#logoutbutton").css("display","none");
+            }
+        });
+
 
 

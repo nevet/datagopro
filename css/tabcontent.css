@@ -38,7 +38,7 @@ ul.tabs li a:visited
         
 ul.tabs li a:hover
 {
-    border: 1px solid #B7B7B7;
+    border: 1px solid #A1CDFF;
     background:#F0F0F0 url(tabbg.gif) 0 -36px repeat-x;
 }
         
@@ -47,9 +47,9 @@ ul.tabs li.selected a, ul.tabs li.selected a:hover
     position: relative;
     top: 0px;
     font-weight:bold;
-    background: white;
-    border: 2px solid #B7B7B7;
-    border-bottom-color: white;
+    background: #E1E6FA;
+    border: 2px solid #A1CDFF;
+    border-bottom-color: #E1E6FA;
 }
         
         
@@ -60,8 +60,9 @@ ul.tabs li.selected a:hover
      
 div.tabcontents
 {
-    border: 1px solid #B7B7B7; padding: 30px;
-    background-color:#FFF;
+    border: 1px solid #A1CDFF;
+    padding: 30px;
+    background-color:#E1E6FA;
     border-radius: 0 0 7px 7px;
 }
 div.tabcontents>i 

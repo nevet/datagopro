@@ -140,11 +140,10 @@ function dealWithGraph(graphObject) {
     } else {
       graph = generateDisconnectGraph(graphObject);
     }
-    console.log(string);
+
     string = string + graphToString(graph);
 
     generatedData = generatedData+string;
-    console.log(generatedData);
   };
 }
 
@@ -208,7 +207,6 @@ function generateConnectGraph(graphObject) {
     };
   };
   
-  console.log(graph);
   return graph;
 }
 
