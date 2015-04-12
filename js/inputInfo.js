@@ -33,7 +33,7 @@
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "number",
+      "datatype": "number",
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
@@ -47,8 +47,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -59,7 +59,7 @@
   function createNewString(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "string",
+      "datatype": "string",
       "stringlength": $("#stringlength").val(),
       "chartype": $("#charset")[0].selectedIndex,
       "linelength": $("#linelength").val(),
@@ -74,8 +74,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -86,9 +86,11 @@
   function createNewGraph(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "graph",
-      "connect": $("#connect")[0].selectedIndex,
-      "direct": $("#direct")[0].selectedIndex,
+      "datatype": "graph",
+      "isconnect": $("#connect")[0].checked,
+      "isdirect": $("#direct")[0].checked,
+      "isweighted": $("#weight")[0].checked,
+      "isTree": $("#tree")[0].checked,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
       "repeattime": $("#repeatGraph").val()
@@ -99,8 +101,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -123,10 +125,10 @@
     $("#wordbreak").val("");
     $("#repeatString").val(1);
 
-    $("#connect")[0].selectedIndex = 0;
-    $("#direct")[0].selectedIndex = 0;
-    $("#weight")[0].selectedIndex = 0;
-    $("#tree")[0].selectedIndex = 0;
+    $("#connect")[0].checked = false;
+    $("#direct")[0].checked = false;
+    $("#weight")[0].checked = false;
+    $("#tree")[0].checked = false;
     $("#node").val("");
     $("#edge").val("");
     $("#repeatGraph").val(1);

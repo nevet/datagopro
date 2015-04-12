@@ -6,6 +6,7 @@ function cancelClicked(e) {
 }
 
 function chooseDataType(e) {
+  clearData();
   chosebutton = e;
   var index = inputInfo.checkExistence(chosebutton);
   if (index >= 0) {
@@ -76,8 +77,10 @@ function prepareGraph(object) {
   $("#agraph").addClass("selected").siblings().removeClass("selected");
   $("#graph").css("display","block").siblings().css("display", "none");
   
-  $("#connect")[0].selectedIndex = object.connect;
-  $("#direct")[0].selectedIndex = object.direct;
+  $("#connect")[0].checked = object.isconnect;
+  $("#direct")[0].checked = object.isdirect;
+  $("#weight")[0].checked = object.isweighted;
+  $("#tree")[0].checked = object.istree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
   $("#repeatGraph").val(object.repeattime);
@@ -97,7 +100,7 @@ function okclicked(e) {
     case "number":
       $(chosebutton).attr("value","Number");
       inputInfo.createNewInfo("number",chosebutton);
-
+      changeInfoMessage("number");
       break;
 
     case "string":
@@ -115,6 +118,16 @@ function okclicked(e) {
     default:
       break;
   }
+
+  var obj = jQuery.extend({}, inputInfo.getLastElement());
+
+  console.log(obj);
+  obj.identifier = undefined;
+
+  preview.startLoading();
+  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
+
+  element.html(string);
 }
 
 function changeInfoMessage(type) {
@@ -138,16 +151,6 @@ function changeInfoMessage(type) {
     default:
       break;
   }
-
-  var obj = jQuery.extend({}, inputInfo.getLastElement());
-
-  console.log(obj);
-  obj.identifier = undefined;
-
-  preview.startLoading();
-  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
-
-  element.html(string);
 }
 
 function numberInfoMessage(object) {
@@ -187,3 +190,27 @@ function graphInfoMessage(object) {
 
   return string;
 }
+
+function clearData() {
+    $("#numbertype")[0].selectedIndex = 0;
+    $("#precision").val("");
+    $("#min").val("");
+    $("#max").val("");
+    $("#repeatNumber").val(1);
+
+    $("#stringlength").val("");
+    $("#charset")[0].selectedIndex = 0;
+    $("#linelength").val("");
+    $("#linebreak").val("");
+    $("#wordlength").val("");
+    $("#wordbreak").val("");
+    $("#repeatString").val(1);
+
+    $("#connect")[0].checked = false;
+    $("#direct")[0].checked = false;
+    $("#weight")[0].checked = false;
+    $("#tree")[0].checked = false;
+    $("#node").val("");
+    $("#edge").val("");
+    $("#repeatGraph").val(1);
+  }
