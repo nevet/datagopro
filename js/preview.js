@@ -1,6 +1,7 @@
 (function (preview, $, undefined) {
   var display = $("#preview");
   var div = "<div></div>";
+  var previewPadding;
 
   var divs = [];
 
@@ -18,10 +19,12 @@
   }
 
   preview.startLoading = function () {
+    display.removeClass("showContent");
     display.addClass("loading");
   }
 
   preview.endLoading = function () {
+    display.addClass("showContent");
     display.removeClass("loading");
   }
 

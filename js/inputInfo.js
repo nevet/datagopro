@@ -117,7 +117,7 @@
     $("#repeatNumber").val(1);
 
     $("#stringlength").val("");
-    $("#chartype")[0].selectedIndex = 0;
+    $("#charset")[0].selectedIndex = 0;
     $("#linelength").val("");
     $("#linebreak").val("");
     $("#wordlength").val("");
@@ -126,6 +126,8 @@
 
     $("#connect")[0].selectedIndex = 0;
     $("#direct")[0].selectedIndex = 0;
+    $("#weight")[0].selectedIndex = 0;
+    $("#tree")[0].selectedIndex = 0;
     $("#node").val("");
     $("#edge").val("");
     $("#repeatGraph").val(1);
