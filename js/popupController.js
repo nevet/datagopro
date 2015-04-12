@@ -128,7 +128,6 @@ function okclicked(e) {
 function changeInfoMessage(type) {
   var element = $(chosebutton).closest("div.data-block").find("#data-block-info");
   var object = inputInfo.getLastElement();
-  console.log(object);
   var string = ""; 
 
   switch (type) {
