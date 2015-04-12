@@ -23,8 +23,10 @@ function numberChanged(e) {
   var element = $(e);
   if (element.val() == "float") {
     $("#precisionDiv").show();
+    $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
+    $("#parity").prop("disabled", false);
   }
 }
 
