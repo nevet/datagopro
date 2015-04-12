@@ -3,7 +3,7 @@
 <head>
 	<title>DataGoPro</title>
 	<meta charset="utf-8">
-	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="shortcut icon" href="starlogo.png" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	
@@ -27,76 +27,7 @@
 
 
 	<div id="fb-root"></div>
-	<script type="text/javascript">
-
-	window.fbAsyncInit = function() {
-	    FB.init({
-	        appId   : '1567423636871440',
-	        oauth   : true,
-	        status  : true, // check login status
-	        cookie  : true, // enable cookies to allow the server to access the session
-	        xfbml   : true, // parse XFBML
-	        version    : 'v2.3'
-	    }); };
-
-	    (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-
-    function fb_login(){
-    FB.login(function(response) {
-
-        if (response.authResponse) {
-            console.log('Welcome!  Fetching your information.... ');
-            //console.log(response); // dump complete info
-            access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
-
-            FB.api('/me', function(response) {
-                user_email = response.email; //get user email
-          // you can store this data into your database             
-            });
-
-        } else {
-            //user hit cancel button
-            console.log('User cancelled login or did not fully authorize.');
-
-        }
-        }, {
-        scope: 'publish_stream,email'
-      });
-    }   
-    
-    (function() {
-        var e = document.createElement('script');
-        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-        e.async = true;
-        $('#fb-root').append(e);
-    }());
-	</script>
-
-	<script type="text/javascript">
-	  (function() {
-	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-	    po.src = 'https://apis.google.com/js/plusone.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-	  })();
-	  	
-	  	function signinCallback(authResult) {
-  			if (authResult['access_token']) {	
-    		document.getElementById('signinButton').setAttribute('style', 'display: none');
-	  } else if (authResult['error']) {
-	    console.log('somthing is wrong：' + authResult['error']);
-	  }
-	}
-	</script>
-
-
-
+	
 	 <script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -110,7 +41,7 @@
 <!-- log in windom -->
 	<div id ="element_to_pop_up">
         <div id="logindiv">
-          <h1 id='loginh1'>Log in to Datagopro</h1>
+          <h1 id='loginh1'><img src="starlogo.png" id="loginlogo" height="50" width="50"> &nbsp; &nbsp; &nbsp;Log in to Datagopro</h1>
           <div id='logform'>
             <span id='logintext'> Please log in via <br> </span>
             
@@ -119,23 +50,12 @@
             	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
             </a>
 		
-            <a href='#' class="btn btn-block btn-social btn-google-plus">
-				<i class="fa fa-google-plus"></i> <span id="signinButton"> 
-				<span
-				    class="g-signin"
-				    data-callback="signinCallback"
-				    data-clientid="980224079160-bmsd1d9rpiatcfguc987a32appn6j58k.apps.googleusercontent.com"
-				    data-cookiepolicy="single_host_origin"
-				    data-requestvisibleactions="http://schemas.google.com/AddActivity"
-				    data-scope="https://www.googleapis.com/auth/plus.login">
+            <a href='#' class="btn btn-block btn-social btn-google-plus" onclick="google_login();">
+				<i class="fa fa-google-plus"></i>
+				<span>
 						Sign in with Google</span>
-				</span>
 			</a>
 
-
-            <div class="btn btn-block btn-social btn-twitter">
-            <i class="fa fa-twitter"></i> <span>Sign in with Twitter</span>
-            </div>
           </div>
       </div>
       <div id='triangle'></div>
@@ -148,16 +68,19 @@
 		<img src="img/logo2.png">
 		<ol id="nav" class="breadcrumb">
 		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
-		  <li id='second_element'><a data-target="#timeline">My Input</a></li>
+		  <li id='second_element' class="logininput" style="display:none"><a data-target="#timeline">My Input</a></li>
 		  <li id='third_element'><a data-target="#popular">Popular Input</a></li>
 		  <li id='fourth_element'><a id='help' data-target="#help">Help</a></li>
-		  <li id='fifth_element'><a id="mybutton">Login</a><li>
+		  <li id='fifth_element'><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
 		</ol> 
+		<div id="profile">
+		  <span> </span>
+		</div>
 	</div>
 	<div id="mainbody">
 		<div id="editor">
-			<input class="form-control" type="text" placeholder="Your data set name here...">
-			<div id="data-field">
+			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">
+			<div id="data-field" class="seventh_element">
 				<div class='data-block'> 
 					<span class="order fa-stack">
 						<i class="fa fa-circle-thin fa-stack-2x"></i>
@@ -167,13 +90,14 @@
 						<input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
 						<i class="fa fa-folder-open"></i>
 					</div>
+					<span id="data-block-info"><span>
 				</div>
 			</div>
-			<div id="add">
+			<div id="add" class='eighth_element'>
 				<i class="fa fa-plus-circle fa-2x"></i>
 				<p>Add more data...</p>
 			</div>
-			<div id="export">
+			<div id="export" class="nineth_element">
 				<p>Export Types</p>
 				<ul>
 					<li class="active">TXT</li>
@@ -191,7 +115,7 @@
 				</div>
 			</div>
 			<div id="generate">
-				<button type='button' class='btn'>Generate</button>
+				<button type='button' id="tenth_element" class='btn'>Generate</button>
 				<i class="fa fa-play"></i>
 			</div> 
 		</div>
@@ -259,8 +183,8 @@
 				
 			</div>
 		</div>
-		<div id="preview">
-			preview
+		<div id="preview" class="showContent">
+			<div class="previewLoadingCover"></div>
 		</div>
 	</div>
 	<div id="footer">
@@ -283,7 +207,7 @@
 		</p>© 2015 Datagopro, Group 11 CP3101B, NUS
 
 	</div>
-	<div id="popup">
+	<div id="popup" style="display:none">
 		<ul class="tabs">
 		    <li id="anumber"><a id="anumber" href="#number">Number</a></li>
 		    <li id="astring"><a id="astring" href="#string">String</a></li>
@@ -300,7 +224,7 @@
 							<option value='float'>Float</option>
 						</select>
 					</div>
-					<div id="precisionDiv" class="form-group" data-toggle="tooltip" data-placement="top" data-original-title="Enter precision when Float is chosen.">
+					<div id="precisionDiv" class="form-group" data-toggle="tooltip" data-placement="top" data-original-title="Enter precision when Float is chosen." style="display:none">
 						<label for="precision" >precision</label>
 						<input id="precision" class='form-control' type='number'></input>
 					</div>
@@ -458,27 +382,56 @@
 	 <ul id="tlyPageGuide" data-tourtitle="Help">
 	  <li class="tlypageguide_bottom" data-tourtarget="#first_element">
 	    <div>
-	      Here is the first item description. The number will appear to the left of the element.
+	      Click here to create new data set.
 	    </div>
 	  </li>
 	  <li class="tlypageguide_bottom" data-tourtarget="#second_element">
 	    <div>
-	      Here is the second item description. The number will appear to the right of the element.
+	      After logging in, click here to see your past inputs
 	    </div>
 	  </li>
 	  <li class="tlypageguide_bottom" data-tourtarget="#third_element">
 	    <div>
-	      Here is the third item description. The number will appear above the element.
+	      Click here to show the popular inputs that have been used by others.
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#fourth_element">
+	  <li class="tlypageguide_top" data-tourtarget="#fourth_element">
 	    <div>
-	      Here is the fourth item description. The number will appear below the element.
+	      Click here to refer to the help guide
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#fifth_element">
+	  <li class="tlypageguide_top" data-tourtarget="#fifth_element">
 	    <div>
-	      Here is the fourth item description. The number will appear below the element.
+	      Click here to log in through facebook or google+
+	    </div>
+	  </li>
+	  <li class="tlypageguide_top" data-tourtarget="#sixth_element">
+	    <div>
+	      type in your data set's name in this input form.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_left" data-tourtarget=".seventh_element">
+	    <div>
+	      Click here to specify the input types and formats.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_right" data-tourtarget=".eighth_element">
+	    <div>
+	      Click here to add more data 
+	    </div>
+	  </li>
+	  <li class="tlypageguide_left" data-tourtarget=".nineth_element">
+	    <div>
+	      Click here to choose which kind of export type to generate
+	    </div>
+	  </li>
+	  <li class="tlypageguide_right" data-tourtarget="#tenth_element">
+	    <div>
+	      Click here to generate data
+	  </li>
+	  	  <li class="tlypageguide_left" data-tourtarget=".eleventh_element">
+	    <div>
+	      Click here to see the preview of generated data.
 	    </div>
 	  </li>
 	</ul>
@@ -488,6 +441,10 @@
 	<script src="js/pageguide.min.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
 	<script src='js/popupController.js'></script>
+	<script src='js/generator.js'></script>
+	<script src='js/inputInfo.js'></script>
+	<script src='js/dataInfo.js'></script>
+	<script src='js/preview.js'></script>
 	<script src="js/tabcontent.js" type="text/javascript"></script>
 	<script src="js/tabHelp.js" type="text/javascript"></script>
 	<script src='js/inputInfo.js'></script>

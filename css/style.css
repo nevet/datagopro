@@ -15,6 +15,15 @@ div#banner>ol>li>a {
 	font-size: 18px;
 	color: #0858B2;
 }
+div#profile{
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 18px;
+	color: #0858B2;
+	position:absolute;
+	right: 72px;
+	top:60px;
+}
 @media (max-width: 767px) {
 	/*small screen*/
 	div#banner {
@@ -53,14 +62,17 @@ div#banner>ol>li>a {
  		border: 3px solid white;
 	}
 	div#preview {
+		font-family: 'Abel', sans-serif;
 		width: 90%;
 		height: 500px;
 		background-color: #E9F0F5;
 		margin: 0 auto 5%;
-		padding: 2em;
 		border-radius: 5px;
  		overflow: scroll;
  		border: 3px solid white;
+	}
+	div#preview.showContent {
+		padding: 2em;
 	}
 }
 @media (min-width: 768px) {
@@ -102,17 +114,19 @@ div#banner>ol>li>a {
  		border: 3px solid white;
 	}
 	div#preview {
+		font-family: 'Abel', sans-serif;
 		float: left;
 		width: 38%;
 		height: 90%;
 		min-height: 500px;
 		background-color: #E9F0F5;
 		margin: 2% 2% 2% 0;
-		padding: 1% 1%;
 		border-radius: 5px;
 		overflow: scroll;
  		border: 3px solid white;
-
+	}
+	div#preview.showContent {
+		padding: 1% 1%;
 	}
 }
 
@@ -314,8 +328,8 @@ div.timeline-content>a>i {
 
 #popup {
 	border-radius: 7px;
-	padding-top: 40px;
-	background-color: #C0BFC0;
+	padding-top: 15px;
+	background-color: #3399cc;
 }
 .popup {
 	width: 400px;
@@ -350,4 +364,39 @@ div#footer {
 	background-color: #DCDCDC;
   	border-top: 3px solid white;
 	text-align: center;
+}
+
+/* dataset preview*/
+.dataCollapseButton {
+	position: relative;
+	top: 19px;
+	width: 13px;
+	margin-left: -10px;
+}
+
+/* preview loading settings*/
+.previewLoadingCover {
+    display:    none;
+    position:   relative;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .5 ) 
+                url('../ajax-loader.gif') 
+                50% 50%
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+#preview.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+#preview.loading .previewLoadingCover {
+    display: block;
 }

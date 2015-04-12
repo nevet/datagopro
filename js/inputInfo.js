@@ -1,29 +1,20 @@
 (function (inputInfo, $, undefined) {
-  var inputList=[];
+  var inputList = [];
 
   inputInfo.createNewInfo = function (type, element) {
     switch (type) {
       case "number":
-        createNewNumber(element);
-        break;
-
+        return createNewNumber(element);
       case "string":
-        createNewString(element);
-        break;
-
+        return createNewString(element);
       case "graph":
-        createNewGraph(element);
-        break;
-
-      default:
-        break;
+        return createNewGraph(element);
     }
   }
 
   inputInfo.checkExistence = function (element) {
     for (var i = inputList.length - 1; i >= 0; i--) {
       if (inputList[i].identifier === element) {
-        console.log("the element is existing at "+i);
         return i;
       }
     };
@@ -35,15 +26,20 @@
     return inputList[index];
   }
 
+  inputInfo.getLastElement = function () {
+    return inputList[inputList.length - 1];
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "number",
-      "numbertype": $("#numbertype")[0].selectedIndex,
+      "datatype": "number",
+      "numberindex" : $("#numbertype")[0].selectedIndex,
+      "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
-      "min": $("#min").val(),
-      "max": $("#max").val(),
-      "repeatNumber": $("#repeatNumber").val()
+      "numbermin": $("#min").val(),
+      "numbermax": $("#max").val(),
+      "repeattime": $("#repeatNumber").val()
     }
 
     clearData();
@@ -51,8 +47,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -63,14 +59,14 @@
   function createNewString(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "string",
+      "datatype": "string",
       "stringlength": $("#stringlength").val(),
-      "chartype": $("#chartype")[0].selectedIndex,
+      "chartype": $("#charset")[0].selectedIndex,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeatString": $("#repeatString").val()
+      "repeattime": $("#repeatString").val()
     }
 
     clearData();
@@ -78,8 +74,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -90,12 +86,14 @@
   function createNewGraph(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "graph",
-      "connect": $("#connect")[0].selectedIndex,
-      "direct": $("#direct")[0].selectedIndex,
+      "datatype": "graph",
+      "isconnect": $("#connect")[0].checked,
+      "isdirect": $("#direct")[0].checked,
+      "isweighted": $("#weight")[0].checked,
+      "isTree": $("#tree")[0].checked,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
-      "repeatGraph": $("#repeatGraph").val()
+      "repeattime": $("#repeatGraph").val()
     }
 
     clearData();
@@ -103,8 +101,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -120,15 +118,17 @@
     $("#repeatNumber").val(1);
 
     $("#stringlength").val("");
-    $("#chartype")[0].selectedIndex = 0;
+    $("#charset")[0].selectedIndex = 0;
     $("#linelength").val("");
     $("#linebreak").val("");
     $("#wordlength").val("");
     $("#wordbreak").val("");
     $("#repeatString").val(1);
 
-    $("#connect")[0].selectedIndex = 0;
-    $("#direct")[0].selectedIndex = 0;
+    $("#connect")[0].checked = false;
+    $("#direct")[0].checked = false;
+    $("#weight")[0].checked = false;
+    $("#tree")[0].checked = false;
     $("#node").val("");
     $("#edge").val("");
     $("#repeatGraph").val(1);
