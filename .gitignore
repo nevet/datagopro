@@ -1,2 +1,6 @@
 # ignore mac crap
 .DS_Store
+
+# ignore apache crap
+.htaccess
+passwd

@@ -1,0 +1,8 @@
+[{
+	datatype: "graph",
+	isConnected: true,
+	numberOfNode: 5,
+	numberOfEdge: 8,
+	isDirected: true,
+	repeattime: 1
+}]

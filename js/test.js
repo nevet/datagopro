@@ -76,10 +76,10 @@ $(function(){
 		console.log("datatype changed!");
 		var data_type_dom = $(event.target);
 		console.log(data_type_dom);
+		data_type_dom.parent().nextAll().remove();
 		switch (data_type_dom.val()) {
 			case "number": 
-				if(data_type_dom.parent().parent().find(".numbertype").length == 0)
-					data_type_dom.parent().after(number_type);
+				data_type_dom.parent().after(number_type);
 				break;
 			case "string":
 				data_type_dom.parent().after(string_length, choose_charset);
@@ -92,6 +92,7 @@ $(function(){
 		console.log("numbertype changed");
 		var number_type_dom = $(event.target);
 		console.log(number_type_dom);
+		number_type_dom.parent().nextAll().remove();
 		switch(number_type_dom.val()) {
 			case "integer":
 				number_type_dom.parent().after(number_min, number_max, repeat);
@@ -108,6 +109,7 @@ $(function(){
 	$("#datafield").on("change", ".choosecharset", function(event){
 		console.log("chosen charset changed");
 		var charset_dom = $(event.target);
+		charset_dom.parent().nextAll().remove();
 		charset_dom.parent().after(line_length, line_break, word_length, word_break, repeat);
 	});
 
@@ -177,8 +179,7 @@ $(function(){
 		else{
 			isCollapse = true;
 			for (var j = 1; j <= divs.length; j++) {
-				if (j > 1) {	
-					console.log(j);		
+				if (j > 1) {		
 					$(divs[j]).collapse('hide');
 					$("#collicon").attr("class", "glyphicon glyphicon-triangle-bottom");
 				}

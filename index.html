@@ -1,84 +1,455 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+	<title>DataGoPro</title>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="starlogo.png" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/loginstyle.css">
+	<link href="css/docs.css" rel="stylesheet" >
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/pageguide.min.css" rel="stylesheet">
+
 	<link rel='stylesheet' href='css/bootstrap-social.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.css'>
-	<link rel='stylesheet' href='css/bootstrap-theme.min.css'>
-	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-	<link rel='stylesheet' href='css/style.css'>
-	<script src='https://code.jquery.com/jquery-2.1.3.min.js'></script>
-	<script type='text/javascript' src='http://code.jquery.com/ui/1.11.4/jquery-ui.js'></script>
-	<script src='js/bootstrap.min.js'></script>
-	<script src='js/bootstrap.js'></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link href="css/tabcontent.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+	<script src="https://apis.google.com/js/plus.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script src='js/login.js'></script>
+	<style></style>
 </head>
 <body>
-	<div class='panel panel-default'>
-		<div class='panel-heading'>
-			<h1>Datagopro</h1>
-			<div class='btn-group'>
-				<button type='button' class='btn btn-primary'>Login</button>
-				<button type='button' class='btn btn-default'>Contacts</button>
-				<button type='button' class='btn btn-default'>Help</button>
-			</div>
-		</div>
-		<div class='panel-body'>
-			<p id='description'>Are you bothered when you want some data to test your programme?<br>Try Datagopro and generate your testing data now!</p>
-		</div>
-	</div>
-	<div id='datafield' class='container'>
-		<div class='row'>
-			<div class='coll col-sm-1'> 
-				<a data-toggle='collapse' href='#collapsediv'> <span class="glyphicon glyphicon-triangle-right" id="collicon"></span>
-				</a>
-			</div>
-			<div class='col-sm-2'>
-				<select class='datatype form-control '>
-					<option selected disabled hidden value=''>Data type</option>
-					<option value='number'>Number</option> 
-					<option value='string'>String</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class='container'>
-		<div class='row addrow'>
-			<div class='col-sm-3'><img src='img/add.jpg' class='add'><span>Add more data...</span></div>
-		</div>
-		<div class='row'>
-			<button id='generate' class='btn btn-success'>Generate</button>
-		</div>
-	</div>
+
+
+	<div id="fb-root"></div>
+	
+	 <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-61563497-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+
+<!-- log in windom -->
+	<div id ="element_to_pop_up">
+        <div id="logindiv">
+          <h1 id='loginh1'><img src="starlogo.png" id="loginlogo" height="50" width="50"> &nbsp; &nbsp; &nbsp;Log in to Datagopro</h1>
+          <div id='logform'>
+            <span id='logintext'> Please log in via <br> </span>
+            
+
+            <a href='#' class=" btn btn-block btn-social btn-facebook" onclick="fb_login();">
+            	 <i class="fa fa-facebook"></i> <span>Sign in with Facebook</span>
+            </a>
 		
-	<p class='text-center'>
-		Share this via...
-		<span>
-			<a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
-				<i class='fa fa-twitter'></i>
-				Twitter
+            <a href='#' class="btn btn-block btn-social btn-google-plus" onclick="google_login();">
+				<i class="fa fa-google-plus"></i>
+				<span>
+						Sign in with Google</span>
 			</a>
-			<a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
-				<i class='fa fa-facebook'></i>
-				Facebook
-			</a>
-			<a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
-				<i class='fa fa-google-plus'></i>
-				Google+
-			</a>
-		</span>
-	</p>
-	<div id='tablecontainer'> 
-		<table id='ascii'>
-			<caption for='ascii'>ASCII</caption>
-		</table>
-		<table id='unicode'>
-			<caption for='unicode'>UNICODE</caption>
-		</table>
+
+          </div>
+      </div>
+      <div id='triangle'></div>
+      <div id="continue"><a href='#' id='logclose'>continue without log in</a></div>
+    </div>
+
+<!-- log in windom -->
+
+	<div id='banner'>
+		<img src="img/logo2.png">
+		<ol id="nav" class="breadcrumb">
+		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
+		  <li id='second_element' class="logininput" style="display:none"><a data-target="#timeline">My Input</a></li>
+		  <li id='third_element'><a data-target="#popular">Popular Input</a></li>
+		  <li id='fourth_element'><a id='help' data-target="#help">Help</a></li>
+		  <li id='fifth_element'><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
+		</ol> 
+		<div id="profile">
+		  <span> </span>
+		</div>
 	</div>
-	
-	
-	<script type='text/javascript' src='js/test.js'></script>
-	<script type='text/javascript' src='js/generator.js'></script>
+	<div id="mainbody">
+		<div id="editor">
+			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">
+			<div id="data-field" class="seventh_element">
+				<div class='data-block'> 
+					<span class="order fa-stack">
+						<i class="fa fa-circle-thin fa-stack-2x"></i>
+						<i class="fa fa-stack-1x">1</i>
+					</span>
+					<div class="column">
+						<input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
+						<i class="fa fa-folder-open"></i>
+					</div>
+					<span id="data-block-info"><span>
+				</div>
+			</div>
+			<div id="add" class='eighth_element'>
+				<i class="fa fa-plus-circle fa-2x"></i>
+				<p>Add more data...</p>
+			</div>
+			<div id="export" class="nineth_element">
+				<p>Export Types</p>
+				<ul>
+					<li class="active">TXT</li>
+					<li>CSV</li>
+					<li>JSON</li>
+				</ul>
+				<div class="setting" id="txt">
+					<p>No additional export type settings.</p>
+				</div>
+				<div class="setting" id="csv" style="display:none">
+					<span>Delimiter char(s)</span><input class="form-control" type="text">
+				</div>
+				<div class="setting" id="json" style="display:none">
+					<p>No additional export type settings.</p>
+				</div>
+			</div>
+			<div id="generate">
+				<button type='button' id="tenth_element" class='btn'>Download</button>
+				<i class="fa fa-download"></i>
+			</div> 
+		</div>
+		<div id="timeline" style="display:none">
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 1</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="1" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 2</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="2" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 3</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="3" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Sat Apr 04 2015 15:28:10</span>
+				</div>
+				
+			</div>
+
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 4</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="4" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 5</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="5" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
+			</div>
+			<div class="timeline-block">
+				<div class="timeline-dot"></div>
+				<div class="timeline-content">
+					<h3>DATA SET NAME 6</h3>
+					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a data-target="6" class="view">View<i class="fa fa-eye"></i></a>
+					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+				</div>
+				
+			</div>
+		</div>
+		<div id="preview" class="showContent">
+			<div class="previewLoadingCover"></div>
+		</div>
+	</div>
+	<div id="footer">
+		<p class='text-center'>
+			Share this via...
+			<span>
+				<a href='https://twitter.com/home?status=https://datagopro.com' title='Share on Twitter' target='_blank' class='btn btn-social btn-twitter text-center'>
+					<i class='fa fa-twitter'></i>
+					Twitter
+				</a>
+				<a href='https://www.facebook.com/sharer/sharer.php?u=https://datagopro.com' target='_blank' class='btn btn-social btn-facebook'>
+					<i class='fa fa-facebook'></i>
+					Facebook
+				</a>
+				<a href='https://plus.google.com/share?url=https://datagopro.com' target='_blank' class='btn btn-social btn-google-plus'>
+					<i class='fa fa-google-plus'></i>
+					Google+
+				</a>
+			</span>
+		</p>© 2015 Datagopro, Group 11 CP3101B, NUS
+
+	</div>
+	<div id="popup" style="display:none">
+		<ul class="tabs">
+		    <li id="anumber"><a id="anumber" href="#number">Number</a></li>
+		    <li id="astring"><a id="astring" href="#string">String</a></li>
+		    <li id="agraph"><a id="agraph" href="#graph">Graph</a></li>
+		</ul>
+		<div class="tabcontents">
+			<i class="fa fa-question-circle fa-2x"></i> 
+		    <div id="number" class="container popup">
+		    	<div class="form-inline">
+		    		<div class='form-group'>
+						<select id="numbertype" class='form-control' onchange="numberChanged(this)" data-toggle="tooltip" data-placement="top" data-original-title="Click to choose Integer or Float.">
+							<option selected disabled hidden value=''>Number type</option>
+							<option value='integer'>Integer</option>
+							<option value='float'>Float</option>
+						</select>
+					</div>
+					<div id="precisionDiv" class="form-group" data-toggle="tooltip" data-placement="top" data-original-title="Enter precision when Float is chosen." style="display:none">
+						<label for="precision" >precision</label>
+						<input id="precision" class='form-control' type='number'></input>
+					</div>
+				</div>
+				<div class="form-inline range" data-toggle="tooltip" data-placement="right" data-original-title="Specify the range you want here.">
+					<div class='form-group'>
+						<label for="min" >Min</label>
+						<input id="min" class='form-control' type='number'></input>
+					</div>
+					
+					<div class='form-group'>
+						<label for="max" >Max</label>
+						<input id="max" class='form-control' type='number'></input>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<span>Advanced settings</span><i class="fa fa-angle-double-down" data-toggle="tooltip" data-placement="right" data-original-title="Click here to show or hide advanced settings."></i>
+					</div>
+				</div>
+				<div class="form-inline advanced" style="display:none">				
+					<div class='form-group'>
+						<select id="parity" disabled="disabled" class='form-control' data-toggle="tooltip" data-placement="right" data-original-title="Click to choose even or odd if you want Integer.">
+							<option selected disabled hidden value=''>Parity</option>
+							<option value='even'>Even</option>
+							<option value='odd'>Odd</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input id="repeatNumber" class='repeattime form-control' type='number' value='1'></input>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
+		    <div id="string" class="container popup">
+		    	<div class="form-inline">
+		    		<div class='form-group' data-toggle="tooltip" data-placement="top" data-original-title="Enter the length of the string you want.">
+		    			<label for="stringlength" >String length</label>
+						<input id="stringlength" class='form-control' type='number'></input>
+					</div>
+					<div class='form-group'>
+						<select id="charset" class='choosecharset form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a charset you want.">
+							<option value='' hidden disabled selected>Charset</option>
+							<option value='ascii'>ASCII</option>
+							<option value='unicode'>Unicode</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<span>Advanced settings</span><i class="fa fa-angle-double-down" data-toggle="tooltip" data-placement="right" data-original-title="If you want a long string of lines of words. Click here."></i>
+					</div>
+				</div>
+				<div class="form-inline advanced" style="display:none">
+					<div class='form-group' data-toggle="tooltip" data-placement="top" data-original-title="Specify the length of each line here.">
+						<label for="linglength" >Line length</label>
+						<input id="linelength" class='linelength form-control' type='number'></input>
+					</div>
+					<div class='form-group'data-toggle="tooltip" data-placement="top" data-original-title="Specify the line break symbol here.">
+						<label for="linebreak" >Line break</label>
+						<input id="linebreak" class='linebreak form-control' type='text'></input>
+					</div>
+				</div>
+				<div class="form-inline advanced" style="display:none">
+					<div class='form-group'data-toggle="tooltip" data-placement="bottom" data-original-title="Specify the length of each word here.">
+						<label for="wordlength" >Word length</label>
+						<input id="wordlength" class='wordlength form-control' type='number'></input>
+					</div>
+					<div class='form-group'data-toggle="tooltip" data-placement="bottom" data-original-title="Specify the word break symbol here.">
+						<label for="wordbreak" >Word break</label>
+						<input id="wordbreak" class='wordbreak form-control' type='text'></input>
+					</div>				
+				</div>
+				<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input id="repeatString" class='repeattime form-control' type='number' value='1'>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
+		    <div id="graph" class="container popup">
+		    	<div class="form-inline">
+					<div class='form-group' data-toggle="tooltip" data-placement="top" data-original-title="Enter the number of graph nodes here.">
+						<label for="node" >No. of nodes</label>
+						<input id="node" class='numbermin form-control' type='number'></input>
+					</div>
+				</div>
+				<div class="form-inline">
+					<div class="checkbox">
+						<label data-toggle="tooltip" data-placement="top" data-original-title="Check here if you want the graph to be directed.">
+							<input id="direct" type="checkbox"> is Directed
+						</label>
+					</div>
+					<div class="checkbox">
+						<label data-toggle="tooltip" data-placement="top" data-original-title="Check here if you want edges of the graph to be weighted.">
+							<input id="weight" type="checkbox"> is Weighted
+						</label>
+					</div>
+					<div class="checkbox">
+						<label data-toggle="tooltip" data-placement="right" data-original-title="Check here if you want the graph to be a tree.">
+							<input id="tree" type="checkbox"> is Tree
+						</label>
+					</div>
+				</div>
+				<div class="form-inline nottree">
+					<div class="form-group" data-toggle="tooltip" data-placement="top" data-original-title="Enter the number of edges in integer or density of edges in percentage. ">
+						<label for="edge" >No. of edges</label>
+						<input id="edge" class='numbermax form-control' type='number'></input>
+					</div>
+					<div class="checkbox">
+						<label data-toggle="tooltip" data-placement="top" data-original-title="Check here if you want the graph to be connected.">
+							<input id="connect" type="checkbox"> is Connected
+						</label>
+					</div>
+				</div>
+				<div class="form-inline weightrange" style="display:none" data-toggle="tooltip" data-placement="top" data-original-title="Specify the range of the edge weight here.">
+					<div class='form-group'>
+						<label for="weightmin" >Weight min</label>
+						<input id="weightmin" class='form-control' type='number'></input>
+					</div>
+					<div class='form-group'>
+						<label for="weightmax" >Weight max</label>
+						<input id="weightmax" class='form-control' type='number'></input>
+					</div>
+				</div>
+		    	<div class="row">
+					<div class='col-sm-12 repeat'>
+						<span class='times'>Repeat</span>
+						<input id="repeatGraph" class='repeattime form-control' type='number' value='1'></input>
+						<span class='times'>times</span>
+					</div>
+		    	</div>
+		        <div class="row popup-btn">
+		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		        	<button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+
+
+
+	 <ul id="tlyPageGuide" data-tourtitle="Help">
+	  <li class="tlypageguide_bottom" data-tourtarget="#first_element">
+	    <div>
+	      Click here to create new data set.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_bottom" data-tourtarget="#second_element">
+	    <div>
+	      After logging in, click here to see your past inputs
+	    </div>
+	  </li>
+	  <li class="tlypageguide_bottom" data-tourtarget="#third_element">
+	    <div>
+	      Click here to show the popular inputs that have been used by others.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_top" data-tourtarget="#fourth_element">
+	    <div>
+	      Click here to refer to the help guide
+	    </div>
+	  </li>
+	  <li class="tlypageguide_top" data-tourtarget="#fifth_element">
+	    <div>
+	      Click here to log in through facebook or google+
+	    </div>
+	  </li>
+	  <li class="tlypageguide_top" data-tourtarget="#sixth_element">
+	    <div>
+	      type in your data set's name in this input form.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_left" data-tourtarget=".seventh_element">
+	    <div>
+	      Click here to specify the input types and formats.
+	    </div>
+	  </li>
+	  <li class="tlypageguide_right" data-tourtarget=".eighth_element">
+	    <div>
+	      Click here to add more data 
+	    </div>
+	  </li>
+	  <li class="tlypageguide_left" data-tourtarget=".nineth_element">
+	    <div>
+	      Click here to choose which kind of export type to generate
+	    </div>
+	  </li>
+	  <li class="tlypageguide_right" data-tourtarget="#tenth_element">
+	    <div>
+	      Click here to generate data
+	  </li>
+	  	  <li class="tlypageguide_left" data-tourtarget=".eleventh_element">
+	    <div>
+	      Click here to see the preview of generated data.
+	    </div>
+	  </li>
+	</ul>
+
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.bpopup.min.js"></script>
+	<script src="js/pageguide.min.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
+	<script src='js/popupController.js'></script>
+	<script src='js/generator.js'></script>
+	<script src='js/inputInfo.js'></script>
+	<script src='js/dataInfo.js'></script>
+	<script src='js/preview.js'></script>
+	<script src="js/tabcontent.js" type="text/javascript"></script>
+	<script src="js/tabHelp.js" type="text/javascript"></script>
+	<script src='js/inputInfo.js'></script>
+	<script src='js/login.js'></script>
+	<script src='js/help.js'></script>
 
 </body>
 </html>
