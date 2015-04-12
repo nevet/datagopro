@@ -54,8 +54,14 @@ window.fbAsyncInit = function() {
             user_id = response.authResponse.userID; //get FB UID
 
             FB.api('/me', function(response) {
-                user_email = response.email; //get user email
+                user_email = response.email; 
+                //get user email
           // you can store this data into your database             
+            });
+
+            var bPopup = $("#element_to_pop_up").bPopup();
+            bPopup.close({
+               transitionClose: 'slideUp'
             });
 
         } else {
@@ -135,7 +141,7 @@ window.fbAsyncInit = function() {
      
     }
 
-    function logout()
+    function google_logout()
     {
         gapi.auth.signOut();
         location.reload();
