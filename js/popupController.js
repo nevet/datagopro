@@ -15,7 +15,7 @@ function chooseDataType(e) {
     preparePopup(index);
   };
   $("#popup").bPopup({
-                speed: 500,
+                speed: 300,
                 transition: 'slideDown',
                 transitionClose: 'fadeIn'
             });
@@ -66,7 +66,7 @@ function prepareString(object) {
   $("#string").css("display","block").siblings().css("display", "none");
 
   $("#stringlength").val(object.stringlength);
-  $("#chartype")[0].selectedIndex = object.chartype;
+  $("#charset")[0].selectedIndex = object.chartype;
   $("#linelength").val(object.linelength);
   $("#linebreak").val(object.linebreak);
   $("#wordlength").val(object.wordlength);
