@@ -139,7 +139,7 @@ function changeInfoMessage(type) {
       break;
   }
 
-  var obj = inputInfo.getLastElement();
+  var obj = jQuery.extend({}, inputInfo.getLastElement());
 
   console.log(obj);
   obj.identifier = undefined;
@@ -151,27 +151,38 @@ function changeInfoMessage(type) {
 }
 
 function numberInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X </b>";
+  var string = "<b>"+object.repeattime + " X ";
 
-  string = string + object.numbertype + 
+  switch (object.numbertype) {
+    case "integer":
+      string = string + "Integer</b>" + 
         " from " + object.numbermin + 
         " to " + object.numbermax;
+      break;
+
+    case "float":
+      string = string + "Float</b>" + 
+        " from " + object.numbermin + 
+        " to " + object.numbermax + 
+        " with precision " + object.precision;
+      break;
+  }
 
   return string;
 }
 
 function stringInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X </b>";
+  var string = "<b>"+object.repeattime + " X ";
 
-  string = string + "string with length of " + object.stringlength;
+  string = string + "String</b> with length of " + object.stringlength;
 
   return string;
 }
 
 function graphInfoMessage(object) {
-  var string = "<b>"+object.repeattime + " X </b>";
+  var string = "<b>"+object.repeattime + " X ";
 
-  string = string + "graph with " + object.node + 
+  string = string + "Graph</b> with " + object.node + 
         " nodes and " + object.edge + " edges";
 
   return string;
