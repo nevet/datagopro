@@ -57,10 +57,12 @@ div#banner>ol>li>a {
 		height: 500px;
 		background-color: #E9F0F5;
 		margin: 0 auto 5%;
-		padding: 2em;
 		border-radius: 5px;
  		overflow: scroll;
  		border: 3px solid white;
+	}
+	div#preview.showContent {
+		padding: 2em;
 	}
 }
 @media (min-width: 768px) {
@@ -108,11 +110,12 @@ div#banner>ol>li>a {
 		min-height: 500px;
 		background-color: #E9F0F5;
 		margin: 2% 2% 2% 0;
-		padding: 1% 1%;
 		border-radius: 5px;
 		overflow: scroll;
  		border: 3px solid white;
-
+	}
+	div#preview.showContent {
+		padding: 1% 1%;
 	}
 }
 
@@ -362,8 +365,8 @@ div#footer {
     height:     100%;
     width:      100%;
     background: rgba( 255, 255, 255, .5 ) 
-                url('../favicon.ico') 
-                50% 50% 
+                url('../ajax-loader.gif') 
+                50% 50%
                 no-repeat;
 }
 
