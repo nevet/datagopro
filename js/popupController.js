@@ -96,6 +96,7 @@ function okclicked(e) {
       $(chosebutton).attr("value","Number");
       
       inputInfo.createNewInfo("number",chosebutton);
+      changeInfoMessage("number");
       var obj = inputInfo.getLastElement();
 
       console.log(obj);
@@ -109,14 +110,69 @@ function okclicked(e) {
     case "string":
       $(chosebutton).attr("value","String");
       inputInfo.createNewInfo("string", chosebutton);
+      changeInfoMessage("string");
       break;
 
     case "graph":
       $(chosebutton).attr("value","Graph");
       inputInfo.createNewInfo("graph", chosebutton);
+      changeInfoMessage("graph");
       break;
 
     default:
       break;
   }
+}
+
+function changeInfoMessage(type) {
+  var element = $(chosebutton).closest("div.data-block").find("#data-block-info");
+  var object = inputInfo.getLastElement();
+  console.log(object);
+  var string = ""; 
+
+  switch (type) {
+    case "number":
+      string = numberInfoMessage(object);
+      break;
+
+    case "string":
+      string = stringInfoMessage(object);
+      break;
+
+    case "graph":
+      string = graphInfoMessage(object);
+      break;
+
+    default:
+      break;
+  }
+
+  element.html(string);
+}
+
+function numberInfoMessage(object) {
+  var string = "<b>"+object.repeattime + " X </b>";
+
+  string = string + object.numbertype + 
+        " from " + object.numbermin + 
+        " to " + object.numbermax;
+
+  return string;
+}
+
+function stringInfoMessage(object) {
+  var string = "<b>"+object.repeattime + " X </b>";
+
+  string = string + "string with length of " + object.stringlength;
+
+  return string;
+}
+
+function graphInfoMessage(object) {
+  var string = "<b>"+object.repeattime + " X </b>";
+
+  string = string + "graph with " + object.node + 
+        " nodes and " + object.edge + " edges";
+
+  return string;
 }

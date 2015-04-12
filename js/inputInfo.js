@@ -62,12 +62,12 @@
       "identifier" : element,
       "dataType": "string",
       "stringlength": $("#stringlength").val(),
-      "chartype": $("#chartype")[0].selectedIndex,
+      "chartype": $("#charset")[0].selectedIndex,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeatString": $("#repeatString").val()
+      "repeattime": $("#repeatString").val()
     }
 
     clearData();
@@ -92,7 +92,7 @@
       "direct": $("#direct")[0].selectedIndex,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
-      "repeatGraph": $("#repeatGraph").val()
+      "repeattime": $("#repeatGraph").val()
     }
 
     clearData();
