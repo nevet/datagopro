@@ -31,7 +31,7 @@ function numberChanged(e) {
 function preparePopup(index) {
   var object = inputInfo.getElement(index);
 
-  switch (object.dataType) {
+  switch (object.datatype) {
     case "number":
       prepareNumber(object);
       break;
@@ -129,6 +129,7 @@ function okclicked(e) {
 }
 
 function changeInfoMessage(type) {
+  console.log("come in message");
   var element = $(chosebutton).closest("div.data-block").find("#data-block-info");
   var object = inputInfo.getLastElement();
   var string = ""; 
@@ -149,6 +150,8 @@ function changeInfoMessage(type) {
     default:
       break;
   }
+
+  element.html(string);
 }
 
 function numberInfoMessage(object) {
@@ -211,4 +214,4 @@ function clearData() {
     $("#node").val("");
     $("#edge").val("");
     $("#repeatGraph").val(1);
-  }
+}
