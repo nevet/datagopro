@@ -115,6 +115,16 @@ function okclicked(e) {
     default:
       break;
   }
+
+  var obj = jQuery.extend({}, inputInfo.getLastElement());
+
+  console.log(obj);
+  obj.identifier = undefined;
+
+  preview.startLoading();
+  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
+
+  element.html(string);
 }
 
 function changeInfoMessage(type) {
@@ -138,16 +148,6 @@ function changeInfoMessage(type) {
     default:
       break;
   }
-
-  var obj = jQuery.extend({}, inputInfo.getLastElement());
-
-  console.log(obj);
-  obj.identifier = undefined;
-
-  preview.startLoading();
-  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
-
-  element.html(string);
 }
 
 function numberInfoMessage(object) {

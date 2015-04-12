@@ -33,7 +33,7 @@
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "number",
+      "datatype": "number",
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
@@ -47,8 +47,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -59,7 +59,7 @@
   function createNewString(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "string",
+      "datatype": "string",
       "stringlength": $("#stringlength").val(),
       "chartype": $("#charset")[0].selectedIndex,
       "linelength": $("#linelength").val(),
@@ -74,8 +74,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -86,7 +86,7 @@
   function createNewGraph(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "graph",
+      "datatype": "graph",
       "connect": $("#connect")[0].selectedIndex,
       "direct": $("#direct")[0].selectedIndex,
       "node": $("#node").val(),
@@ -99,8 +99,8 @@
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
-      if (object.dataType != newObject.dataType) {
-        alert("Different dataType");
+      if (object.datatype != newObject.datatype) {
+        alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
