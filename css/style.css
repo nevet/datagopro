@@ -15,6 +15,15 @@ div#banner>ol>li>a {
 	font-size: 18px;
 	color: #0858B2;
 }
+div#profile{
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 18px;
+	color: #0858B2;
+	position:absolute;
+	right: 72px;
+	top:60px;
+}
 @media (max-width: 767px) {
 	/*small screen*/
 	div#banner {

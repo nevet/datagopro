@@ -129,10 +129,10 @@ window.fbAsyncInit = function() {
                     }
                 }
              
-                var str = "Name:" + resp['displayName'] + "<br>";
-                str += "<img src='" + resp['image']['url'] + "' /><br>";
-                str += "Email:" + email + "<br>";
-                document.getElementById("profile").innerHTML = str;
+                //var str = "Name:" + resp['displayName'] + "<br>";
+                // str += "<img src='" + resp['image']['url'] + "' /><br>";
+                //str += "Email:" + email + "<br>";
+                $("div#profile span").html("Welcome, "+resp['displayName']+"!");
             });
         }   
      
