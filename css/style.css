@@ -60,6 +60,7 @@ div#profile{
 		border-radius: 5px;
 		overflow: scroll;
  		border: 3px solid white;
+ 		position: relative;
 	}
 	div#preview {
 		font-family: 'Abel', sans-serif;
@@ -105,20 +106,21 @@ div#profile{
 		float: left;
 		width: 56%;
 		height: 90%;
-		min-height: 500px;
+		min-height: 530px;
 		background-color: #A1CDFF;
 		margin: 2% 2%;
 		padding: 2em;
 		border-radius: 5px;		
 		overflow: scroll;
  		border: 3px solid white;
+ 		position: relative;
 	}
 	div#preview {
 		font-family: 'Abel', sans-serif;
 		float: left;
 		width: 38%;
 		height: 90%;
-		min-height: 500px;
+		min-height: 530px;
 		background-color: #E9F0F5;
 		margin: 2% 2% 2% 0;
 		border-radius: 5px;
@@ -132,7 +134,7 @@ div#profile{
 
 div#mainbody {
 	width: 100%;
-	min-height: 555px;
+	min-height: 580px;
 	overflow: hidden;
 	background-color: #EBEBEB;
 	color: #0858B2;
@@ -143,6 +145,8 @@ div#editor .fa {
 }
 div#data-field {
 	margin: 2% 0.5% 1%;
+	max-height: 44%;
+	overflow: scroll;
 }
 div.data-block {
 	margin: 1% 0;
@@ -170,6 +174,8 @@ div.column {
 }
 div#add {
 	width: 200px;
+	position: absolute;
+	bottom: 190px;
 }
 div#add>i {
 	margin: 0 4px;
@@ -187,9 +193,11 @@ div#add>p {
 }
 
 div#export{
-	width: 100%;
+	width: 80%;
 	overflow: hidden;
 	font-size: 18px;
+	position: absolute;
+	bottom: 90px;
 }
 div#export>p {
 	margin: 0 5px 5px;
@@ -233,9 +241,10 @@ div.setting>input {
 }
 div#generate {
 	margin-top: 2%;
-	position: relative;
+	position: absolute;
 	width: 18%;
-	min-width: 120px;
+	min-width: 150px;
+	bottom: 25px;
 }
 div#generate>button {
 	font-size: 20px;
@@ -248,13 +257,13 @@ div#generate>button {
  	background-color: #2272CB;
  	color: white;
 }
-div#generate .fa-play:before{
+div#generate .fa-download:before{
 	color: white;
 }
 div#generate>i {
 	position: absolute;
-	top:14px;
-	left: 85%;
+	bottom:15px;
+	left: 122px;
 	cursor: pointer;
 }
 div#timeline {
