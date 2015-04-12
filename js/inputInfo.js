@@ -1,26 +1,19 @@
 (function (inputInfo, $, undefined) {
-  var inputList=[];
+  var inputList = [];
 
   inputInfo.createNewInfo = function (type, element) {
     switch (type) {
       case "number":
-        createNewNumber(element);
-        break;
-
+        return createNewNumber(element);
       case "string":
-        createNewString(element);
-        break;
-
+        return createNewString(element);
       case "graph":
-        createNewGraph(element);
-        break;
-
-      default:
-        break;
+        return createNewGraph(element);
     }
   }
 
   inputInfo.checkExistence = function (element) {
+    console.log(inputList);
     for (var i = inputList.length - 1; i >= 0; i--) {
       if (inputList[i].identifier === element) {
         console.log("the element is existing at "+i);
@@ -35,15 +28,19 @@
     return inputList[index];
   }
 
+  inputInfo.getLastElement = function () {
+    return inputList[inputList.length - 1];
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
-      "dataType": "number",
-      "numbertype": $("#numbertype")[0].selectedIndex,
+      "datatype": "number",
+      "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "precision": $("#precision").val(),
-      "min": $("#min").val(),
-      "max": $("#max").val(),
-      "repeatNumber": $("#repeatNumber").val()
+      "numbermin": $("#min").val(),
+      "numbermax": $("#max").val(),
+      "repeattime": $("#repeatNumber").val()
     }
 
     clearData();

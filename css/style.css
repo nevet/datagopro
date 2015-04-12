@@ -351,3 +351,30 @@ div#footer {
   	border-top: 3px solid white;
 	text-align: center;
 }
+
+/* preview loading settings*/
+.previewLoadingCover {
+    display:    none;
+    position:   relative;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .5 ) 
+                url('../favicon.ico') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+#preview.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+#preview.loading .previewLoadingCover {
+    display: block;
+}

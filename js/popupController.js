@@ -1,4 +1,5 @@
 var chosebutton;
+var worker = new Worker("js/dataInfo.js");
 
 $("#popup").hide();
 $("#precisionDiv").hide();
@@ -82,11 +83,27 @@ function prepareGraph(object) {
 
 function okclicked(e) {
   $("#popup").bPopup().close();
+
   var element = $(e);
+
+  worker.onmessage = function(event) {
+    preview.render(element, event.data);
+    preview.endLoading();
+  };
+
   switch (element.val()) {
     case "number":
       $(chosebutton).attr("value","Number");
+      
       inputInfo.createNewInfo("number",chosebutton);
+      var obj = inputInfo.getLastElement();
+
+      console.log(obj);
+      obj.identifier = undefined;
+
+      preview.startLoading();
+      worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
+
       break;
 
     case "string":
