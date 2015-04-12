@@ -14,7 +14,11 @@ function chooseDataType(e) {
   if (index >=0) {
     preparePopup(index);
   };
-  $("#popup").bPopup();
+  $("#popup").bPopup({
+                speed: 500,
+                transition: 'slideDown',
+                transitionClose: 'fadeIn'
+            });
 }
 
 function numberChanged(e) {
