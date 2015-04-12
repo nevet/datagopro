@@ -135,8 +135,6 @@ window.fbAsyncInit = function() {
      
     }
 
-   
-
     function logout()
     {
         gapi.auth.signOut();
