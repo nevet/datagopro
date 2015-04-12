@@ -13,10 +13,8 @@
   }
 
   inputInfo.checkExistence = function (element) {
-    console.log(inputList);
     for (var i = inputList.length - 1; i >= 0; i--) {
       if (inputList[i].identifier === element) {
-        console.log("the element is existing at "+i);
         return i;
       }
     };
