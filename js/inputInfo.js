@@ -87,8 +87,10 @@
     var newObject = {
       "identifier" : element,
       "datatype": "graph",
-      "connect": $("#connect")[0].selectedIndex,
-      "direct": $("#direct")[0].selectedIndex,
+      "isconnect": $("#connect")[0].checked,
+      "isdirect": $("#direct")[0].checked,
+      "isweighted": $("#weight")[0].checked,
+      "isTree": $("#tree")[0].checked,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
       "repeattime": $("#repeatGraph").val()
@@ -123,10 +125,10 @@
     $("#wordbreak").val("");
     $("#repeatString").val(1);
 
-    $("#connect")[0].selectedIndex = 0;
-    $("#direct")[0].selectedIndex = 0;
-    $("#weight")[0].selectedIndex = 0;
-    $("#tree")[0].selectedIndex = 0;
+    $("#connect")[0].checked = false;
+    $("#direct")[0].checked = false;
+    $("#weight")[0].checked = false;
+    $("#tree")[0].checked = false;
     $("#node").val("");
     $("#edge").val("");
     $("#repeatGraph").val(1);

@@ -181,6 +181,7 @@ window.fbAsyncInit = function() {
                 $("#mybutton").css("display","");
                 $("#logoutbutton").css("display","none");
             }
+            location.reload();
         });
 
 
