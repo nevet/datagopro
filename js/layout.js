@@ -25,7 +25,7 @@ $(function(){
     	}
 	    $("#nav li>a").click(function(e){
 	        e.preventDefault();
-	        if (this.id != "mybutton" && this.id !="logoutbutton") {
+	        if (this.id != "mybutton" && this.id != "logoutbutton") {
 	        	console.log("fired!");
 		        var prev = $("#nav li.active");
 		        prev.removeClass();
