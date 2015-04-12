@@ -88,10 +88,10 @@ function okclicked(e) {
 
   var element = $(e);
 
-  // worker.onmessage = function(event) {
-  //   preview.render(element, event.data);
-  //   preview.endLoading();
-  // };
+  worker.onmessage = function(event) {
+    preview.render(element, event.data);
+    preview.endLoading();
+  };
 
   switch (element.val()) {
     case "number":
