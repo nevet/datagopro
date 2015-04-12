@@ -139,7 +139,7 @@ function changeInfoMessage(type) {
       break;
   }
 
-  var obj = inputInfo.getLastElement();
+  var obj = jQuery.extend({}, inputInfo.getLastElement());
 
   console.log(obj);
   obj.identifier = undefined;
