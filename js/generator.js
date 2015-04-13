@@ -102,12 +102,27 @@ function dealWithNumber(numberObject) {
 
 function generateInteger(integerObject) {
   var
-  min = new Number(integerObject.numbermin), 
-  max = new Number(integerObject.numbermax);
+  min = Math.ceil(integerObject.numbermin), 
+  max = Math.floor(integerObject.numbermax);
 
-  var number = new Number(Math.floor(Math.random() * (max - min + 1)) + min);
+  var number = Math.floor(Math.random() * (max - min)) + min;
+  if (integerObject.parity) {
+    if (integerObject.parity == "odd" && number % 2 == 0) {
+      if (number < max) {
+        number++;
+      } else {
+        number--;
+      };
+    } else if (integerObject.parity == "even" && number % 2 == 1) {
+      if (number < max) {
+        number++;
+      } else {
+        number--;
+      };
+    };
+  };
 
-  return number.toFixed(0);
+  return number;
 }
 
 function generateFloat(floatObject) {
