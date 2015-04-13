@@ -64,7 +64,8 @@ $(function(){
   }
 
   function createData(e) {
-  	var lastChild = $("#data-field").children().last();
+  	var dataField = $("#data-field");
+  	var lastChild = dataField.children().last();
   	var lastInputButton = lastChild.find("input").last();
   	// the last one has not been specified, we need to add a place holder
   	// in preview
@@ -73,10 +74,15 @@ $(function(){
   	}
 
   	order++;
-  	lastChild.append($("<div class='data-block'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
-  		+order+"</i> </span> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'> <i class='fa fa-folder-open'></i> </div><span id='data-block-info'><span></div>"));
+
+  	var datablock = $("<div class='data-block'><a href='#'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
+  		+order+"</i> </span></a> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'> <i class='fa fa-folder-open'></i> </div><span id='data-block-info'><span></div>");
+
+  	dataField.append(datablock);
 		
 		document.getElementById("data-field").scrollTop = document.getElementById("data-field").scrollHeight;
+
+		datablock.find("input").trigger("click");
 	}
 	
 	function showExportSetting(prev, type) {
@@ -88,6 +94,35 @@ $(function(){
 		var dataset = ("<div class='data-set'><h3>This is data-set No."+id+"</h3><p>content of this data-set.</p></div>")
 		$("#preview").html(dataset);
 	}
+
+	function clearDeleteState(icon, iconHtml) {
+		icon.html(iconHtml);
+		icon.removeClass("fa-times");
+	}
+
+	var inDeleteIcon = undefined;
+
+	$("#data-field").on("click", ".fa-stack", function (event) {
+		if (inDeleteIcon == undefined) {
+			var icon = $(this).find(".fa-stack-1x");
+			var iconHtml = icon.html();
+			icon.addClass("fa-times");
+			icon.html("");
+
+			inDeleteIcon = [icon, iconHtml];
+			event.stopPropagation();
+		} else {
+			clearDeleteState(inDeleteIcon[0], inDeleteIcon[1]);
+			inDeleteIcon = undefined;
+		}
+	});
+
+	$("body").on("click", function () {
+		if (inDeleteIcon != undefined) {
+			clearDeleteState(inDeleteIcon[0], inDeleteIcon[1]);
+			inDeleteIcon = undefined;
+		}
+	});
 
 	// event listener for popup window
 	$("#popup").on("click", ".fa-angle-double-down",function(e){
