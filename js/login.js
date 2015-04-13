@@ -191,7 +191,7 @@ window.fbAsyncInit = function() {
                                //console.log(symbol);
                            }
                 });             
-            });
+
             });
         }   
      
