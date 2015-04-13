@@ -145,6 +145,7 @@ function dealWithGraph(graphObject) {
 
     if (graphObject.isconnected) {
       graph = generateConnectGraph(graphObject);
+      console.log(graph);
     } else {
       graph = generateDisconnectGraph(graphObject);
     }
@@ -169,8 +170,8 @@ function graphToString(graph) {
 }
 
 function generateConnectGraph(graphObject) {
-  var n = graphObject.node;
-  var e = graphObject.edge;
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
   var isDirected = graphObject.isdirected;
   var nodes = [];
   var graph = [];
@@ -178,13 +179,14 @@ function generateConnectGraph(graphObject) {
     nodes[i] = i;
     graph[i] = [];
   }
-  
+  console.log(nodes);
+  console.log(graph);
   nodes = shuffle(nodes);
 
   for (var i = 0; i < nodes.length - 1 ; i++) {
     graph[nodes[i]].push(nodes[i+1]);
   };
-  
+  console.log(nodes);
   if (isDirected && e > n*(n-1)) {
     e = n*(n-1);
   } else if (!isDirected && e > n*(n-1)/2) {
@@ -214,7 +216,7 @@ function generateConnectGraph(graphObject) {
       };
     };
   };
-  
+  console.log(graph);
   return graph;
 }
 
