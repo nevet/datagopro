@@ -60,6 +60,7 @@ function prepareNumber(object) {
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
+  $("#parity")[0].selectedIndex = object.parityindex;
 }
 
 function prepareString(object) {
@@ -83,8 +84,8 @@ function prepareGraph(object) {
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
   $("#tree")[0].checked = object.istree;
-  $("#node").val(object.node);
-  $("#edge").val(object.edge);
+  $("#node").val(object.numberOfNode);
+  $("#edge").val(object.numberOfEdge);
   $("#repeatGraph").val(object.repeattime);
 }
 
@@ -200,6 +201,7 @@ function clearData() {
     $("#min").val("");
     $("#max").val("");
     $("#repeatNumber").val(1);
+    $("#parity")[0].selectedIndex = 0;
 
     $("#stringlength").val("");
     $("#charset")[0].selectedIndex = 0;

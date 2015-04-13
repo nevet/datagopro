@@ -141,7 +141,7 @@ function dealWithGraph(graphObject) {
     var graph = [];
     var string = graphObject.numberOfNode + " " + graphObject.numberOfEdge + "\n";
 
-    if (graphObject.isConnected) {
+    if (graphObject.isconnected) {
       graph = generateConnectGraph(graphObject);
     } else {
       graph = generateDisconnectGraph(graphObject);
@@ -169,7 +169,7 @@ function graphToString(graph) {
 function generateConnectGraph(graphObject) {
   var n = graphObject.numberOfNode;
   var e = graphObject.numberOfEdge;
-  var isDirected = graphObject.isDirected;
+  var isDirected = graphObject.isdirected;
   var nodes = [];
   var graph = [];
   for (var i=0; i<n; i++) {
