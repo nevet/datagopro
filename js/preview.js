@@ -149,7 +149,7 @@
   });
 
   $("#generate button").on("click", function () {
-    if (allData.length) {
+    if (allData.length>0) {
       var output = "";
 
       for (var i = 0; i < allData.length; i ++) {
