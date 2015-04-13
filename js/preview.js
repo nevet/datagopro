@@ -96,6 +96,7 @@
       }
 
       divs.push(object);
+      allData.push(data);
     } else {
       newDiv = newDiv.div;
       collapseButton = $(newDiv).find("button");
