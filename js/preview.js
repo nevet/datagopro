@@ -134,7 +134,7 @@
     }
   }
 
-  $("#preview button").on("click", function () {
+  $("#preview").on("click", "button", function () {
     var button = $(this);
 
     console.log(button.attr("aria-expanded"));
