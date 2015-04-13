@@ -115,7 +115,7 @@ div#profile{
 		background-color: #EBEBEB;
 		color: #0858B2;
 	}
-	div#editor, div#timelin, div#popular {
+	div#editor, div#timeline, div#popular {
 		float: left;
 		width: 56%;
 		height: 90%;
