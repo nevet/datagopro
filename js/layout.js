@@ -128,6 +128,10 @@ function clearData() {
     $("#max").val(100);
     $("#repeatNumber").val(10);
     $("#parity")[0].selectedIndex = 0;
+    noErrorHighlight($("#repeatNumber"));
+    noErrorHighlight($("#max"));
+    noErrorHighlight($("#min"));
+    noErrorHighlight($("#precision"));
 
     $("#stringlength").val(100);
     $("#charset")[0].selectedIndex = 0;
@@ -136,6 +140,8 @@ function clearData() {
     $("#wordlength").val("");
     $("#wordbreak").val("");
     $("#repeatString").val(10);
+    noErrorHighlight($("#stringlength"));
+    noErrorHighlight($("#repeatString"));
 
     $("#connect")[0].checked = true;
     $("#direct")[0].checked = true;
@@ -144,4 +150,7 @@ function clearData() {
     $("#node").val(10);
     $("#edge").val(90);
     $("#repeatGraph").val(1);
+    noErrorHighlight($("#repeatGraph"));
+    noErrorHighlight($("#node"));
+    noErrorHighlight($("#edge"));
 }
