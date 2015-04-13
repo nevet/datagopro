@@ -50,11 +50,17 @@ div#profile{
 		margin-bottom: 0px;
 		background-color: #E1E6FA;
 	}
-
-	div#editor, div#timeline{
+	div#mainbody {
+		width: 100%;
+		min-height: 1100px;
+		overflow: hidden;
+		background-color: #EBEBEB;
+		color: #0858B2;
+	}
+	div#editor, div#timeline, div#popular{
 		width: 90%;
 		margin: 5% auto;
-		height: 500px;
+		min-height: 500px;
 		background-color: #A1CDFF;
 		padding: 1% 1%;
 		border-radius: 5px;
@@ -65,7 +71,7 @@ div#profile{
 	div#preview {
 		font-family: 'Abel', sans-serif;
 		width: 90%;
-		height: 500px;
+		min-height: 500px;
 		background-color: #E9F0F5;
 		margin: 0 auto 5%;
 		border-radius: 5px;
@@ -102,14 +108,21 @@ div#profile{
 		margin-bottom: 0px;
 		background-color: #E1E6FA;
 	}
-	div#editor, div#timeline {
+	div#mainbody {
+		width: 100%;
+		min-height: 580px;
+		overflow: hidden;
+		background-color: #EBEBEB;
+		color: #0858B2;
+	}
+	div#editor, div#timelin, div#popular {
 		float: left;
 		width: 56%;
 		height: 90%;
 		min-height: 530px;
 		background-color: #A1CDFF;
 		margin: 2% 2%;
-		padding: 2em;
+		padding: 1.5%;
 		border-radius: 5px;		
 		overflow: scroll;
  		border: 3px solid white;
@@ -132,13 +145,7 @@ div#profile{
 	}
 }
 
-div#mainbody {
-	width: 100%;
-	min-height: 580px;
-	overflow: hidden;
-	background-color: #EBEBEB;
-	color: #0858B2;
-}
+
 div#editor .fa {
 	color: #0858B2;
 	/*opacity: 0.8;*/
@@ -228,7 +235,7 @@ div.setting {
 	clear: both;
 	background-color: #E1E6FA;
 }
-div.setting>p,span {
+div.setting>p, div.setting>span {
 	font-size: 14px;
 	font-family: 'Open Sans',sans-serif;
 	margin-bottom: 5px;
@@ -338,7 +345,7 @@ div.timeline-content>a>i {
 #popup {
 	border-radius: 7px;
 	padding-top: 15px;
-	background-color: #3399cc;
+	background-color: #E1E6FA;
 }
 .popup {
 	width: 400px;
@@ -364,7 +371,124 @@ div.popup .col-sm-1 {
 .popup-btn {
 	float: right;
 }
+div#popular {
+	background-color: #F0F8FF;
 
+}
+div#category {
+	position: absolute;
+	bottom: 30px;
+	width: 95%;
+	height: auto;
+	max-height: 30%;
+	border: 2px solid #4169E1;
+	border-radius: 5px;	
+	font-weight: bold;
+	padding: 10px 20px;
+	overflow: auto;
+}
+div#category p {
+	font-size: 24px;
+	color: #4169E1;
+}
+div#popular .label-size a{
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	position: relative;
+	font-size: 12px;
+	margin-bottom: 9px;
+	margin-left: 20px;
+	padding: 0 10px 0 12px;
+	background-color: #4169E1;
+	color: #FFFFFF !important;
+	text-decoration: none;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+}
+div#popular .label-size a:hover {
+	background: #FFFFFF;
+	color: #4169E1!important;
+}
+div#popular .label-size a:before {
+	content: "";
+	float: left;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	width: 0;
+	height: 0;
+	border-color: transparent #4169E1 transparent transparent;
+	border-style: solid;
+	border-width: 12px 12px 12px 0;
+}
+div#popular .label-size a:hover:before{
+  border-color: transparent #FFFFFF transparent transparent;
+}
+div#popular .label-size a:after {
+	content: "";
+	position: absolute;
+	top: 10px;
+	left: 0;
+	float: left;
+	width: 4px;
+	height: 4px;
+	border-radius: 2px;
+	background: #FFFFFF;
+	box-shadow: -1px -1px 2px #004977;
+}
+div#popular .label-size a:hover:after {
+	background: #4169E1;
+}
+div#popular #more{
+	border: 2px solid #4169E1;
+	border-radius: 5px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 12px;
+	margin-bottom: 9px;
+	margin-left: 20px;
+	padding: 3px;
+	color: #4169E1;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+div.popularblock>span {
+	min-width: 100%;
+}
+div.popularblock>i {
+	float: left;
+	color: #FFFFFF;
+	font-size: 22px;
+}
+div.popularblock>a{
+	text-decoration: none;
+	height: 28px;
+	width: auto;
+	border-radius: 5px;
+	background-color: #ACB7C0;
+	color: white;
+	float: right;
+	padding: 7px 8px;
+	margin-left: 7px;
+	font-size: 12px;
+	cursor: pointer;
+}
+div.popularblock>a>i{
+	color: white;
+	margin-left: 10px;
+	opacity: 1;
+	cursor: pointer;
+}
+div.popularblock {
+	position: relative;
+	overflow: auto;
+	padding: 5px 10px 10px;
+	border-radius: 5px;
+	width: 100%;
+	background-color: #87CEFA;
+}
 div#footer {
 	padding-top: 1%;
 	clear: left;
