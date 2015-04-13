@@ -18,9 +18,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	$email = trim_input($_POST["email"]);
 	$type = trim_input($_POST["type"]);
 	
-	$sql = "INSERT INTO user(logintype, name, email) VALUES('".$type."',".$name.",".$email.")";
+	$sql = "INSERT INTO user(logintype, name, email) VALUES('".$type."','".$name."','".$email."')";
 
-	$conn->query($sql);	
+	$resultQ = $conn->query($sql);
+
+  if($resultQ)
+  {
+    $return["json"] = "success";
+    echo json_encode($return);
+  }
+
+
 }
 
   function trim_input($data) {

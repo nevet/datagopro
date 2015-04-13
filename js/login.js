@@ -83,11 +83,11 @@ window.fbAsyncInit = function() {
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "login.php", //Relative or absolute path to response.php file
+                    url: "js/login.php", //Relative or absolute path to response.php file
                     data: postdata,
                     success: function(data) {
                          var returndata = data["json"];
-                               //console.log(symbol);
+                               console.log(returndata);
                            }
                 });             
             });
@@ -188,7 +188,7 @@ window.fbAsyncInit = function() {
                     data: postdata,
                     success: function(data) {
                          var returndata = data["json"];
-                               //console.log(symbol);
+                               console.log(returndata);
                            }
                 });             
 
