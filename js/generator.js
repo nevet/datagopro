@@ -2,6 +2,7 @@ var generatedData;
 
 generate = function (array) {
   generatedData = "";
+  console.log(array);
   if (array) {
     for (var i = 0; i<=array.length - 1; i++) {
       var object = array[i];
@@ -17,6 +18,7 @@ generate = function (array) {
           break;
 
         case "graph":
+          console.log(object);
           dealWithGraph(object);
           break;
 
