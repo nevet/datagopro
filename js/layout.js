@@ -3,7 +3,40 @@ $(function(){
     	$( window ).resize(function() {
     		setHeights();
     	});
-    	function setHeights() {
+    	// navigation
+    	$("#nav li>a").click(function(e){
+	        e.preventDefault();
+	        if (this.id != "mybutton" && this.id != "logoutbutton") {
+	        	console.log("fired!");
+		        var prev = $("#nav li.active");
+		        prev.removeClass();
+		        $(this).parent().addClass("active");
+		        $($(prev.find("a")[0]).attr("data-target")).css("display", "none");
+		        $($(this).attr("data-target")).css("display", "block");
+		        if ($(this).attr("data-target") == "#timeline") {
+		        	tlHeight();
+		        }
+		        
+	        }
+	        
+	    });
+	    var order=1;
+	    $("#add>i").on("click", createData);
+	    $("#add>p").on("click", createData);
+    	$("#export li").click(function(e){
+			if($(this).className==null) {
+				var prev = $($(this).parent().find(".active"));
+				prev.removeClass("active")
+				$(this).addClass("active");
+			}
+			showExportSetting(prev.html().toLowerCase(), $(this).html().toLowerCase());
+		});
+		$(".timeline-block .view").click(function(e){
+			e.preventDefault();
+			var id = $(this).attr("data-target");
+			viewDataSet(id);
+		});
+		function setHeights() {
     		if(document.documentElement.clientWidth > 768){
     			//big screen
 	    		var cHeight = document.documentElement.clientHeight;
@@ -22,31 +55,11 @@ $(function(){
 	    		tlHeight();
 	    	}
 
-    	}
-	    $("#nav li>a").click(function(e){
-	        e.preventDefault();
-	        if (this.id != "mybutton" && this.id != "logoutbutton") {
-	        	console.log("fired!");
-		        var prev = $("#nav li.active");
-		        prev.removeClass();
-		        $(this).parent().addClass("active");
-		        $($(this).attr("data-target")).css("display", "block");
-		        if ($(this).attr("data-target") == "#timeline") {
-		        	tlHeight();
-		        }
-		        var sibling = $($(this).parent().siblings()[0]);
-		        $($(prev.find("a")[0]).attr("data-target")).css("display", "none");
-	        }
-	        
-	    });
+    	}   
 	    function tlHeight() {
 	    	var sHeight = document.getElementById("timeline").scrollHeight * 0.97;
 	    	$('<style>#timeline:before{height:'+sHeight+'px}</style>').appendTo('head');
 	    }
-	    var order=1;
-	    $("#add>i").on("click", createData);
-	    $("#add>p").on("click", createData);
-
 	    function createData(e) {
 	    	var lastChild = $("#data-field").children().last();
 	    	var lastInputButton = lastChild.find("input").last();
@@ -62,28 +75,20 @@ $(function(){
 			
 			document.getElementById("data-field").scrollTop = document.getElementById("data-field").scrollHeight;
 		}
-		$("#export li").click(function(e){
-			if($(this).className==null) {
-				var prev = $($(this).parent().find(".active"));
-				prev.removeClass("active")
-				$(this).addClass("active");
-			}
-			showExportSetting(prev.html().toLowerCase(), $(this).html().toLowerCase());
-		});
+		
 		function showExportSetting(prev, type) {
 			$("#"+prev).css("display", "none");
 			$("#"+type).css("display", "block");
 		}
 
-		$(".timeline-block .view").click(function(e){
-			e.preventDefault();
-			var id = $(this).attr("data-target");
-			viewDataSet(id);
-		});
+		
 		function viewDataSet(id) {
 			var dataset = ("<div class='data-set'><h3>This is data-set No."+id+"</h3><p>content of this data-set.</p></div>")
 			$("#preview").html(dataset);
 		}
+
+
+		// event listener for popup window
 		$("#popup").on("click", ".fa-angle-double-down",function(e){
 			e.preventDefault();
 			$(this).closest(".container").find(".advanced").css("display","block");
