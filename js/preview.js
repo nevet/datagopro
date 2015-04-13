@@ -149,13 +149,13 @@
   });
 
   $("#generate button").on("click", function () {
-    if (allData.length>0) {
+    if (allData.length) {
       var output = "";
 
       for (var i = 0; i < allData.length; i ++) {
         output += allData[i];
       }
-
+      
       save(output);
     } else {
       alert("There's no input so far!");
