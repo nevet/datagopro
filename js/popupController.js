@@ -56,7 +56,7 @@ function prepareNumber(object) {
   $("#number").css("display","block").siblings().css("display", "none");
 
   $("#numbertype")[0].selectedIndex = object.numberindex;
-  $("#precision").val(object.precision);
+  $("#precision").val(object.floatprecision);
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
