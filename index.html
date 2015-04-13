@@ -233,7 +233,6 @@
 		    	<div class="form-inline">
 		    		<div class='form-group'>
 						<select id="numbertype" class='form-control' onchange="numberChanged(this)" data-toggle="tooltip" data-placement="top" data-original-title="Click to choose Integer or Float.">
-							<option selected disabled hidden value=''>Number type</option>
 							<option value='integer'>Integer</option>
 							<option value='float'>Float</option>
 						</select>
@@ -248,7 +247,6 @@
 						<label for="min" >Min</label>
 						<input id="min" class='form-control' type='number'></input>
 					</div>
-					
 					<div class='form-group'>
 						<label for="max" >Max</label>
 						<input id="max" class='form-control' type='number'></input>
@@ -262,7 +260,6 @@
 				<div class="form-inline advanced" style="display:none">				
 					<div class='form-group'>
 						<select id="parity" disabled="disabled" class='form-control' data-toggle="tooltip" data-placement="right" data-original-title="Click to choose even or odd if you want Integer.">
-							<option selected disabled hidden value=''>Parity</option>
 							<option value='even'>Even</option>
 							<option value='odd'>Odd</option>
 						</select>
@@ -271,7 +268,7 @@
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatNumber" class='repeattime form-control' type='number' min='1' value='1'></input>
+						<input id="repeatNumber" class='repeattime form-control' type='number' min='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -287,8 +284,7 @@
 						<input id="stringlength" class='form-control' type='number'></input>
 					</div>
 					<div class='form-group'>
-						<select id="charset" class='choosecharset form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a charset you want.">
-							<option value='' hidden disabled selected>Charset</option>
+						<select id="charset" class='form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a charset you want.">
 							<option value='ascii'>ASCII</option>
 							<option value='unicode'>Unicode</option>
 						</select>
@@ -322,7 +318,7 @@
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatString" class='repeattime form-control' type='number' min='1' value='1'>
+						<input id="repeatString" class='repeattime form-control' type='number' min='1'>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -376,10 +372,23 @@
 						<input id="weightmax" class='form-control' type='number'></input>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<span>Advanced settings</span><i class="fa fa-angle-double-down" data-toggle="tooltip" data-placement="right" data-original-title="If you want a long string of lines of words. Click here."></i>
+					</div>
+				</div>
+				<div class="form-inline advanced" style="display:none">
+					<div class='form-group'>
+						<select id="graphformat" class='form-control' data-toggle="tooltip" data-placement="right" data-original-title="Click to choose the output format of graph you want.">
+							<option value='adjlist'>Adjacency List</option>
+							<option value='adjmtrx'>Adjacency Matrix</option>
+						</select>
+					</div>
+				</div>
 		    	<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatGraph" class='repeattime form-control' type='number' min='1' value='1'></input>
+						<input id="repeatGraph" class='repeattime form-control' type='number' min='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
