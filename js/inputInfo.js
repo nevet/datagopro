@@ -34,6 +34,8 @@
     var newObject = {
       "identifier" : element,
       "datatype": "number",
+      "parityindex": $("#parity")[0].selectedIndex,
+      "parity": $("#parity")[0].selectedIndex == 1 ? "even" : "odd",
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
       "floatprecision": $("#precision").val(),
@@ -116,6 +118,7 @@
     $("#min").val("");
     $("#max").val("");
     $("#repeatNumber").val(1);
+    $("#parity")[0].selectedIndex = 0;
 
     $("#stringlength").val("");
     $("#charset")[0].selectedIndex = 0;

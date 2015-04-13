@@ -60,6 +60,7 @@ function prepareNumber(object) {
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
+  $("#parity")[0].selectedIndex = object.parityindex;
 }
 
 function prepareString(object) {
@@ -200,6 +201,7 @@ function clearData() {
     $("#min").val("");
     $("#max").val("");
     $("#repeatNumber").val(1);
+    $("#parity")[0].selectedIndex = 0;
 
     $("#stringlength").val("");
     $("#charset")[0].selectedIndex = 0;
