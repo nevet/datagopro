@@ -143,7 +143,7 @@ function dealWithGraph(graphObject) {
     var graph = [];
     var string = graphObject.node + " " + graphObject.edge + "\n";
 
-    if (graphObject.isconnected) {
+    if (graphObject.isconnect) {
       graph = generateConnectGraph(graphObject);
       console.log(graph);
     } else {
