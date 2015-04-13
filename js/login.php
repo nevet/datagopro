@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$name = trim_input($_POST["name"]);
 	$email = trim_input($_POST["email"]);
-	$type = trim_input($_POST["email"]);
+	$type = trim_input($_POST["type"]);
 	
 	$sql = "INSERT INTO user(logintype, name, email) VALUES('".$type."',".$name.",".$email.")";
 

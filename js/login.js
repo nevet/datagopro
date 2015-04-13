@@ -74,7 +74,22 @@ window.fbAsyncInit = function() {
                 $("div#profile span").html("Welcome, "+user_name+"!");
                 $("#mybutton").css("display","none");
                 $("#logoutbutton").css("display",""); 
-                $(".logininput").css("display","");             
+                $(".logininput").css("display","");
+
+                var postdata = {};
+                postdata["name"] = user_name;
+                postdata["email"] = user_email;
+                postdata["type"] = logintype;
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "login.php", //Relative or absolute path to response.php file
+                    data: postdata,
+                    success: function(data) {
+                         var returndata = data["json"];
+                               //console.log(symbol);
+                           }
+                });             
             });
 
             
@@ -161,6 +176,22 @@ window.fbAsyncInit = function() {
                     bPopup.close({
                        transitionClose: 'slideUp'
                     });
+
+                var postdata = {};
+                postdata["name"] = resp['displayName'];
+                postdata["email"] = email;
+                postdata["type"] = logintype;
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "login.php", //Relative or absolute path to response.php file
+                    data: postdata,
+                    success: function(data) {
+                         var returndata = data["json"];
+                               //console.log(symbol);
+                           }
+                });             
+            });
             });
         }   
      
