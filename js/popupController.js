@@ -92,10 +92,10 @@ function prepareGraph(object) {
 function okclicked(e) {
   var element = $(e);
 
-  // worker.onmessage = function(event) {
-  //   preview.render(chosebutton, event.data);
-  //   preview.endLoading();
-  // };
+  worker.onmessage = function(event) {
+    preview.render(chosebutton, event.data);
+    preview.endLoading();
+  };
 
   switch (element.val()) {
     case "number":
@@ -108,15 +108,21 @@ function okclicked(e) {
       break;
 
     case "string":
-      $(chosebutton).attr("value","String");
-      inputInfo.createNewInfo("string", chosebutton);
-      changeInfoMessage("string");
+      if (checkStringValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","String");
+        inputInfo.createNewInfo("string", chosebutton);
+        changeInfoMessage("string");
+      };
       break;
 
     case "graph":
-      $(chosebutton).attr("value","Graph");
-      inputInfo.createNewInfo("graph", chosebutton);
-      changeInfoMessage("graph");
+      if (checkGraphValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","Graph");
+        inputInfo.createNewInfo("graph", chosebutton);
+        changeInfoMessage("graph");
+      };
       break;
 
     default:
@@ -233,11 +239,56 @@ function checkNumberValidation() {
 }
 
 function checkStringValidation() {
+  var isValid = true;
 
+  if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
+    errorHighlight($("#stringlength"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#stringlength"));
+  }
+
+  if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
+    errorHighlight($("#repeatString"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatString"));
+  }
+
+  return isValid;
 }
 
 function checkGraphValidation() {
+  var isValid = true;
+  $("#tree")[0].checked = object.istree;
+  $("#node").val(object.node);
+  $("#edge").val(object.edge);
+  $("#repeatGraph").val(object.repeattime);
 
+  if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
+    errorHighlight($("#repeatGraph"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatGraph"));
+  }
+
+  if ($("#node").val() == "" || $("#node").val() <= 0) {
+    errorHighlight($("#node"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#node"));
+  }
+
+  if (!$("#tree")[0].checked) {
+    if ($("#edge").val() == "" || $("#edge").val() <= 0) {
+      errorHighlight($("#edge"));
+      isValid = false;
+    } 
+  } else {
+    noErrorHighlight($("#edge"));
+  }
+
+  return isValid;
 }
 
 function errorHighlight(element) {
