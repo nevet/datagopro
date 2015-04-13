@@ -139,7 +139,7 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.numberOfNode + " " + graphObject.numberOfEdge + "\n";
+    var string = graphObject.node + " " + graphObject.edge + "\n";
 
     if (graphObject.isconnected) {
       graph = generateConnectGraph(graphObject);
@@ -167,8 +167,8 @@ function graphToString(graph) {
 }
 
 function generateConnectGraph(graphObject) {
-  var n = graphObject.numberOfNode;
-  var e = graphObject.numberOfEdge;
+  var n = graphObject.node;
+  var e = graphObject.edge;
   var isDirected = graphObject.isdirected;
   var nodes = [];
   var graph = [];

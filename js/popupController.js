@@ -84,8 +84,8 @@ function prepareGraph(object) {
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
   $("#tree")[0].checked = object.istree;
-  $("#node").val(object.numberOfNode);
-  $("#edge").val(object.numberOfEdge);
+  $("#node").val(object.node);
+  $("#edge").val(object.edge);
   $("#repeatGraph").val(object.repeattime);
 }
 

@@ -93,8 +93,8 @@
       "isdirect": $("#direct")[0].checked,
       "isweighted": $("#weight")[0].checked,
       "isTree": $("#tree")[0].checked,
-      "numberOfNode": $("#node").val(),
-      "numberOfEdge": $("#edge").val(),
+      "node": $("#node").val(),
+      "edge": $("#edge").val(),
       "repeattime": $("#repeatGraph").val()
     }
 
