@@ -50,3 +50,12 @@
 	"max" : 10000,
 	"repeattime" : 300
 }]
+
+[{
+	"datatype" : "number",
+	"numbertype" : "integer",
+	"parity": "odd",
+	"numbermin" : 100,
+	"numbermax" : 10000,
+	"repeattime" : 300
+}]

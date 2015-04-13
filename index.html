@@ -162,25 +162,39 @@
 				</div>
 				
 			</div>
-			<div class="timeline-block">
-				<div class="timeline-dot"></div>
-				<div class="timeline-content">
-					<h3>DATA SET NAME 5</h3>
+		</div>
+		<div id="popular" style="display:none">
+			<div id="populartable">
+				<div class="popularblock">
+					<h4>DATA SET NAME 1</h4>
+					<p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
+					<i class="fa fa-tags fa-2x"></i>
+					<span class='label-size'>
+						<a data-target="all">All</a>
+					</span>
+					<span class='label-size'>
+						<a data-target="cat1">Cat1</a>
+					</span>
 					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-					<a data-target="5" class="view">View<i class="fa fa-eye"></i></a>
-					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
+					<a data-target="1" class="view">View<i class="fa fa-eye"></i></a>
+						
 				</div>
-				
 			</div>
-			<div class="timeline-block">
-				<div class="timeline-dot"></div>
-				<div class="timeline-content">
-					<h3>DATA SET NAME 6</h3>
-					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-					<a data-target="6" class="view">View<i class="fa fa-eye"></i></a>
-					<span  class="date-time">Fri Apr 03 2015 15:28:10</span>
-				</div>
-				
+			<div id="category">
+				<h4>CATEGORIES</h4>
+				<span class='label-size'>
+					<a data-target="all">All</a>
+				</span>
+				<span class='label-size'>
+					<a data-target="cat1">Cat1</a>
+				</span>
+				<span class='label-size'>
+					<a data-target="cat2">Cat2</a>
+				</span>
+				<span class='label-size'>
+					<a data-target="cat3">Cat3</a>
+				</span>
+				<a id="more" >Show more</a>
 			</div>
 		</div>
 		<div id="preview" class="showContent">
@@ -257,7 +271,7 @@
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatNumber" class='repeattime form-control' type='number' value='1'></input>
+						<input id="repeatNumber" class='repeattime form-control' type='number' min='1' value='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -308,7 +322,7 @@
 				<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatString" class='repeattime form-control' type='number' value='1'>
+						<input id="repeatString" class='repeattime form-control' type='number' min='1' value='1'>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
@@ -365,7 +379,7 @@
 		    	<div class="row">
 					<div class='col-sm-12 repeat'>
 						<span class='times'>Repeat</span>
-						<input id="repeatGraph" class='repeattime form-control' type='number' value='1'></input>
+						<input id="repeatGraph" class='repeattime form-control' type='number' min='1' value='1'></input>
 						<span class='times'>times</span>
 					</div>
 		    	</div>
