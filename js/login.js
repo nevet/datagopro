@@ -80,10 +80,11 @@ window.fbAsyncInit = function() {
                 postdata["name"] = user_name;
                 postdata["email"] = user_email;
                 postdata["type"] = logintype;
+                postdata["posttype"] = "login";
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "js/login.php", //Relative or absolute path to response.php file
+                    url: "login.php", //Relative or absolute path to response.php file
                     data: postdata,
                     success: function(data) {
                          var returndata = data["json"];
@@ -181,6 +182,7 @@ window.fbAsyncInit = function() {
                 postdata["name"] = resp['displayName'];
                 postdata["email"] = email;
                 postdata["type"] = logintype;
+                postdata["posttype"] = "login";
                 $.ajax({
                     type: "POST",
                     dataType: "json",
