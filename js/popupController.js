@@ -90,20 +90,21 @@ function prepareGraph(object) {
 }
 
 function okclicked(e) {
-  $("#popup").bPopup().close();
-
   var element = $(e);
 
-  worker.onmessage = function(event) {
-    preview.render(chosebutton, event.data);
-    preview.endLoading();
-  };
+  // worker.onmessage = function(event) {
+  //   preview.render(chosebutton, event.data);
+  //   preview.endLoading();
+  // };
 
   switch (element.val()) {
     case "number":
-      $(chosebutton).attr("value","Number");
-      inputInfo.createNewInfo("number",chosebutton);
-      changeInfoMessage("number");
+      if (checkNumberValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","Number");
+        inputInfo.createNewInfo("number",chosebutton);
+        changeInfoMessage("number");
+      };
       break;
 
     case "string":
@@ -193,4 +194,56 @@ function graphInfoMessage(object) {
         " nodes and " + object.edge + " edges";
 
   return string;
+}
+
+function checkNumberValidation() {
+  var isValid = true;
+
+  if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
+    errorHighlight($("#repeatNumber"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatNumber"));
+  }
+
+  if ($("#max").val() == "" || $("#min").val() > $("#max").val()) {
+    errorHighlight($("#max"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#max"));
+  }
+
+  if ($("#min").val() == "") {
+    errorHighlight($("#min"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#min"));
+  }
+
+  if ($("#numbertype")[0].selectedIndex == 1) {
+    if ($("#precision").val() == "" || $("#precision").val() < 0) {
+      errorHighlight($("#precision"));
+      isValid = false;
+    }
+  } else {
+    noErrorHighlight($("#precision"));
+  }
+
+  return isValid;
+}
+
+function checkStringValidation() {
+
+}
+
+function checkGraphValidation() {
+
+}
+
+function errorHighlight(element) {
+  $(element).css("background-color", "hotpink");
+}
+
+function noErrorHighlight(element) {
+  $(element).css("background-color", "white");
 }
