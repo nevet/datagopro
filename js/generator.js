@@ -252,7 +252,7 @@ function generateDisconnectGraph(graphObject) {
   }
    
   var i = 0;
-  while (i <= e) {
+  while (i < e) {
     var randomIndex = Math.floor(Math.random() * n);
     if (i % n == 0) {
       nodes = shuffle(nodes);
