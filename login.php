@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "7*aIo92d";
-$dbname = "user";
+$dbname = "datagopro";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
