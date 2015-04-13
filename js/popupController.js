@@ -292,7 +292,7 @@ function checkGraphValidation() {
 }
 
 function errorHighlight(element) {
-  $(element).css("background-color", "hotpink");
+  $(element).css("background-color", "#FF8282");
 }
 
 function noErrorHighlight(element) {
