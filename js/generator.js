@@ -2,7 +2,7 @@ var generatedData;
 
 generate = function (array) {
   generatedData = "";
-  console.log(array);
+
   if (array) {
     for (var i = 0; i<=array.length - 1; i++) {
       var object = array[i];
@@ -18,7 +18,6 @@ generate = function (array) {
           break;
 
         case "graph":
-          console.log(object);
           dealWithGraph(object);
           break;
 
@@ -145,7 +144,6 @@ function dealWithGraph(graphObject) {
 
     if (graphObject.isconnect) {
       graph = generateConnectGraph(graphObject);
-      console.log(graph);
     } else {
       graph = generateDisconnectGraph(graphObject);
     }
@@ -179,14 +177,13 @@ function generateConnectGraph(graphObject) {
     nodes[i] = i;
     graph[i] = [];
   }
-  console.log(nodes);
-  console.log(graph);
+
   nodes = shuffle(nodes);
 
   for (var i = 0; i < nodes.length - 1 ; i++) {
     graph[nodes[i]].push(nodes[i+1]);
   };
-  console.log(nodes);
+
   if (isDirected && e > n*(n-1)) {
     e = n*(n-1);
   } else if (!isDirected && e > n*(n-1)/2) {
@@ -216,7 +213,7 @@ function generateConnectGraph(graphObject) {
       };
     };
   };
-  console.log(graph);
+
   return graph;
 }
 
@@ -236,5 +233,45 @@ function shuffle(array) {
 }
 
 function generateDisconnectGraph(graphObject) {
-  return generateConnectGraph(graphObject);
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
+  var isDirected = graphObject.isdirected;
+  var nodes = [];
+  var graph = [];
+  for (var i=0; i<n; i++) {
+    nodes[i] = i;
+    graph[i] = [];
+  }
+
+  nodes = shuffle(nodes);
+
+  if (isDirected && e > n*(n-1)) {
+    e = n*(n-1);
+  } else if (!isDirected && e > n*(n-1)/2) {
+    e = n*(n-1)/2;
+  }
+   
+  var i = 0;
+  while (i <= e) {
+    var randomIndex = Math.floor(Math.random() * n);
+    if (i % n == 0) {
+      nodes = shuffle(nodes);
+    }
+
+    for (var j = nodes.length - 1; j >= 0; j--) {
+      if (randomIndex != nodes[j] && graph[randomIndex].indexOf(nodes[j]) === -1) {
+        if (isDirected) {
+          graph[randomIndex].push(nodes[j]);
+          i++;
+          break;
+        } else if (graph[nodes[j]].indexOf(randomIndex) === -1){
+          graph[randomIndex].push(nodes[j]);
+          i++;
+          break;
+        };
+      }
+    };
+  };
+
+  return graph;
 }
