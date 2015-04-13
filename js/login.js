@@ -33,6 +33,8 @@
 })();
 
 var logintype = undefined;
+var username = undefined;
+var useremail = undefined;
 
 //facebook log in
 window.fbAsyncInit = function() {
@@ -68,17 +70,17 @@ window.fbAsyncInit = function() {
                 });
 
             FB.api('/me', function(response) {
-                var user_email = response.email; 
-                var user_name = response.name;
+                useremail = response.email; 
+                username = response.name;
                 logintype = "facebook";
-                $("div#profile span").html("Welcome, "+user_name+"!");
+                $("div#profile span").html("Welcome, "+username+"!");
                 $("#mybutton").css("display","none");
                 $("#logoutbutton").css("display",""); 
                 $(".logininput").css("display","");
 
                 var postdata = {};
-                postdata["name"] = user_name;
-                postdata["email"] = user_email;
+                postdata["name"] = username;
+                postdata["email"] = useremail;
                 postdata["type"] = logintype;
                 postdata["posttype"] = "login";
                 $.ajax({
@@ -153,14 +155,13 @@ window.fbAsyncInit = function() {
             });
             request.execute(function (resp)
             {
-                var email = '';
                 if(resp['emails'])
                 {
                     for(i = 0; i < resp['emails'].length; i++)
                     {
                         if(resp['emails'][i]['type'] == 'account')
                         {
-                            email = resp['emails'][i]['value'];
+                            useremail = resp['emails'][i]['value'];
                         }
                     }
                 }
@@ -168,7 +169,8 @@ window.fbAsyncInit = function() {
                 //var str = "Name:" + resp['displayName'] + "<br>";
                 // str += "<img src='" + resp['image']['url'] + "' /><br>";
                 //str += "Email:" + email + "<br>";
-                $("div#profile span").html("Welcome, "+resp['displayName']+"!");
+                username = resp['displayName']
+                $("div#profile span").html("Welcome, "+username+"!");
                 $("#mybutton").css("display","none");
                 $("#logoutbutton").css("display","");
                 $(".logininput").css("display","");
@@ -179,8 +181,8 @@ window.fbAsyncInit = function() {
                     });
 
                 var postdata = {};
-                postdata["name"] = resp['displayName'];
-                postdata["email"] = email;
+                postdata["name"] = username;
+                postdata["email"] = useremail;
                 postdata["type"] = logintype;
                 postdata["posttype"] = "login";
                 $.ajax({
@@ -220,6 +222,24 @@ window.fbAsyncInit = function() {
                 $("#mybutton").css("display","");
                 $("#logoutbutton").css("display","none");
             }
+
+                var postdata = {};
+                postdata["logintype"] = "logout";
+                postdata["email"] = useremail;
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "login.php", //Relative or absolute path to response.php file
+                    data: postdata,
+                    success: function(data) {
+                         var returndata = data["json"];
+                               console.log(returndata);
+                           }
+                });
+
+                logintype = undefined;
+                useremail = undefined;
+                username = undefined;
     });
 
 
