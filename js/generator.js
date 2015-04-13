@@ -236,5 +236,5 @@ function shuffle(array) {
 }
 
 function generateDisconnectGraph(graphObject) {
-  generateConnectGraph(graphObject);
+  return generateConnectGraph(graphObject);
 }
