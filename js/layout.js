@@ -7,14 +7,14 @@ $(function(){
   // navigation
   $(".navbar-nav a").click(function(e){
     e.preventDefault();
-	var prev = $(".navbar-nav > li.active");
-	console.log(this.id);
-	console.log(prev);
-	prev.removeClass();
-	$(this).parent().addClass("active");
-	$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
-	$($(this).attr("data-target")).css("display", "block");
-          
+    //console.log(this.id);
+    if(this.id == "newdata" || this.id=="popularinput") {
+		var prev = $(".navbar-nav > li.active");
+		prev.removeClass();
+		$(this).parent().addClass("active");
+		$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
+		$($(this).attr("data-target")).css("display", "block");
+    }      
   });
   $("#myinput").click(function(e){
   		var prev = $("#nav li.active");
