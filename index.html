@@ -10,7 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="css/loginstyle.css">
 	<link href="css/docs.css" rel="stylesheet" >
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/pageguide.min.css" rel="stylesheet">
+	<link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
+
 
 	<link rel='stylesheet' href='css/bootstrap-social.css'>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -38,7 +39,7 @@
 	  ga('send', 'pageview');
 	</script>
 
-<!-- log in windom -->
+<!-- log in window -->
 	<div id ="element_to_pop_up">
         <div id="logindiv">
           <h1 id='loginh1'><img src="starlogo.png" id="loginlogo" height="50" width="50"> &nbsp; &nbsp; &nbsp;Log in to Datagopro</h1>
@@ -61,8 +62,8 @@
       <div id='triangle'></div>
       <div id="continue"><a href='#' id='logclose'>continue without log in</a></div>
     </div>
-
-<!-- log in windom -->
+<!-- log in window -->
+<!-- navbar -->
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -96,22 +97,11 @@
 		   	</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	<!-- <div id='banner'>
-		<img src="img/logo2.png">
-		<ol id="nav" class="breadcrumb">
-		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
-		  <li id='second_element' class="logininput" style="display:none"><a data-target="#timeline">My Input</a></li>
-		  <li id='third_element'><a data-target="#popular">Popular Input</a></li>
-		  
-		  </ol> 
-		<div id="profile">
-		  <span> </span>
-		</div>
-	</div> -->
+<!-- navbar -->
 	<div id="mainbody">
 		<div id="editor">
-			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">
-			<div id="data-field" class="seventh_element">
+			<input id="setname" class="form-control" type="text" placeholder="Your data set name here...">
+			<div id="data-field">
 				<div class='data-block'>
 					<a href="#">
 					<span class="order fa-stack">
@@ -126,11 +116,11 @@
 					<span id="data-block-info"><span>
 				</div>
 			</div>
-			<div id="add" class='eighth_element'>
+			<div id="add">
 				<i class="fa fa-plus-circle fa-2x"></i>
 				<p>Add more data...</p>
 			</div>
-			<div id="export" class="nineth_element">
+			<div id="export">
 				<p>Export Types</p>
 				<ul>
 					<li class="active">TXT</li>
@@ -148,7 +138,7 @@
 				</div>
 			</div>
 			<div id="generate">
-				<button type='button' id="tenth_element" class='btn'>Download</button>
+				<button type='button' id="downloadbutton" class='btn'>Download</button>
 				<i class="fa fa-download"></i>
 			</div> 
 		</div>
@@ -454,82 +444,46 @@
 
 
 
-	 <ul id="tlyPageGuide" data-tourtitle="Help">
-	  <li class="tlypageguide_bottom" data-tourtarget="#first_element">
+	 <ol id="tutorialguide"  style="display:none" data-joyride >
+	 <li data-id="setname" data-button="Next">
 	    <div>
-	      Click here to create new data set.
+	      <p>Type in the name of your dataset here.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#second_element">
+	  <li data-id="data-field" data-button="Next">
 	    <div>
-	      After logging in, click here to see your past inputs
+	      <p>Click here to specify the user input for datasets.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#third_element">
+	  <li data-id="add" data-button="Next">
 	    <div>
-	      Click here to show the popular inputs that have been used by others.
+	      <p>Click this button to add more data.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#fourth_element">
+	  <li data-id="export" data-button="Next">
 	    <div>
-	      Click here to refer to the help guide
+	      <p>Choose the desired export type here.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#fifth_element">
+	  <li data-id="downloadbutton" data-button="Next">
 	    <div>
-	      Click here to log in through facebook or google+
+	      <p>Click this button to download the dataset you created!</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#sixth_element">
+	  <li data-id="preview" data-button="Next" data-options="tipLocation:left;nubPosition:right">
 	    <div>
-	      type in your data set's name in this input form.
+	      <p>This preview area will show the temperary generated data.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_left" data-tourtarget=".seventh_element">
-	    <div>
-	      Click here to specify the input types and formats.
-	    </div>
-	  </li>
-	  <li class="tlypageguide_right" data-tourtarget=".eighth_element">
-	    <div>
-	      Click here to add more data 
-	    </div>
-	  </li>
-	  <li class="tlypageguide_left" data-tourtarget=".nineth_element">
-	    <div>
-	      Click here to choose which kind of export type to generate
-	    </div>
-	  </li>
-	  <li class="tlypageguide_right" data-tourtarget="#tenth_element">
-	    <div>
-	      Click here to generate data
-	  </li>
-	  	  <li class="tlypageguide_left" data-tourtarget=".eleventh_element">
-	    <div>
-	      Click here to see the preview of generated data.
-	    </div>
-	  </li>
-	</ul>
+	</ol>
 
-	<div class="tlyPageGuideWelcome">
-    <p>Here's a snappy modal to welcome you to my new page! pageguide is here to help you learn more.</p>
-    <p>
-        This button will launch pageguide:
-        <button class="tlypageguide_start">let's go</button>
-    </p>
-    <p>
-        This button will close the modal without doing anything:
-        <button class="tlypageguide_ignore">not now</button>
-    </p>
-    <p>
-        This button will close the modal and prevent it from being opened again:
-        <button class="tlypageguide_dismiss">got it, thanks</button>
-    </p>
-	</div>
+
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/pageguide.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/modernizr.mq.js"></script>
+    <script src="js/jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
 	<script src='js/popupController.js'></script>
 	<script src='js/generator.js'></script>
@@ -541,6 +495,7 @@
 	<script src='js/inputInfo.js'></script>
 	<script src='js/login.js'></script>
 	<script src='js/help.js'></script>
+	
 
 </body>
 </html>

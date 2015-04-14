@@ -157,6 +157,22 @@ $(function(){
 		$(this).attr("class","fa fa-angle-double-down");
 	});
 
+	// auto click ok when enter key is pressed
+	$("body").on("keypress", function (e) {
+		// 
+		if (!$("#popup[style*='block']").length) return;
+
+		if (e.which == 13) {
+			// find which tab are we in
+			var tab = $(this).find("div[class*='container'][style*='block']").attr("id");
+			var okButton = $(this).find("button[value='" + tab + "'][onclick*='ok']");
+			 
+			if (okButton) {
+				okButton.click();
+			}
+		}
+	});
+
 	$("#tree").click(function(e){
 		if($(this).is(":checked")) {
 			$(".nottree").css("display", "none");
