@@ -16,8 +16,18 @@
                 $("#element_to_pop_up").bPopup({//uses jQuery easing plugin
                 speed: 500,
                 transition: 'slideDown',
-                transitionClose: 'slideUp'
-                });
+                transitionClose: 'slideUp',
+                onClose: function() {
+                    $(document).ready(function(){ 
+                            $('#tutorialguide').joyride({ 
+                              autoStart : true,
+                              nubPosition: 'top',
+                              modal: true,
+                              expose: true
+                            });
+                        });}
+            });
+
             }
             else{}
 

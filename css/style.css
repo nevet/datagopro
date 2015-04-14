@@ -5,25 +5,7 @@ html body {
 	font-weight: 400;
 	background-color: #DCDCDC;
 }
-div#banner>ol>li[class="active"]>a {
-	cursor: inherit;
-	color: #91989F;
-}
-div#banner>ol>li>a {
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 18px;
-	color: #0858B2;
-}
-div#profile{
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 18px;
-	color: #0858B2;
-	position:absolute;
-	right: 72px;
-	top:60px;
-}
+
 .navbar {
 	margin-bottom: 0;
 }
@@ -33,6 +15,7 @@ div#profile{
 .navbar-nav > li > a {
 	height: 65px;
 	padding-top: 25px;
+	cursor: pointer;
 }
 @media (max-width: 767px) {
 	/*small screen*/
