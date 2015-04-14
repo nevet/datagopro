@@ -30,6 +30,17 @@
     return inputList[inputList.length - 1];
   }
 
+  inputInfo.removeElement = function (identifier) {
+    for (var i = 0; i < inputList.length; i ++) {
+      if (inputList[i].identifier === identifier) {
+        preview.removeEntry(identifier);
+        inputList.splice(i, 1);
+
+        break;
+      }
+    }
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
