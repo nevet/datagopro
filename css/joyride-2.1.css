@@ -50,6 +50,7 @@ body {
   left: 22px;
   width: 0;
   height: 0;
+  z-index: 1001;
   border: solid 14px;
   border: solid 14px;
 }
@@ -62,6 +63,7 @@ body {
   border-bottom-color so here we set the border-color
   and override the top,left,right colors below.
   */
+  z-index: 1001;
   border-color: #eee; /*change the nub color here*/
   border-top-color: transparent !important;
   border-left-color: transparent !important;
@@ -79,6 +81,7 @@ body {
   border-top-color so here we set the border-color
   and override the bottom,left,right colors below.
   */
+  z-index: 1001;
   border-color: #eee;
   border-bottom-color: transparent !important;
   border-left-color: transparent !important;
@@ -89,6 +92,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.right {
+  z-index: 1001;
   border-color: #eee;
   border-top-color: transparent !important;
   border-right-color: transparent !important;
@@ -101,6 +105,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.left {
+  z-index: 1001;
   border-color: #000;
   border-color: rgba(0,0,0,0.8) !important;
   border-top-color: transparent !important;
@@ -249,7 +254,7 @@ body {
 .joyride-expose-cover {
     background: transparent;
     position: absolute;
-    z-index: 10000;
+    z-index: 100;
     top: 0px;
     left: 0px;
 }
