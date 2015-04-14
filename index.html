@@ -79,7 +79,7 @@
 		      		<li class="active">
 		      			<a id="newdata"data-target="#editor">New Data<span class="sr-only">(current)</span></a>
 		      		</li>
-		      		<li id='popularinput'><a data-target="#popular">Popular Input</a></li>
+		      		<li ><a id='popularinput' data-target="#popular">Popular Input</a></li>
 			    </ul>
 		     	<ul class="nav navbar-nav navbar-right">
 		       		<li><a id='help' data-target="#help">Help</a></li>
@@ -141,6 +141,10 @@
 				<button type='button' id="downloadbutton" class='btn'>Download</button>
 				<i class="fa fa-download"></i>
 			</div> 
+			<!-- <div id="saveDiv">
+				<button type='button' id="save" class="btn">Save</button>
+				
+			</div> -->
 		</div>
 		<div id="timeline" style="display:none">
 			<div class="timeline-block">
@@ -303,7 +307,7 @@
 					<label>Times</label>
 				</div>
 	      <div class="row popup-btn">
-	    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+	    		<button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
 	       	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
 	      </div>
 	      </div>
@@ -359,7 +363,7 @@
 					<label>Times</label>
 				</div>
 		        <div class="row popup-btn">
-		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		    		<button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
 		        	<button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
 		        </div>
 		    </div>
@@ -435,7 +439,7 @@
 		    			<label>Times</label>
 		    		</div>
 		        <div class="row popup-btn">
-		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+		    		<button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
 		        	<button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
 		        </div>
 		    </div>
