@@ -1,10 +1,16 @@
 (function (doc, $, undefined) {
-  var headBlock = new BLock();
+  var contentArea = view.addContentArea();
+  var headBlock = new Block(-1);
+  var tailBlock = headBlock;
   var selectedBlocks = [];
+  var blockCount = 0;
+  var blockId = 1;
 
-  doc.addBlock = function (type) {
-    view.addRow();
-    headBlock.succ = new Block(type);
+  doc.addBlock = function () {
+    tailBlock.setSucc(new Block(blockId));
+    tailBlock = tailBlock.succ();
+    blockCount ++;
+    blockId ++;
   }
 
   doc.removeBlock = function (blockIds) {
@@ -40,6 +46,11 @@
   }
 
   doc.generate = function () {
-    // generate data for current document
+    var curBlock = headBlock.succ();
+
+    while (curBlock) {
+      curBlock.dump();
+      curBlock = curBlock.succ();
+    }
   }
 }) (window.doc = window.doc || {}, jQuery);

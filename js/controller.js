@@ -1,8 +1,12 @@
 (function (controller, $, undefined) {
   // do when document is ready
   $(function () {
-    $("#testButton").on("click", function () {
-      doc.addBlock('number');
+    $("#addRowButton").on("click", function () {
+      doc.addBlock();
+    });
+
+    $("#genButton").on("click", function () {
+      doc.generate();
     });
   });
 }) (window.controller = window.controller || {}, jQuery);

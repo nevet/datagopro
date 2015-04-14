@@ -60,6 +60,7 @@ function prepareNumber(object) {
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
+  $("#parity")[0].selectedIndex = object.parityindex;
 }
 
 function prepareString(object) {
@@ -89,8 +90,6 @@ function prepareGraph(object) {
 }
 
 function okclicked(e) {
-  $("#popup").bPopup().close();
-
   var element = $(e);
 
   worker.onmessage = function(event) {
@@ -100,21 +99,30 @@ function okclicked(e) {
 
   switch (element.val()) {
     case "number":
-      $(chosebutton).attr("value","Number");
-      inputInfo.createNewInfo("number",chosebutton);
-      changeInfoMessage("number");
+      if (checkNumberValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","Number");
+        inputInfo.createNewInfo("number",chosebutton);
+        changeInfoMessage("number");
+      };
       break;
 
     case "string":
-      $(chosebutton).attr("value","String");
-      inputInfo.createNewInfo("string", chosebutton);
-      changeInfoMessage("string");
+      if (checkStringValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","String");
+        inputInfo.createNewInfo("string", chosebutton);
+        changeInfoMessage("string");
+      };
       break;
 
     case "graph":
-      $(chosebutton).attr("value","Graph");
-      inputInfo.createNewInfo("graph", chosebutton);
-      changeInfoMessage("graph");
+      if (checkGraphValidation()) {
+        $("#popup").bPopup().close();
+        $(chosebutton).attr("value","Graph");
+        inputInfo.createNewInfo("graph", chosebutton);
+        changeInfoMessage("graph");
+      };
       break;
 
     default:
@@ -194,26 +202,99 @@ function graphInfoMessage(object) {
   return string;
 }
 
-function clearData() {
-    $("#numbertype")[0].selectedIndex = 0;
-    $("#precision").val("");
-    $("#min").val("");
-    $("#max").val("");
-    $("#repeatNumber").val(1);
+function checkNumberValidation() {
+  var isValid = true;
 
-    $("#stringlength").val("");
-    $("#charset")[0].selectedIndex = 0;
-    $("#linelength").val("");
-    $("#linebreak").val("");
-    $("#wordlength").val("");
-    $("#wordbreak").val("");
-    $("#repeatString").val(1);
+  if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
+    errorHighlight($("#repeatNumber"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatNumber"));
+  }
 
-    $("#connect")[0].checked = false;
-    $("#direct")[0].checked = false;
-    $("#weight")[0].checked = false;
-    $("#tree")[0].checked = false;
-    $("#node").val("");
-    $("#edge").val("");
-    $("#repeatGraph").val(1);
+  if ($("#max").val() == "" || $("#min").val() > $("#max").val()) {
+    errorHighlight($("#max"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#max"));
+  }
+
+  if ($("#min").val() == "") {
+    errorHighlight($("#min"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#min"));
+  }
+
+  if ($("#numbertype")[0].selectedIndex == 1) {
+    if ($("#precision").val() == "" || $("#precision").val() < 0) {
+      errorHighlight($("#precision"));
+      isValid = false;
+    }
+  } else {
+    noErrorHighlight($("#precision"));
+  }
+
+  return isValid;
+}
+
+function checkStringValidation() {
+  var isValid = true;
+
+  if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
+    errorHighlight($("#stringlength"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#stringlength"));
+  }
+
+  if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
+    errorHighlight($("#repeatString"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatString"));
+  }
+
+  return isValid;
+}
+
+function checkGraphValidation() {
+  var isValid = true;
+  $("#tree")[0].checked = object.istree;
+  $("#node").val(object.node);
+  $("#edge").val(object.edge);
+  $("#repeatGraph").val(object.repeattime);
+
+  if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
+    errorHighlight($("#repeatGraph"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#repeatGraph"));
+  }
+
+  if ($("#node").val() == "" || $("#node").val() <= 0) {
+    errorHighlight($("#node"));
+    isValid = false;
+  } else {
+    noErrorHighlight($("#node"));
+  }
+
+  if (!$("#tree")[0].checked) {
+    if ($("#edge").val() == "" || $("#edge").val() <= 0) {
+      errorHighlight($("#edge"));
+      isValid = false;
+    } 
+  } else {
+    noErrorHighlight($("#edge"));
+  }
+
+  return isValid;
+}
+
+function errorHighlight(element) {
+  $(element).css("background-color", "#FF8282");
+}
+
+function noErrorHighlight(element) {
+  $(element).css("background-color", "white");
 }

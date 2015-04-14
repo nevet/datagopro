@@ -2,6 +2,7 @@ var generatedData;
 
 generate = function (array) {
   generatedData = "";
+
   if (array) {
     for (var i = 0; i<=array.length - 1; i++) {
       var object = array[i];
@@ -139,9 +140,9 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.numberOfNode + " " + graphObject.numberOfEdge + "\n";
+    var string = graphObject.node + " " + graphObject.edge + "\n";
 
-    if (graphObject.isConnected) {
+    if (graphObject.isconnect) {
       graph = generateConnectGraph(graphObject);
     } else {
       graph = generateDisconnectGraph(graphObject);
@@ -167,22 +168,22 @@ function graphToString(graph) {
 }
 
 function generateConnectGraph(graphObject) {
-  var n = graphObject.numberOfNode;
-  var e = graphObject.numberOfEdge;
-  var isDirected = graphObject.isDirected;
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
+  var isDirected = graphObject.isdirected;
   var nodes = [];
   var graph = [];
   for (var i=0; i<n; i++) {
     nodes[i] = i;
     graph[i] = [];
   }
-  
+
   nodes = shuffle(nodes);
 
   for (var i = 0; i < nodes.length - 1 ; i++) {
     graph[nodes[i]].push(nodes[i+1]);
   };
-  
+
   if (isDirected && e > n*(n-1)) {
     e = n*(n-1);
   } else if (!isDirected && e > n*(n-1)/2) {
@@ -212,7 +213,7 @@ function generateConnectGraph(graphObject) {
       };
     };
   };
-  
+
   return graph;
 }
 
@@ -232,5 +233,45 @@ function shuffle(array) {
 }
 
 function generateDisconnectGraph(graphObject) {
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
+  var isDirected = graphObject.isdirected;
+  var nodes = [];
+  var graph = [];
+  for (var i=0; i<n; i++) {
+    nodes[i] = i;
+    graph[i] = [];
+  }
 
+  nodes = shuffle(nodes);
+
+  if (isDirected && e > n*(n-1)) {
+    e = n*(n-1);
+  } else if (!isDirected && e > n*(n-1)/2) {
+    e = n*(n-1)/2;
+  }
+   
+  var i = 0;
+  while (i < e) {
+    var randomIndex = Math.floor(Math.random() * n);
+    if (i % n == 0) {
+      nodes = shuffle(nodes);
+    }
+
+    for (var j = nodes.length - 1; j >= 0; j--) {
+      if (randomIndex != nodes[j] && graph[randomIndex].indexOf(nodes[j]) === -1) {
+        if (isDirected) {
+          graph[randomIndex].push(nodes[j]);
+          i++;
+          break;
+        } else if (graph[nodes[j]].indexOf(randomIndex) === -1){
+          graph[randomIndex].push(nodes[j]);
+          i++;
+          break;
+        };
+      }
+    };
+  };
+
+  return graph;
 }

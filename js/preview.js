@@ -96,6 +96,7 @@
       }
 
       divs.push(object);
+      allData.push(data);
     } else {
       newDiv = newDiv.div;
       collapseButton = $(newDiv).find("button");
@@ -133,10 +134,8 @@
     }
   }
 
-  $("#preview button").on("click", function () {
+  $("#preview").on("click", "button", function () {
     var button = $(this);
-
-    console.log(button.attr("aria-expanded"));
 
     if (button.attr("aria-expanded") == "true") {
       button.removeClass("fa-angle-down");
@@ -154,7 +153,7 @@
       for (var i = 0; i < allData.length; i ++) {
         output += allData[i];
       }
-
+      
       save(output);
     } else {
       alert("There's no input so far!");

@@ -34,8 +34,10 @@
     var newObject = {
       "identifier" : element,
       "datatype": "number",
+      "parityindex": $("#parity")[0].selectedIndex,
+      "parity": undefined,
       "numberindex" : $("#numbertype")[0].selectedIndex,
-      "numbertype": $("#numbertype")[0].selectedIndex == 1 ? "integer" : "float",
+      "numbertype": $("#numbertype")[0].selectedIndex == 0 ? "integer" : "float",
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
@@ -43,6 +45,22 @@
     }
 
     clearData();
+    switch (newObject.parityindex) {
+      case 0:
+        newObject.parity = undefined;
+        break;
+
+      case 1:
+        newObject.parity = "even";
+        break;
+
+      case 2:
+        newObject.parity = "odd";
+        break;
+
+      default:
+        break;
+    }
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
@@ -108,29 +126,5 @@
     }
 
     inputList.push(newObject);
-  }
-
-  function clearData() {
-    $("#numbertype")[0].selectedIndex = 0;
-    $("#precision").val("");
-    $("#min").val("");
-    $("#max").val("");
-    $("#repeatNumber").val(1);
-
-    $("#stringlength").val("");
-    $("#charset")[0].selectedIndex = 0;
-    $("#linelength").val("");
-    $("#linebreak").val("");
-    $("#wordlength").val("");
-    $("#wordbreak").val("");
-    $("#repeatString").val(1);
-
-    $("#connect")[0].checked = false;
-    $("#direct")[0].checked = false;
-    $("#weight")[0].checked = false;
-    $("#tree")[0].checked = false;
-    $("#node").val("");
-    $("#edge").val("");
-    $("#repeatGraph").val(1);
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);
