@@ -12,6 +12,7 @@ function cancelClicked(e) {
 function chooseDataType(e) {
   clearData();
   chosebutton = e;
+  $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
     preparePopup(currentEntryIndex);
