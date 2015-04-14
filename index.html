@@ -10,7 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="css/loginstyle.css">
 	<link href="css/docs.css" rel="stylesheet" >
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/pageguide.min.css" rel="stylesheet">
+	<link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
+
 
 	<link rel='stylesheet' href='css/bootstrap-social.css'>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -423,82 +424,70 @@
 
 
 
-	 <ul id="tlyPageGuide" data-tourtitle="Help">
-	  <li class="tlypageguide_bottom" data-tourtarget="#first_element">
+	 <ul id="tutorialguide"  style="display:none" data-joyride >
+	  <li data-id="first_element" data-button="Next">
 	    <div>
-	      Click here to create new data set.
+	      <p>Click here to create new data set.</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#second_element">
+	  <li  data-id="second_element" data-button="Next">
 	    <div>
-	      After logging in, click here to see your past inputs
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_bottom" data-tourtarget="#third_element">
+	  <li data-id="third_element" data-button="Next">
 	    <div>
-	      Click here to show the popular inputs that have been used by others.
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#fourth_element">
+	  <li  data-id="fourth_element" data-button="Next">
 	    <div>
-	      Click here to refer to the help guide
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#fifth_element">
+	  <li  data-id="fifth_element" data-button="Next">
 	    <div>
-	      Click here to log in through facebook or google+
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_top" data-tourtarget="#sixth_element">
+	  <li  data-id="sixth_element" data-button="Next">
 	    <div>
-	      type in your data set's name in this input form.
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_left" data-tourtarget=".seventh_element">
+	  <li  data-class="seventh_element" data-button="Next">
 	    <div>
-	      Click here to specify the input types and formats.
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_right" data-tourtarget=".eighth_element">
+	  <li  data-class="eighth_element" data-button="Next">
 	    <div>
-	      Click here to add more data 
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_left" data-tourtarget=".nineth_element">
+	  <li  data-class="nineth_element" data-button="Next">
 	    <div>
-	      Click here to choose which kind of export type to generate
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
-	  <li class="tlypageguide_right" data-tourtarget="#tenth_element">
+	  <li data-id="tenth_element" data-button="Next">
 	    <div>
-	      Click here to generate data
+	      <p>After logging in, click here to see your past inputs</p>
 	  </li>
-	  	  <li class="tlypageguide_left" data-tourtarget=".eleventh_element">
+	  	  <li data-class="eleventh_element" data-button="Next">
 	    <div>
-	      Click here to see the preview of generated data.
+	      <p>After logging in, click here to see your past inputs</p>
 	    </div>
 	  </li>
 	</ul>
 
-	<div class="tlyPageGuideWelcome">
-    <p>Here's a snappy modal to welcome you to my new page! pageguide is here to help you learn more.</p>
-    <p>
-        This button will launch pageguide:
-        <button class="tlypageguide_start">let's go</button>
-    </p>
-    <p>
-        This button will close the modal without doing anything:
-        <button class="tlypageguide_ignore">not now</button>
-    </p>
-    <p>
-        This button will close the modal and prevent it from being opened again:
-        <button class="tlypageguide_dismiss">got it, thanks</button>
-    </p>
-	</div>
+
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.bpopup.min.js"></script>
-	<script src="js/pageguide.min.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/modernizr.mq.js"></script>
+    <script src="js/jquery.joyride-2.1.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
 	<script src='js/popupController.js'></script>
 	<script src='js/generator.js'></script>
@@ -510,6 +499,7 @@
 	<script src='js/inputInfo.js'></script>
 	<script src='js/login.js'></script>
 	<script src='js/help.js'></script>
+	
 
 </body>
 </html>
