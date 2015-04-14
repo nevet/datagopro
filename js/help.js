@@ -8,21 +8,19 @@
 	//  	});
 	// });
 	// 
-	$(window).load(function() {
-        $('#tutorialguide').joyride({
-          autoStart : true,
-          nubPosition: 'top'
-        });
-      });
 	
 	$(document).ready(function(){
 		$(document).on("click","#help",function(event){
 			$('#tutorialguide').joyride({
 	          autoStart : true,
-	 		  nubPosition: 'top'	
+	 		  nubPosition: 'top',
+	 		  modal:true,
+	 		  expose: true	
 		    });
 		});
 	});
+
+
 
 
 

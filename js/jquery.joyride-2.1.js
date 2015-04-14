@@ -642,7 +642,7 @@
                   zIndex: el.css('z-index'),
                   position: el.css('position')
                   };
-        el.css('z-index',expose.css('z-index')*1+1);
+        el.css('z-index',expose.css('z-index')*1-1);
         if(origCSS.position == 'static'){
           el.css('position','relative');
         }
