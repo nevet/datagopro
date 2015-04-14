@@ -39,7 +39,7 @@
 	  ga('send', 'pageview');
 	</script>
 
-<!-- log in windom -->
+<!-- log in window -->
 	<div id ="element_to_pop_up">
         <div id="logindiv">
           <h1 id='loginh1'><img src="starlogo.png" id="loginlogo" height="50" width="50"> &nbsp; &nbsp; &nbsp;Log in to Datagopro</h1>
@@ -62,22 +62,42 @@
       <div id='triangle'></div>
       <div id="continue"><a href='#' id='logclose'>continue without log in</a></div>
     </div>
+<!-- log in window -->
+<!-- navbar -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			    <a class="navbar-brand" href="#">
+			    	<img src="img/logo2.png">
+			    </a>
+			</div>
 
-<!-- log in windom -->
-
-	<div id='banner'>
-		<img src="img/logo2.png">
-		<ol id="nav" class="breadcrumb">
-		  <li class="active"><a id="newdata" data-target="#editor">New Data</a></li>
-		  <li class="logininput" style="display:none"><a id="myinput" data-target="#timeline">My Input</a></li>
-		  <li><a id="popularinput" data-target="#popular">Popular Input</a></li>
-		  <li><a id='help'>Help</a></li>
-		  <li><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
-		</ol> 
-		<div id="profile">
-		  <span> </span>
-		</div>
-	</div>
+	   		<!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      	<ul class="nav navbar-nav">
+		      		<li class="active">
+		      			<a id="newdata"data-target="#editor">New Data<span class="sr-only">(current)</span></a>
+		      		</li>
+		      		<li id='popularinput'><a data-target="#popular">Popular Input</a></li>
+			    </ul>
+		     	<ul class="nav navbar-nav navbar-right">
+		       		<li><a id='help' data-target="#help">Help</a></li>
+		       		<li><a id="login">Login</a></li>
+		
+		        	<li id='afterlogin'class="dropdown" style="display:none">
+		          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="profile"></span><span class="caret"></span></a>
+		         		<ul class="dropdown-menu" role="menu">
+				            <li><a href="#" id="myinput"><a data-target="#timeline">My Input</a></a></li>
+				            <li class="divider"></li>
+				            <li><a href="#" id="logout">Logout</a></li>
+				        </ul>
+		        	</li>
+		      	</ul>
+		   	</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+<!-- navbar -->
 	<div id="mainbody">
 		<div id="editor">
 			<input id="setname" class="form-control" type="text" placeholder="Your data set name here...">

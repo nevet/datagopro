@@ -1,7 +1,7 @@
 html body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
-	min-height: 800px;
+	min-height: 776px;
 	font-weight: 400;
 	background-color: #DCDCDC;
 }
@@ -24,31 +24,23 @@ div#profile{
 	right: 72px;
 	top:60px;
 }
+.navbar {
+	margin-bottom: 0;
+}
+.navbar-brand, .navbar-collapse, .navbar-nav > li{
+	height: 65px;
+}
+.navbar-nav > li > a {
+	height: 65px;
+	padding-top: 25px;
+}
 @media (max-width: 767px) {
 	/*small screen*/
-	div#banner {
-		width: 100%;
-		min-height: 120px;
-		overflow: auto;
-		background-color: #E1E6FA;
-		border-bottom: 3px solid white;
-		padding:10px;
-		position: relative;
-	}
-	div#banner>img {
-		margin-left: 2%;
+	.navbar-brand>img{
+		margin-left: 10px;
 		width: 150px;
 		height: auto;
 		float: left;
-	}
-	div#banner>ol {
-		position: absolute;
-		width: 100%;
-		clear: both;
-		top: 68%;
-		left: 3%;
-		margin-bottom: 0px;
-		background-color: #E1E6FA;
 	}
 	div#mainbody {
 		width: 100%;
@@ -83,31 +75,15 @@ div#profile{
 	}
 }
 @media (min-width: 768px) {
-	div#banner {
-		min-height: 100px;
-		width: 100%;
-		overflow: auto;
-		background-color: #E1E6FA;
-		border-bottom: 3px solid white;
-		padding:10px;
-		position: relative;
-	}
-	div#banner>img {
-		margin-left: 2%;
+	/*big screen*/
+	.navbar-brand>img {
+		margin-left: 20px;
 		width: 15%;
-		min-width: 180px;
-		height: auto;
-		float: left;
+		min-width: 155px;
+		margin-top: -11px;
+		margin-right: -100px;
 	}
-	div#banner>ol {
-		position: absolute;
-		width: 60%;
-		clear: left;
-		top: 55%;
-		left: 30%;
-		margin-bottom: 0px;
-		background-color: #E1E6FA;
-	}
+
 	div#mainbody {
 		width: 100%;
 		min-height: 580px;
@@ -242,7 +218,7 @@ div.setting>p, div.setting>span {
 }
 div.setting>input {
 	width: 60px;
-	height: 28px;
+	height: 24px;
 	display: inline-block;
 	margin-left: 1%;
 }

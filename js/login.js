@@ -1,5 +1,5 @@
 (function(){
-        $(document).on("click", "#mybutton", function(event){
+        $(document).on("click", "#login", function(event){
             event.preventDefault();
             $("#element_to_pop_up").bPopup({//uses jQuery easing plugin
                 speed: 500,
@@ -84,9 +84,8 @@ window.fbAsyncInit = function() {
                 username = response.name;
                 logintype = "facebook";
                 $("div#profile span").html("Welcome, "+username+"!");
-                $("#mybutton").css("display","none");
-                $("#logoutbutton").css("display",""); 
-                $(".logininput").css("display","");
+                $("#login").css("display","none");
+                $("#afterlogin").css("display","");
 
                 var postdata = {};
                 postdata["name"] = username;
@@ -180,10 +179,9 @@ window.fbAsyncInit = function() {
                 // str += "<img src='" + resp['image']['url'] + "' /><br>";
                 //str += "Email:" + email + "<br>";
                 username = resp['displayName']
-                $("div#profile span").html("Welcome, "+username+"!");
-                $("#mybutton").css("display","none");
-                $("#logoutbutton").css("display","");
-                $(".logininput").css("display","");
+                $("#profile").html("Welcome, "+username+"!");
+                $("#login").css("display","none");
+                $("#afterlogin").css("display","");
                 logintype="google";
                 var bPopup = $("#element_to_pop_up").bPopup();
                     bPopup.close({
@@ -216,21 +214,19 @@ window.fbAsyncInit = function() {
         gapi.auth.signOut();
     }
 
-    $(document).on("click", "#logoutbutton", function(event){
+    $(document).on("click", "#logout", function(event){
             event.preventDefault();
             if (logintype=="google") {
                 google_logout();
-                $(".logininput").css("display","none");
-                $("div#profile span").html("");
-                $("#mybutton").css("display","");
-                $("#logoutbutton").css("display","none");
+                $("#profile").html("");
+                $("#login").css("display","");
+                $("#afterlogin").css("display","none");
             }
             else {
                 facebook_logout();
-                $(".logininput").css("display","none");
-                $("div#profile span").html("");
-                $("#mybutton").css("display","");
-                $("#logoutbutton").css("display","none");
+                $("#profile").html("");
+                $("#login").css("display","");
+                $("#afterlogin").css("display","none");
             }
 
                 var postdata = {};
