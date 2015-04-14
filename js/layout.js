@@ -100,6 +100,15 @@ $(function(){
 		icon.removeClass("fa-times");
 	}
 
+	function renumberDatablocks() {
+		var dataField = $("#data-field");
+		var dataBlocks = dataField.find(".data-block");
+
+		for (var i = 0; i < dataBlocks.length; i ++) {
+			$(dataBlocks[i]).find(".fa-stack-1x").html(i + 1);
+		}
+	}
+
 	var inDeleteIcon = undefined;
 
 	$("#data-field").on("click", ".fa-stack", function (event) {
@@ -112,8 +121,19 @@ $(function(){
 			inDeleteIcon = [icon, iconHtml];
 			event.stopPropagation();
 		} else {
-			clearDeleteState(inDeleteIcon[0], inDeleteIcon[1]);
-			inDeleteIcon = undefined;
+			if ($(this).find(".fa-times").length) {
+				// delete entry
+				var dataBlock = $(this).closest(".data-block");
+
+				inputInfo.removeElement(dataBlock.find("input")[0]);
+				dataBlock.remove();
+
+				order --;
+				renumberDatablocks();
+			} else {
+				clearDeleteState(inDeleteIcon[0], inDeleteIcon[1]);
+				inDeleteIcon = undefined;
+			}
 		}
 	});
 

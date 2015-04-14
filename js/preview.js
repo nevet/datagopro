@@ -53,6 +53,18 @@
     downloadLink.click();
   }
 
+  preview.removeEntry = function (identifier) {
+    for (var i = 0; i < divs.length; i ++) {
+      if (divs[i].identifier === identifier) {
+        divs[i].div.remove();
+        divs.splice(i, 1);
+        allData.splice(i, 1);
+
+        break;
+      }
+    }
+  }
+
   preview.startLoading = function () {
     display.removeClass("showContent");
     display.addClass("loading");

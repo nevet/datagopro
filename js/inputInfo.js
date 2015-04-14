@@ -30,6 +30,32 @@
     return inputList[inputList.length - 1];
   }
 
+  inputInfo.getValidBackref = function (index) {
+    var validRef = [];
+
+    for (var i = 0; i < inputList.length; i ++) {
+      if (i != index &&
+          inputList[i].numbertype == "integer" &&
+          inputList[i].repeattime == "1") {
+        // validRef.push(inputList[i].closest(".data-block").find(".fa-stack-1x").html());
+      validRef.push(i);
+      }
+    }
+
+    return validRef;
+  }
+
+  inputInfo.removeElement = function (identifier) {
+    for (var i = 0; i < inputList.length; i ++) {
+      if (inputList[i].identifier === identifier) {
+        preview.removeEntry(identifier);
+        inputList.splice(i, 1);
+
+        break;
+      }
+    }
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
