@@ -96,11 +96,11 @@
 					<span id="data-block-info"><span>
 				</div>
 			</div>
-			<div id="add" class='eighth_element'>
+			<div id="add">
 				<i class="fa fa-plus-circle fa-2x"></i>
 				<p>Add more data...</p>
 			</div>
-			<div id="export" class="nineth_element">
+			<div id="export">
 				<p>Export Types</p>
 				<ul>
 					<li class="active">TXT</li>
@@ -118,7 +118,7 @@
 				</div>
 			</div>
 			<div id="generate">
-				<button type='button' id="tenth_element" class='btn'>Download</button>
+				<button type='button' id="downloadbutton" class='btn'>Download</button>
 				<i class="fa fa-download"></i>
 			</div> 
 		</div>
@@ -425,9 +425,34 @@
 
 
 	 <ol id="tutorialguide"  style="display:none" data-joyride >
-	  <li data-id="data-field" data-button="Next" >
+	 <li data-id="setname" data-button="Next">
 	    <div>
-	      <p>Click here to create new data set.</p>
+	      <p>Type in the name of your dataset here.</p>
+	    </div>
+	  </li>
+	  <li data-id="data-field" data-button="Next">
+	    <div>
+	      <p>Click here to specify the user input for datasets.</p>
+	    </div>
+	  </li>
+	  <li data-id="add" data-button="Next">
+	    <div>
+	      <p>Click this button to add more data.</p>
+	    </div>
+	  </li>
+	  <li data-id="export" data-button="Next">
+	    <div>
+	      <p>Choose the desired export type here.</p>
+	    </div>
+	  </li>
+	  <li data-id="downloadbutton" data-button="Next">
+	    <div>
+	      <p>Click this button to download the dataset you created!</p>
+	    </div>
+	  </li>
+	  <li data-id="preview" data-button="Next" data-options="tipLocation:left;nubPosition:right">
+	    <div>
+	      <p>This preview area will show the temperary generated data.</p>
 	    </div>
 	  </li>
 	</ol>

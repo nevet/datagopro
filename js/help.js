@@ -11,28 +11,16 @@
 	$(window).load(function() {
         $('#tutorialguide').joyride({
           autoStart : true,
-          nubPosition: 'top',
-          postStepCallback : function (index, tip) {
-          if (index == 2) {
-            $(this).joyride('set_li', false, 1);
-          }
-        },
-        modal:true,
-        expose: true
+          nubPosition: 'top'
         });
       });
+	
 	$(document).ready(function(){
 		$(document).on("click","#help",function(event){
 			$('#tutorialguide').joyride({
 	          autoStart : true,
-	          postStepCallback : function (index, tip) {
-	          if (index == 2) {
-	            $(this).joyride('set_li', false, 1);
-	          }
-	        },
-	        modal:true,
-	        expose: true
-	        });
+	 		  nubPosition: 'top'	
+		    });
 		});
 	});
 
