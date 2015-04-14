@@ -81,11 +81,13 @@
 		<div id="editor">
 			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">
 			<div id="data-field" class="seventh_element">
-				<div class='data-block'> 
+				<div class='data-block'>
+					<a href="#">
 					<span class="order fa-stack">
 						<i class="fa fa-circle-thin fa-stack-2x"></i>
 						<i class="fa fa-stack-1x">1</i>
 					</span>
+					</a>
 					<div class="column">
 						<input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
 						<i class="fa fa-folder-open"></i>
@@ -266,36 +268,42 @@
 						</select>
 					</div>
 				</div>
-				<div class="row">
-					<div class='col-sm-12 repeat'>
-						<span class='times'>Repeat</span>
-						<input id="repeatNumber" class='repeattime form-control' type='number' min='1'></input>
-						<span class='times'>times</span>
-					</div>
-		    	</div>
-		        <div class="row popup-btn">
-		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
-		        	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
-		        </div>
-		    </div>
+				<div class="form-inline">
+				  <label>Repeat</label>
+				  <div class="form-group">
+						<div class="input-group" style="margin: 0;">
+				      <select id="repeateType" class="form-control" style="width: 95px;">
+								<option value="custom">Exact</option>
+								<option value="backref">Refer To</option>
+							</select>
+				      <input id="repeatNumber" class="repeattime form-control" type="number" min="1" style="background-color: white;">
+				    </div>
+			    </div>
+					<label>Times</label>
+				</div>
+	      <div class="row popup-btn">
+	    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
+	       	<button class="btn btn-primary" value="number" onClick="okclicked(this)">OK</button>
+	      </div>
+	      </div>
 		    <div id="string" class="container popup">
 		    	<div class="form-inline">
 		    		<div class='form-group' data-toggle="tooltip" data-placement="top" data-original-title="Enter the length of the string you want.">
 		    			<label for="stringlength" >String length</label>
-						<input id="stringlength" class='form-control' type='number' min="1"></input>
+							<input id="stringlength" class='form-control' type='number' min="1"></input>
+						</div>
+						<div class='form-group'>
+							<select id="charset" class='form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a charset you want.">
+								<option value='ascii'>ASCII</option>
+								<option value='unicode'>Unicode</option>
+							</select>
+						</div>
 					</div>
-					<div class='form-group'>
-						<select id="charset" class='form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a charset you want.">
-							<option value='ascii'>ASCII</option>
-							<option value='unicode'>Unicode</option>
-						</select>
+					<div class="row">
+						<div class="col-sm-12">
+							<span>Advanced settings</span><i class="fa fa-angle-double-down" data-toggle="tooltip" data-placement="right" data-original-title="If you want a long string of lines of words. Click here."></i>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<span>Advanced settings</span><i class="fa fa-angle-double-down" data-toggle="tooltip" data-placement="right" data-original-title="If you want a long string of lines of words. Click here."></i>
-					</div>
-				</div>
 				<div class="form-inline advanced" style="display:none">
 					<div class='form-group' data-toggle="tooltip" data-placement="top" data-original-title="Specify the length of each line here.">
 						<label for="linglength" >Line length</label>
@@ -316,13 +324,19 @@
 						<input id="wordbreak" class='wordbreak form-control' type='text'></input>
 					</div>				
 				</div>
-				<div class="row">
-					<div class='col-sm-12 repeat'>
-						<span class='times'>Repeat</span>
-						<input id="repeatString" class='repeattime form-control' type='number' min='1'>
-						<span class='times'>times</span>
-					</div>
-		    	</div>
+				<div class="form-inline">
+				  <label>Repeat</label>
+				  <div class="form-group">
+						<div class="input-group" style="margin: 0;">
+				      <select id="repeateType" class="form-control" style="width: 95px;">
+								<option value="custom">Exact</option>
+								<option value="backref">Refer To</option>
+							</select>
+							<input id="repeatString" class='repeattime form-control' type='number' min='1'>
+				    </div>
+			    </div>
+					<label>Times</label>
+				</div>
 		        <div class="row popup-btn">
 		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
 		        	<button class="btn btn-primary" value="string" onClick="okclicked(this)">OK</button>
@@ -386,13 +400,19 @@
 						</select>
 					</div>
 				</div>
-		    	<div class="row">
-					<div class='col-sm-12 repeat'>
-						<span class='times'>Repeat</span>
-						<input id="repeatGraph" class='repeattime form-control' type='number' min='1'></input>
-						<span class='times'>times</span>
-					</div>
-		    	</div>
+		    		<div class="form-inline">
+		    		  <label>Repeat</label>
+		    		  <div class="form-group">
+		    				<div class="input-group" style="margin: 0;">
+		    		      <select id="repeateType" class="form-control" style="width: 95px;">
+		    						<option value="custom">Exact</option>
+		    						<option value="backref">Refer To</option>
+		    					</select>
+		    					<input id="repeatGraph" class='repeattime form-control' type='number' min='1'></input>
+		    		    </div>
+		    	    </div>
+		    			<label>Times</label>
+		    		</div>
 		        <div class="row popup-btn">
 		    		<button class="btn btn-primary" onClick="cancelClicked(this)">Cancel</button>
 		        	<button class="btn btn-primary" value="graph" onClick="okclicked(this)">OK</button>
