@@ -12,7 +12,7 @@
 	$(document).ready(function(){
 		$(document).on("click","#help",function(event){
 			$('#tutorialguide').joyride({
-	          autoStart : true,
+	      autoStart : true,
 	 		  nubPosition: 'top',
 	 		  modal:true,
 	 		  expose: true	
