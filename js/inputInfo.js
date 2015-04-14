@@ -30,6 +30,21 @@
     return inputList[inputList.length - 1];
   }
 
+  inputInfo.getValidBackref = function (index) {
+    var validRef = [];
+
+    for (var i = 0; i < inputList.length; i ++) {
+      if (i != index &&
+          inputList[i].numbertype == "integer" &&
+          inputList[i].repeattime == "1") {
+        // validRef.push(inputList[i].closest(".data-block").find(".fa-stack-1x").html());
+      validRef.push(i);
+      }
+    }
+
+    return validRef;
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,

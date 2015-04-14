@@ -1,5 +1,9 @@
 var chosebutton;
 var worker = new Worker("js/dataInfo.js");
+var currentEntryIndex;
+
+var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
+var backrefSelectHtml = '<select class="form-control" style="width: 95px"></select>';
 
 function cancelClicked(e) {
   $("#popup").bPopup().close();
@@ -8,9 +12,9 @@ function cancelClicked(e) {
 function chooseDataType(e) {
   clearData();
   chosebutton = e;
-  var index = inputInfo.checkExistence(chosebutton);
-  if (index >= 0) {
-    preparePopup(index);
+  currentEntryIndex = inputInfo.checkExistence(chosebutton);
+  if (currentEntryIndex >= 0) {
+    preparePopup(currentEntryIndex);
   };
   $("#popup").bPopup({
                 speed: 300,
@@ -87,6 +91,51 @@ function prepareGraph(object) {
   $("#node").val(object.node);
   $("#edge").val(object.edge);
   $("#repeatGraph").val(object.repeattime);
+}
+
+function repeatTypeChanged(e) {
+  var repeatTypeSelect = $(e)[0];
+  var inputGroup = repeatTypeSelect.parent(".input-group");
+  var dataType = repeatTypeSelect.attr("id");
+
+  var backrefSelect = inputGroup.find("select[id*='backref']");
+  var customInput = inputGroup.find("input");
+  
+  // if we are choosing custom input
+  if (repeatTypeSelect == 0) {
+    // if input field is not there
+    if (!customInput.length) {
+      // check if we have select field first
+      if (backrefSelect.length) {
+        // if we find a select, delete it
+        backrefSelect.remove();
+      }
+
+      customInput = $(repInputHtml);
+      customInput.attr("id", dataType + "customInput");
+      customInput.appendTo(inputGroup);
+    }
+  } else { // if we are choosing backreference
+    // if backref select is not there
+    if (!backrefSelect) {
+      // check if custom input field is there
+      if (customInput.length) {
+        // if we find a custom input box, delete it
+        customInput.remove();
+      }
+
+      backrefSelect = $(backrefSelectHtml);
+      backrefSelect.attr("id", dataType + "backref");
+
+      var validOptions = inputInfo.getValidBackref(currentEntryIndex);
+
+      for (var i = 0; i < validOptions.length; i ++) {
+        backrefSelect.append("<option>" + validOptions[i] + "</option>");
+      }
+
+      backrefSelect.appendTo(inputGroup);
+    }
+  }
 }
 
 function okclicked(e) {
