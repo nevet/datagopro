@@ -68,11 +68,11 @@
 	<div id='banner'>
 		<img src="img/logo2.png">
 		<ol id="nav" class="breadcrumb">
-		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
-		  <li id='second_element' class="logininput" style="display:none"><a data-target="#timeline">My Input</a></li>
-		  <li id='third_element'><a data-target="#popular">Popular Input</a></li>
-		  <li id='fourth_element'><a id='help' data-target="#help">Help</a></li>
-		  <li id='fifth_element'><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
+		  <li class="active"><a id="newdata" data-target="#editor">New Data</a></li>
+		  <li class="logininput" style="display:none"><a id="myinput" data-target="#timeline">My Input</a></li>
+		  <li><a id="popularinput" data-target="#popular">Popular Input</a></li>
+		  <li><a id='help'>Help</a></li>
+		  <li><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
 		</ol> 
 		<div id="profile">
 		  <span> </span>
@@ -80,8 +80,8 @@
 	</div>
 	<div id="mainbody">
 		<div id="editor">
-			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">
-			<div id="data-field" class="seventh_element">
+			<input id="setname" class="form-control" type="text" placeholder="Your data set name here...">
+			<div id="data-field">
 				<div class='data-block'>
 					<a href="#">
 					<span class="order fa-stack">
@@ -424,62 +424,13 @@
 
 
 
-	 <ul id="tutorialguide"  style="display:none" data-joyride >
-	  <li data-id="first_element" data-button="Next">
+	 <ol id="tutorialguide"  style="display:none" data-joyride >
+	  <li data-id="data-field" data-button="Next" >
 	    <div>
 	      <p>Click here to create new data set.</p>
 	    </div>
 	  </li>
-	  <li  data-id="second_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li data-id="third_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-id="fourth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-id="fifth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-id="sixth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-class="seventh_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-class="eighth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li  data-class="nineth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	  <li data-id="tenth_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	  </li>
-	  	  <li data-class="eleventh_element" data-button="Next">
-	    <div>
-	      <p>After logging in, click here to see your past inputs</p>
-	    </div>
-	  </li>
-	</ul>
+	</ol>
 
 
 

@@ -11,6 +11,7 @@
 	$(window).load(function() {
         $('#tutorialguide').joyride({
           autoStart : true,
+          nubPosition: 'top',
           postStepCallback : function (index, tip) {
           if (index == 2) {
             $(this).joyride('set_li', false, 1);
@@ -34,6 +35,9 @@
 	        });
 		});
 	});
+
+
+
 
 
 })();
