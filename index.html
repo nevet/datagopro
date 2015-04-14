@@ -63,20 +63,51 @@
     </div>
 
 <!-- log in windom -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			    <a class="navbar-brand" href="#">
+			    	<img src="img/logo2.png">
+			    </a>
+			</div>
 
-	<div id='banner'>
+	   		<!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      	<ul class="nav navbar-nav">
+		      		<li class="active">
+		      			<a id="newdata"data-target="#editor">New Data<span class="sr-only">(current)</span></a>
+		      		</li>
+		      		<li id='popularinput'><a data-target="#popular">Popular Input</a></li>
+			    </ul>
+		     	<ul class="nav navbar-nav navbar-right">
+		       		<li><a id='help' data-target="#help">Help</a></li>
+		       		<li><a id="login">Login</a></li>
+		
+		        	<li id='afterlogin'class="dropdown" style="display:none">
+		          		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="profile"></span><span class="caret"></span></a>
+		         		<ul class="dropdown-menu" role="menu">
+				            <li><a href="#" id="myinput"><a data-target="#timeline">My Input</a></a></li>
+				            <li class="divider"></li>
+				            <li><a href="#" id="logout">Logout</a></li>
+				        </ul>
+		        	</li>
+		      	</ul>
+		   	</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	<!-- <div id='banner'>
 		<img src="img/logo2.png">
 		<ol id="nav" class="breadcrumb">
 		  <li class="active" id='first_element'><a data-target="#editor">New Data</a></li>
 		  <li id='second_element' class="logininput" style="display:none"><a data-target="#timeline">My Input</a></li>
 		  <li id='third_element'><a data-target="#popular">Popular Input</a></li>
-		  <li id='fourth_element'><a id='help' data-target="#help">Help</a></li>
-		  <li id='fifth_element'><a id="mybutton">Login</a><a id="logoutbutton" style="display:none">Logout</a></li>
-		</ol> 
+		  
+		  </ol> 
 		<div id="profile">
 		  <span> </span>
 		</div>
-	</div>
+	</div> -->
 	<div id="mainbody">
 		<div id="editor">
 			<input id='sixth_element' class="form-control" type="text" placeholder="Your data set name here...">

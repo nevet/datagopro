@@ -5,21 +5,24 @@ $(function(){
 		setHeights();
 	});
   // navigation
-  $("#nav li>a").click(function(e){
+  $(".navbar-nav a").click(function(e){
     e.preventDefault();
-    if (this.id != "mybutton" && this.id != "logoutbutton") {
-    	console.log("fired!");
-      var prev = $("#nav li.active");
-      prev.removeClass();
-      $(this).parent().addClass("active");
-      $($(prev.find("a")[0]).attr("data-target")).css("display", "none");
-      $($(this).attr("data-target")).css("display", "block");
-      if ($(this).attr("data-target") == "#timeline") {
-      	tlHeight();
-      }
-    }      
+	var prev = $(".navbar-nav > li.active");
+	console.log(this.id);
+	console.log(prev);
+	prev.removeClass();
+	$(this).parent().addClass("active");
+	$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
+	$($(this).attr("data-target")).css("display", "block");
+          
   });
-
+  $("#myinput").click(function(e){
+  		var prev = $("#nav li.active");
+  		$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
+      	$($(this).attr("data-target")).css("display", "block");
+  		tlHeight();
+  });
+      	
   var order=1;
   $("#add>i").on("click", createData);
   $("#add>p").on("click", createData);
@@ -41,21 +44,18 @@ $(function(){
 	function setHeights() {
 		if(document.documentElement.clientWidth > 768){
 			//big screen
-  		var cHeight = document.documentElement.clientHeight;
-  		//console.log(cHeight);
-  		//banner height
-  		var bHeight = cHeight*0.13;
-  		$("#banner").css("height", bHeight+"px");
-  		//main body height
-  		var mbHeight = cHeight * 3/4;
-  		console.log(mbHeight);
-  		$("#mainbody").css("height", mbHeight+"px");
-  		//footer height
-  		var fHeight = cHeight*0.13;
-  		$("#footer").css("height", fHeight+"px");
-  		//timeline height
-  		tlHeight();
-  	}
+	  		var cHeight = document.documentElement.clientHeight;
+	  		console.log(cHeight);
+	  		//main body height
+	  		var mbHeight = cHeight * 0.78;
+	  		console.log(mbHeight);
+	  		$("#mainbody").css("height", mbHeight+"px");
+	  		//footer height
+	  		var fHeight = cHeight*0.12;
+	  		$("#footer").css("height", fHeight+"px");
+	  		//timeline height
+	  		tlHeight();
+	  	}
 	}
 
   function tlHeight() {
