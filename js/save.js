@@ -140,7 +140,7 @@ $(function(){
 		$("<i></i>", {
 			"class": "fa fa-plus",
 			"css": {
-				"margin": "0 8px",
+				"margin": "0 5px",
 			},
 		}).appendTo(".addtagcontainer");
 
@@ -166,6 +166,9 @@ $(function(){
         $("<label></label>",{
         	"for": "aspopular",
         	"html": "<input id='aspopular' type='checkbox'> Save as popular input",
+        	"css": {
+        		"margin": "0 0 0 5px",
+        	}
         }).appendTo(".checkbox");
 	}
 });

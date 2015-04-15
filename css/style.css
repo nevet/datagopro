@@ -111,7 +111,26 @@ div#editor .fa {
 	color: #0858B2;
 	/*opacity: 0.8;*/
 }
+div#editor>input.form-control {
+	width: 60%;
+	float: left;
+	margin-right: 20px;
+}
+div#editor>p {
+	width: 40%;
+	display: inline;
+	line-height: 34px;
+}
+div#editor>p a {
+	width: 34px;
+	height: 34px;
+	padding: 5px;
 
+}
+div#editor>p .fa{
+	color: white;
+	font-size: 24px;
+}
 div#editor .fa-delete{
 	color: white;
 }
