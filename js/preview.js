@@ -66,7 +66,7 @@
 
         var curWidth = preview.width();
 
-        console.log(curWidth + " " + maxWidth + " " + lastWidth);
+        // console.log(curWidth + " " + maxWidth + " " + lastWidth);
 
         if (curWidth < maxWidth && curWidth != lastWidth) {
           best = i;
@@ -87,6 +87,18 @@
         return allData[i];
       }
     }
+  }
+
+  preview.getDivByIdentifier = function (identifier) {
+    for (var i = 0; i < divs.length; i ++) {
+      if (divs[i].identifier === identifier) {
+        return [i, divs[i].div];
+      }
+    }
+  }
+
+  preview.getDivByIndex = function (index) {
+    return divs[index].div;
   }
 
   preview.removeEntry = function (identifier) {

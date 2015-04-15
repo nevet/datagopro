@@ -591,6 +591,17 @@ div.popularblock {
 	margin-left: -10px;
 }
 
+.glowSpan {
+	border-width: 1px;
+	border-color: rgb(170, 204, 242);
+	border-style: solid;
+	border-radius: 5px;
+	
+	-webkit-box-shadow: 0 0 10px rgb(18, 80, 239);
+	-moz-box-shadow: 0 0 10px rgb(18, 80, 239);
+	box-shadow: 0 0 10px rgb(18, 80, 239);
+}
+
 /* preview loading settings*/
 .previewLoadingCover {
     display:    none;
