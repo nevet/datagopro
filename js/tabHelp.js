@@ -71,11 +71,11 @@ $(function() {
 									$("#parity").val("odd").trigger("change");
 									$("#parity").tooltip("hide");
 									setTimeout( function(){
-										$("#parity").val("").trigger("change");
+										$("#parity").trigger("change");
 										$("#parity").css("border", "1px solid #ccc");
 										container.find(".fa-angle-double-up").css("border", "");
 										container.find(".fa-angle-double-up").trigger("click");
-										$("#numbertype").val("").trigger("change");
+										$("#numbertype").trigger("change");
 									},1500);
 								},1500);
 							},1500);
@@ -84,6 +84,8 @@ $(function() {
 				},1500);
 			},1500);
 		},1500);
+
+		clearData();
 	}
 	function stringHelp(container){
 
@@ -131,6 +133,8 @@ $(function() {
 				},1500);
 			},1500);
 		},1500);
+
+		clearData();
 	}
 	function graphHelp(container){
 		$("#node").css("border", "3px solid #51CBEE");
@@ -182,4 +186,6 @@ $(function() {
 			},1500);
 		},1500);
 	}
+
+	clearData();
 });
