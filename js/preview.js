@@ -81,6 +81,14 @@
     }
   }
 
+  preview.getData = function (identifier) {
+    for (var i = 0; i < divs.length; i ++) {
+      if (divs[i].identifier === identifier) {
+        return allData[i];
+      }
+    }
+  }
+
   preview.removeEntry = function (identifier) {
     for (var i = 0; i < divs.length; i ++) {
       if (divs[i].identifier === identifier) {
