@@ -3,7 +3,9 @@ var worker = new Worker("js/dataInfo.js");
 var currentEntryIndex;
 
 var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
-var backrefSelectHtml = '<select class="form-control" style="width: 95px"></select>';
+var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"></span>';
+var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
+var backrefSelectHtml = '<select class="form-control" style="width: 125px"></select>';
 
 function cancelClicked(e) {
   $("#popup").bPopup().close();
@@ -88,22 +90,22 @@ function prepareGraph(object) {
   $("#connect")[0].checked = object.isconnect;
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
-  $("#tree")[0].checked = object.istree;
+  $("#tree")[0].checked = object.isTree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
   $("#repeatGraph").val(object.repeattime);
 }
 
 function repeatTypeChanged(e) {
-  var repeatTypeSelect = $(e)[0];
+  var repeatTypeSelect = $(e);
   var inputGroup = repeatTypeSelect.parent(".input-group");
-  var dataType = repeatTypeSelect.attr("id");
+  var dataType = repeatTypeSelect.attr("id").substr(10);
 
   var backrefSelect = inputGroup.find("select[id*='backref']");
   var customInput = inputGroup.find("input");
   
   // if we are choosing custom input
-  if (repeatTypeSelect == 0) {
+  if (repeatTypeSelect[0].selectedIndex == 0) {
     // if input field is not there
     if (!customInput.length) {
       // check if we have select field first
@@ -113,12 +115,12 @@ function repeatTypeChanged(e) {
       }
 
       customInput = $(repInputHtml);
-      customInput.attr("id", dataType + "customInput");
+      customInput.attr("id", "repeat" + dataType);
       customInput.appendTo(inputGroup);
     }
   } else { // if we are choosing backreference
     // if backref select is not there
-    if (!backrefSelect) {
+    if (!backrefSelect.length) {
       // check if custom input field is there
       if (customInput.length) {
         // if we find a custom input box, delete it
@@ -126,12 +128,16 @@ function repeatTypeChanged(e) {
       }
 
       backrefSelect = $(backrefSelectHtml);
-      backrefSelect.attr("id", dataType + "backref");
+      backrefSelect.attr("id", "backref" + dataType);
 
       var validOptions = inputInfo.getValidBackref(currentEntryIndex);
 
-      for (var i = 0; i < validOptions.length; i ++) {
-        backrefSelect.append("<option>" + validOptions[i] + "</option>");
+      if (!validOptions.length) {
+        backrefSelect.append("<option value='' disabled selected style='display:none;'>No Valid Reference</option>");
+      } else {
+        for (var i = 0; i < validOptions.length; i ++) {
+          backrefSelect.append("<option value=" + (validOptions[i] - 1) + ">Data Entry " + validOptions[i] + "</option>");
+        }
       }
 
       backrefSelect.appendTo(inputGroup);
@@ -185,6 +191,13 @@ function okclicked(e) {
   obj.identifier = undefined;
 
   preview.startLoading();
+  
+  // handle backreference case
+  if (!obj.repeattime) {
+    obj.repeattime = parseInt(preview.getData(obj.repeatref));
+    obj.repeatref = undefined;
+  }
+
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 }
 
@@ -259,7 +272,7 @@ function checkNumberValidation() {
     errorHighlight($("#repeatNumber"));
     isValid = false;
   } else {
-    noErrorHighlight($("#repeatNumber"));
+    correctHighlight($("#repeatNumber"));
   }
 
   if ($("#max").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
@@ -269,17 +282,19 @@ function checkNumberValidation() {
     noErrorHighlight($("#max"));
   }
 
-  if ($("#min").val() == "") {
+  if ($("#min").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
     errorHighlight($("#min"));
     isValid = false;
   } else {
-    noErrorHighlight($("#min"));
+    correctHighlight($("#min"));
   }
 
   if ($("#numbertype")[0].selectedIndex == 1) {
     if ($("#precision").val() == "" || $("#precision").val() < 0) {
       errorHighlight($("#precision"));
       isValid = false;
+    } else {
+      correctHighlight($("#precision"));
     }
   } else {
     noErrorHighlight($("#precision"));
@@ -295,14 +310,14 @@ function checkStringValidation() {
     errorHighlight($("#stringlength"));
     isValid = false;
   } else {
-    noErrorHighlight($("#stringlength"));
+    correctHighlight($("#stringlength"));
   }
 
   if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
     errorHighlight($("#repeatString"));
     isValid = false;
   } else {
-    noErrorHighlight($("#repeatString"));
+    correctHighlight($("#repeatString"));
   }
 
   return isValid;
@@ -310,41 +325,145 @@ function checkStringValidation() {
 
 function checkGraphValidation() {
   var isValid = true;
-  $("#tree")[0].checked = object.istree;
-  $("#node").val(object.node);
-  $("#edge").val(object.edge);
-  $("#repeatGraph").val(object.repeattime);
 
   if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
     errorHighlight($("#repeatGraph"));
     isValid = false;
   } else {
-    noErrorHighlight($("#repeatGraph"));
+    correctHighlight($("#repeatGraph"));
   }
 
   if ($("#node").val() == "" || $("#node").val() <= 0) {
     errorHighlight($("#node"));
     isValid = false;
   } else {
-    noErrorHighlight($("#node"));
+    correctHighlight($("#node"));
   }
 
   if (!$("#tree")[0].checked) {
     if ($("#edge").val() == "" || $("#edge").val() <= 0) {
       errorHighlight($("#edge"));
       isValid = false;
-    } 
+    } else {
+      correctHighlight($("#edge"));
+    }
   } else {
-    noErrorHighlight($("#edge"));
+    noErrorHighlight(("#edge"));
   }
 
   return isValid;
 }
 
 function errorHighlight(element) {
-  $(element).css("background-color", "#FF8282");
+  $(element).parent().removeClass("has-success form-feedback");
+  $(element).parent().addClass("has-error form-feedback");
+  var string = "#"+$(element).attr("id")+"Span";
+  $(string).html(iconError);
 }
 
 function noErrorHighlight(element) {
-  $(element).css("background-color", "white");
+  $(element).parent().removeClass("has-error has-success form-feedback");
+  var string = "#"+$(element).attr("id")+"Span";
+  $(string).html("");
 }
+
+function correctHighlight(element) {
+  $(element).parent().removeClass("has-error form-feedback");
+  $(element).parent().addClass("has-success form-feedback");
+  var string = "#"+$(element).attr("id")+"Span";
+  $(string).html(iconCorrect);
+}
+
+$(function(){
+  $("#min").focusout(function() {
+    if ($("#min").val() == "") {
+      errorHighlight($("#min"));
+    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
+      errorHighlight($("#min"));
+      errorHighlight($("#max"));
+    } else {
+      correctHighlight($("#min"));
+      if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
+        correctHighlight($("#max"));
+      }
+    }
+  });
+
+  $("#max").focusout(function() {
+    if ($("#max").val() == "") {
+      errorHighlight($("#max"));
+    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
+      errorHighlight($("#min"));
+      errorHighlight($("#max"));
+    } else {
+      correctHighlight($("#max"));
+      if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
+        correctHighlight($("#min"));
+      }
+    }
+  });
+
+  $("#repeatNumber").focusout(function() {
+    if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
+      errorHighlight($("#repeatNumber"));
+    } else {
+      correctHighlight($("#repeatNumber"));
+    }
+  });
+
+  $("#precision").focusout(function() {
+  if ($("#numbertype")[0].selectedIndex == 1) {
+    if ($("#precision").val() == "" || $("#precision").val() < 0) {
+        errorHighlight($("#precision"));
+      } else {
+        correctHighlight($("#precision"));
+      }
+    } else {
+      noErrorHighlight($("#precision"));
+    }
+  });
+  
+  $("#stringlength").focusout(function() {
+    if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
+      errorHighlight($("#stringlength"));
+    } else {
+      correctHighlight($("#stringlength"));
+    }
+  });
+
+  $("#repeatString").focusout(function() {
+    if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
+      errorHighlight($("#repeatString"));
+    } else {
+      correctHighlight($("#repeatString"));
+    }
+  });
+
+  $("#node").focusout(function() {
+    if ($("#node").val() == "" || $("#node").val() <= 0) {
+      errorHighlight($("#node"));
+    } else {
+      correctHighlight($("#node"));
+    }
+  });
+
+  $("#edge").focusout(function() {
+    if (!$("#tree")[0].checked) {
+      if ($("#edge").val() == "" || $("#edge").val() <= 0) {
+        errorHighlight($("#edge"));
+      } else {
+        correctHighlight($("#edge"));
+      }
+    } else {
+      noErrorHighlight(("#edge"));
+    }
+  });
+
+  $("#repeatGraph").focusout(function() {
+    if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
+      errorHighlight($("#repeatGraph"));
+    } else {
+      correctHighlight($("#repeatGraph"));
+    }
+  });
+});

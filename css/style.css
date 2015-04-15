@@ -111,6 +111,27 @@ div#editor .fa {
 	color: #0858B2;
 	/*opacity: 0.8;*/
 }
+
+div#editor .fa-delete{
+	color: white;
+}
+
+div#editor .btn-delete{
+	background-color: #A1CDFF;
+	padding:5px 10px 5px 10px;
+	border: 1px solid;
+	border-radius: 5px;
+	border-color: white;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+div#editor .btn-delete:hover{
+	background-color: #FF4D4D;
+	border-color: #FF4D4D;
+}
+
+
 div#data-field {
 	margin: 2% 0.5% 1%;
 	max-height: 55%;

@@ -77,7 +77,8 @@ $(function(){
   	order++;
 
   	var datablock = $("<div class='data-block'><a href='#'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
-  		+order+"</i> </span></a> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'> <i class='fa fa-folder-open'></i> </div><span id='data-block-info'><span></div>");
+  		+order+"</i> </span></a> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'>"+
+      " <i class='fa fa-folder-open'></i> </div><a class='btn-delete' href='#'><i class='fa fa-trash-o fa-lg fa-delete'></i></a><span id='data-block-info'><span></div>");
 
   	dataField.append(datablock);
 		
@@ -112,7 +113,7 @@ $(function(){
 
 	var inDeleteIcon = undefined;
 
-	$("#data-field").on("click", ".fa-stack", function (event) {
+	$(document).on("click", "#data-field.fa-stack", function (event) {
 		if (inDeleteIcon == undefined) {
 			var icon = $(this).find(".fa-stack-1x");
 			var iconHtml = icon.html();
@@ -144,6 +145,22 @@ $(function(){
 			inDeleteIcon = undefined;
 		}
 	});
+
+
+  /*
+   Delete functions and Select functions.
+   */
+  
+  $(document).on("click", "#data-field .btn-delete",function(event){
+    var dataBlock = $(this).closest(".data-block");
+    inputInfo.removeElement(dataBlock.find("input")[0]);
+        dataBlock.remove();
+
+        order --;
+        renumberDatablocks();
+
+  });
+  
 
 	// event listener for popup window
 	$("#popup").on("click", ".fa-angle-double-down",function(e){

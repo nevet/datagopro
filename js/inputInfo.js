@@ -38,7 +38,7 @@
           inputList[i].numbertype == "integer" &&
           inputList[i].repeattime == "1") {
         // validRef.push(inputList[i].closest(".data-block").find(".fa-stack-1x").html());
-      validRef.push(i);
+        validRef.push(i + 1);
       }
     }
 
@@ -67,7 +67,12 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
-      "repeattime": $("#repeatNumber").val()
+    }
+
+    if ($("#repeatNumber").length) {
+      newObject.repeattime = $("#repeatNumber").val();
+    } else {
+      newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
     }
 
     switch (newObject.parityindex) {
@@ -109,8 +114,14 @@
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
       "wordbreak": $("#wordbreak").val(),
-      "repeattime": $("#repeatString").val()
     }
+
+    if ($("#repeatString").length) {
+      newObject.repeattime = $("#repeatString").val();
+    } else {
+      newObject.repeatref = inputList[parseInt($("#backrefString").val())].identifier;
+    }
+
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
@@ -134,7 +145,12 @@
       "isTree": $("#tree")[0].checked,
       "node": $("#node").val(),
       "edge": $("#edge").val(),
-      "repeattime": $("#repeatGraph").val()
+    }
+
+    if ($("#repeatGraph").length) {
+      newObject.repeattime = $("#repeatGraph").val();
+    } else {
+      newObject.repeatref = inputList[parseInt($("#repeatGraph").val())].identifier;
     }
     
     var index = inputInfo.checkExistence(element);
