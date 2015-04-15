@@ -3,8 +3,8 @@ var worker = new Worker("js/dataInfo.js");
 var currentEntryIndex;
 
 var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
-var iconError = '<span class="glyphicon glyphicon-remove" style="color: red"></span>';
-var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: green"></span>';
+var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"></span>';
+var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
 var backrefSelectHtml = '<select class="form-control" style="width: 125px"></select>';
 
 function cancelClicked(e) {
