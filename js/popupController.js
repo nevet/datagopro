@@ -200,8 +200,7 @@ function okclicked(e) {
 }
 
 function changeInfoMessage(type) {
-  console.log("come in message");
-  var element = $(chosebutton).closest("div.data-block").find("#data-block-info");
+  var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
   var object = inputInfo.getLastElement();
   var string = ""; 
 
@@ -222,7 +221,20 @@ function changeInfoMessage(type) {
       break;
   }
 
-  element.html(string+" <b>X "+object.repeattime);
+  string += " <b>X ";
+
+  if (object.repeattime) {
+    element.html(string + object.repeattime + "</b>");
+  } else {
+    var ref = preview.getDivByIdentifier(object.repeatref);
+    var index = ref[0] + 1;
+    var refDiv = ref[1];
+
+    var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + index + '</i></span>');
+
+    element.html(string);
+    circle.appendTo(element);
+  }
 }
 
 function numberInfoMessage(object) {
