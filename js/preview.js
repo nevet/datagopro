@@ -53,6 +53,34 @@
     downloadLink.click();
   }
 
+  function splitData(data, preview, collapse) {
+    preview.html(data);
+
+    var maxWidth = preview.parent().width();
+    var lastWidth = 0;
+    var best = 0;
+
+    for (var i = 0; i < data.length; i ++) {
+      if (data[i] == ' ') {
+        preview.html(data.substr(0, i));
+
+        var curWidth = preview.width();
+
+        console.log(curWidth + " " + maxWidth + " " + lastWidth);
+
+        if (curWidth < maxWidth && curWidth != lastWidth) {
+          best = i;
+          lastWidth = curWidth;
+        } else {
+          preview.html(data.substr(0, best));
+          collapse.html(data.substr(best + 1));
+
+          break;
+        }
+      }
+    }
+  }
+
   preview.removeEntry = function (identifier) {
     for (var i = 0; i < divs.length; i ++) {
       if (divs[i].identifier === identifier) {
@@ -118,31 +146,30 @@
       allData[check[1]] = data;
     }
 
-    if (data.length < 65 && data.length != 0) {
+    collapseButton.css("visibility", "visible");
+    
+    var previewDataSpan = $("<span></span>");
+    
+    previewDataSpan.css("font-family", "'Abel', sans-serif");
+    previewDataSpan.appendTo(dataDiv);
+
+    if (data.length == 0) {
+      previewDataSpan.html("unspecified");
+      return;
+    }
+
+    var collapseDataDiv = $(div);
+    
+    collapseDataDiv.attr("id", divId);
+    collapseDataDiv.attr("aria-expanded", true);
+    collapseDataDiv.addClass("collapse");
+    collapseDataDiv.addClass("in");
+    collapseDataDiv.appendTo(dataDiv);
+
+    splitData(data, previewDataSpan, collapseDataDiv);
+
+    if (collapseDataDiv.html() == "") {
       collapseButton.css("visibility", "hidden");
-      dataDiv.html(data);
-    } else {
-      collapseButton.css("visibility", "visible");
-      var previewData = data.substr(0, 64);
-      var previewDataSpan = $("<span></span>");
-      
-      previewDataSpan.css("font-family", "'Abel', sans-serif");
-      previewDataSpan.html(previewData);
-      previewDataSpan.appendTo(dataDiv);
-
-      if (data.length == 0) {
-        previewDataSpan.html("unspecified");
-      }
-
-      var collapseData = data.substr(64);
-      var collapseDataDiv = $(div);
-      
-      collapseDataDiv.attr("id", divId);
-      collapseDataDiv.attr("aria-expanded", true);
-      collapseDataDiv.addClass("collapse");
-      collapseDataDiv.addClass("in");
-      collapseDataDiv.html(collapseData);
-      collapseDataDiv.appendTo(dataDiv);
     }
   }
 

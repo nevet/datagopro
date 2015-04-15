@@ -143,8 +143,8 @@ function okclicked(e) {
   var element = $(e);
 
   worker.onmessage = function(event) {
-    preview.render(chosebutton, event.data);
     preview.endLoading();
+    preview.render(chosebutton, event.data);
   };
 
   switch (element.val()) {
