@@ -52,7 +52,7 @@ $(function(){
 	  		console.log(mbHeight);
 	  		$("#mainbody").css("height", mbHeight+"px");
 	  		//footer height
-	  		var fHeight = cHeight*(1-np-0.78);
+	  		var fHeight = cHeight*(1-np-0.79);
 	  		$("#footer").css("height", fHeight+"px");
 	  		//timeline height
 	  		tlHeight();
