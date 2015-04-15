@@ -70,7 +70,6 @@
       "repeattime": $("#repeatNumber").val()
     }
 
-    clearData();
     switch (newObject.parityindex) {
       case 0:
         newObject.parity = undefined;
@@ -113,8 +112,6 @@
       "repeattime": $("#repeatString").val()
     }
 
-    clearData();
-
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
     if (index >= 0) {
@@ -139,8 +136,6 @@
       "edge": $("#edge").val(),
       "repeattime": $("#repeatGraph").val()
     }
-
-    clearData();
     
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
