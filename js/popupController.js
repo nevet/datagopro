@@ -262,7 +262,7 @@ function checkNumberValidation() {
     noErrorHighlight($("#repeatNumber"));
   }
 
-  if ($("#max").val() == "" || $("#min").val() > $("#max").val()) {
+  if ($("#max").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
     errorHighlight($("#max"));
     isValid = false;
   } else {

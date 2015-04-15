@@ -33,7 +33,7 @@ generate = function (array) {
 function dealWithString(stringObject) {
   for (var i = stringObject.repeattime; i > 0; i--) {
     var string = generateString(stringObject);
-    generatedData = generatedData+string;
+    generatedData = generatedData+string+" ";
   };
 }
 

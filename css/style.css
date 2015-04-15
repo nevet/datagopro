@@ -1,7 +1,7 @@
 html body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
-	/*min-height: 776px;*/
+	min-height: 700px;
 	font-weight: 400;
 	background-color: #DCDCDC;
 }
