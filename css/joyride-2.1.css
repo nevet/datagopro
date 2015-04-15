@@ -115,8 +115,7 @@ body {
 }
 
 .joyride-tip-guide span.joyride-nub.top-right {
-  border-color: #000;
-  border-color: rgba(0,0,0,0.8);
+  border-color: #eee;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
