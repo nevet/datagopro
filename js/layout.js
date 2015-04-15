@@ -151,6 +151,16 @@ $(function(){
    Delete functions and Select functions.
    */
   
+  $(document).on("click", "#data-field .btn-delete",function(event){
+    var dataBlock = $(this).closest(".data-block");
+    inputInfo.removeElement(dataBlock.find("input")[0]);
+        dataBlock.remove();
+
+        order --;
+        renumberDatablocks();
+
+  });
+  
 
 	// event listener for popup window
 	$("#popup").on("click", ".fa-angle-double-down",function(e){
