@@ -7,8 +7,8 @@ $(function(){
   // navigation
   $(".navbar-nav a").click(function(e){
     e.preventDefault();
-    //console.log(this.id);
-    if(this.id == "newdata" || this.id=="popularinput") {
+    console.log(this.id);
+    if(this.id == "newdata" || this.id=="popularinput" || this.id=="myinput") {
 		var prev = $(".navbar-nav > li.active");
 		prev.removeClass();
 		$(this).parent().addClass("active");
@@ -48,12 +48,12 @@ $(function(){
 	  		console.log(cHeight);
 	  		var np = 64/cHeight;
 	  		//main body height
-	  		var mbHeight = cHeight * 0.78;
+	  		var mbHeight = cHeight * (1-np);
 	  		console.log(mbHeight);
 	  		$("#mainbody").css("height", mbHeight+"px");
 	  		//footer height
-	  		var fHeight = cHeight*(1-np-0.79);
-	  		$("#footer").css("height", fHeight+"px");
+	  		// var fHeight = cHeight*(1-np-0.79);
+	  		// $("#footer").css("height", fHeight+"px");
 	  		//timeline height
 	  		tlHeight();
 	  	}
