@@ -46,12 +46,13 @@ $(function(){
 			//big screen
 	  		var cHeight = document.documentElement.clientHeight;
 	  		console.log(cHeight);
+	  		var np = 64/cHeight;
 	  		//main body height
 	  		var mbHeight = cHeight * 0.78;
 	  		console.log(mbHeight);
 	  		$("#mainbody").css("height", mbHeight+"px");
 	  		//footer height
-	  		var fHeight = cHeight*0.12;
+	  		var fHeight = cHeight*(1-np-0.78);
 	  		$("#footer").css("height", fHeight+"px");
 	  		//timeline height
 	  		tlHeight();

@@ -1,7 +1,7 @@
 html body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
-	min-height: 776px;
+	/*min-height: 776px;*/
 	font-weight: 400;
 	background-color: #DCDCDC;
 }
@@ -19,11 +19,12 @@ html body {
 }
 @media (max-width: 767px) {
 	/*small screen*/
-	.navbar-brand>img{
-		margin-left: 10px;
-		width: 150px;
-		height: auto;
-		float: left;
+	.navbar-brand>img {
+		margin-left: 20px;
+		width: 15%;
+		min-width: 150px;
+		margin-top: -11px;
+		margin-right: -100px;
 	}
 	div#mainbody {
 		width: 100%;
@@ -206,36 +207,50 @@ div.setting>input {
 	margin-left: 1%;
 }
 div#generate {
-	margin-top: 2%;
+	margin-top: 5px;
 	position: absolute;
-	width: 18%;
-	min-width: 150px;
+	width: 150px;
 	bottom: 25px;
 }
-div#generate>button {
+div#generate>button, div#saveDiv>button {
 	font-size: 20px;
 	font-weight: 600;
 	text-align: left;
-	margin: 1% 0;
-	padding: 3% 5%;
+	margin: 3px 0;
+	padding: 5px 10px;
 	width: 100%;
 	border: 2px solid #0858B2;
  	background-color: #2272CB;
  	color: white;
 }
-div#generate .fa-download:before{
+div#generate .fa-download:before, div#saveDiv .fa-floppy-o:before{
 	color: white;
 }
-div#generate>i {
+div#generate>span, div#saveDiv>span {
+	position: relative;
+}
+div#generate i {
 	position: absolute;
-	bottom:15px;
-	left: 122px;
+	bottom:16px;
+	left: 124px;
+	cursor: pointer;
+}
+div#saveDiv {
+	position: absolute;
+	bottom: 25px;
+	margin-top: 5px;
+	left: 180px;
+	width: 100px;
+}
+div#saveDiv i {
+	position: absolute;
+	bottom: 16px;
+	left: 73px;
 	cursor: pointer;
 }
 div#timeline {
 	background-color: #E9F0F5;
 	position: relative;
-	/*padding: 2em;*/
 	overflow: scroll;
 }
 
