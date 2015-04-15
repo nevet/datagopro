@@ -457,6 +457,26 @@ $(function(){
     };
   });
 
+  $("#parity").on('change', function() {
+    if ($("#parity")[0].selectedIndex == 1) {
+      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
+        if (parseInt($("#min").val()) % 2 == 1) {
+          isValid = false; 
+          errorHighlight($("#min"));
+          errorHighlight($("#max"));
+        };
+      };
+    } else if ($("#parity")[0].selectedIndex == 2) {
+      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
+        if (parseInt($("#min").val()) % 2 == 0) {
+          isValid = false;
+          errorHighlight($("#min"));
+          errorHighlight($("#max"));
+        };
+      };
+    };
+  })
+
   $("#repeatNumber").focusout(function() {
     if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
       errorHighlight($("#repeatNumber"));
