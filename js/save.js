@@ -110,7 +110,7 @@ $(function(){
 
 		$("<input>", {
 			"type": "text",
-			"keyup": function(e){
+			"keydown": function(e){
 				console.log(e.which);
 				var tagname = $(this).val().trim();
 				if(e.which == 32) {
