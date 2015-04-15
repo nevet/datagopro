@@ -280,7 +280,8 @@ div#saveDiv {
 	position: absolute;
 	bottom: 3%;
 	margin-top: 5px;
-	left: 23%;
+	left: 22%;
+	margin-left: 20px;
 	width: 100px;
 }
 div#saveDiv i {
