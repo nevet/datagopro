@@ -196,15 +196,15 @@
 				<div class="popularblock">
 					<h4>DATA SET NAME 1</h4>
 					<p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-					<i class="fa fa-tags fa-2x"></i>
+					<i id="tag" class="fa fa-tags fa-2x"></i>
 					<span class='label-size'>
 						<a data-target="all">All</a>
 					</span>
 					<span class='label-size'>
 						<a data-target="cat1">Cat1</a>
 					</span>
-					<a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-					<a data-target="1" class="view">View<i class="fa fa-eye"></i></a>
+					<a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
+					<a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>
 						
 				</div>
 			</div>
@@ -448,10 +448,8 @@
 	</div>
 
 
-
 	
-
-	 <ol id="newdataguide"  style="display:none" data-joyride >
+	 <ol id="newdataguide"  style="display:none" >
 	 <li data-id="newdata" data-button="Next">
 	    <div>
 	      <p>Click here to create new dataset</p>
@@ -503,7 +501,49 @@
 	    </div>
 	  </li>
 	</ol>
-
+	 
+	<ol id="popularguide"  style="display:none">
+	<li data-id="newdata" data-button="Next">
+	    <div>
+	      <p>Click here to create new dataset</p>
+	    </div>
+	  </li>
+	  <li data-id="popularinput" data-button="Next">
+	    <div>
+	      <p>Click here to see the popular input data sets</p>
+	    </div>
+	  </li>
+	  <li data-id="help" data-button="Next" data-options="tipLocation:bottom;nubPosition:top-right">
+	    <div>
+	      <p>Click here to refer to the help manual.</p>
+	    </div>
+	  </li>
+	  <li data-id="login" data-button="Next" data-options="tipLocation:bottom;nubPosition:top-right">
+	    <div>
+	      <p>Click here to log in through facebook or Google+.</p>
+	    </div>
+	  </li>
+	  <li data-id="populartable" data-button="Next">
+	    <div>
+	      <p>This table shows the input created by which author and when.</p>
+	    </div>
+	  </li>
+	  <li data-id="tag" data-button="Next">
+	    <div>
+	      <p>Click the tags here to help you look for a special category of data.</p>
+	    </div>
+	  </li>
+	  <li data-id="viewbutton" data-button="Next">
+	    <div>
+	      <p>Click this button to view the past inputs.</p>
+	    </div>
+	  </li>
+	  <li data-id="clonebutton" data-button="Next">
+	    <div>
+	      <p>Click this button to clone this past input into your data fields.</p>
+	    </div>
+	  </li>
+	</ol>	
 
 
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>

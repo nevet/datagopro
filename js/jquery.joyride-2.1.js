@@ -58,9 +58,9 @@
     methods = {
 
       init : function (opts) {
+        methods.destroy();
         return this.each(function () {
-
-          if ($.isEmptyObject(settings)) {
+          // if ($.isEmptyObject(settings)) {
             settings = $.extend(true, defaults, opts);
 
             // non configurable settings
@@ -149,9 +149,9 @@
               }
               }
             });
-          } else {
-            methods.restart();
-          }
+          // } else {
+          //   methods.restart();
+          // }
 
         });
       },
@@ -832,11 +832,11 @@
         }
 
         if (settings.cookieMonster) {
-          $.cookie(settings.cookieName, 'ridden', { expires: 365, domain: settings.cookieDomain, path: settings.cookiePath });
+          //$.cookie(settings.cookieName, 'ridden', { expires: 365, domain: settings.cookieDomain, path: settings.cookiePath });
         }
 
         if (settings.localStorage) {
-          localStorage.setItem(settings.localStorageKey, true);
+          //localStorage.setItem(settings.localStorageKey, false);
         }
 
         if (settings.timer > 0) {
