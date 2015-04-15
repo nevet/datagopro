@@ -1,13 +1,14 @@
 html body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
-	min-height: 700px;
 	font-weight: 400;
-	background-color: #DCDCDC;
+	position: relative;
+	background-color: #EBEBEB;
 }
 
 .navbar {
 	margin-bottom: 0;
+	border-radius: 0;
 }
 .navbar-brand, .navbar-collapse, .navbar-nav > li{
 	height: 65px;
@@ -17,8 +18,7 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
-@media (max-width: 767px) {
-	/*small screen*/
+/*@media (max-width: 767px) {
 	.navbar-brand>img {
 		margin-left: 20px;
 		width: 15%;
@@ -57,8 +57,8 @@ html body {
 	div#preview.showContent {
 		padding: 2em;
 	}
-}
-@media (min-width: 768px) {
+}*/
+/*@media (min-width: 768px) {*/
 	/*big screen*/
 	.navbar-brand>img {
 		margin-left: 20px;
@@ -70,18 +70,19 @@ html body {
 
 	div#mainbody {
 		width: 100%;
-		min-height: 580px;
+		height: 90%;
+		min-height: 630px;
 		overflow: hidden;
 		background-color: #EBEBEB;
 		color: #0858B2;
 	}
 	div#editor, div#timeline, div#popular {
 		float: left;
-		width: 56%;
-		height: 90%;
-		min-height: 530px;
+		width: 57%;
+		height: 95%;
+		/*min-height: 530px;*/
 		background-color: #A1CDFF;
-		margin: 2% 2%;
+		margin: 1.2% 1.5%;
 		padding: 1.5%;
 		border-radius: 5px;		
 		overflow: scroll;
@@ -92,10 +93,10 @@ html body {
 		font-family: 'Abel', sans-serif;
 		float: left;
 		width: 38%;
-		height: 90%;
-		min-height: 530px;
+		height: 95%;
+		/*min-height: 530px;*/
 		background-color: #E9F0F5;
-		margin: 2% 2% 2% 0;
+		margin: 1.2% 1.5% 1.2% 0;
 		border-radius: 5px;
 		overflow: scroll;
  		border: 3px solid white;
@@ -103,7 +104,7 @@ html body {
 	div#preview.showContent {
 		padding: 1% 1%;
 	}
-}
+/*}*/
 
 
 div#editor .fa {
@@ -112,7 +113,7 @@ div#editor .fa {
 }
 div#data-field {
 	margin: 2% 0.5% 1%;
-	max-height: 44%;
+	max-height: 55%;
 	overflow: scroll;
 }
 div.data-block {
@@ -142,7 +143,7 @@ div.column {
 div#add {
 	width: 200px;
 	position: absolute;
-	bottom: 190px;
+	bottom: 27%;
 }
 div#add>i {
 	margin: 0 4px;
@@ -164,7 +165,7 @@ div#export{
 	overflow: hidden;
 	font-size: 18px;
 	position: absolute;
-	bottom: 90px;
+	bottom: 12%;
 }
 div#export>p {
 	margin: 0 5px 5px;
@@ -210,10 +211,10 @@ div#generate {
 	margin-top: 5px;
 	position: absolute;
 	width: 150px;
-	bottom: 25px;
+	bottom: 3%;
 }
 div#generate>button, div#saveDiv>button {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 600;
 	text-align: left;
 	margin: 3px 0;
@@ -231,22 +232,87 @@ div#generate>span, div#saveDiv>span {
 }
 div#generate i {
 	position: absolute;
-	bottom:16px;
-	left: 124px;
+	bottom: 15px;
+	left: 123px;
 	cursor: pointer;
 }
 div#saveDiv {
 	position: absolute;
-	bottom: 25px;
+	bottom: 3%;
 	margin-top: 5px;
-	left: 180px;
+	left: 23%;
 	width: 100px;
 }
 div#saveDiv i {
 	position: absolute;
-	bottom: 16px;
+	bottom: 15px;
 	left: 73px;
 	cursor: pointer;
+}
+div.savewindow {
+	position: absolute;
+	width: 400px;
+	height: 140px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	padding: 0px 5px 5px;
+}
+div.cover {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+div.savewindow::before {
+	position: absolute;
+	content: "";
+	border-color: transparent #fff transparent transparent ;
+	border-width: 7px; 
+	border-style: solid;
+	right: 100%;
+	top:70%;
+	width:0;
+	height:0;
+}
+
+.tagbox, .addtagcontainer, .inputcontainer {
+	width: 100%;
+	height: auto;
+	clear: both;
+}
+.info {
+	width: 100%;
+	height: 32px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: aliceblue;
+	padding: 5px 0;
+	text-align: center;
+}
+.inputcontainer {
+	width: 100%;
+	margin: 0 0 10px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	line-height: 28px;
+	padding: 0 0 0 2px;
+	color: #fff;
+	overflow: hidden;
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
+}
+
+.inputcontainer input {
+	padding: 0;
+	border: 0;
+	box-shadow: none;
+	background: none;
+	max-width: 350px;
+	overflow: hidden;
+	height: 28px;
+	margin-left: 5px;
+}
+.inputcontainer input:focus{
+    outline: 0;
 }
 div#timeline {
 	background-color: #E9F0F5;
@@ -365,13 +431,14 @@ div#category p {
 	font-size: 24px;
 	color: #4169E1;
 }
-div#popular .label-size a{
+div#mainbody .label-size a{
 	float: left;
 	height: 24px;
 	line-height: 24px;
 	position: relative;
 	font-size: 12px;
-	margin-bottom: 9px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 	margin-left: 20px;
 	padding: 0 10px 0 12px;
 	background-color: #4169E1;
@@ -380,11 +447,11 @@ div#popular .label-size a{
 	border-bottom-right-radius: 4px;
 	border-top-right-radius: 4px;
 }
-div#popular .label-size a:hover {
+div#mainbody .label-size a:hover {
 	background: #FFFFFF;
 	color: #4169E1!important;
 }
-div#popular .label-size a:before {
+div#mainbody .label-size a:before {
 	content: "";
 	float: left;
 	position: absolute;
@@ -396,10 +463,10 @@ div#popular .label-size a:before {
 	border-style: solid;
 	border-width: 12px 12px 12px 0;
 }
-div#popular .label-size a:hover:before{
+div#mainbody .label-size a:hover:before{
   border-color: transparent #FFFFFF transparent transparent;
 }
-div#popular .label-size a:after {
+div#mainbody .label-size a:after {
 	content: "";
 	position: absolute;
 	top: 10px;
@@ -411,7 +478,7 @@ div#popular .label-size a:after {
 	background: #FFFFFF;
 	box-shadow: -1px -1px 2px #004977;
 }
-div#popular .label-size a:hover:after {
+div#mainbody .label-size a:hover:after {
 	background: #4169E1;
 }
 div#popular #more{
@@ -463,7 +530,7 @@ div.popularblock {
 	width: 100%;
 	background-color: #87CEFA;
 }
-div#footer {
+/*div#footer {
 	padding-top: 1%;
 	clear: left;
 	width: 100%;
@@ -471,7 +538,7 @@ div#footer {
 	background-color: #DCDCDC;
   	border-top: 3px solid white;
 	text-align: center;
-}
+}*/
 
 /* dataset preview*/
 .dataCollapseButton {

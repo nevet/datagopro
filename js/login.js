@@ -83,7 +83,7 @@ window.fbAsyncInit = function() {
                 useremail = response.email; 
                 username = response.name;
                 logintype = "facebook";
-                $("div#profile span").html("Welcome, "+username+"!");
+                $("span#profile").html("Welcome, "+username+"!");
                 $("#login").css("display","none");
                 $("#afterlogin").css("display","");
 
@@ -179,7 +179,7 @@ window.fbAsyncInit = function() {
                 // str += "<img src='" + resp['image']['url'] + "' /><br>";
                 //str += "Email:" + email + "<br>";
                 username = resp['displayName']
-                $("#profile").html("Welcome, "+username+"!");
+                $("span#profile").html("Welcome, "+username+"!");
                 $("#login").css("display","none");
                 $("#afterlogin").css("display","");
                 logintype="google";
@@ -218,13 +218,13 @@ window.fbAsyncInit = function() {
             event.preventDefault();
             if (logintype=="google") {
                 google_logout();
-                $("#profile").html("");
+                $("span#profile").html("");
                 $("#login").css("display","");
                 $("#afterlogin").css("display","none");
             }
             else {
                 facebook_logout();
-                $("#profile").html("");
+                $("span#profile").html("");
                 $("#login").css("display","");
                 $("#afterlogin").css("display","none");
             }
