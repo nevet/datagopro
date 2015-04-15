@@ -34,7 +34,7 @@ $(function(){
 				"position": "absolute",
 				"z-index": "1",
 				"left": (x+20)+"px",
-				"top": (y-185)+"px",
+				"top": (y-240)+"px",
 			},
 		}).appendTo("#editor");
 		//close
@@ -109,6 +109,7 @@ $(function(){
 		}).appendTo(".inputcontainer");
 
 		$("<input>", {
+			"type": "text",
 			"keyup": function(e){
 				console.log(e.which);
 				var tagname = $(this).val().trim();
@@ -119,8 +120,7 @@ $(function(){
 						$("<span></span>", {
 							"class": "label-size",
 							"html": "<a>"+ tagname+"</a>",
-						}).appendTo(".created");
-						
+						}).appendTo(".created");					
 					}		
 				}
 				else if(e.which == 127 || e.which == 8) {
@@ -129,7 +129,7 @@ $(function(){
 						$($(".created").children().last()).remove();
 					}
 				}
-			}
+			},
 		}).appendTo(".inputcontainer");
 
 		//add button
@@ -150,7 +150,7 @@ $(function(){
 				console.log(e);
 				$(".addtagcontainer").css("display", "none");
 				$(".inputcontainer").css("display", "block");
-				$(".inputcontainer input").trigger("focus");
+				$(".inputcontainer>input").trigger("focus");
 			},
 			"css": {
 				"cursor": "pointer",
@@ -158,8 +158,14 @@ $(function(){
 			},
 		}).appendTo(".addtagcontainer");
 
-		
+		//as popular
+        $("<div></div>", {
+        	"class": "checkbox",
+        }).appendTo(".savewindow");
 
-
+        $("<label></label>",{
+        	"for": "aspopular",
+        	"html": "<input id='aspopular' type='checkbox'> Save as popular input",
+        }).appendTo(".checkbox");
 	}
 });
