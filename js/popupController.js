@@ -30,9 +30,11 @@ function numberChanged(e) {
   var element = $(e);
   if (element.val() == "float") {
     $("#precisionDiv").show();
+    checkNumberValidation();
     $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
+    noErrorHighlight($("#precision"));
     $("#parity").prop("disabled", false);
   }
 }
