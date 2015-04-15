@@ -3,9 +3,9 @@ var worker = new Worker("js/dataInfo.js");
 var currentEntryIndex;
 
 var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
-var backrefSelectHtml = '<select class="form-control" style="width: 95px"></select>';
 var iconError = '<span class="glyphicon glyphicon-remove" style="color: red"></span>';
 var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: green"></span>';
+var backrefSelectHtml = '<select class="form-control" style="width: 125px"></select>';
 
 function cancelClicked(e) {
   $("#popup").bPopup().close();
@@ -97,15 +97,15 @@ function prepareGraph(object) {
 }
 
 function repeatTypeChanged(e) {
-  var repeatTypeSelect = $(e)[0];
+  var repeatTypeSelect = $(e);
   var inputGroup = repeatTypeSelect.parent(".input-group");
-  var dataType = repeatTypeSelect.attr("id");
+  var dataType = repeatTypeSelect.attr("id").substr(10);
 
   var backrefSelect = inputGroup.find("select[id*='backref']");
   var customInput = inputGroup.find("input");
   
   // if we are choosing custom input
-  if (repeatTypeSelect == 0) {
+  if (repeatTypeSelect[0].selectedIndex == 0) {
     // if input field is not there
     if (!customInput.length) {
       // check if we have select field first
@@ -115,12 +115,12 @@ function repeatTypeChanged(e) {
       }
 
       customInput = $(repInputHtml);
-      customInput.attr("id", dataType + "customInput");
+      customInput.attr("id", "repeat" + dataType);
       customInput.appendTo(inputGroup);
     }
   } else { // if we are choosing backreference
     // if backref select is not there
-    if (!backrefSelect) {
+    if (!backrefSelect.length) {
       // check if custom input field is there
       if (customInput.length) {
         // if we find a custom input box, delete it
@@ -128,12 +128,16 @@ function repeatTypeChanged(e) {
       }
 
       backrefSelect = $(backrefSelectHtml);
-      backrefSelect.attr("id", dataType + "backref");
+      backrefSelect.attr("id", "backref" + dataType);
 
       var validOptions = inputInfo.getValidBackref(currentEntryIndex);
 
-      for (var i = 0; i < validOptions.length; i ++) {
-        backrefSelect.append("<option>" + validOptions[i] + "</option>");
+      if (!validOptions.length) {
+        backrefSelect.append("<option value='' disabled selected style='display:none;'>No Valid Reference</option>");
+      } else {
+        for (var i = 0; i < validOptions.length; i ++) {
+          backrefSelect.append("<option value=" + (validOptions[i] - 1) + ">Data Entry " + validOptions[i] + "</option>");
+        }
       }
 
       backrefSelect.appendTo(inputGroup);
@@ -187,6 +191,13 @@ function okclicked(e) {
   obj.identifier = undefined;
 
   preview.startLoading();
+  
+  // handle backreference case
+  if (!obj.repeattime) {
+    obj.repeattime = parseInt(preview.getData(obj.repeatref));
+    obj.repeatref = undefined;
+  }
+
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 }
 
