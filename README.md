@@ -7,3 +7,5 @@ Feel free to visist our main page at www.datagopro.com.
 Please take a look at our [developer guide](https://docs.google.com/document/d/1lCe_XyzD9m9mVYwIB1rWl50h-C2M24pHn_9bJLKuKM4/edit#heading=h.44cluypgtmpk).
 
 We are currently using Trello to keep track of our issues [here](https://trello.com/b/FSQrJgOK/datagopro).
+
+To monitor php error, navigate to your project hosting folder, run ./monitor_local.sh {passwd_for_admin}.
