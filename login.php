@@ -32,7 +32,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     $currentuser = $email;
                     $return["json"] = "success";
                     echo json_encode($return);
-                  }
+                  } else {
+		    echo $conn->errno.": ".$conn->error."\n";
+		  }
                   break;
     case "logout":
                   $email = trim_input($_POST["email"]);
