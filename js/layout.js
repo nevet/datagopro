@@ -116,7 +116,7 @@ $(function(){
 	$(document).on("click", "#data-field.fa-stack", function (event) {
 		if (inDeleteIcon == undefined) {
 			var icon = $(this).find(".fa-stack-1x");
-			var iconHtml = icon.html();
+		  var iconHtml = icon.html();
 			icon.addClass("fa-times");
 			icon.html("");
 
