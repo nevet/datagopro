@@ -17,7 +17,7 @@ $currentuser = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-  switch (trim_input($_POST["logintype"])){
+  switch (trim_input($_POST["posttype"])){
     case "login":
                   $name = trim_input($_POST["name"]);
                   $email = trim_input($_POST["email"]);
@@ -36,14 +36,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                   break;
     case "logout":
                   $email = trim_input($_POST["email"]);
-                  $return = {};
-                  if($email == $currentuser)
+                  
+		  if ($email == $currentuser)
                   {
                     $currentuser = '';
                     $return["json"] = "success logged out";
                   }
                   else{
-                    $return["json"] = "logged-in email is not the logged out email."
+                    $return["json"] = "logged-in email is not the logged out email.";
                   }
 
                   echo json_encode($return);
@@ -57,12 +57,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                   $sql = "SELECT setname FROM input WHERE useremail='".$email."'";
                   $resultQ = $conn->query($sql);
                   if ($resultQ->num_rows>0) {
-                    $sql = "UPDATE input SET input='".$input."', date='".$date."',tag='".$tag."' WHERE useremail='".$email."'";
+                    $sql = "UPDATE input SET input='$input', date='$date',tag='$tag' WHERE useremail='$email'";
                     $conn->query($sql);
                   }
                   else
                   {
-                    $sql = "INSERT INTO input(useremail, jsoninput, date, tag, setname) VALUES('".$email."','".$input."','".$date."','".$tag."','".$setname"')";
+                    $sql = "INSERT INTO input(useremail, jsoninput, date, tag, setname) VALUES('$email','$input','$date','$tag','$setname')";
                     $conn->query($sql);
                   }
 

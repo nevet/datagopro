@@ -7,8 +7,8 @@ $(function(){
   // navigation
   $(".navbar-nav a").click(function(e){
     e.preventDefault();
-    //console.log(this.id);
-    if(this.id == "newdata" || this.id=="popularinput") {
+    console.log(this.id);
+    if(this.id == "newdata" || this.id=="popularinput" || this.id=="myinput") {
 		var prev = $(".navbar-nav > li.active");
 		prev.removeClass();
 		$(this).parent().addClass("active");
@@ -48,12 +48,12 @@ $(function(){
 	  		console.log(cHeight);
 	  		var np = 64/cHeight;
 	  		//main body height
-	  		var mbHeight = cHeight * 0.78;
+	  		var mbHeight = cHeight * (1-np);
 	  		console.log(mbHeight);
 	  		$("#mainbody").css("height", mbHeight+"px");
 	  		//footer height
-	  		var fHeight = cHeight*(1-np-0.79);
-	  		$("#footer").css("height", fHeight+"px");
+	  		// var fHeight = cHeight*(1-np-0.79);
+	  		// $("#footer").css("height", fHeight+"px");
 	  		//timeline height
 	  		tlHeight();
 	  	}
@@ -76,9 +76,9 @@ $(function(){
 
   	order++;
 
-  	var datablock = $("<div class='data-block'><a href='#'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
-  		+order+"</i> </span></a> <div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'>"+
-      " <i class='fa fa-folder-open'></i> </div><a class='btn-delete' href='#'><i class='fa fa-trash-o fa-lg fa-delete'></i></a><span id='data-block-info'><span></div>");
+  	var datablock = $("<div class='data-block'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
+  		+order+"</i> </span><div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'>"+
+      " <i class='fa fa-folder-open'></i> </div><a class='btn-delete' href='#'><i class='fa fa-trash-o fa-lg fa-delete'></i></a><span class='data-block-info'><span></div>");
 
   	dataField.append(datablock);
 		
@@ -160,6 +160,14 @@ $(function(){
         renumberDatablocks();
 
   });
+
+  $("#data-field").on("mouseenter", ".data-block-info .fa-stack", function () {
+    var corresPreviewDiv = preview.getDivByIndex(parseInt($(this).find(".fa-stack-1x").html()) - 1);
+    corresPreviewDiv.find("span").addClass("glowSpan");
+  }).on("mouseleave", ".data-block-info .fa-stack", function () {
+    var corresPreviewDiv = preview.getDivByIndex(parseInt($(this).find(".fa-stack-1x").html()) - 1);
+    corresPreviewDiv.find("span").removeClass("glowSpan");
+  });
   
 
 	// event listener for popup window
@@ -217,9 +225,9 @@ function clearData() {
     $("#max").val(100);
     $("#repeatNumber").val(10);
     $("#parity")[0].selectedIndex = 0;
-    noErrorHighlight($("#repeatNumber"));
-    noErrorHighlight($("#max"));
-    noErrorHighlight($("#min"));
+    correctHighlight($("#repeatNumber"));
+    correctHighlight($("#max"));
+    correctHighlight($("#min"));
     noErrorHighlight($("#precision"));
 
     $("#stringlength").val(100);
@@ -229,8 +237,8 @@ function clearData() {
     $("#wordlength").val("");
     $("#wordbreak").val("");
     $("#repeatString").val(10);
-    noErrorHighlight($("#stringlength"));
-    noErrorHighlight($("#repeatString"));
+    correctHighlight($("#stringlength"));
+    correctHighlight($("#repeatString"));
 
     $("#connect")[0].checked = true;
     $("#direct")[0].checked = true;
@@ -239,7 +247,7 @@ function clearData() {
     $("#node").val(10);
     $("#edge").val(90);
     $("#repeatGraph").val(1);
-    noErrorHighlight($("#repeatGraph"));
-    noErrorHighlight($("#node"));
-    noErrorHighlight($("#edge"));
+    correctHighlight($("#repeatGraph"));
+    correctHighlight($("#node"));
+    correctHighlight($("#edge"));
 }
