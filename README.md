@@ -7,3 +7,10 @@ Feel free to visist our main page at www.datagopro.com.
 Please take a look at our [developer guide](https://docs.google.com/document/d/1lCe_XyzD9m9mVYwIB1rWl50h-C2M24pHn_9bJLKuKM4/edit#heading=h.44cluypgtmpk).
 
 We are currently using Trello to keep track of our issues [here](https://trello.com/b/FSQrJgOK/datagopro).
+
+Try to use servermng.sh to manage server actions. Currently it support:
+
+1. PHP error log monitoring (action_code = monitor);
+2. Git pulling (action_code = update).
+
+./servermng.sh {passwd_for_admin} {action_code}.
