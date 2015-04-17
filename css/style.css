@@ -400,6 +400,7 @@ div.popup .col-sm-1 {
 	display: inline;
 	width: 20%;
 	margin-right: 10px;
+
 }
 .repeat {
 	display: inline;
@@ -412,6 +413,10 @@ div.popup .col-sm-1 {
 }
 .popup-btn {
 	float: right;
+}
+.popup-btn>button {
+	width: 65px;
+	padding: 6px;
 }
 div#popular {
 	background-color: #F0F8FF;

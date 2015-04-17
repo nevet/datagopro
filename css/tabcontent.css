@@ -83,11 +83,12 @@ div.tabcontents>i
 
 div.tabcontents .form-inline .form-control
 {
-    margin: 0 10px 0 0;
+    margin: 0;
     display: inline-block;
     width: 80px;
     vertical-align: middle;
 }
+
 div.tabcontents label {
     font-family: 'Open Sans',sans-serif;
     line-height: 34px;
@@ -97,6 +98,7 @@ div.tabcontents label {
 div.tabcontents .form-inline select.form-control 
 {
     width: 130px;
+    margin-right: 10px;
 }
 div.tabcontents .form-inline 
 {
@@ -109,6 +111,9 @@ div.tabcontents .checkbox
 }
 div.tabcontents .range {
     width: 260px;
+}
+div.tabcontents #repeatNumber {
+    border-radius: 5px;
 }
 /*div.tabcontents .tooltip {
     display: none;
