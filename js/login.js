@@ -95,7 +95,9 @@ function fb_login() {
         username = response.name;
         logintype = "facebook";
 
-        $.post("login.php", {"name": username, "email": useremail, "type": logintype, "posttype": "login"}, function (res) {
+        data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
+
+        $.post("login.php", data, function (res) {
           if (res.status == "ok") {
             udpateLoginRegion(username);
             uploadLocalSession();
