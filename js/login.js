@@ -1,74 +1,37 @@
-(function() {
+function udpateLoginRegion(name) {
+  $("span#profile").html("Welcome, " + name + "!");
+  $("#login").css("display", "none");
+  $("#afterlogin").css("display", "");
+}
 
-  function udpateLoginRegion(name) {
-    $("span#profile").html("Welcome, " + name + "!");
-    $("#login").css("display", "none");
-    $("#afterlogin").css("display", "");
-  }
+function uploadLocalSession() {
+  // unuploaded session will be uploaded once user logged in
+}
 
-  function uploadLocalSession() {
-    // unuploaded session will be uploaded once user logged in
-  }
+function getSession() {
+  var regex = /phpsessid=(.+?);/gi;
+  var token = regex.exec(document.cookie);
 
-  function getSession() {
-    var regex = /phpsessid=(.+?);/gi;
-    var token = regex.exec(document.cookie);
+  return token ? token[1] : undefined;
+}
 
-    return token ? token[1] : undefined;
-  }
-
-  function popupLoginOptions(isNewUser) {
-    $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-      speed: 500,
-      transition: 'slideDown',
-      transitionClose: 'slideUp',
-      onClose: function() {
-        if (isNewUser) {
-          $('#tutorialguide').joyride({
-            autoStart: true,
-            nubPosition: 'top',
-            modal: true,
-            expose: true
-          });
-        }
+function popupLoginOptions(isNewUser) {
+  $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
+    speed: 500,
+    transition: 'slideDown',
+    transitionClose: 'slideUp',
+    onClose: function() {
+      if (isNewUser) {
+        $('#tutorialguide').joyride({
+          autoStart: true,
+          nubPosition: 'top',
+          modal: true,
+          expose: true
+        });
       }
-    });
-  }
-
-  $(document).on("click", "#login", function(event) {
-    event.preventDefault();
-    $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-      speed: 500,
-      transition: 'slideDown',
-      transitionClose: 'slideUp'
-    });
-  });
-
-  $(document).ready(function() {
-    var sid = getSession();
-
-    if (!sid) {
-      // user with no session in cookie, proceed to new user logic
-      popupLoginOptions(true);
-    } else {
-      $.post("login.php", {"posttype": "session", "sid": sid}, function (res) {
-        if (res.status == "return") {
-          udpateLoginRegion(res.username);
-        } else {
-          popupLoginOptions(true);
-        }
-      });
     }
   });
-
-  $(document).on('click', '#logclose', function(event) {
-    event.preventDefault();
-    var bPopup = $("#element_to_pop_up").bPopup();
-    bPopup.close({
-      transitionClose: 'slideUp'
-    });
-  });
-})();
+}
 
 var logintype = undefined;
 var username = undefined;
@@ -141,11 +104,9 @@ function fb_login() {
   $('#fb-root').append(e);
 }());
 
-
 function facebook_logout() {
   FB.logout(function(response) {});
 }
-
 
 //google login functions
 (function() {
@@ -224,6 +185,40 @@ function loginCallback(result) {
 function google_logout() {
   gapi.auth.signOut();
 }
+
+$(document).ready(function() {
+  var sid = getSession();
+
+  if (!sid) {
+    // user with no session in cookie, proceed to new user logic
+    popupLoginOptions(true);
+  } else {
+    $.post("login.php", {"posttype": "session", "sid": sid}, function (res) {
+      if (res.status == "return") {
+        udpateLoginRegion(res.username);
+      } else {
+        popupLoginOptions(true);
+      }
+    });
+  }
+});
+
+$(document).on("click", "#login", function(event) {
+  event.preventDefault();
+  $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
+    speed: 500,
+    transition: 'slideDown',
+    transitionClose: 'slideUp'
+  });
+});
+
+$(document).on('click', '#logclose', function(event) {
+  event.preventDefault();
+  var bPopup = $("#element_to_pop_up").bPopup();
+  bPopup.close({
+    transitionClose: 'slideUp'
+  });
+});
 
 $(document).on("click", "#logout", function(event) {
   event.preventDefault();
