@@ -90,12 +90,14 @@ function fb_login() {
         startLoadingLogin();
 
         $.post("login.php", data, function (res) {
-          if (res.status == "ok") {
+          var data = JSON.parse(res);
+
+          if (data.status == "ok") {
             udpateLoginRegion(username);
             finishLoadingLogin();
             uploadLocalSession();
           } else {
-            alert(res.msg);
+            alert(data.msg);
           }
         }, "json");
       });
@@ -209,7 +211,7 @@ $(document).ready(function() {
       var data = JSON.parse(res);
       
       if (data.status == "return") {
-        udpateLoginRegion(res.username);
+        udpateLoginRegion(data.username);
         finishLoadingLogin();
       } else {
         popupLoginOptions(true);
