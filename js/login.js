@@ -1,21 +1,39 @@
-function udpateLoginRegion(name) {
-  $("span#profile").html("Welcome, " + name + "!");
-  $("#login").css("display", "none");
-  $("#afterlogin").css("display", "");
-}
-
-function uploadLocalSession() {
-  // unuploaded session will be uploaded once user logged in
-}
-
-function getSession() {
-  var regex = /phpsessid=(.+?);/gi;
-  var token = regex.exec(document.cookie);
-
-  return token[1];
-}
-
 (function() {
+
+  function udpateLoginRegion(name) {
+    $("span#profile").html("Welcome, " + name + "!");
+    $("#login").css("display", "none");
+    $("#afterlogin").css("display", "");
+  }
+
+  function uploadLocalSession() {
+    // unuploaded session will be uploaded once user logged in
+  }
+
+  function getSession() {
+    var regex = /phpsessid=(.+?);/gi;
+    var token = regex.exec(document.cookie);
+
+    return token ? token[1] : undefined;
+  }
+
+  function popupLoginOptions(isNewUser) {
+    $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
+      speed: 500,
+      transition: 'slideDown',
+      transitionClose: 'slideUp',
+      onClose: function() {
+        if (isNewUser) {
+          $('#tutorialguide').joyride({
+            autoStart: true,
+            nubPosition: 'top',
+            modal: true,
+            expose: true
+          });
+        }
+      }
+    });
+  }
 
   $(document).on("click", "#login", function(event) {
     event.preventDefault();
@@ -27,25 +45,20 @@ function getSession() {
   });
 
   $(document).ready(function() {
-    $.post("login.php", {"posttype": "session", "sid": getSession()}, function (res) {
-      if (res.status == "return") {
-        udpateLoginRegion(res.username);
-      } else {
-        $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-          speed: 500,
-          transition: 'slideDown',
-          transitionClose: 'slideUp',
-          onClose: function() {
-            $('#tutorialguide').joyride({
-              autoStart: true,
-              nubPosition: 'top',
-              modal: true,
-              expose: true
-            });
-          }
-        });
-      }
-    });
+    var sid = getSession();
+
+    if (!sid) {
+      // user with no session in cookie, proceed to new user logic
+      popupLoginOptions(true);
+    } else {
+      $.post("login.php", {"posttype": "session", "sid": sid}, function (res) {
+        if (res.status == "return") {
+          udpateLoginRegion(res.username);
+        } else {
+          popupLoginOptions(true);
+        }
+      });
+    }
   });
 
   $(document).on('click', '#logclose', function(event) {
