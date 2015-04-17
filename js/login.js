@@ -90,14 +90,12 @@ function fb_login() {
         startLoadingLogin();
 
         $.post("login.php", data, function (res) {
-          var data = JSON.parse(res);
-
-          if (data.status == "ok") {
+          if (res.status == "ok") {
             udpateLoginRegion(username);
             finishLoadingLogin();
             uploadLocalSession();
           } else {
-            alert(data.msg);
+            alert(res.msg);
           }
         }, "json");
       });
