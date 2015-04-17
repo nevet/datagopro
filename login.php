@@ -1,8 +1,17 @@
 <?php
+
+session_start();
+
+$sessionid = session_id();
+
 $servername = "localhost";
 $username = "root";
 $password = "7*aIo92d";
 $dbname = "datagopro";
+
+function printSQLError() {
+	return $conn->errno . ": " . $conn->error . "\n";
+}
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,26 +21,58 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$currentuser = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input($_POST["posttype"])) {
+		case "session":
+			// $sql = "SELECT * FROM user WHERE sessionid='" . $sessionid . "'";
+			// $res = $conn->query($sql);
+			$res = isset($_SESSION["curuser"]);
+
+			if ($res) {
+				// session still valid, return the user details back to front end
+				// $res = $res->fetch_assoc();
+				// $_SESSION["curuser"] = $res["name"];
+
+				// echo json_encode($return);
+				echo json_encode(array("status" => "return", "username" => $_SESSION["curuser"]));
+			} else {
+				echo json_encode(array("status" => "new"));
+			}
+
+			break;
 		case "login":
 			$name = trim_input($_POST["name"]);
 			$email = trim_input($_POST["email"]);
 			$type = trim_input($_POST["type"]);
 
-			$sql = "INSERT INTO user(logintype, name, email) VALUES('" . $type . "','" . $name . "','" . $email . "')";
+			//check if this is a return user using login type and email
+			$sql = "SELECT * FROM user WHERE logintype='" . $type . "' AND email='" . $email . "'";
 
-			$resultQ = $conn->query($sql);
+			$res = $conn->query($sql);
 
-			if ($resultQ) {
-				$currentuser = $email;
-				$return["json"] = "success";
-				echo json_encode($return);
+			// set curuser in session to current name regardless of new or return user
+			$_SESSION["curuser"] = $res["name"];
+
+			if ($res) {
+				// this is a return user, just return status 'ok' since user's details have
+				// already known in front end
+				$res = $res->fetch_assoc();
+
+				echo json_encode(array("status" => "ok"));
 			} else {
-				echo $conn->errno . ": " . $conn->error . "\n";
+				// this is a new user, we need to insert it into the database first, then
+				// return status
+				$sql = "INSERT INTO user(logintype, name, email) VALUES('" . $type . "','" . $name . "','" . $email . "')";
+
+				$resultQ = $conn->query($sql);
+
+				if ($resultQ) {
+					echo json_encode(array("status" => "ok"));
+				} else {
+					echo json_encode(array("status" => "fail", "msg" => printSQLError()));
+				}
 			}
+
 			break;
 		case "logout":
 			$email = trim_input($_POST["email"]);

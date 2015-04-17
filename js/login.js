@@ -1,3 +1,13 @@
+function udpateLoginRegion(name) {
+  $("span#profile").html("Welcome, " + name + "!");
+  $("#login").css("display", "none");
+  $("#afterlogin").css("display", "");
+}
+
+function uploadLocalSession() {
+  // unuploaded session will be uploaded once user logged in
+}
+
 (function() {
 
   $(document).on("click", "#login", function(event) {
@@ -9,29 +19,26 @@
     });
   });
 
-
   $(document).ready(function() {
-
-    if (localStorage.getItem('firstVisit') != 'true') {
-      localStorage.setItem('firstVisit', 'true');
-      $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-        speed: 500,
-        transition: 'slideDown',
-        transitionClose: 'slideUp',
-        onClose: function() {
-          $(document).ready(function() {
+    $.post("login.php", {"posttype": "session"}, function (res) {
+      if (res.status == "return") {
+        udpateLoginRegion(res.username);
+      } else {
+        $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
+          speed: 500,
+          transition: 'slideDown',
+          transitionClose: 'slideUp',
+          onClose: function() {
             $('#tutorialguide').joyride({
               autoStart: true,
               nubPosition: 'top',
               modal: true,
               expose: true
             });
-          });
-        }
-      });
-
-    } else {}
-
+          }
+        });
+      }
+    });
   });
 
   $(document).on('click', '#logclose', function(event) {
@@ -87,33 +94,24 @@ function fb_login() {
         useremail = response.email;
         username = response.name;
         logintype = "facebook";
-        $("span#profile").html("Welcome, " + username + "!");
-        $("#login").css("display", "none");
-        $("#afterlogin").css("display", "");
 
         var postdata = {};
         postdata["name"] = username;
         postdata["email"] = useremail;
         postdata["type"] = logintype;
         postdata["posttype"] = "login";
-        $.ajax({
-          type: "POST",
-          dataType: "json",
-          url: "login.php", //Relative or absolute path to response.php file
-          data: postdata,
-          success: function(data) {
-            var returndata = data["json"];
-            console.log(returndata);
+        $.post("login.php", JSON.parse(postdata), function (res) {
+          if (res.status == "ok") {
+            udpateLoginRegion(username);
+            uploadLocalSession();
+          } else {
+            alert(res.msg);
           }
         });
       });
-
-
-
     } else {
       //user hit cancel button
       console.log('User cancelled login or did not fully authorize.');
-
     }
   }, {
     scope: 'publish_stream,email'

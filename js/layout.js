@@ -7,7 +7,6 @@ $(function(){
   // navigation
   $(".navbar-nav a").click(function(e){
     e.preventDefault();
-    console.log(this.id);
     if(this.id == "newdata" || this.id=="popularinput" || this.id=="myinput") {
 		var prev = $(".navbar-nav > li.active");
 		prev.removeClass();
