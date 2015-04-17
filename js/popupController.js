@@ -554,4 +554,14 @@ $(function(){
       correctHighlight($("#repeatGraph"));
     }
   });
+
+  $('#linelength').keypress(function(e) {
+    var verified = (e.which == 8 || e.which == undefined || e.which == 0) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+    if (verified) {e.preventDefault();}
+  });
+
+  $('#wordlength').keypress(function(e) {
+    var verified = (e.which == 8 || e.which == undefined || e.which == 0) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
+    if (verified) {e.preventDefault();}
+  });
 });
