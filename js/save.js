@@ -34,7 +34,7 @@ $(function(){
 				"position": "absolute",
 				"z-index": "1",
 				"left": (x+30)+"px",
-				"top": (y-220)+"px",
+				"top": (y-240)+"px",
 			},
 		}).appendTo("#editor");
 		//close
@@ -140,6 +140,9 @@ $(function(){
 		//add button
 		$("<div></div>", {
 			"class": "addtagcontainer",
+			"css": {
+				"padding-top": "7px",
+			},
 		}).appendTo(".savewindow");
 
 		$("<i></i>", {
@@ -173,6 +176,9 @@ $(function(){
 		//as popular
         $("<div></div>", {
         	"class": "checkbox",
+        	"css": {
+        		"margin": "5px 0",
+        	},
         }).appendTo(".savewindow");
 
         $("<label></label>",{
@@ -182,5 +188,30 @@ $(function(){
         		"margin": "0 0 0 5px",
         	}
         }).appendTo(".checkbox");
+
+        //ok and cancel
+        $("<div></div>", {
+        	"class": "buttoncontainer",
+        }).appendTo(".savewindow");
+        $("<button></button>", {
+        	"id": "tagok",
+        	"text": "OK",
+        	"class": "btn btn-primary",
+        	"click" : function(){
+		        $(".savewindow").remove();
+				$(".cover").remove();
+		    },
+        }).appendTo(".buttoncontainer");
+
+        $("<button></button>", {
+        	"id": "tagcancel",
+        	"text": "Cancel",
+        	"class": "btn btn-danger",
+        	"click" : function(){
+		        $(".savewindow").remove();
+				$(".cover").remove();
+		    },
+        }).appendTo(".buttoncontainer");
+        
 	}
 });

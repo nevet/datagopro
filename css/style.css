@@ -242,7 +242,7 @@ div#saveDiv i {
 div.savewindow {
 	position: absolute;
 	width: 400px;
-	height: 180px;
+	height: 200px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	background-color: #fff;
@@ -260,14 +260,24 @@ div.savewindow::before {
 	border-width: 7px; 
 	border-style: solid;
 	right: 100%;
-	top:80%;
+	top:85%;
 	width:0;
 	height:0;
 }
-
+div.savewindow>.buttoncontainer {
+	width: 100%;
+	text-align: center;
+}
+div.savewindow button {
+	height: 26px;
+	width: 50px;
+	margin: 0 5px;
+	padding: 5px 3px; 
+	font-size: 12px;
+}
 .tagbox, .addtagcontainer, .inputcontainer {
 	width: 100%;
-	height: auto;
+	height: 30px;
 	clear: both;
 }
 .info {
@@ -281,7 +291,7 @@ div.savewindow::before {
 }
 .inputcontainer {
 	width: 100%;
-	margin: 0 0 10px;
+	margin: 0;
 	overflow: hidden;
 	border: 1px solid #ccc;
 	border-radius: 5px;
