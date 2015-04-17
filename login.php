@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				// already known in front end
 				$res = $res->fetch_assoc();
 				$_SESSION["curname"] = $res["name"];
-				
+
 				echo json_encode(array("status" => "ok", "username" => $res["name"]));
 			} else {
 				// this is a new user, we need to insert it into the database first, then
