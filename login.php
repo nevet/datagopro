@@ -50,15 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			$res = $conn->query($sql);
 
-			// set curuser in session to current name regardless of new or return user
-			$_SESSION["curuser"] = $res["name"];
-
-			if ($res) {
+			if ($res && $res->num_rows != 0) {
 				// this is a return user, just return status 'ok' since user's details have
 				// already known in front end
 				$res = $res->fetch_assoc();
-
-				echo json_encode(array("status" => "ok"));
+				$_SESSION["curname"] = $res["name"];
+				
+				echo json_encode(array("status" => "ok", "username" => $res["name"]));
 			} else {
 				// this is a new user, we need to insert it into the database first, then
 				// return status
