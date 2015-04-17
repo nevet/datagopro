@@ -63,6 +63,7 @@ $(function(){
 		$("<i></i>", {
 			"class": "fa fa-info-circle",
 			"css": {
+				"color": "#4E4E4E",
 				"margin": "0 8px",
 			},
 		}).appendTo(".info");
@@ -71,6 +72,7 @@ $(function(){
 			"class": "message",
 			"text": "Add tags to manage your input.",
 			"css": {
+				"color": "#4E4E4E",
 				"display": "inline",
 			},
 		}).appendTo(".info");

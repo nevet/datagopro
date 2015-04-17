@@ -38,7 +38,7 @@ div#editor, div#timeline, div#popular {
 	width: 60%;
 	height: 100%;
 	margin-right: 1%;
-	background-color: #A1CDFF;
+	background-color: #B6D5FD;
 	padding: 1.5%;	
 	overflow: hidden;
 	position: relative;
@@ -84,7 +84,7 @@ div#editor .fa-delete{
 }
 
 div#editor .btn-delete{
-	background-color: #A1CDFF;
+	background-color: #B6D5FD;
 	padding:5px 10px 5px 10px;
 	border: 1px solid;
 	border-radius: 5px;
@@ -342,7 +342,7 @@ div.timeline-dot {
 	width: 25px;
 	height: 25px;
 	position: absolute;
-	left: 4px;
+	left: 10px;
 	top: 8%;
 	border-radius: 50%;
 	background-color: white;
@@ -450,9 +450,12 @@ div.popularblock>a>i{
 	opacity: 1;
 	cursor: pointer;
 }
+div.popularblock>h4 {
+	margin-right: 10px;
+}
 div.popularblock>p {
 	font-size: 12px;
-	margin-bottom: 0;
+	margin-bottom: 5px;
 }
 div.popularblock {
 	position: relative;
@@ -461,7 +464,7 @@ div.popularblock {
 	margin: 10px 0;
 	border-radius: 5px;
 	width: 100%;
-	background-color: #87CEFA;
+	background-color: #A1CDFF;
 }
 
 div#category {
@@ -469,7 +472,7 @@ div#category {
 	bottom: 30px;
 	width: 95%;
 	height: auto;
-	height: 30%;
+	height: 25%;
 	border: 2px solid #4169E1;
 	border-radius: 5px;	
 	font-weight: bold;
