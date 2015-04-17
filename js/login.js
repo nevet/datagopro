@@ -100,14 +100,18 @@ function fb_login() {
         postdata["email"] = useremail;
         postdata["type"] = logintype;
         postdata["posttype"] = "login";
-        $.post("login.php", JSON.parse(postdata), function (res) {
+
+        var postString = JSON.stringify(postdata);
+        console.log(postString);
+        
+        $.post("login.php", postString, function (res) {
           if (res.status == "ok") {
             udpateLoginRegion(username);
             uploadLocalSession();
           } else {
             alert(res.msg);
           }
-        });
+        }, "json");
       });
     } else {
       //user hit cancel button
