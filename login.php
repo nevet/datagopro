@@ -59,10 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				echo json_encode(array("status" => "ok", "username" => $res["name"]));
 			} else {
 				// this is a new user, we need to insert it into the database first, then
-				// return status
+				// add it into the session, finally return status
 				$sql = "INSERT INTO user(logintype, name, email) VALUES('" . $type . "','" . $name . "','" . $email . "')";
 
 				$resultQ = $conn->query($sql);
+				$_SESSION["curname"] = $res["name"];
 
 				if ($resultQ) {
 					echo json_encode(array("status" => "ok"));
