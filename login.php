@@ -24,19 +24,10 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input($_POST["posttype"])) {
 		case "session":
-			// $sql = "SELECT * FROM user WHERE sessionid='" . $sessionid . "'";
-			// $res = $conn->query($sql);
-			$res = isset($_SESSION["curuser"]);
-
-			if ($res) {
-				// session still valid, return the user details back to front end
-				// $res = $res->fetch_assoc();
-				// $_SESSION["curuser"] = $res["name"];
-
-				// echo json_encode($return);
+			if ($_POST["sid"] == $sessionid) {
 				echo json_encode(array("status" => "return", "username" => $_SESSION["curuser"]));
 			} else {
-				echo json_encode(array("status" => "new"));
+				echo json_encode(array("status" => "new", "sid" => $sessionid));
 			}
 
 			break;

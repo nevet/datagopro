@@ -8,6 +8,13 @@ function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
 }
 
+function getSession() {
+  var regex = /phpsessid=(.+?);/gi;
+  var token = regex.exec(document.cookie);
+
+  return token[1];
+}
+
 (function() {
 
   $(document).on("click", "#login", function(event) {
@@ -20,7 +27,7 @@ function uploadLocalSession() {
   });
 
   $(document).ready(function() {
-    $.post("login.php", {"posttype": "session"}, function (res) {
+    $.post("login.php", {"posttype": "session", "sid": getSession()}, function (res) {
       if (res.status == "return") {
         udpateLoginRegion(res.username);
       } else {
@@ -81,7 +88,6 @@ function fb_login() {
   FB.login(function(response) {
 
     if (response.authResponse) {
-      //console.log(response); // dump complete info
       access_token = response.authResponse.accessToken; //get access token
       var user_id = response.authResponse.userID; //get FB UID
 
