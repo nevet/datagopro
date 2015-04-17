@@ -24,10 +24,8 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input("posttype")) {
 		case "session":
-			$sid = trim_input("sid");
-
-			if ($sid == $sessionid) {
-				echo json_encode(array("status" => "return", "username" => $_SESSION["curuser"]));
+			if (isset($_SESSION["curname"])) {
+				echo json_encode(array("status" => "return", "username" => $_SESSION["curname"]));
 			} else {
 				echo json_encode(array("status" => "new", "sid" => $sessionid));
 			}

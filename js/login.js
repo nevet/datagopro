@@ -193,8 +193,10 @@ $(document).ready(function() {
     // user with no session in cookie, proceed to new user logic
     popupLoginOptions(true);
   } else {
-    $.post("login.php", {"posttype": "session", "sid": sid}, function (res) {
-      if (res.status == "return") {
+    $.post("login.php", {"posttype": "session"}, function (res) {
+      var data = JSON.parse(res);
+      
+      if (data.status == "return") {
         udpateLoginRegion(res.username);
       } else {
         popupLoginOptions(true);
@@ -204,12 +206,7 @@ $(document).ready(function() {
 });
 
 $(document).on("click", "#login", function(event) {
-  event.preventDefault();
-  $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-    speed: 500,
-    transition: 'slideDown',
-    transitionClose: 'slideUp'
-  });
+  popupLoginOptions(false);
 });
 
 $(document).on('click', '#logclose', function(event) {
