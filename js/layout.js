@@ -145,15 +145,6 @@ $(function(){
 		}
 	});
 
-  $(document).on("ajaxStart", function () {
-    console.log("ajax start");
-  });
-
-  $(document).on("ajaxStop", function () {
-    console.log("ajax end");
-  });
-
-
   /*
    Delete functions and Select functions.
    */

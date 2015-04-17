@@ -1,3 +1,11 @@
+function startLoadingLogin() {
+  $(".loginLoadingCover").css("display", "block");
+}
+
+function finishLoadingLogin() {
+  $(".loginLoadingCover").css("display", "none");
+}
+
 function udpateLoginRegion(name) {
   $("span#profile").html("Welcome, " + name + "!");
   $("#login").css("display", "none");
@@ -79,9 +87,12 @@ function fb_login() {
 
         data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
 
+        startLoadingLogin();
+
         $.post("login.php", data, function (res) {
           if (res.status == "ok") {
             udpateLoginRegion(username);
+            finishLoadingLogin();
             uploadLocalSession();
           } else {
             alert(res.msg);
@@ -193,11 +204,13 @@ $(document).ready(function() {
     // user with no session in cookie, proceed to new user logic
     popupLoginOptions(true);
   } else {
+    startLoadingLogin();
     $.post("login.php", {"posttype": "session"}, function (res) {
       var data = JSON.parse(res);
       
       if (data.status == "return") {
         udpateLoginRegion(res.username);
+        finishLoadingLogin();
       } else {
         popupLoginOptions(true);
       }
