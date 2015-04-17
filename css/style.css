@@ -2,10 +2,7 @@ html body {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	font-weight: 400;
-	position: relative;
-	background-color: #EBEBEB;
 }
-
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
@@ -18,98 +15,49 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
-/*@media (max-width: 767px) {
-	.navbar-brand>img {
-		margin-left: 20px;
-		width: 15%;
-		min-width: 150px;
-		margin-top: -11px;
-		margin-right: -100px;
-	}
-	div#mainbody {
-		width: 100%;
-		min-height: 1100px;
-		overflow: hidden;
-		background-color: #EBEBEB;
-		color: #0858B2;
-	}
-	div#editor, div#timeline, div#popular{
-		width: 90%;
-		margin: 5% auto;
-		min-height: 500px;
-		background-color: #A1CDFF;
-		padding: 1% 1%;
-		border-radius: 5px;
-		overflow: scroll;
- 		border: 3px solid white;
- 		position: relative;
-	}
-	div#preview {
-		font-family: 'Abel', sans-serif;
-		width: 90%;
-		min-height: 500px;
-		background-color: #E9F0F5;
-		margin: 0 auto 5%;
-		border-radius: 5px;
- 		overflow: scroll;
- 		border: 3px solid white;
-	}
-	div#preview.showContent {
-		padding: 2em;
-	}
-}*/
-/*@media (min-width: 768px) {*/
-	/*big screen*/
-	.navbar-brand>img {
-		margin-left: 20px;
-		width: 15%;
-		min-width: 155px;
-		margin-top: -11px;
-		margin-right: -100px;
-	}
 
-	div#mainbody {
-		width: 100%;
-		height: 90%;
-		min-height: 630px;
-		overflow: hidden;
-		background-color: #EBEBEB;
-		color: #0858B2;
-	}
-	div#editor, div#timeline, div#popular {
-		float: left;
-		width: 57%;
-		height: 95%;
-		/*min-height: 530px;*/
-		background-color: #A1CDFF;
-		margin: 1.2% 1.5%;
-		padding: 1.5%;
-		border-radius: 5px;		
-		overflow: scroll;
- 		border: 3px solid white;
- 		position: relative;
-	}
-	div#preview {
-		font-family: 'Abel', sans-serif;
-		float: left;
-		width: 38%;
-		height: 95%;
-		/*min-height: 530px;*/
-		background-color: #E9F0F5;
-		margin: 1.2% 1.5% 1.2% 0;
-		border-radius: 5px;
-		overflow: scroll;
- 		border: 3px solid white;
-	}
-	div#preview.showContent {
-		padding: 1% 1%;
-	}
-/*}*/
+.navbar-brand>img {
+	margin-left: 20px;
+	width: 15%;
+	min-width: 155px;
+	margin-top: -11px;
+	margin-right: -100px;
+}
 
+div#mainbody {
+	width: 100%;
+	height: 90%;
+	min-height: 620px;
+	overflow: hidden;
+	background-color: #222222;
+	color: #0858B2;
+}
+
+div#editor, div#timeline, div#popular {
+	float: left;
+	width: 60%;
+	height: 100%;
+	margin-right: 1%;
+	background-color: #A1CDFF;
+	padding: 1.5%;	
+	overflow: hidden;
+	position: relative;
+}
+div#preview {
+	font-family: 'Abel', sans-serif;
+	float: left;
+	width: 39%;
+	height: 100%;
+	background-color: #E9F0F5;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+div#preview.showContent {
+	padding: 1% 1%;
+}
 
 div#editor .fa {
 	color: #0858B2;
-	/*opacity: 0.8;*/
 }
 div#editor>input.form-control {
 	width: 60%;
@@ -150,11 +98,12 @@ div#editor .btn-delete:hover{
 	border-color: #FF4D4D;
 }
 
-
 div#data-field {
 	margin: 2% 0.5% 1%;
-	max-height: 55%;
-	overflow: scroll;
+	max-height: 58%;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 div.data-block {
 	margin: 1% 0;
@@ -281,7 +230,7 @@ div#saveDiv {
 	bottom: 3%;
 	margin-top: 5px;
 	left: 22%;
-	margin-left: 20px;
+	margin-left: 10px;
 	width: 100px;
 }
 div#saveDiv i {
@@ -339,7 +288,6 @@ div.savewindow::before {
 	line-height: 28px;
 	padding: 0 0 0 2px;
 	color: #000;
-	overflow: hidden;
 	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
 }
 
@@ -360,7 +308,8 @@ div.savewindow::before {
 div#timeline {
 	background-color: #E9F0F5;
 	position: relative;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 div#timeline::before {
@@ -456,14 +405,61 @@ div.popup .col-sm-1 {
 }
 div#popular {
 	background-color: #F0F8FF;
-
 }
+div#populartable {
+	width: 100%;
+	max-height: 70%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+div.popularblock>span {
+	width: 100%;
+}
+div.popularblock>i {
+	float: left;
+	color: #FFFFFF;
+	font-size: 20px;
+	margin: 5px 0;
+}
+div.popularblock>a{
+	text-decoration: none;
+	height: 28px;
+	width: auto;
+	border-radius: 5px;
+	background-color: #ACB7C0;
+	color: white;
+	float: right;
+	padding: 7px 8px;
+	margin-left: 7px;
+	font-size: 12px;
+	cursor: pointer;
+}
+div.popularblock>a>i{
+	color: white;
+	margin-left: 10px;
+	opacity: 1;
+	cursor: pointer;
+}
+div.popularblock>p {
+	font-size: 12px;
+	margin-bottom: 0;
+}
+div.popularblock {
+	position: relative;
+	overflow: auto;
+	padding: 5px 10px 5px;
+	margin: 10px 0;
+	border-radius: 5px;
+	width: 100%;
+	background-color: #87CEFA;
+}
+
 div#category {
 	position: absolute;
 	bottom: 30px;
 	width: 95%;
 	height: auto;
-	max-height: 30%;
+	height: 30%;
 	border: 2px solid #4169E1;
 	border-radius: 5px;	
 	font-weight: bold;
@@ -480,9 +476,7 @@ div#mainbody .label-size a{
 	line-height: 24px;
 	position: relative;
 	font-size: 12px;
-	margin-bottom: 5px;
-	margin-top: 5px;
-	margin-left: 20px;
+	margin: 5px 5px 5px 20px;
 	padding: 0 10px 0 12px;
 	background-color: #4169E1;
 	color: #FFFFFF !important;
@@ -527,61 +521,15 @@ div#mainbody .label-size a:hover:after {
 div#popular #more{
 	border: 2px solid #4169E1;
 	border-radius: 5px;
-	height: 24px;
-	line-height: 24px;
+	height: 26px;
 	font-size: 12px;
-	margin-bottom: 9px;
-	margin-left: 20px;
+	margin: 4px 10px;
 	padding: 3px;
 	color: #4169E1;
+	display: inline-block;
 	cursor: pointer;
 	text-decoration: none;
 }
-
-div.popularblock>span {
-	min-width: 100%;
-}
-div.popularblock>i {
-	float: left;
-	color: #FFFFFF;
-	font-size: 22px;
-}
-div.popularblock>a{
-	text-decoration: none;
-	height: 28px;
-	width: auto;
-	border-radius: 5px;
-	background-color: #ACB7C0;
-	color: white;
-	float: right;
-	padding: 7px 8px;
-	margin-left: 7px;
-	font-size: 12px;
-	cursor: pointer;
-}
-div.popularblock>a>i{
-	color: white;
-	margin-left: 10px;
-	opacity: 1;
-	cursor: pointer;
-}
-div.popularblock {
-	position: relative;
-	overflow: auto;
-	padding: 5px 10px 10px;
-	border-radius: 5px;
-	width: 100%;
-	background-color: #87CEFA;
-}
-/*div#footer {
-	padding-top: 1%;
-	clear: left;
-	width: 100%;
-	min-height: 90px;
-	background-color: #DCDCDC;
-  	border-top: 3px solid white;
-	text-align: center;
-}*/
 
 /* dataset preview*/
 .dataCollapseButton {

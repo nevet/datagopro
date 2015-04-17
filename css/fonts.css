@@ -1,0 +1,18 @@
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
+}
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+/*@font-face {
+	font-family: 'Abel';
+	font-style: normal;
+	font-weight: 400;
+	src: url(../fonts/Abel/Abel-Regular.ttf);
+}*/

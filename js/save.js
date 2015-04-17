@@ -33,8 +33,8 @@ $(function(){
 			"css": {
 				"position": "absolute",
 				"z-index": "1",
-				"left": (x+20)+"px",
-				"top": (y-240)+"px",
+				"left": (x+30)+"px",
+				"top": (y-220)+"px",
 			},
 		}).appendTo("#editor");
 		//close
@@ -68,6 +68,7 @@ $(function(){
 		}).appendTo(".info");
 
 		$("<p></p>", {
+			"class": "message",
 			"text": "Add tags to manage your input.",
 			"css": {
 				"display": "inline",
@@ -116,7 +117,11 @@ $(function(){
 				if(e.which == 32) {
 					
 					this.value = "";
-					if(tagname != "") {	
+					if($(".created").children().length == 2) {
+						$(".info").css("background-color", "#FFC8A5");
+						$(".message").text("Only support creating 2 new tags at most.");
+					}
+					else if(tagname != "") {	
 						$("<span></span>", {
 							"class": "label-size",
 							"html": "<a>"+ tagname+"</a>",
@@ -140,7 +145,14 @@ $(function(){
 		$("<i></i>", {
 			"class": "fa fa-plus",
 			"css": {
+				"cursor": "pointer",
 				"margin": "0 5px",
+			},
+			"click": function(e){
+				console.log(e);
+				$(".addtagcontainer").css("display", "none");
+				$(".inputcontainer").css("display", "block");
+				$(".inputcontainer>input").trigger("focus");
 			},
 		}).appendTo(".addtagcontainer");
 

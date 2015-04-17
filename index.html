@@ -13,8 +13,9 @@
     <link rel='stylesheet' href='css/bootstrap-social.css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="css/tabcontent.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/fonts.css">
+    <!-- <link href='fonts/Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'> -->
     <script src="https://apis.google.com/js/plus.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
     <script src='js/login.js'></script>
@@ -87,6 +88,7 @@
           </div><!-- /.container-fluid -->
         </nav>
         <!-- navbar -->
+
         <div id="mainbody">
           <div id="editor">
             <input id="setname" class="form-control" type="text" placeholder="Your data set name here...">
@@ -113,9 +115,9 @@
                   <input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
                   <i class="fa fa-folder-open"></i>
                 </div>
-                <a class="btn-delete" href="#"><i class="fa fa-trash-o fa-lg fa-delete"></i></a><span class="data-block-info"><span>
+                  <a class="btn-delete" href="#"><i class="fa fa-trash-o fa-lg fa-delete"></i></a><span class="data-block-info"><span>
               </div>
-            </div>
+       	 	</div>
             <div id="add">
               <i class="fa fa-plus-circle fa-2x"></i>
               <p>Add more data...</p>
@@ -190,9 +192,10 @@
             </div>
           </div>
           <div id="popular" style="display:none">
+
             <div id="populartable">
               <div class="popularblock">
-                <h4>DATA SET NAME 1</h4>
+                <h5>DATA SET NAME 1</h5>
                 <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
                 <i id="tag" class="fa fa-tags fa-2x"></i>
                 <span class='label-size'>
@@ -202,10 +205,62 @@
                   <a data-target="cat1">Cat1</a>
                 </span>
                 <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>
-                
+                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+              </div>
+              <div class="popularblock">
+                <h5>DATA SET NAME 1</h5>
+                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
+                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <span class='label-size'>
+                  <a data-target="all">All</a>
+                </span>
+                <span class='label-size'>
+                  <a data-target="cat1">Cat1</a>
+                </span>
+                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+              </div>
+              <div class="popularblock">
+                <h5>DATA SET NAME 1</h5>
+                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
+                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <span class='label-size'>
+                  <a data-target="all">All</a>
+                </span>
+                <span class='label-size'>
+                  <a data-target="cat1">Cat1</a>
+                </span>
+                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+              </div>
+              <div class="popularblock">
+                <h5>DATA SET NAME 1</h5>
+                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
+                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <span class='label-size'>
+                  <a data-target="all">All</a>
+                </span>
+                <span class='label-size'>
+                  <a data-target="cat1">Cat1</a>
+                </span>
+                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+              </div>
+              <div class="popularblock">
+                <h5>DATA SET NAME 1</h5>
+                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
+                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <span class='label-size'>
+                  <a data-target="all">All</a>
+                </span>
+                <span class='label-size'>
+                  <a data-target="cat1">Cat1</a>
+                </span>
+                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
               </div>
             </div>
+
             <div id="category">
               <h4>CATEGORIES</h4>
               <span class='label-size'>
