@@ -8,4 +8,9 @@ Please take a look at our [developer guide](https://docs.google.com/document/d/1
 
 We are currently using Trello to keep track of our issues [here](https://trello.com/b/FSQrJgOK/datagopro).
 
-To monitor php error, navigate to your project hosting folder, run ./monitor_local.sh {passwd_for_admin}.
+Try to use servermng.sh to manage server actions. Currently it support:
+
+1. PHP error log monitoring (action_code = monitor);
+2. Git pulling (action_code = update).
+
+./servermng.sh {passwd_for_admin} {action_code}.
