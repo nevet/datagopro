@@ -9,7 +9,7 @@ $(function(){
 		e.preventDefault();
 		if(this.id=="myinput") {
 			var prev = $(".navbar-nav > li.active");
-			
+			prev.removeClass();
 			$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
 			$("#timeline").css("display", "block");
 		}
