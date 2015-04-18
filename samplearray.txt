@@ -1,0 +1,39 @@
+[{
+  "datatype": "number",
+  "parityindex": 1,
+  "parity": undefined,
+  "numberindex" :0,
+  "numbertype": "integer",
+  "floatprecision": "",
+  "numbermin": 10,
+  "numbermax": 20,
+  "repeattime": 10
+}, {
+  "datatype": "number",
+  "parityindex": 0,
+  "parity": undefined,
+  "numberindex" :1,
+  "numbertype": "float",
+  "floatprecision": 3,
+  "numbermin": 10,
+  "numbermax": 20,
+  "repeattime": 10
+}, {
+  "datatype": "string",
+  "stringlength": 100,
+  "chartype": "unicode",
+  "linelength": "",
+  "linebreak": "\n",
+  "wordlength":"",
+  "wordbreak": "",
+  "repeattime": 10
+}, {
+  "datatype": "graph",
+  "isconnect": true,
+  "isdirect": true,
+  "isweighted": false,
+  "isTree": false,
+  "node": 10,
+  "edge": 90,
+  "repeattime": 10
+}]
