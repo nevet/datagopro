@@ -200,11 +200,11 @@ div.setting>input {
 div#generate {
 	margin-top: 5px;
 	position: absolute;
-	width: 150px;
+	width: 140px;
 	bottom: 3%;
 }
 div#generate>button, div#saveDiv>button {
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: 600;
 	text-align: left;
 	margin: 3px 0;
@@ -214,7 +214,7 @@ div#generate>button, div#saveDiv>button {
  	background-color: #2272CB;
  	color: white;
 }
-div#generate .fa-download:before, div#saveDiv .fa-floppy-o:before{
+div#generate .fa-download:before, div#saveDiv .fa-tags:before{
 	color: white;
 }
 div#generate>span, div#saveDiv>span {
@@ -223,21 +223,21 @@ div#generate>span, div#saveDiv>span {
 div#generate i {
 	position: absolute;
 	bottom: 15px;
-	left: 123px;
+	left: 115px;
 	cursor: pointer;
 }
 div#saveDiv {
 	position: absolute;
 	bottom: 3%;
 	margin-top: 5px;
-	left: 22%;
+	left: 160px;
 	margin-left: 10px;
-	width: 100px;
+	width: 130px;
 }
 div#saveDiv i {
 	position: absolute;
 	bottom: 15px;
-	left: 73px;
+	left: 105px;
 	cursor: pointer;
 }
 div.savewindow {
@@ -278,8 +278,11 @@ div.savewindow button {
 }
 .tagbox, .addtagcontainer, .inputcontainer {
 	width: 100%;
-	height: 30px;
+	height: 34px;
 	clear: both;
+}
+.tagbox {
+	margin-top: 5px;
 }
 .info {
 	width: 100%;
@@ -288,23 +291,27 @@ div.savewindow button {
 	border: 1px solid #ccc;
 	background-color: aliceblue;
 	padding: 5px 0;
+	margin: 3px 0 0;
 	text-align: center;
 }
 .inputcontainer {
 	width: 100%;
-	margin: 0;
+	height: 35px;
+	margin: 3px 0 0;
 	overflow: hidden;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	line-height: 28px;
 	padding: 0 0 0 2px;
 	color: #000;
+	cursor: text;
 	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
 }
 
 .inputcontainer>input {
 	padding: 0;
 	border: 0;
+	margin-top: 3px;
 	box-shadow: none;
 	background: none;
 	width: 100px;
@@ -502,10 +509,7 @@ div#mainbody .label-size a{
 	text-decoration: none;
 	border-bottom-right-radius: 4px;
 	border-top-right-radius: 4px;
-}
-div#mainbody .label-size a:hover {
-	background: #FFFFFF;
-	color: #4169E1!important;
+	cursor: pointer;
 }
 div#mainbody .label-size a:before {
 	content: "";
@@ -519,9 +523,6 @@ div#mainbody .label-size a:before {
 	border-style: solid;
 	border-width: 12px 12px 12px 0;
 }
-div#mainbody .label-size a:hover:before{
-  border-color: transparent #FFFFFF transparent transparent;
-}
 div#mainbody .label-size a:after {
 	content: "";
 	position: absolute;
@@ -534,9 +535,29 @@ div#mainbody .label-size a:after {
 	background: #FFFFFF;
 	box-shadow: -1px -1px 2px #004977;
 }
+
+div#mainbody .label-size a:hover {
+	background: #FFFFFF;
+	color: #4169E1!important;
+}
+div#mainbody .label-size a:hover:before{
+  border-color: transparent #FFFFFF transparent transparent;
+}
 div#mainbody .label-size a:hover:after {
 	background: #4169E1;
 }
+
+div#mainbody .label-size a.selected {
+	background: #ACB7C0;
+	color: #4169E1!important;
+}
+div#mainbody .label-size a.selected:before{
+  border-color: transparent #ACB7C0 transparent transparent;
+}
+div#mainbody .label-size a.selected:after {
+	background: #4169E1;
+}
+
 div#popular #more{
 	border: 2px solid #4169E1;
 	border-radius: 5px;

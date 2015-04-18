@@ -11,6 +11,9 @@ $(function(){
 		console.log(left+" "+top+" "+height+" "+width+" "+x+" "+y);
 		createSaveWindow(x, y);
 	});
+	$("div#mainbody .label-size a").click(function(e){
+		$(this).addClass("selected");
+	});
 	function createSaveWindow(x, y) {
 		var cH = document.documentElement.clientHeight;
 		var cW = document.documentElement.clientWidth;
@@ -31,6 +34,7 @@ $(function(){
 		$("<div></div>", {
 			"class": "savewindow",
 			"css": {
+				"padding": "20px",
 				"position": "absolute",
 				"z-index": "1",
 				"left": (x+30)+"px",
@@ -51,10 +55,7 @@ $(function(){
 				$(".cover").remove();
 		    },
 		}).appendTo(".savewindow");
-		//header
-		$("<h5></h5>", {
-			"text": "Successfully saved!",
-		}).appendTo(".savewindow");
+		
 		//info
 		$("<div></div>", {
 			"class": "info",
@@ -70,7 +71,7 @@ $(function(){
 
 		$("<p></p>", {
 			"class": "message",
-			"text": "Add tags to manage your input.",
+			"text": "Add tags to manage your saved input.",
 			"css": {
 				"color": "#4E4E4E",
 				"display": "inline",
@@ -94,8 +95,13 @@ $(function(){
 		for (var i=0; i < taglist.length; i++){
 			$("<span></span>", {
 				"class": "label-size",
-				"html": "<a>"+ taglist[i]+"</a>",
 			}).appendTo(".tagbox");
+			$("<a></a>", {
+				"text": taglist[i],
+				"click": function() {
+					$(this).addClass("selected");
+				},
+			}).appendTo(".savewindow .label-size:last");
 		}
 
 		//create new tags
@@ -104,6 +110,9 @@ $(function(){
 			"css": {
 				"display": "none",
 				"border": "1px solid #ccc",
+			},
+			"click": function(){
+				$(".inputcontainer>input").trigger("focus");
 			}
 		}).appendTo(".savewindow");
 
@@ -143,7 +152,7 @@ $(function(){
 		$("<div></div>", {
 			"class": "addtagcontainer",
 			"css": {
-				"padding-top": "7px",
+				"padding-top": "8px",
 			},
 		}).appendTo(".savewindow");
 
@@ -175,7 +184,7 @@ $(function(){
 			},
 		}).appendTo(".addtagcontainer");
 
-		//as popular
+		//as private
         $("<div></div>", {
         	"class": "checkbox",
         	"css": {
@@ -185,7 +194,7 @@ $(function(){
 
         $("<label></label>",{
         	"for": "aspopular",
-        	"html": "<input id='aspopular' type='checkbox'> Save as popular input",
+        	"html": "<input id='aspopular' type='checkbox'> This saved input will be private.",
         	"css": {
         		"margin": "0 0 0 5px",
         	}
