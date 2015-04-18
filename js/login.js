@@ -1,3 +1,11 @@
+function startLoadingLogin() {
+  $(".loginLoadingCover").css("display", "block");
+}
+
+function finishLoadingLogin() {
+  $(".loginLoadingCover").css("display", "none");
+}
+
 function udpateLoginRegion(name) {
   $("span#profile").html("Welcome, " + name + "!");
   $("#login").css("display", "none");
@@ -8,47 +16,30 @@ function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
 }
 
-(function() {
+function getSession() {
+  var regex = /phpsessid=(.+?);/gi;
+  var token = regex.exec(document.cookie);
 
-  $(document).on("click", "#login", function(event) {
-    event.preventDefault();
-    $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-      speed: 500,
-      transition: 'slideDown',
-      transitionClose: 'slideUp'
-    });
-  });
+  return token ? token[1] : undefined;
+}
 
-  $(document).ready(function() {
-    $.post("login.php", {"posttype": "session"}, function (res) {
-      if (res.status == "return") {
-        udpateLoginRegion(res.username);
-      } else {
-        $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-          speed: 500,
-          transition: 'slideDown',
-          transitionClose: 'slideUp',
-          onClose: function() {
-            $('#tutorialguide').joyride({
-              autoStart: true,
-              nubPosition: 'top',
-              modal: true,
-              expose: true
-            });
-          }
+function popupLoginOptions(isNewUser) {
+  $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
+    speed: 500,
+    transition: 'slideDown',
+    transitionClose: 'slideUp',
+    onClose: function() {
+      if (isNewUser) {
+        $('#tutorialguide').joyride({
+          autoStart: true,
+          nubPosition: 'top',
+          modal: true,
+          expose: true
         });
       }
-    });
+    }
   });
-
-  $(document).on('click', '#logclose', function(event) {
-    event.preventDefault();
-    var bPopup = $("#element_to_pop_up").bPopup();
-    bPopup.close({
-      transitionClose: 'slideUp'
-    });
-  });
-})();
+}
 
 var logintype = undefined;
 var username = undefined;
@@ -81,7 +72,6 @@ function fb_login() {
   FB.login(function(response) {
 
     if (response.authResponse) {
-      //console.log(response); // dump complete info
       access_token = response.authResponse.accessToken; //get access token
       var user_id = response.authResponse.userID; //get FB UID
 
@@ -95,19 +85,19 @@ function fb_login() {
         username = response.name;
         logintype = "facebook";
 
-        var postdata = {};
-        postdata["name"] = username;
-        postdata["email"] = useremail;
-        postdata["type"] = logintype;
-        postdata["posttype"] = "login";
-        $.post("login.php", JSON.parse(postdata), function (res) {
+        data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
+
+        startLoadingLogin();
+
+        $.post("login.php", data, function (res) {
           if (res.status == "ok") {
             udpateLoginRegion(username);
+            finishLoadingLogin();
             uploadLocalSession();
           } else {
             alert(res.msg);
           }
-        });
+        }, "json");
       });
     } else {
       //user hit cancel button
@@ -125,11 +115,9 @@ function fb_login() {
   $('#fb-root').append(e);
 }());
 
-
 function facebook_logout() {
   FB.logout(function(response) {});
 }
-
 
 //google login functions
 (function() {
@@ -208,6 +196,39 @@ function loginCallback(result) {
 function google_logout() {
   gapi.auth.signOut();
 }
+
+$(document).ready(function() {
+  var sid = getSession();
+
+  if (!sid) {
+    // user with no session in cookie, proceed to new user logic
+    popupLoginOptions(true);
+  } else {
+    startLoadingLogin();
+    $.post("login.php", {"posttype": "session"}, function (res) {
+      var data = JSON.parse(res);
+      
+      if (data.status == "return") {
+        udpateLoginRegion(data.username);
+        finishLoadingLogin();
+      } else {
+        popupLoginOptions(true);
+      }
+    });
+  }
+});
+
+$(document).on("click", "#login", function(event) {
+  popupLoginOptions(false);
+});
+
+$(document).on('click', '#logclose', function(event) {
+  event.preventDefault();
+  var bPopup = $("#element_to_pop_up").bPopup();
+  bPopup.close({
+    transitionClose: 'slideUp'
+  });
+});
 
 $(document).on("click", "#logout", function(event) {
   event.preventDefault();

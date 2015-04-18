@@ -22,28 +22,23 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	switch (trim_input($_POST["posttype"])) {
+	switch (trim_input("posttype")) {
 		case "session":
-			// $sql = "SELECT * FROM user WHERE sessionid='" . $sessionid . "'";
-			// $res = $conn->query($sql);
-			$res = isset($_SESSION["curuser"]);
-
-			if ($res) {
-				// session still valid, return the user details back to front end
-				// $res = $res->fetch_assoc();
-				// $_SESSION["curuser"] = $res["name"];
-
-				// echo json_encode($return);
-				echo json_encode(array("status" => "return", "username" => $_SESSION["curuser"]));
+			if (isset($_SESSION["curname"])) {
+				echo json_encode(array("status" => "return", "username" => $_SESSION["curname"]));
 			} else {
-				echo json_encode(array("status" => "new"));
+				echo json_encode(array("status" => "new", "sid" => $sessionid));
 			}
 
 			break;
 		case "login":
-			$name = trim_input($_POST["name"]);
-			$email = trim_input($_POST["email"]);
-			$type = trim_input($_POST["type"]);
+			$name = trim_input("name");
+			$email = trim_input("email");
+			$type = trim_input("type");
+
+			if (is_null($name) || is_null($email) || is_null($type)) {
+        echo "invalid data";
+			}
 
 			//check if this is a return user using login type and email
 			$sql = "SELECT * FROM user WHERE logintype='" . $type . "' AND email='" . $email . "'";
@@ -55,14 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				// already known in front end
 				$res = $res->fetch_assoc();
 				$_SESSION["curname"] = $res["name"];
-				
+
 				echo json_encode(array("status" => "ok", "username" => $res["name"]));
 			} else {
 				// this is a new user, we need to insert it into the database first, then
-				// return status
+				// add it into the session, finally return status
 				$sql = "INSERT INTO user(logintype, name, email) VALUES('" . $type . "','" . $name . "','" . $email . "')";
 
 				$resultQ = $conn->query($sql);
+				$_SESSION["curname"] = $name;
 
 				if ($resultQ) {
 					echo json_encode(array("status" => "ok"));
@@ -73,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			break;
 		case "logout":
-			$email = trim_input($_POST["email"]);
+			$email = trim_input("email");
 
 			if ($email == $currentuser) {
 				$currentuser = '';
@@ -85,10 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			echo json_encode($return);
 		case "storeinput":
 			$email = $currentuser;
-			$input = trim_input($_POST["jsoninput"]);
-			$date = trim_input($_POST["date"]);
-			$tag = trim_input($_POST["tag"]);
-			$setname = trim_input($_POST["setname"]);
+			$input = trim_input("jsoninput");
+			$date = trim_input("date");
+			$tag = trim_input("tag");
+			$setname = trim_input("setname");
 
 			$sql = "SELECT setname FROM input WHERE useremail='" . $email . "'";
 			$resultQ = $conn->query($sql);
@@ -109,7 +105,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function trim_input($data) {
-	$data = trim($data);
+	if (!isset($_POST[$data])) {
+		return null;
+	}
+
+	$data = trim($_POST[$data]);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
 	return $data;

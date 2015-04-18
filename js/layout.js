@@ -145,7 +145,6 @@ $(function(){
 		}
 	});
 
-
   /*
    Delete functions and Select functions.
    */
@@ -157,7 +156,6 @@ $(function(){
 
         order --;
         renumberDatablocks();
-
   });
 
   $("#data-field").on("mouseenter", ".data-block-info .fa-stack", function () {
@@ -167,7 +165,6 @@ $(function(){
     var corresPreviewDiv = preview.getDivByIndex(parseInt($(this).find(".fa-stack-1x").html()) - 1);
     corresPreviewDiv.find("span").removeClass("glowSpan");
   });
-  
 
 	// event listener for popup window
 	$("#popup").on("click", ".fa-angle-double-down",function(e){
