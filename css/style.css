@@ -15,6 +15,9 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
+.navbar-nav > li > a > i {
+	margin-right: 10px;
+}
 
 .navbar-brand>img {
 	margin-left: 20px;
