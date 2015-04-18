@@ -77,11 +77,11 @@
             
             <li id='afterlogin'class="dropdown" style="display:none">
               <div class="loginLoadingCover"></div>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i><span id="profile"></span><i class="fa fa-caret-down"></i></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i><span id="profile"></span><i class="fa fa-caret-down"></i></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a  id="myinput" data-target="#timeline"><i class="fa fa-folder"></i>My Input</a></li>
                 <li class="divider"></li>
-                <li><a href="#" id="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                <li><a id="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -195,74 +195,49 @@
           <div id="popular" style="display:none">
 
             <div id="populartable">
-              <div class="popularblock">
+              <div class="popular-block">
                 <h4>DATA SET NAME 1</h4>
                 <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <i class="fa fa-tags fa-2x"></i>
                 <span class='label-size'>
                   <a data-target="all">All</a>
                 </span>
                 <span class='label-size'>
                   <a data-target="cat1">Cat1</a>
                 </span>
-                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+                <a class= 'clone' data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a class='view' data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
               </div>
-              <div class="popularblock">
+              <div class="popular-block">
                 <h4>DATA SET NAME 1</h4>
                 <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <i class="fa fa-tags fa-2x"></i>
                 <span class='label-size'>
                   <a data-target="all">All</a>
                 </span>
                 <span class='label-size'>
                   <a data-target="cat1">Cat1</a>
                 </span>
-                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
               </div>
-              <div class="popularblock">
+              <div class="popular-block">
                 <h4>DATA SET NAME 1</h4>
                 <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i id="tag" class="fa fa-tags fa-2x"></i>
+                <i class="fa fa-tags fa-2x"></i>
                 <span class='label-size'>
                   <a data-target="all">All</a>
                 </span>
                 <span class='label-size'>
                   <a data-target="cat1">Cat1</a>
                 </span>
-                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
+                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
+                <a data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
               </div>
-              <div class="popularblock">
-                <h4>DATA SET NAME 1</h4>
-                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i id="tag" class="fa fa-tags fa-2x"></i>
-                <span class='label-size'>
-                  <a data-target="all">All</a>
-                </span>
-                <span class='label-size'>
-                  <a data-target="cat1">Cat1</a>
-                </span>
-                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
-              </div>
-              <div class="popularblock">
-                <h4>DATA SET NAME 1</h4>
-                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i id="tag" class="fa fa-tags fa-2x"></i>
-                <span class='label-size'>
-                  <a data-target="all">All</a>
-                </span>
-                <span class='label-size'>
-                  <a data-target="cat1">Cat1</a>
-                </span>
-                <a id="clonebutton" data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a id="viewbutton" data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
-              </div>
+              
             </div>
 
-            <div id="category">
+            <div id="tag">
               <h4>CATEGORIES</h4>
               <span class='label-size'>
                 <a data-target="all">All</a>
@@ -608,5 +583,6 @@
         <script src='js/login.js'></script>
         <script src='js/help.js'></script>
         <script type="text/javascript" src="js/save.js"></script>
+        <script type="text/javascript" src="js/previewInput.js"></script>
       </body>
     </html>

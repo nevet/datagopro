@@ -11,9 +11,7 @@ $(function(){
 		console.log(left+" "+top+" "+height+" "+width+" "+x+" "+y);
 		createSaveWindow(x, y);
 	});
-	$("div#mainbody .label-size a").click(function(e){
-		$(this).addClass("selected");
-	});
+	
 	function createSaveWindow(x, y) {
 		var cH = document.documentElement.clientHeight;
 		var cW = document.documentElement.clientWidth;

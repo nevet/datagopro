@@ -32,6 +32,7 @@ html body {
 	padding-left: 100px;
 	color: white;
 	font-style: italic;
+	cursor: pointer;
 }
 
 div#mainbody {
@@ -352,6 +353,8 @@ div#timeline::before {
 div.timeline-block {
 	margin: 2em 0;
 	position: relative;
+	border: 7px solid #BCD8FD;
+	cursor: pointer;
 }
 div.timeline-block:first-child {
 	margin-top: 0;
@@ -445,16 +448,16 @@ div#populartable {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
-div.popularblock>span {
+div.popular-block>span {
 	width: 100%;
 }
-div.popularblock>i {
+div.popular-block>i {
 	float: left;
 	color: #FFFFFF;
 	font-size: 20px;
 	margin: 5px 0;
 }
-div.popularblock>a{
+div.popular-block>a{
 	text-decoration: none;
 	height: 28px;
 	width: auto;
@@ -467,30 +470,35 @@ div.popularblock>a{
 	font-size: 12px;
 	cursor: pointer;
 }
-div.popularblock>a>i{
+div.popular-block>a>i{
 	color: white;
 	margin-left: 10px;
 	opacity: 1;
 	cursor: pointer;
 }
-div.popularblock>h4 {
+div.popular-block>h4 {
 	margin-right: 10px;
 }
-div.popularblock>p {
+div.popular-block>p {
 	font-size: 12px;
 	margin-bottom: 5px;
 }
-div.popularblock {
+div.popular-block {
 	position: relative;
 	overflow: auto;
 	padding: 5px 10px 5px;
 	margin: 10px 0;
 	border-radius: 5px;
 	width: 100%;
+	border: 7px solid #A1CDFF;
 	background-color: #A1CDFF;
+	cursor: pointer;
+}
+div.popular-block.selected {
+	border-color: #FFFAFA;
 }
 
-div#category {
+div#tag {
 	position: absolute;
 	bottom: 30px;
 	width: 95%;
@@ -502,7 +510,7 @@ div#category {
 	padding: 10px 20px;
 	overflow: auto;
 }
-div#category p {
+div#tag p {
 	font-size: 24px;
 	color: #4169E1;
 }

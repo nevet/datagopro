@@ -27,11 +27,8 @@ $(function(){
 			$($(this).attr("data-target")).css("display", "block");	
 		}      
 	});
-	$("#myinput").click(function(e){
-		var prev = $("#nav li.active");
-		$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
-	  	$($(this).attr("data-target")).css("display", "block");
-		tlHeight();
+	$(".navbar img").click(function(e) {
+		$("#newdata").trigger("click");
 	});
 	  	
 	var order=1;
