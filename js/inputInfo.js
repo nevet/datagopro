@@ -51,8 +51,27 @@
         preview.removeEntry(identifier);
         inputList.splice(i, 1);
 
+        inputInfo.saveSession();
+
         break;
       }
+    }
+  }
+
+  inputInfo.saveSession = function () {
+    // TODO: saving is currently sequential, could be made as parallel in the
+    // future
+    var data = serializeInput();
+    console.log(data);
+
+    if (dataSid) {
+      // we are online, upload the session to server
+      $.post("dataSession", {"cmd": "upload", "id": dataSid, "jsoninput": data}, function (res) {
+        // update label
+      });
+    } else {
+      // we are offline, store the data in local storage
+      localStorage.dataSession = data;
     }
   }
 
@@ -163,5 +182,24 @@
     }
 
     inputList.push(newObject);
+  }
+
+  function serializeInput() {
+    var output = [];
+
+    var inputs = $("#data-field").find("input");
+
+    for (var i = 0; i < inputs.length; i ++) {
+      for (var j = 0; j < inputList.length; j ++) {
+        if (inputList[j].identifier === inputs[i]) {
+          var obj = jQuery.extend({}, inputList[j]);
+
+          obj.identifier = undefined;
+          output.push(obj);
+        }
+      }
+    }
+
+    return JSON.stringify(output);
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);

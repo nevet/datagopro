@@ -210,6 +210,7 @@ $(document).ready(function() {
       
       if (data.status == "return") {
         udpateLoginRegion(data.username);
+        username = data.username;
         finishLoadingLogin();
       } else {
         popupLoginOptions(true);

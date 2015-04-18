@@ -187,6 +187,8 @@ function okclicked(e) {
       break;
   }
 
+  inputInfo.saveSession();
+
   var obj = jQuery.extend({}, inputInfo.getLastElement());
 
   console.log(obj);
