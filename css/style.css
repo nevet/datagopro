@@ -15,7 +15,7 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
-.navbar-nav li > a > i {
+.navbar-nav li > a > i, span#profile  {
 	margin-right: 10px;
 }
 
@@ -25,6 +25,13 @@ html body {
 	min-width: 155px;
 	margin-top: -11px;
 	margin-right: -100px;
+}
+.navbar p {
+	height: 65px;
+	padding-top: 25px;
+	padding-left: 100px;
+	color: white;
+	font-style: italic;
 }
 
 div#mainbody {
