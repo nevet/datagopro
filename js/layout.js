@@ -158,6 +158,45 @@ $(function(){
         renumberDatablocks();
   });
 
+  $("#fbShare").on("click", function (e) {
+    // TODO: need to revise this logic
+
+    if (localStorage.dataSid) {
+      // we logged in, all data has been pushed to server, and has been assigned
+      // a data session id. In this case, we can share the input id directly
+      $.get("tinyurl.php", {"id": localStorage.dataSid}, function (res) {
+        var data = JSON.parse(res);
+
+        if (data.status == "ok") {
+          var tiny = data.url;
+          var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
+          
+          // create a instant link
+        }
+      });
+    } else
+    if (localStorage.dataSession) {
+      // upload to server with annoymous user, then use the return data session id
+      // to get url
+      $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
+        var data = JSON.parse(res);
+
+        $.get("tinyurl.php", {"id": data.sid}, function (res) {
+          var data = JSON.parse(res);
+
+          if (data.status == "ok") {
+            var tiny = data.url;
+            var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
+            
+            // create a instant link
+          }
+        });
+      });
+    }
+
+    e.preventDefault();
+  });
+
   $("#data-field").on("mouseenter", ".data-block-info .fa-stack", function () {
     var corresPreviewDiv = preview.getDivByIndex(parseInt($(this).find(".fa-stack-1x").html()) - 1);
     corresPreviewDiv.find("span").addClass("glowSpan");
@@ -194,6 +233,8 @@ $(function(){
 			}
 		}
 	});
+
+
 
 	$("#tree").click(function(e){
 		if($(this).is(":checked")) {

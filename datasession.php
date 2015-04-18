@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if (!$res) {
             echo json_encode(array("status" => "error", "msg": print_SQL_error()));
           } else {
-            echo json_encode(array("status" => "ok", "msg": get_auto_id($db)));
+            echo json_encode(array("status" => "ok", "sid": get_auto_id($db)));
           }
         } else {
           $sql = "SELECT * FROM input WHERE id=$inputId";

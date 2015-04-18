@@ -64,9 +64,9 @@
     var data = serializeInput();
     console.log(data);
 
-    if (dataSid) {
+    if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("dataSession", {"cmd": "upload", "id": dataSid, "jsoninput": data}, function (res) {
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data}, function (res) {
         // update label
       });
     } else {
