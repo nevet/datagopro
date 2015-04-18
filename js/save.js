@@ -196,7 +196,7 @@ $(function(){
         	"css": {
         		"margin": "0 0 0 5px",
         	}
-        }).appendTo(".checkbox");
+        }).appendTo(".savewindow .checkbox");
 
         //ok and cancel
         $("<div></div>", {

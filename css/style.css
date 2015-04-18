@@ -121,7 +121,7 @@ div.data-block {
 	margin: 1% 0;
 }
 
-div#data-field .fa-folder-open{
+div.column .fa-folder-open{
 	position: absolute;
 	top: 3px;
 	left: 80%;
@@ -130,16 +130,19 @@ div#data-field .fa-folder-open{
 }
 div.column {
 	position: relative;
-	width: 35%;
+	width: 30%;
 	display: inline;
 }
 .order {
 	float: left;
 	top: 4px;
 }
+
 .column>input {
 	text-align: left;
-	margin: 0 1%; 
+	margin: 0 1%;
+	width: 160px; 
+	text-transform: capitalize;
 }
 div#add {
 	width: 200px;

@@ -17,7 +17,7 @@ function chooseDataType(e) {
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
-    preparePopup(currentEntryIndex);
+    preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({
                 speed: 300,
@@ -39,8 +39,7 @@ function numberChanged(e) {
   }
 }
 
-function preparePopup(index) {
-  var object = inputInfo.getElement(index);
+preparePopup = function (object) {
 
   switch (object.datatype) {
     case "number":
@@ -203,9 +202,16 @@ function okclicked(e) {
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 }
 
-function changeInfoMessage(type) {
-  var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
-  var object = inputInfo.getLastElement();
+function changeInfoMessage(type, info_span, data) {
+  if (info_span) {
+    element = info_span;
+    object = data;
+  }
+  else {
+    var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
+    var object = inputInfo.getLastElement();
+  }
+
   var string = ""; 
 
   switch (type) {
