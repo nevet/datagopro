@@ -15,7 +15,7 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
-.navbar-nav > li > a > i {
+.navbar-nav li > a > i {
 	margin-right: 10px;
 }
 
