@@ -170,7 +170,6 @@
     
     var previewDataSpan = $("<span></span>");
     
-    previewDataSpan.css("font-family", "'Abel', sans-serif");
     previewDataSpan.appendTo(dataDiv);
 
     if (data.length == 0) {

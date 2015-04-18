@@ -36,6 +36,7 @@ div#mainbody {
 div#editor, div#timeline, div#popular {
 	float: left;
 	width: 60%;
+	min-height: 700px;
 	height: 100%;
 	margin-right: 1%;
 	background-color: #B6D5FD;
@@ -44,9 +45,9 @@ div#editor, div#timeline, div#popular {
 	position: relative;
 }
 div#preview {
-	font-family: 'Abel', sans-serif;
 	float: left;
 	width: 39%;
+	min-height: 700px;
 	height: 100%;
 	background-color: #E9F0F5;
 	overflow-y: auto;
