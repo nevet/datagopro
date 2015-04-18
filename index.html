@@ -64,21 +64,24 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
-              <a id="newdata"data-target="#editor">New Data<span class="sr-only">(current)</span></a>
+              <a id="newdata"data-target="#editor"><i class="fa fa-file-text-o"></i>New Data</a>
             </li>
-            <li ><a id='popularinput' data-target="#popular">Popular Input</a></li>
+            <li >
+            	<a id='popularinput' data-target="#popular"><i class="fa fa-list-ul"></i>Popular Input</a>
+            </li>
+            <li><p id="notice">All changes saved.</p></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a id='help' data-target="#help">Help</a></li>
-            <li><a id="login">Login</a></li>
+            <li><a id='help' data-target="#help"><i class="fa fa-question-circle"></i>Help</a></li>
+            <li><a id="login"><i class="fa fa-sign-in"></i>Login</a></li>
             
             <li id='afterlogin'class="dropdown" style="display:none">
               <div class="loginLoadingCover"></div>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="profile"></span><span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i><span id="profile"></span><i class="fa fa-caret-down"></i></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a  id="myinput" data-target="#timeline">My Input</a></li>
+                <li><a  id="myinput" data-target="#timeline"><i class="fa fa-folder"></i>My Input</a></li>
                 <li class="divider"></li>
-                <li><a href="#" id="logout">Logout</a></li>
+                <li><a href="#" id="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
               </ul>
             </li>
           </ul>
