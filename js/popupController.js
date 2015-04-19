@@ -17,6 +17,7 @@ function chooseDataType(e) {
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
+    console.log("existing " + currentEntryIndex);
     preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({

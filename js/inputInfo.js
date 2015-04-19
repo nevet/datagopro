@@ -56,6 +56,15 @@
     }
   }
 
+  inputInfo.clearInputList = function() {
+    inputList = [];
+  }
+
+  inputInfo.insertData = function(iden, data) {    
+    data.identifier = iden;
+    inputList.push(data);
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
@@ -94,6 +103,7 @@
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
         alert("Different datatype");
@@ -125,6 +135,7 @@
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
         alert("Different datatype");
@@ -155,6 +166,7 @@
     
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
         alert("Different datatype");

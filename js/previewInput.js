@@ -6,6 +6,7 @@ $(function() {
 	var tag1 = "first";
 	var tag2 = "second";
 	var tags = [ tag1, tag2 ];
+	var worker = new Worker("js/dataInfo.js");
 
     var dataArray = [{
 	  "datatype": "number",
@@ -16,7 +17,7 @@ $(function() {
 	  "floatprecision": "",
 	  "numbermin": 10,
 	  "numbermax": 20,
-	  "repeattime": 10
+	  "repeattime": 2
 	}, {
 	  "datatype": "number",
 	  "parityindex": 0,
@@ -24,27 +25,27 @@ $(function() {
 	  "numberindex" :1,
 	  "numbertype": "float",
 	  "floatprecision": 3,
-	  "numbermin": 10,
-	  "numbermax": 20,
-	  "repeattime": 10
+	  "numbermin": -30,
+	  "numbermax": 30,
+	  "repeattime": 3
 	}, {
 	  "datatype": "string",
-	  "stringlength": 100,
+	  "stringlength": 200,
 	  "chartype": "unicode",
 	  "linelength": "",
-	  "linebreak": "\n",
+	  "linebreak": "\\n",
 	  "wordlength":"",
 	  "wordbreak": "",
-	  "repeattime": 10
+	  "repeattime": 5
 	}, {
 	  "datatype": "graph",
 	  "isconnect": true,
 	  "isdirect": true,
 	  "isweighted": false,
 	  "isTree": false,
-	  "node": 10,
-	  "edge": 90,
-	  "repeattime": 10
+	  "node": 5,
+	  "edge": 7,
+	  "repeattime": 5
 	}];
 	
     function createPopularBlock(){
@@ -251,7 +252,7 @@ $(function() {
 		insertDataSet("#preview", event);
 	}
 	function insertDataSet(container, event){
-
+		inputInfo.clearInputList();
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
 			var data = dataArray[i];
@@ -278,7 +279,7 @@ $(function() {
 			}).appendTo(container+" .data-block:last");
 
 			if(container != "#preview") {
-				$("<input>", {
+				var button = $("<input>", {
 					"class": "btn btn-default",
 					"editable": "true",
 					"value": data.datatype,
@@ -289,9 +290,12 @@ $(function() {
 			                transition: 'slideDown',
 			                transitionClose: 'fadeIn'
 			            });
-			            preparePopup(dataArray[$(this).attr("data-index")]);
+						
+					 	chooseDataType(this);
 					}
 				}).appendTo(container+" .data-block:last .column");
+				
+				inputInfo.insertData(button[0], dataArray[$(button).attr("data-index")]);
 			}
 			else {
 				$("<input>", {
