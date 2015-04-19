@@ -52,7 +52,7 @@ $(function() {
     	$("<div></div>", {
     		"class": "popular-block",
     		"click": function(e) {
-    			highlightSelectedBlock("#popular", e);
+    			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
     		}
     	}).appendTo("#populartable");
 
@@ -60,7 +60,8 @@ $(function() {
     	$("<h4></h4>", {
     		"text": datasetName,
     		"click": function(e) {
-    			$('.popular-block').trigger('click');
+    			e.stopPropagation();
+    			$(this).closest('.popular-block').trigger('click');
     		},
     	}).appendTo("#populartable > .popular-block:last");
 
@@ -68,7 +69,8 @@ $(function() {
     	$("<p></p>", {
     		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
     		"click": function(e) {
-    			$('.popular-block').trigger('click');
+    			e.stopPropagation();
+    			$(this).closest('.popular-block').trigger('click');
     		},
     	}).appendTo("#populartable > .popular-block:last");
 
@@ -123,33 +125,112 @@ $(function() {
 	    }).appendTo("#populartable > .popular-block:last .view:last");
 	}
 
+    function createTimelineBlock(){
+    	//block wrap
+    	$("<div></div>", {
+    		"class": "timeline-block",
+    		"click": function(e) {
+    			
+    		},
+    	}).appendTo("#timeline");
+
+    	//dot on timeline
+    	$("<div></div>", {
+    		"class": "timeline-dot",
+    	}).appendTo("#timeline .timeline-block:last");
+
+    	//content
+    	$("<div></div>", {
+    		"class": "timeline-content",
+    		"click": function(e) {
+    			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
+    		}
+    	}).appendTo("#timeline .timeline-block:last");
+
+
+    	//dataset name
+    	$("<h4></h4>", {
+    		"text": datasetName,
+    		"click": function(e) {
+    			e.stopPropagation();
+    			$(this).closest('.timeline-content').trigger('click');
+    		},
+    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+    	//created time
+    	$("<p></p>", {
+    		"html": createTime,
+    		"click": function(e) {
+    			e.stopPropagation();
+    			$(this).closest('.timeline-content').trigger('click');
+    		},
+    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+    	//tags
+    	$("<i></i>",{
+    		"class": "fa fa-tags fa-2x",
+    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+    	for (var i=0; i < tags.length; i++){
+			$("<span></span>", {
+			"class": "label-size",
+			}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+			$("<a></a>", {
+				"text": tags[i],
+				"click": function() {
+					$(this).addClass("selected");
+				},
+			}).appendTo("#timeline > .timeline-block:last .label-size:last");
+	    }
+
+	    //clone
+	    $("<a></a>",{
+	    	"class":"clone",
+	    	"data-target": "1",
+	    	"text": "Clone",
+	    	"click": function(e){
+	    		e.stopPropagation();
+				e.preventDefault();
+	    		cloneDataSet(e);
+	    	},
+	    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+	    $("<i></i>", {
+	    	"class": "fa fa-pencil",
+	    }).appendTo("#timeline > .timeline-block:last .clone:last");
+
+	    //view
+	    $("<a></a>",{
+	    	"class":"view",
+	    	"data-target": "1",
+	    	"text": "View",
+	    	"click": function(e) {
+	    		e.stopPropagation();
+				e.preventDefault();
+	    		viewDataSet(e);
+	    	}
+	    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+	    $("<i></i>", {
+	    	"class": "fa fa-eye",
+	    }).appendTo("#timeline > .timeline-block:last .view:last");
+	}
+
 	createPopularBlock();
-	// $("#timeline .timeline-block").click(function(e){
-	// 	$(this).css("border-color", "#FFFAFA");
-	// });
+	createPopularBlock();
+	createPopularBlock();
+	createTimelineBlock();
+	createTimelineBlock();
+	createTimelineBlock();
 
-	// $(".timeline-block .view").click(function(e){
-	// 	e.stopPropagation();
-	// 	e.preventDefault();
-	// 	var id = $(this).attr("data-target");
-	// 	viewDataSet(id);
-	// });
-	// $(".timeline-block .clone").click(function(e){
-	// 	e.stopPropagation();
-	// 	e.preventDefault();
-	// 	var id = $(this).attr("data-target");
-	// 	var dataset = 
-	// 	cloneDataSet(id);
-	// });
+	function highlightSelectedBlock(container, block){
 
-	function highlightSelectedBlock(container, event){
-		console.log(container+event);
-		var block = event.target;
 		if($(block).hasClass("selected")) {
 			$(block).removeClass("selected");
 		}
 		else {
-			var prev = $(container+" .popular-block.selected");
+			var prev = $(container+".selected");
 			prev.removeClass("selected");
 			$(block).addClass("selected");
 		}
@@ -166,6 +247,7 @@ $(function() {
 	});
 
 	function viewDataSet(event) {
+		$("#preview").children().not(".previewLoadingCover").remove();
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
 			var data = dataArray[i];

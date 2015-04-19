@@ -91,7 +91,7 @@
         <!-- navbar -->
 
         <div id="mainbody">
-          <div id="editor">
+          <div id="editor" style="display:block">
             <input id="setname" class="form-control" type="text" placeholder="Your data set name here...">
             <p data-toggle="tooltip" data-placement="bottom" data-original-title="Share via SNS">
               <span>
@@ -150,92 +150,12 @@
               <span><i class="fa fa-tags"></i></span>
             </div>
           </div>
-          <div id="timeline" style="display:none">
-            <div class="timeline-block">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <h3>DATA SET NAME 1</h3>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="1" class="view">View<i class="fa fa-eye"></i></a>
-                <span  class="date-time">Sat Apr 04 2015 15:28:10</span>
-              </div>
-              
-            </div>
-            <div class="timeline-block">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <h3>DATA SET NAME 2</h3>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="2" class="view">View<i class="fa fa-eye"></i></a>
-                <span  class="date-time">Sat Apr 04 2015 15:28:10</span>
-              </div>
-              
-            </div>
-            <div class="timeline-block">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <h3>DATA SET NAME 3</h3>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="3" class="view">View<i class="fa fa-eye"></i></a>
-                <span  class="date-time">Sat Apr 04 2015 15:28:10</span>
-              </div>
-              
-            </div>
-            <div class="timeline-block">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <h3>DATA SET NAME 4</h3>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="4" class="view">View<i class="fa fa-eye"></i></a>
-                <span  class="date-time">Fri Apr 03 2015 15:28:10</span>
-              </div>
-              
-            </div>
-          </div>
+
+          <div id="timeline" style="display:none"></div>
+
           <div id="popular" style="display:none">
 
-            <div id="populartable">
-              <div class="popular-block">
-                <h4>DATA SET NAME 1</h4>
-                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i class="fa fa-tags fa-2x"></i>
-                <span class='label-size'>
-                  <a data-target="all">All</a>
-                </span>
-                <span class='label-size'>
-                  <a data-target="cat1">Cat1</a>
-                </span>
-                <a class= 'clone' data-target="1">Clone<i class="fa fa-pencil"></i></a>
-                <a class='view' data-target="1" >View<i class="fa fa-eye"></i></a>              
-              </div>
-              <div class="popular-block">
-                <h4>DATA SET NAME 1</h4>
-                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i class="fa fa-tags fa-2x"></i>
-                <span class='label-size'>
-                  <a data-target="all">All</a>
-                </span>
-                <span class='label-size'>
-                  <a data-target="cat1">Cat1</a>
-                </span>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
-              </div>
-              <div class="popular-block">
-                <h4>DATA SET NAME 1</h4>
-                <p>Author: ABC &nbsp;&nbsp;Sat Apr 04 2015 15:28:10</p>
-                <i class="fa fa-tags fa-2x"></i>
-                <span class='label-size'>
-                  <a data-target="all">All</a>
-                </span>
-                <span class='label-size'>
-                  <a data-target="cat1">Cat1</a>
-                </span>
-                <a data-target="#">Clone<i class="fa fa-pencil"></i></a>
-                <a data-target="1" class="view">View<i class="fa fa-eye"></i></a>              
-              </div>
-              
-            </div>
+            <div id="populartable"></div>
 
             <div id="tag">
               <h4>CATEGORIES</h4>
@@ -254,13 +174,16 @@
               <a id="more" >Show more</a>
             </div>
           </div>
+
           <div id="preview" class="showContent">
             <div class="previewLoadingCover"></div>
           </div>
         </div>
+
         <div id="footer" style="display: none">
           © 2015 Datagopro, Group 11 CP3101B, NUS
         </div>
+        
         <div id="popup" style="display:none">
           <ul class="tabs">
             <li id="anumber"><a id="anumber" href="#number">Number</a></li>

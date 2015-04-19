@@ -12,8 +12,9 @@ $(function(){
 			prev.removeClass();
 			$($(prev.find("a")[0]).attr("data-target")).css("display", "none");
 			$("#timeline").css("display", "block");
+			$("#preview").children().not(".previewLoadingCover").remove();
 		}
-		if(this.id == "newdata" || this.id=="popularinput") {
+		else if(this.id == "newdata" || this.id=="popularinput") {
 			var prev = $(".navbar-nav > li.active");
 			if (prev.length == 0) {
 				// timeline is displayed now
@@ -25,6 +26,7 @@ $(function(){
 			}
 			$(this).parent().addClass("active");
 			$($(this).attr("data-target")).css("display", "block");	
+			$("#preview").children().not(".previewLoadingCover").remove();
 		}      
 	});
 	$(".navbar img").click(function(e) {
@@ -43,11 +45,7 @@ $(function(){
 		showExportSetting(prev.html().toLowerCase(), $(this).html().toLowerCase());
 	});
 
-	$(".timeline-block .view").click(function(e){
-		e.preventDefault();
-		var id = $(this).attr("data-target");
-		viewDataSet(id);
-	});
+	
 
 	function setHeights() {
 		if(document.documentElement.clientWidth > 768){
@@ -68,8 +66,8 @@ $(function(){
 	}
 
   function tlHeight() {
-  	var sHeight = document.getElementById("timeline").scrollHeight * 0.97;
-  	$('<style>#timeline:before{height:'+sHeight+'px}</style>').appendTo('head');
+  	// var sHeight = document.getElementById("timeline").scrollHeight * 0.97;
+  	// $('<style>#timeline:before{height:'+sHeight+'px}</style>').appendTo('head');
   }
 
   function createData(e) {
@@ -100,10 +98,7 @@ $(function(){
 		$("#"+type).css("display", "block");
 	}
 
-	function viewDataSet(id) {
-		var dataset = ("<div class='data-set'><h3>This is data-set No."+id+"</h3><p>content of this data-set.</p></div>")
-		$("#preview").html(dataset);
-	}
+	
 
 	function clearDeleteState(icon, iconHtml) {
 		icon.html(iconHtml);

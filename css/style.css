@@ -344,20 +344,19 @@ div#timeline {
 	overflow-y: auto;
 }
 
-div#timeline::before {
+div.timeline-block::before {
 	content: "";
 	position: absolute;
-	left: 3em;
-	top:2%;
+	left: 2.4%;
+	top: 2%;
 	min-height: 100%;
 	width: 5px;
 	background-color: #D7E4ED;
 }
 div.timeline-block {
-	margin: 2em 0;
 	position: relative;
-	border: 7px solid #BCD8FD;
 	cursor: pointer;
+	padding:8px 0 12px;  
 }
 div.timeline-block:first-child {
 	margin-top: 0;
@@ -366,8 +365,8 @@ div.timeline-dot {
 	width: 25px;
 	height: 25px;
 	position: absolute;
-	left: 10px;
-	top: 8%;
+	left: 1%;
+	top: 12%;
 	border-radius: 50%;
 	background-color: white;
 }
@@ -375,32 +374,27 @@ div.timeline-content {
 	margin-left: 4em;
 	background-color: #BCD8FD;
 	border-radius: 5px;
-	padding: 0.2em 2em 2em;
+	padding: 0.2em 1em 2.5em;
 	position: relative;
+	border: 7px solid #BCD8FD;
 }
 div.timeline-content::before {
 	content: "";
 	position: absolute;
-	right: 100%;
-	top:12%;
-	width:0;
-	height:0;
+	right: 101%;
+	top: 12%;
+	width: 0;
+	height: 0;
 	border: 10px solid #E9F0F5;
 	border-right: 10px solid #BCD8FD;
 }
-
-div.timeline-content>a {
-	text-decoration: none;
-	height: 34px;
-	width: 80px;
-	border-radius: 5px;
-	background-color: #ACB7C0;
-	color: white;
-	float: right;
-	padding: 7px 8px;
-	margin-left: 7px;
-	cursor: pointer;
+div.timeline-content.selected {
+	border-color: #FFFAFA;
 }
+div.timeline-content.selected::before {
+	border-right-color: #FFFAFA;
+}
+
 div.timeline-content>a>i {
 	color: white;
 	margin-left: 10px;
@@ -454,13 +448,13 @@ div#populartable {
 div.popular-block>span {
 	width: 100%;
 }
-div.popular-block>i {
+div.popular-block>i, div.timeline-content>i {
 	float: left;
 	color: #FFFFFF;
 	font-size: 20px;
 	margin: 5px 0;
 }
-div.popular-block>a{
+div.popular-block>a, div.timeline-content>a{
 	text-decoration: none;
 	height: 28px;
 	width: auto;
