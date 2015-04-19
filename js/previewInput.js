@@ -248,61 +248,100 @@ $(function() {
 
 	function viewDataSet(event) {
 		$("#preview").children().not(".previewLoadingCover").remove();
+		insertDataSet("#preview", event);
+	}
+	function insertDataSet(container, event){
+
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
 			var data = dataArray[i];
-			console.log()
 			//data-block
 			$("<div></div>", {
 				"class": "data-block",
-			}).appendTo("#preview");
+			}).appendTo(container);
 
 			// order
 			$("<span></span>", {
 				"class": "order fa-stack",
-			}).appendTo("#preview .data-block:last");
+			}).appendTo(container+" .data-block:last");
 			$("<i></i>", {
 				"class": "fa fa-circle-thin fa-stack-2x",
-			}).appendTo("#preview .data-block:last .order:last");
+			}).appendTo(container+" .data-block:last .order:last");
 			$("<i></i>", {
 				"class": "fa fa-stack-1x",
 				"text": i+1,
-			}).appendTo("#preview .data-block:last .order:last");
+			}).appendTo(container+" .data-block:last .order:last");
 
 			//button
 			$("<div></div>", {
 				"class": "column",
-			}).appendTo("#preview .data-block:last");
+			}).appendTo(container+" .data-block:last");
 
-			$("<input>", {
-				"class": "btn btn-default",
-				"editable": "false",
-				"readonly": "on",
-				"value": data.datatype,
-				"data-index": i,
-				"click": function(){
-					$("#popup").bPopup({
-		                speed: 300,
-		                transition: 'slideDown',
-		                transitionClose: 'fadeIn'
-		            });
-		            preparePopup(dataArray[$(this).attr("data-index")]);
-				}
-			}).appendTo("#preview .data-block:last .column");
+			if(container != "#preview") {
+				$("<input>", {
+					"class": "btn btn-default",
+					"editable": "true",
+					"value": data.datatype,
+					"data-index": i,
+					"click": function(){
+						$("#popup").bPopup({
+			                speed: 300,
+			                transition: 'slideDown',
+			                transitionClose: 'fadeIn'
+			            });
+			            preparePopup(dataArray[$(this).attr("data-index")]);
+					}
+				}).appendTo(container+" .data-block:last .column");
+			}
+			else {
+				$("<input>", {
+					"class": "btn btn-default",
+					"editable": "true",
+					"readonly": "on",
+					"value": data.datatype,
+					"data-index": i,
+					"click": function(){
+						$("#popup").bPopup({
+			                speed: 300,
+			                transition: 'slideDown',
+			                transitionClose: 'fadeIn'
+			            });
+			            preparePopup(dataArray[$(this).attr("data-index")]);
+					}
+				}).appendTo(container+" .data-block:last .column");
+			}
+
+			
 
 			$("<i></i>", {
 				"class": "fa fa-folder-open",
-			}).appendTo("#preview .data-block:last .column");	
+			}).appendTo(container+" .data-block:last .column");	
+
+			//add delete button if cloned to the datafield
+			if(container != "#preview") {
+				$("<a></a>", {
+					"class": "btn-delete",
+				}).appendTo(container+" .data-block:last");
+				$("<i></i>", {
+					"class": "fa fa-trash-o fa-lg fa-delete",
+				}).appendTo(container+" .data-block:last .btn-delete");
+
+			}
 
 			//info span 
 			var info_span = $("<span></span>", {
 				"class": "data-block-info",
 			});
-			info_span.appendTo("#preview .data-block:last");
+			info_span.appendTo(container+" .data-block:last");
 			changeInfoMessage(data.datatype, info_span, data);
 		};
 	}
 	function cloneDataSet(event) {
+		$("#preview").children().not(".previewLoadingCover").remove();
 
+		$("#newdata").trigger("click");
+
+		$("#data-field").children().remove();
+		insertDataSet("#data-field", event);
 	}
 });

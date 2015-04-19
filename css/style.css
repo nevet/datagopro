@@ -394,7 +394,13 @@ div.timeline-content.selected {
 div.timeline-content.selected::before {
 	border-right-color: #FFFAFA;
 }
-
+div.timeline-content>h4 {
+	margin-right: 10px;
+}
+div.timeline-content>p {
+	font-size: 12px;
+	margin-bottom: 5px;
+}
 div.timeline-content>a>i {
 	color: white;
 	margin-left: 10px;
