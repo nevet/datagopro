@@ -64,7 +64,12 @@ function prepareNumber(object) {
   $("#number").css("display","block").siblings().css("display", "none");
 
   $("#numbertype")[0].selectedIndex = object.numberindex;
-  $("#precision").val(object.floatprecision);
+  if (object.numberindex == 1) {
+    $("#precision").val(object.floatprecision);
+    $("#precision").show();
+  } else {
+    $("#precision").hide();
+  }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
