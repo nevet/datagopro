@@ -294,7 +294,7 @@ $(function() {
 					 	chooseDataType(this);
 					}
 				}).appendTo(container+" .data-block:last .column");
-				
+
 				inputInfo.insertData(button[0], dataArray[$(button).attr("data-index")]);
 			}
 			else {
@@ -311,6 +311,7 @@ $(function() {
 			                transitionClose: 'fadeIn'
 			            });
 			            preparePopup(dataArray[$(this).attr("data-index")]);
+			            $(".ok").hide();
 					}
 				}).appendTo(container+" .data-block:last .column");
 			}

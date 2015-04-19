@@ -13,6 +13,7 @@ function cancelClicked(e) {
 
 function chooseDataType(e) {
   clearData();
+  $(".ok").show();
   chosebutton = e;
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
