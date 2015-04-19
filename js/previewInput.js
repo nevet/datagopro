@@ -253,6 +253,10 @@ $(function() {
 	}
 	function insertDataSet(container, event){
 		inputInfo.clearInputList();
+		preview.startLoading();
+		var buttonArray = [];
+		var index = 0;
+
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
 			var data = dataArray[i];
@@ -294,8 +298,21 @@ $(function() {
 					 	chooseDataType(this);
 					}
 				}).appendTo(container+" .data-block:last .column");
+				buttonArray.push(button[0]);
 
 				inputInfo.insertData(button[0], dataArray[$(button).attr("data-index")]);
+				var obj = jQuery.extend({}, inputInfo.getLastElement());
+
+				console.log(obj);
+				obj.identifier = undefined;
+
+				// handle backreference case
+				if (!obj.repeattime) {
+					obj.repeattime = parseInt(preview.getData(obj.repeatref));
+					obj.repeatref = undefined;
+				}
+
+				worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 			}
 			else {
 				$("<input>", {
@@ -340,6 +357,12 @@ $(function() {
 			info_span.appendTo(container+" .data-block:last");
 			changeInfoMessage(data.datatype, info_span, data);
 		};
+
+		worker.onmessage = function(event) {
+			preview.endLoading();
+			preview.render(buttonArray[index++], event.data);
+		};
+
 	}
 	function cloneDataSet(event) {
 		$("#preview").children().not(".previewLoadingCover").remove();
