@@ -33,6 +33,7 @@ function numberChanged(e) {
   if (element.val() == "float") {
     $("#precisionDiv").show();
     checkNumberValidation();
+    $("#parity")[0].selectedIndex = 0;
     $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
@@ -69,8 +70,12 @@ function prepareNumber(object) {
   if (object.numberindex == 1) {
     $("#precision").val(object.floatprecision);
     $("#precisionDiv").show();
+    checkNumberValidation();
+    $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
+    $("#parity").prop("disabled", false);
+    noErrorHighlight($("#precision"));
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
