@@ -66,9 +66,9 @@ function prepareNumber(object) {
   $("#numbertype")[0].selectedIndex = object.numberindex;
   if (object.numberindex == 1) {
     $("#precision").val(object.floatprecision);
-    $("#precision").show();
+    $("#precisionDiv").show();
   } else {
-    $("#precision").hide();
+    $("#precisionDiv").hide();
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
