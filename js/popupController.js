@@ -14,11 +14,14 @@ function cancelClicked(e) {
 function chooseDataType(e) {
   clearData();
   $(".ok").show();
+  $(".cancel").text("Cancel");
+  $("#popup input").attr("disabled", false);
+  $("#popup select").attr("disabled", false);
+
   chosebutton = e;
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
-    console.log("existing " + currentEntryIndex);
     preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({
@@ -103,6 +106,8 @@ function prepareGraph(object) {
   $("#connect")[0].checked = object.isconnect;
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
+  $("#weightmin").val(object.weightmin);
+  $("#weightmax").val(object.weightmax);
   $("#tree")[0].checked = object.isTree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
@@ -200,7 +205,6 @@ function okclicked(e) {
 
   var obj = jQuery.extend({}, inputInfo.getLastElement());
 
-  console.log(obj);
   obj.identifier = undefined;
 
   preview.startLoading();

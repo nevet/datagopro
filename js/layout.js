@@ -1,4 +1,6 @@
 $(function(){
+  order=1;
+  
 	clearData();
 	setHeights();
 	$( window ).resize(function() {
@@ -64,7 +66,6 @@ $(function(){
 		$("#newdata").trigger("click");
 	});
 	  	
-	var order=1;
 	$("#add>i").on("click", createData);
 	$("#add>p").on("click", createData);
 	$("#export li").click(function(e){
@@ -266,6 +267,8 @@ function clearData() {
   $("#connect")[0].checked = true;
   $("#direct")[0].checked = true;
   $("#weight")[0].checked = false;
+  $("#weightmin").val("");
+  $("#weightmax").val("");
   $("#tree")[0].checked = false;
   $("#node").val(10);
   $("#edge").val(90);

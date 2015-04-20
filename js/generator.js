@@ -33,7 +33,7 @@ generate = function (array) {
 function dealWithString(stringObject) {
   for (var i = stringObject.repeattime; i > 0; i--) {
     var string = generateString(stringObject);
-    generatedData = generatedData+string+" ";
+    generatedData = generatedData+string+"\n";
   };
 }
 
@@ -65,14 +65,19 @@ function generateString(stringObject) {
   possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (var i = 1; i <= stringLength; i++) {
-    if (i % lineLength == 0) {
-      text = text+lineBreak;
-    } else if ((i % lineLength) % wordLength == 0) {
-      text = text + wordBreak;
-    } else {
-      text = text + possible.charAt(
-        Math.floor(Math.random() * possible.length));
-    };
+    text = text + possible.charAt(Math.floor(Math.random() * possible.length));
+
+    if (lineLength > 0) {
+      if (i % lineLength == 0) {
+        text = text + lineBreak;
+      } else if (wordLength > 0 && (i % lineLength) % wordLength == 0) {
+        text = text + wordBreak;
+      }
+    } else if (wordLength > 0) {
+      if (i % wordLength == 0) {
+        text = text + wordBreak;
+      }
+    }
   };
 
   if (stringLength % lineLength != 0) { text += lineBreak;};
@@ -106,7 +111,7 @@ function generateInteger(integerObject) {
   min = Math.ceil(integerObject.numbermin), 
   max = Math.floor(integerObject.numbermax);
 
-  var number = Math.floor(Math.random() * (max - min)) + min;
+  var number = Math.floor(Math.random() * (max - min + 1) + min);
   if (integerObject.parity) {
     if (integerObject.parity == "odd" && number % 2 == 0) {
       if (number < max) {
@@ -148,19 +153,30 @@ function dealWithGraph(graphObject) {
       graph = generateDisconnectGraph(graphObject);
     }
 
-    string = string + graphToString(graph);
+    string = string + graphToString(graph, graphObject);
 
     generatedData = generatedData+string;
   };
 }
 
-function graphToString(graph) {
+function graphToString(graph, graphObject) {
   var string = "";
-
+  var max, min;
+  if (graphObject.isweighted) {
+    max = Math.floor(graphObject.weightmax);
+    min = Math.ceil(graphObject.weightmin);
+  };
   for (var i=0; i<graph.length; i++) {
     // graph[i].sort();
     for (var j=0; j<graph[i].length; j++) {
-      string = string + (i+1) + " " + (graph[i][j]+1) + "\n";
+      string = string + (i+1) + " " + (graph[i][j]+1);
+
+      if (graphObject.isweighted) {
+        var weight = Math.floor(Math.random() * (max - min + 1) + min);
+        string = string + " " + weight;
+      };
+
+      string = string + "\n";
     }
   }
 
