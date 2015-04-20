@@ -254,18 +254,18 @@ $(function() {
 	}
 
 	function insertDataSet(container, event){
-    var buttonArray = [];
-    var index = 0;
-		inputInfo.clearInputList();
+	    var buttonArray = [];
+	    var index = 0;
+			inputInfo.clearInputList();
 
-    if(container != "#preview") {
-		  preview.startLoading();
-    }
+	    if(container != "#preview") {
+			  preview.startLoading();
+	    }
 
-    worker.onmessage = function(event) {
-      preview.endLoading();
-      preview.render(buttonArray[index++], event.data);
-    };
+	    worker.onmessage = function(event) {
+	      preview.endLoading();
+	      preview.render(buttonArray[index++], event.data);
+	    };
 
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
@@ -300,19 +300,18 @@ $(function() {
 					"data-index": i,
 					"click": function(){
 						$("#popup").bPopup({
-              speed: 300,
-              transition: 'slideDown',
-              transitionClose: 'fadeIn'
-            });
-						
-					 	chooseDataType(this);
+			              speed: 300,
+			              transition: 'slideDown',
+			              transitionClose: 'fadeIn'
+			            });
+						chooseDataType(this);
 					}
 				}).appendTo(container+" .data-block:last .column");
 
 				buttonArray.push(button[0]);
 				inputInfo.insertData(button[0], dataArray[$(button).attr("data-index")]);
 				
-        var obj = jQuery.extend({}, inputInfo.getLastElement());
+        		var obj = jQuery.extend({}, inputInfo.getLastElement());
 				obj.identifier = undefined;
 
 				// handle backreference case
@@ -332,13 +331,12 @@ $(function() {
 					"data-index": i,
 					"click": function(){
 						$("#popup").bPopup({
-              speed: 300,
-              transition: 'slideDown',
-              transitionClose: 'fadeIn'
-            });
-
-            preparePopup(dataArray[$(this).attr("data-index")]);
-            $(".ok").hide();
+			              speed: 300,
+			              transition: 'slideDown',
+			              transitionClose: 'fadeIn'
+			            });
+           				preparePopup(dataArray[$(this).attr("data-index")]);
+			            $(".ok").hide();
 					}
 				}).appendTo(container+" .data-block:last .column");
 			}
