@@ -110,7 +110,7 @@
 
             }
 
-            settings.$document.on('click.joyride', '.joyride-next-tip, .joyride-modal-bg', function (e) {
+            settings.$document.on('click.joyride', '.joyride-next-tip', function (e) {
               e.preventDefault();
 
               if (settings.$li.next().length < 1) {
@@ -127,7 +127,7 @@
 
             });
 
-            settings.$document.on('click.joyride', '.joyride-close-tip', function (e) {
+            settings.$document.on('click.joyride', '.joyride-close-tip, .joyride-modal-bg', function (e) {
               e.preventDefault();
               methods.end(true /* isAborted */);
             });
