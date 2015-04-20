@@ -65,22 +65,18 @@ function generateString(stringObject) {
   possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (var i = 1; i <= stringLength; i++) {
+    text = text + possible.charAt(Math.floor(Math.random() * possible.length));
+
     if (lineLength > 0) {
       if (i % lineLength == 0) {
         text = text + lineBreak;
       } else if (wordLength > 0 && (i % lineLength) % wordLength == 0) {
         text = text + wordBreak;
-      } else {
-        text = text + possible.charAt(Math.floor(Math.random() * possible.length));
       }
     } else if (wordLength > 0) {
       if (i % wordLength) {
         text = text + wordBreak;
-      } else {
-        text = text + possible.charAt(Math.floor(Math.random() * possible.length));
       }
-    } else {
-      text = text + possible.charAt(Math.floor(Math.random() * possible.length));
     }
   };
 
