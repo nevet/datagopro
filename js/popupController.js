@@ -14,6 +14,10 @@ function cancelClicked(e) {
 function chooseDataType(e) {
   clearData();
   $(".ok").show();
+  $(".cancel").text("Cancel");
+  $("#popup input").attr("disabled", false);
+  $("#popup select").attr("disabled", false);
+
   chosebutton = e;
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
