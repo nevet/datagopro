@@ -219,35 +219,39 @@ $(function(){
 });
 
 function clearData() {
-    $("#numbertype")[0].selectedIndex = 0;
-    $("#precision").val(3);
-    $("#min").val(0);
-    $("#max").val(100);
-    $("#repeatNumber").val(10);
-    $("#parity")[0].selectedIndex = 0;
-    correctHighlight($("#repeatNumber"));
-    correctHighlight($("#max"));
-    correctHighlight($("#min"));
-    noErrorHighlight($("#precision"));
+  $("#anumber").addClass("selected").siblings().removeClass("selected");
+  $("#number").css("display","block").siblings().css("display", "none");
+  
+  $("#numbertype")[0].selectedIndex = 0;
+  $("#precision").val(3);
+  $("#precisionDiv").hide();
+  $("#min").val(0);
+  $("#max").val(100);
+  $("#repeatNumber").val(10);
+  $("#parity")[0].selectedIndex = 0;
+  correctHighlight($("#repeatNumber"));
+  correctHighlight($("#max"));
+  correctHighlight($("#min"));
+  noErrorHighlight($("#precision"));
 
-    $("#stringlength").val(100);
-    $("#charset")[0].selectedIndex = 0;
-    $("#linelength").val("");
-    $("#linebreak").val("\\n");
-    $("#wordlength").val("");
-    $("#wordbreak").val("");
-    $("#repeatString").val(10);
-    correctHighlight($("#stringlength"));
-    correctHighlight($("#repeatString"));
+  $("#stringlength").val(100);
+  $("#charset")[0].selectedIndex = 0;
+  $("#linelength").val("");
+  $("#linebreak").val("\\n");
+  $("#wordlength").val("");
+  $("#wordbreak").val("");
+  $("#repeatString").val(10);
+  correctHighlight($("#stringlength"));
+  correctHighlight($("#repeatString"));
 
-    $("#connect")[0].checked = true;
-    $("#direct")[0].checked = true;
-    $("#weight")[0].checked = false;
-    $("#tree")[0].checked = false;
-    $("#node").val(10);
-    $("#edge").val(90);
-    $("#repeatGraph").val(1);
-    correctHighlight($("#repeatGraph"));
-    correctHighlight($("#node"));
-    correctHighlight($("#edge"));
+  $("#connect")[0].checked = true;
+  $("#direct")[0].checked = true;
+  $("#weight")[0].checked = false;
+  $("#tree")[0].checked = false;
+  $("#node").val(10);
+  $("#edge").val(90);
+  $("#repeatGraph").val(1);
+  correctHighlight($("#repeatGraph"));
+  correctHighlight($("#node"));
+  correctHighlight($("#edge"));
 }
