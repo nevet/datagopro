@@ -47,8 +47,8 @@ div#mainbody {
 div#editor, div#timeline, div#popular {
 	float: left;
 	width: 60%;
-	min-height: 700px;
 	height: 100%;
+	min-height: 620px;
 	margin-right: 1%;
 	background-color: #B6D5FD;
 	padding: 1.5%;	
@@ -58,14 +58,14 @@ div#editor, div#timeline, div#popular {
 div#preview {
 	float: left;
 	width: 39%;
-	min-height: 700px;
 	height: 100%;
+	min-height: 620px;
 	background-color: #E9F0F5;
-	overflow-y: auto;
-	overflow-x: hidden;
 }
 div#preview.showContent {
-	padding: 1% 1%;
+	padding: 10px 20px;
+	overflow-x: auto; 
+	overflow-y: auto;
 }
 
 div#editor .fa {
