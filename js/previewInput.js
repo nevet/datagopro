@@ -256,10 +256,10 @@ $(function() {
 	function insertDataSet(container, event){
 	    var buttonArray = [];
 	    var index = 0;
-			inputInfo.clearInputList();
 
 	    if(container != "#preview") {
 			  preview.startLoading();
+        inputInfo.clearInputList();
 	    }
 
 	    worker.onmessage = function(event) {
