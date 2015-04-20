@@ -62,7 +62,10 @@ function generateString(stringObject) {
 
   var
   text = "",
-  possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  possibleCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  possibleSmall = "abcdefghijklmnopqrstuvwxyz";
+  possibleNumber = "0123456789";
+  possible = possibleCapital + possibleSmall + possibleNumber;
 
   for (var i = 1; i <= stringLength; i++) {
     text = text + possible.charAt(Math.floor(Math.random() * possible.length));
