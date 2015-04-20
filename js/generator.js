@@ -99,14 +99,14 @@ function dealWithNumber(numberObject) {
 
     case "float":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        numberArray.push(generateInteger(numberObject));
+        numberArray.push(generateFloat(numberObject));
       };
       break;
 
     default:
       break;
   }
-  console.log(numberArray);
+
   if (numberObject.order == "ascending") {
     numberArray.sort(function(a, b){return a-b});
   } else if (numberObject.order == "descending") {
@@ -116,7 +116,6 @@ function dealWithNumber(numberObject) {
   for (var i = 0; i < numberArray.length; i++) {
     generatedData = generatedData + numberArray[i] + " ";
   };
-  console.log(generatedData);
 }
 
 function generateInteger(integerObject) {
