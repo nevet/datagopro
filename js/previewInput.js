@@ -8,7 +8,7 @@ $(function() {
 	var tags = [ tag1, tag2 ];
 	var worker = new Worker("js/dataInfo.js");
 
-    var dataArray = [{
+  var dataArray = [{
 	  "datatype": "number",
 	  "parityindex": 1,
 	  "parity": undefined,
@@ -17,7 +17,7 @@ $(function() {
 	  "floatprecision": "",
 	  "numbermin": 10,
 	  "numbermax": 20,
-	  "repeattime": 2
+	  "repeattime": 20
 	}, {
 	  "datatype": "number",
 	  "parityindex": 0,
@@ -27,7 +27,7 @@ $(function() {
 	  "floatprecision": 3,
 	  "numbermin": -30,
 	  "numbermax": 30,
-	  "repeattime": 3
+	  "repeattime": 30
 	}, {
 	  "datatype": "string",
 	  "stringlength": 200,
@@ -36,7 +36,7 @@ $(function() {
 	  "linebreak": "\\n",
 	  "wordlength":"",
 	  "wordbreak": "",
-	  "repeattime": 5
+	  "repeattime": 11
 	}, {
 	  "datatype": "graph",
 	  "isconnect": true,
@@ -45,177 +45,177 @@ $(function() {
 	  "isTree": false,
 	  "node": 5,
 	  "edge": 7,
-	  "repeattime": 5
+	  "repeattime": 2
 	}];
 	
-    function createPopularBlock(){
-    	//block wrap
-    	$("<div></div>", {
-    		"class": "popular-block",
-    		"click": function(e) {
-    			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
-    		}
-    	}).appendTo("#populartable");
+  function createPopularBlock(){
+  	//block wrap
+  	$("<div></div>", {
+  		"class": "popular-block",
+  		"click": function(e) {
+  			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
+  		}
+  	}).appendTo("#populartable");
 
-    	//dataset name
-    	$("<h4></h4>", {
-    		"text": datasetName,
-    		"click": function(e) {
-    			e.stopPropagation();
-    			$(this).closest('.popular-block').trigger('click');
-    		},
-    	}).appendTo("#populartable > .popular-block:last");
+  	//dataset name
+  	$("<h4></h4>", {
+  		"text": datasetName,
+  		"click": function(e) {
+  			e.stopPropagation();
+  			$(this).closest('.popular-block').trigger('click');
+  		},
+  	}).appendTo("#populartable > .popular-block:last");
 
-    	//author and created time
-    	$("<p></p>", {
-    		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
-    		"click": function(e) {
-    			e.stopPropagation();
-    			$(this).closest('.popular-block').trigger('click');
-    		},
-    	}).appendTo("#populartable > .popular-block:last");
+  	//author and created time
+  	$("<p></p>", {
+  		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
+  		"click": function(e) {
+  			e.stopPropagation();
+  			$(this).closest('.popular-block').trigger('click');
+  		},
+  	}).appendTo("#populartable > .popular-block:last");
 
-    	//tags
-    	$("<i></i>",{
-    		"class": "fa fa-tags fa-2x",
-    	}).appendTo("#populartable > .popular-block:last");
+  	//tags
+  	$("<i></i>",{
+  		"class": "fa fa-tags fa-2x",
+  	}).appendTo("#populartable > .popular-block:last");
 
-    	for (var i=0; i < tags.length; i++){
-			$("<span></span>", {
-			"class": "label-size",
-			}).appendTo("#populartable > .popular-block:last");
+  	for (var i=0; i < tags.length; i++){
+  		$("<span></span>", {
+  		"class": "label-size",
+  		}).appendTo("#populartable > .popular-block:last");
 
-			$("<a></a>", {
-				"text": tags[i],
-				"click": function() {
-					$(this).addClass("selected");
-				},
-			}).appendTo("#populartable > .popular-block:last .label-size:last");
-	    }
+  		$("<a></a>", {
+  			"text": tags[i],
+  			"click": function() {
+  				$(this).addClass("selected");
+  			},
+  		}).appendTo("#populartable > .popular-block:last .label-size:last");
+    }
 
-	    //clone
-	    $("<a></a>",{
-	    	"class":"clone",
-	    	"data-target": "1",
-	    	"text": "Clone",
-	    	"click": function(e){
-	    		e.stopPropagation();
-				e.preventDefault();
-	    		cloneDataSet(e);
-	    	},
-	    }).appendTo("#populartable > .popular-block:last");
+    //clone
+    $("<a></a>",{
+    	"class":"clone",
+    	"data-target": "1",
+    	"text": "Clone",
+    	"click": function(e){
+    		e.stopPropagation();
+			e.preventDefault();
+    		cloneDataSet(e);
+    	},
+    }).appendTo("#populartable > .popular-block:last");
 
-	    $("<i></i>", {
-	    	"class": "fa fa-pencil",
-	    }).appendTo("#populartable > .popular-block:last .clone:last");
+    $("<i></i>", {
+    	"class": "fa fa-pencil",
+    }).appendTo("#populartable > .popular-block:last .clone:last");
 
-	    //view
-	    $("<a></a>",{
-	    	"class":"view",
-	    	"data-target": "1",
-	    	"text": "View",
-	    	"click": function(e) {
-	    		e.stopPropagation();
-				e.preventDefault();
-	    		viewDataSet(e);
-	    	}
-	    }).appendTo("#populartable > .popular-block:last");
+    //view
+    $("<a></a>",{
+    	"class":"view",
+    	"data-target": "1",
+    	"text": "View",
+    	"click": function(e) {
+    		e.stopPropagation();
+			e.preventDefault();
+    		viewDataSet(e);
+    	}
+    }).appendTo("#populartable > .popular-block:last");
 
-	    $("<i></i>", {
-	    	"class": "fa fa-eye",
-	    }).appendTo("#populartable > .popular-block:last .view:last");
+    $("<i></i>", {
+    	"class": "fa fa-eye",
+    }).appendTo("#populartable > .popular-block:last .view:last");
 	}
 
-    function createTimelineBlock(){
-    	//block wrap
-    	$("<div></div>", {
-    		"class": "timeline-block",
-    		"click": function(e) {
-    			
-    		},
-    	}).appendTo("#timeline");
+  function createTimelineBlock(){
+  	//block wrap
+  	$("<div></div>", {
+  		"class": "timeline-block",
+  		"click": function(e) {
+  			
+  		},
+  	}).appendTo("#timeline");
 
-    	//dot on timeline
-    	$("<div></div>", {
-    		"class": "timeline-dot",
-    	}).appendTo("#timeline .timeline-block:last");
+  	//dot on timeline
+  	$("<div></div>", {
+  		"class": "timeline-dot",
+  	}).appendTo("#timeline .timeline-block:last");
 
-    	//content
-    	$("<div></div>", {
-    		"class": "timeline-content",
-    		"click": function(e) {
-    			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
-    		}
-    	}).appendTo("#timeline .timeline-block:last");
+  	//content
+  	$("<div></div>", {
+  		"class": "timeline-content",
+  		"click": function(e) {
+  			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
+  		}
+  	}).appendTo("#timeline .timeline-block:last");
 
 
-    	//dataset name
-    	$("<h4></h4>", {
-    		"text": datasetName,
-    		"click": function(e) {
-    			e.stopPropagation();
-    			$(this).closest('.timeline-content').trigger('click');
-    		},
-    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  	//dataset name
+  	$("<h4></h4>", {
+  		"text": datasetName,
+  		"click": function(e) {
+  			e.stopPropagation();
+  			$(this).closest('.timeline-content').trigger('click');
+  		},
+  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-    	//created time
-    	$("<p></p>", {
-    		"html": createTime,
-    		"click": function(e) {
-    			e.stopPropagation();
-    			$(this).closest('.timeline-content').trigger('click');
-    		},
-    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  	//created time
+  	$("<p></p>", {
+  		"html": createTime,
+  		"click": function(e) {
+  			e.stopPropagation();
+  			$(this).closest('.timeline-content').trigger('click');
+  		},
+  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-    	//tags
-    	$("<i></i>",{
-    		"class": "fa fa-tags fa-2x",
-    	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  	//tags
+  	$("<i></i>",{
+  		"class": "fa fa-tags fa-2x",
+  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-    	for (var i=0; i < tags.length; i++){
-			$("<span></span>", {
-			"class": "label-size",
-			}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  	for (var i=0; i < tags.length; i++){
+  		$("<span></span>", {
+  		  "class": "label-size",
+  		}).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-			$("<a></a>", {
-				"text": tags[i],
-				"click": function() {
-					$(this).addClass("selected");
-				},
-			}).appendTo("#timeline > .timeline-block:last .label-size:last");
-	    }
+  		$("<a></a>", {
+  			"text": tags[i],
+  			"click": function() {
+  				$(this).addClass("selected");
+  			},
+  		}).appendTo("#timeline > .timeline-block:last .label-size:last");
+    }
 
-	    //clone
-	    $("<a></a>",{
-	    	"class":"clone",
-	    	"data-target": "1",
-	    	"text": "Clone",
-	    	"click": function(e){
-	    		e.stopPropagation();
-				e.preventDefault();
-	    		cloneDataSet(e);
-	    	},
-	    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
+    //clone
+    $("<a></a>",{
+    	"class":"clone",
+    	"data-target": "1",
+    	"text": "Clone",
+    	"click": function(e){
+    		e.stopPropagation();
+			e.preventDefault();
+    		cloneDataSet(e);
+    	},
+    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-	    $("<i></i>", {
-	    	"class": "fa fa-pencil",
-	    }).appendTo("#timeline > .timeline-block:last .clone:last");
+    $("<i></i>", {
+    	"class": "fa fa-pencil",
+    }).appendTo("#timeline > .timeline-block:last .clone:last");
 
-	    //view
-	    $("<a></a>",{
-	    	"class":"view",
-	    	"data-target": "1",
-	    	"text": "View",
-	    	"click": function(e) {
-	    		e.stopPropagation();
-				e.preventDefault();
-	    		viewDataSet(e);
-	    	}
-	    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
+    //view
+    $("<a></a>",{
+    	"class":"view",
+    	"data-target": "1",
+    	"text": "View",
+    	"click": function(e) {
+    		e.stopPropagation();
+			e.preventDefault();
+    		viewDataSet(e);
+    	}
+    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-	    $("<i></i>", {
-	    	"class": "fa fa-eye",
-	    }).appendTo("#timeline > .timeline-block:last .view:last");
+    $("<i></i>", {
+    	"class": "fa fa-eye",
+    }).appendTo("#timeline > .timeline-block:last .view:last");
 	}
 
 	createPopularBlock();
@@ -251,11 +251,20 @@ $(function() {
 		$("#preview").children().not(".previewLoadingCover").remove();
 		insertDataSet("#preview", event);
 	}
+
 	function insertDataSet(container, event){
+    var buttonArray = [];
+    var index = 0;
 		inputInfo.clearInputList();
-		preview.startLoading();
-		var buttonArray = [];
-		var index = 0;
+
+    if(container != "#preview") {
+		  preview.startLoading();
+    }
+
+    worker.onmessage = function(event) {
+      preview.endLoading();
+      preview.render(buttonArray[index++], event.data);
+    };
 
 		for (var i = 0; i <= dataArray.length-1; i++) {
 
@@ -290,20 +299,19 @@ $(function() {
 					"data-index": i,
 					"click": function(){
 						$("#popup").bPopup({
-			                speed: 300,
-			                transition: 'slideDown',
-			                transitionClose: 'fadeIn'
-			            });
+              speed: 300,
+              transition: 'slideDown',
+              transitionClose: 'fadeIn'
+            });
 						
 					 	chooseDataType(this);
 					}
 				}).appendTo(container+" .data-block:last .column");
+
 				buttonArray.push(button[0]);
-
 				inputInfo.insertData(button[0], dataArray[$(button).attr("data-index")]);
-				var obj = jQuery.extend({}, inputInfo.getLastElement());
-
-				console.log(obj);
+				
+        var obj = jQuery.extend({}, inputInfo.getLastElement());
 				obj.identifier = undefined;
 
 				// handle backreference case
@@ -323,17 +331,16 @@ $(function() {
 					"data-index": i,
 					"click": function(){
 						$("#popup").bPopup({
-			                speed: 300,
-			                transition: 'slideDown',
-			                transitionClose: 'fadeIn'
-			            });
-			            preparePopup(dataArray[$(this).attr("data-index")]);
-			            $(".ok").hide();
+              speed: 300,
+              transition: 'slideDown',
+              transitionClose: 'fadeIn'
+            });
+
+            preparePopup(dataArray[$(this).attr("data-index")]);
+            $(".ok").hide();
 					}
 				}).appendTo(container+" .data-block:last .column");
 			}
-
-			
 
 			$("<i></i>", {
 				"class": "fa fa-folder-open",
@@ -347,7 +354,6 @@ $(function() {
 				$("<i></i>", {
 					"class": "fa fa-trash-o fa-lg fa-delete",
 				}).appendTo(container+" .data-block:last .btn-delete");
-
 			}
 
 			//info span 
@@ -357,18 +363,11 @@ $(function() {
 			info_span.appendTo(container+" .data-block:last");
 			changeInfoMessage(data.datatype, info_span, data);
 		};
-
-		worker.onmessage = function(event) {
-			preview.endLoading();
-			preview.render(buttonArray[index++], event.data);
-		};
-
 	}
+
 	function cloneDataSet(event) {
 		$("#preview").children().not(".previewLoadingCover").remove();
-
 		$("#newdata").trigger("click");
-
 		$("#data-field").children().remove();
 		insertDataSet("#data-field", event);
 	}
