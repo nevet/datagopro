@@ -54,6 +54,7 @@
   }
 
   function splitData(data, preview, collapse) {
+    data = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
     preview.html(data);
 
     var maxWidth = preview.parent().width();
@@ -124,7 +125,6 @@
   }
 
   preview.render = function (element, data) {
-    data = data.replace(/\\n/g, "<br>");
     var check = exist(element);
     console.log(check);
     var newDiv = check[0];
