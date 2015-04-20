@@ -54,7 +54,7 @@
   }
 
   function splitData(data, preview, collapse) {
-    data = data.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    data = data.replace(/(?:\r\n|\r|\n)/g, '<br/>');
     preview.html(data);
 
     var maxWidth = preview.parent().width();
@@ -62,7 +62,7 @@
     var best = 0;
 
     for (var i = 0; i < data.length; i ++) {
-      if (data[i] == ' ') {
+      if (data[i] == ' ' || data[i] == '>') {
         preview.html(data.substr(0, i));
 
         var curWidth = preview.width();
