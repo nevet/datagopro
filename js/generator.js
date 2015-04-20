@@ -33,7 +33,7 @@ generate = function (array) {
 function dealWithString(stringObject) {
   for (var i = stringObject.repeattime; i > 0; i--) {
     var string = generateString(stringObject);
-    generatedData = generatedData+string+" ";
+    generatedData = generatedData+string+"\n";
   };
 }
 
@@ -145,7 +145,7 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.node + " " + graphObject.edge + "<br>";
+    var string = graphObject.node + " " + graphObject.edge + "\n";
 
     if (graphObject.isconnect) {
       graph = generateConnectGraph(graphObject);
@@ -178,7 +178,7 @@ function graphToString(graph, graphObject) {
         string = string + " " + weight;
       };
 
-      string = string + "<br>";
+      string = string + "\n";
     }
   }
 

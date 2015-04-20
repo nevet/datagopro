@@ -124,6 +124,7 @@
   }
 
   preview.render = function (element, data) {
+    data = data.replace(/\\n/g, "<br>");
     var check = exist(element);
     console.log(check);
     var newDiv = check[0];
