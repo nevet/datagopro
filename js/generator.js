@@ -74,7 +74,7 @@ function generateString(stringObject) {
         text = text + wordBreak;
       }
     } else if (wordLength > 0) {
-      if (i % wordLength) {
+      if (i % wordLength == 0) {
         text = text + wordBreak;
       }
     }
