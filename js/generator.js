@@ -162,6 +162,7 @@ function dealWithGraph(graphObject) {
 function graphToString(graph, graphObject) {
   var string = "";
   var max, min;
+  console.log(graphObject);
   if (graphObject.isweighted) {
     max = graphObject.weightmax;
     min = graphObject.weightmin;
