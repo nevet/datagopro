@@ -160,7 +160,7 @@ function dealWithGraph(graphObject) {
 }
 
 function graphToString(graph, graphObject) {
-  var string = "";
+  var string = "<br>";
   var max, min;
   console.log(graphObject);
   if (graphObject.isweighted) {
@@ -172,8 +172,8 @@ function graphToString(graph, graphObject) {
     for (var j=0; j<graph[i].length; j++) {
       string = string + (i+1) + " " + (graph[i][j]+1);
       if (graphObject.isweighted) {
-        var weight = Math.floor(Math.random() * (max - min) + min);
-        string = string + " " + weight;
+        var weight = new Number(Math.random() * (max - min) + min);
+        string = string + " " + weight.toFixed(0);
       };
       string = string + "<br>";
     }

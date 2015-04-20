@@ -108,7 +108,7 @@ function prepareGraph(object) {
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
   $("#weightmin").val(object.weightmin);
-  $("#weightmax").val(object.weightmin);
+  $("#weightmax").val(object.weightmax);
   $("#tree")[0].checked = object.isTree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
