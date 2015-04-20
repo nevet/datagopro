@@ -249,6 +249,7 @@ function clearData() {
   $("#max").val(100);
   $("#repeatNumber").val(10);
   $("#parity")[0].selectedIndex = 0;
+  $("#order")[0].selectedIndex = 0;
   correctHighlight($("#repeatNumber"));
   correctHighlight($("#max"));
   correctHighlight($("#min"));

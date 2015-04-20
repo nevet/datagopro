@@ -89,24 +89,34 @@ function generateString(stringObject) {
 }
 
 function dealWithNumber(numberObject) {
+  var numberArray = [];
   switch (numberObject.numbertype) {
     case "integer":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateInteger(numberObject).toString();
-        generatedData = generatedData+string+" ";
+        numberArray.push(generateInteger(numberObject));
       };
       break;
 
     case "float":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateFloat(numberObject).toString();
-        generatedData = generatedData+string+" ";
+        numberArray.push(generateInteger(numberObject));
       };
       break;
 
     default:
       break;
   }
+  console.log(numberArray);
+  if (numberObject.order == "ascending") {
+    numberArray.sort(function(a, b){return a-b});
+  } else if (numberObject.order == "descending") {
+    numberArray.sort(function(a, b){return b-a});
+  };
+
+  for (var i = 0; i < numberArray.length; i++) {
+    generatedData = generatedData + numberArray[i] + " ";
+  };
+  console.log(generatedData);
 }
 
 function generateInteger(integerObject) {

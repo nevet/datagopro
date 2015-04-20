@@ -84,6 +84,7 @@ function prepareNumber(object) {
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
   $("#parity")[0].selectedIndex = object.parityindex;
+  $("#order")[0].selectedIndex = object.orderindex;
 }
 
 function prepareString(object) {
