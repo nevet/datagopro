@@ -373,6 +373,6 @@ $(function() {
 		$("#newdata").trigger("click");
 		$("#data-field").children().remove();
 		insertDataSet("#data-field", event);
-    order += dataArray.length;
+    order = dataArray.length;
 	}
 });
