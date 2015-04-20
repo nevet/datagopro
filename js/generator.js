@@ -171,14 +171,18 @@ function graphToString(graph, graphObject) {
     // graph[i].sort();
     for (var j=0; j<graph[i].length; j++) {
       string = string + (i+1) + " " + (graph[i][j]+1);
+
       if (graphObject.isweighted) {
-        var weight = new Number(Math.random() * (max - min) + min);
+        var weight = new Number((Math.random() * (max - min)) + min);
+        console.log(max+" "+" "+min+" weight: "+weight);
         string = string + " " + weight.toFixed(0);
       };
+
       string = string + "<br>";
     }
   }
 
+  console.log(string);
   return string;
 }
 
