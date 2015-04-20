@@ -124,8 +124,8 @@
               <p>Add more data...</p>
             </div>
             <div id="groupbutton">
-              <i class="fa fa-plus-circle fa-2x"></i>
-              <p>Group</p>
+              <i class="fa fa-plus-square fa-2x"></i>
+              <p>Group data...</p>
             </div>
             <div id="export">
               <p>Export Types</p>
@@ -191,31 +191,27 @@
         <div id="grouppopup" style="display:none">
           <div class="from form-inline">
               <label> From: </label>
-              <select class='grp-from form-control' data-toggle="tooltip" data-placement="right" style="width:100px">
-                    <option class="number" value="1">1</option>
-                    <option class="number" value="2">2</option>
-                    <option class="group" value="group" start="3" end="5">(3~5)</option>
+              <select id="from"class='grp-from form-control' onchange="adjustTo(this)" style="width:100px">
+                    
               </select>
           </div>
 
           <div class = "to form-inline">
              <label> To: </label>
-              <select class='grp-to form-control' data-toggle="tooltip" data-placement="right" style="width: 100px">
-                    <option class="number" value="1">1</option>
-                    <option class="number" value="2">2</option>
-                    <option class="group" value="group" start="3" end="5">(3~5)</option>
+              <select id="to" class='grp-to form-control' onchange="adjustFrom(this)"style="width: 100px">
+                    
               </select>
           </div>
 
           <div class = "grouprepeat form-inline">
              <label> Repeat: </label>
-             <input id="repeatString" class='repeattime grp-rep form-control' type='number' min='1' style="width: 100px">
+             <input id="repeatGroup" class='repeattime grp-rep form-control' type='number' min='1' style="width: 100px">
              <label> times. </label>
           </div>
           
           <div class="groupcanok row popup-btn">
-                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
-                <button class="btn btn-primary ok" value="graph" onClick="okclicked(this)">OK</button>
+                <button class="btn btn-danger cancel" onClick="groupCancelled()">Cancel</button>
+                <button class="btn btn-primary ok" value="graph" onClick="groupDone()">OK</button>
           </div>
 
         </div>
