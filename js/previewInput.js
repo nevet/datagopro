@@ -337,6 +337,9 @@ $(function() {
 			            });
            				preparePopup(dataArray[$(this).attr("data-index")]);
 			            $(".ok").hide();
+			            $(".cancel").text("Back");
+			            $("#popup input").attr("disabled", true);
+			            $("#popup select").attr("disabled", true);
 					}
 				}).appendTo(container+" .data-block:last .column");
 			}
@@ -365,6 +368,7 @@ $(function() {
 	}
 
 	function cloneDataSet(event) {
+		latestNewDataPreview = null;
 		$("#preview").children().not(".previewLoadingCover").remove();
 		$("#newdata").trigger("click");
 		$("#data-field").children().remove();

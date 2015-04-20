@@ -240,14 +240,14 @@
                       <option value="custom">Exact</option>
                       <option value="backref">Refer To</option>
                     </select>
-                    <input id="repeatNumber" class="repeattime form-control" type="number" min="1" style="background-color: white;">
+                    <input id="repeatNumber" class="repeattime form-control" type="number" min="1">
                   </div>
                   <span id="repeatNumberSpan"></span>
                 </div>
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
                 <button class="btn btn-primary ok" value="number" onClick="okclicked(this)">OK</button>
               </div>
             </div>
@@ -305,7 +305,7 @@
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
                 <button class="btn btn-primary ok" value="string" onClick="okclicked(this)">OK</button>
               </div>
             </div>
@@ -384,7 +384,7 @@
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
                 <button class="btn btn-primary ok" value="graph" onClick="okclicked(this)">OK</button>
               </div>
             </div>
