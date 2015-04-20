@@ -20,11 +20,12 @@
 }
 
 #grouppopup{
-  padding:10px;
+  padding:10px 20px;
   width:300px;
   margin-top:3px;
   border-radius: 5px 5px 5px 5px ;
   background:#f0f0f0;
+  overflow: hidden;
 }
 
 .from, .to, .grouprepeat, .groupcanok{

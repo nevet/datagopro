@@ -144,23 +144,33 @@ div.column {
 	width: 160px; 
 	text-transform: capitalize;
 }
+
+p.group-info {
+	margin: 8px 40px;
+}
+
 div#add {
 	width: 200px;
 	position: absolute;
 	bottom: 27%;
 }
-div#add>i {
-	margin: 0 4px;
+div#groupbutton {
+	width: 200px;
+	position: absolute;
+	bottom: 27%;
+	left: 300px;
+}
+div#add>i, div#groupbutton>i {
+	margin: 4px;
 	padding-left: 2px;
 	float: left;
 	cursor: pointer;
 }
-div#add>p {
+div#add>p, div#groupbutton>p {
 	margin-top: 1%;
 	margin-left: 40px;
   	line-height: 34px;
-  	font-size: 18px;
-  	font-family: 'Open Sans',sans-serif;
+  	font-size: 17px;
   	cursor: pointer;
 }
 
