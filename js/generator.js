@@ -145,7 +145,7 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.node + " " + graphObject.edge + "\n";
+    var string = graphObject.node + " " + graphObject.edge + "<br>";
 
     if (graphObject.isconnect) {
       graph = generateConnectGraph(graphObject);
@@ -160,12 +160,12 @@ function dealWithGraph(graphObject) {
 }
 
 function graphToString(graph, graphObject) {
-  var string = "<br>";
+  var string = "";
   var max, min;
   console.log(graphObject);
   if (graphObject.isweighted) {
-    max = graphObject.weightmax;
-    min = graphObject.weightmin;
+    max = Math.floor(graphObject.weightmax);
+    min = Math.ceil(graphObject.weightmin);
   };
   for (var i=0; i<graph.length; i++) {
     // graph[i].sort();
@@ -173,9 +173,9 @@ function graphToString(graph, graphObject) {
       string = string + (i+1) + " " + (graph[i][j]+1);
 
       if (graphObject.isweighted) {
-        var weight = new Number((Math.random() * (max - min)) + min);
-        console.log(max+" "+" "+min+" weight: "+weight);
-        string = string + " " + weight.toFixed(0);
+        var weight = Math.floor(Math.random() * (max - min) + min);
+        console.log("max: "+max+" min: "+min+" weight: "+weight);
+        string = string + " " + weight;
       };
 
       string = string + "<br>";
