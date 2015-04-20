@@ -1,4 +1,6 @@
 $(function(){
+  order=1;
+  
 	clearData();
 	setHeights();
 	$( window ).resize(function() {
@@ -64,7 +66,6 @@ $(function(){
 		$("#newdata").trigger("click");
 	});
 	  	
-	var order=1;
 	$("#add>i").on("click", createData);
 	$("#add>p").on("click", createData);
 	$("#export li").click(function(e){
