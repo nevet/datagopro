@@ -111,7 +111,7 @@ function generateInteger(integerObject) {
   min = Math.ceil(integerObject.numbermin), 
   max = Math.floor(integerObject.numbermax);
 
-  var number = Math.floor(Math.random() * (max - min)) + min;
+  var number = Math.floor(Math.random() * (max - min) + min);
   if (integerObject.parity) {
     if (integerObject.parity == "odd" && number % 2 == 0) {
       if (number < max) {
@@ -171,10 +171,10 @@ function graphToString(graph, graphObject) {
     for (var j=0; j<graph[i].length; j++) {
       string = string + (i+1) + " " + (graph[i][j]+1);
       if (graphObject.isweighted) {
-        var weight = Math.floor(Math.random() * (max - min)) + min;
+        var weight = Math.floor(Math.random() * (max - min) + min);
         string = string + " " + weight;
       };
-      string = string + "\n";
+      string = string + "<br>";
     }
   }
 
