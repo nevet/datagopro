@@ -270,8 +270,9 @@ function clearData() {
   $("#connect")[0].checked = true;
   $("#direct")[0].checked = true;
   $("#weight")[0].checked = false;
-  $("#weightmin").val("");
-  $("#weightmax").val("");
+  $("#weightmin").val(1);
+  $("#weightmax").val(1);
+  $(".weightrange").css("display", "none");
   $("#tree")[0].checked = false;
   $("#node").val(10);
   $("#edge").val(90);
@@ -279,4 +280,6 @@ function clearData() {
   correctHighlight($("#repeatGraph"));
   correctHighlight($("#node"));
   correctHighlight($("#edge"));
+  noErrorHighlight($("#weightmax"));
+  noErrorHighlight($("#weightmin"));
 }

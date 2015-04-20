@@ -50,14 +50,17 @@ preparePopup = function (object) {
   switch (object.datatype) {
     case "number":
       prepareNumber(object);
+      checkNumberValidation();
       break;
 
     case "string":
       prepareString(object);
+      checkStringValidation();
       break;
 
     case "graph":
       prepareGraph(object);
+      checkGraphValidation();
       break;
 
     default:
@@ -73,7 +76,6 @@ function prepareNumber(object) {
   if (object.numberindex == 1) {
     $("#precision").val(object.floatprecision);
     $("#precisionDiv").show();
-    checkNumberValidation();
     $("#parity").prop("disabled", "disabled");
   } else {
     $("#precisionDiv").hide();
@@ -316,14 +318,14 @@ function checkNumberValidation() {
   }
   
   element = $("#max");
-  if (isNumberInput(element) && checkMaxMin()) {
+  if (isNumberInput(element) && checkMaxMin($("#min"), $("#max"))) {
     correctHighlight(element);
   } else {
     isValid = false;
   };
 
   element = $("#min");
-  if (isNumberInput(element) && checkMaxMin()) {
+  if (isNumberInput(element) && checkMaxMin($("#min"), $("#max"))) {
     correctHighlight(element);
   } else {
     isValid = false;
@@ -390,9 +392,30 @@ function checkGraphValidation() {
     element = $("#edge");
     if (isNumberInput(element) && isPositiveInput(element)) {
       correctHighlight(element);
+    } else {
+      isValid = false;
     }
   } else {
-    noErrorHighlight(("#edge"));
+    noErrorHighlight($("#edge"));
+  }
+
+  if ($("#weight")[0].checked) {
+    element = $("#weightmin");
+    if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+      correctHighlight($("#weightmin"));
+    } else {
+      isValid = false;
+    }
+
+    element = $("#weightmax");
+    if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+      correctHighlight($("#weightmax"));
+    } else {
+      isValid = false;
+    }
+  } else {
+    noErrorHighlight($("#weightmin"));
+    noErrorHighlight($("#weightmax"));
   }
 
   return isValid;
@@ -421,7 +444,7 @@ function correctHighlight(element) {
 $(function(){
   $("#min").focusout(function() {
     var element = $("#max");
-    if (isNumberInput(element) && checkMaxMin()) {
+    if (isNumberInput(element) && checkMaxMin($("#min"), $("#max"))) {
       correctHighlight($("#min"));
       if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
         correctHighlight($("#max"));
@@ -433,7 +456,7 @@ $(function(){
 
   $("#max").focusout(function() {
     var element = $("#max");
-    if (isNumberInput(element) && checkMaxMin()) {
+    if (isNumberInput(element) && checkMaxMin($("#min"), $("#max"))) {
       correctHighlight($("#max"));
       if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
         correctHighlight($("#min"));
@@ -497,6 +520,43 @@ $(function(){
     }
   });
 
+  $("#weightmin").focusout(function() {
+    var element = $("#weightmin");
+    if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+      correctHighlight($("#weightmin"));
+      if (parseInt($("#weightmin").val()) <= parseInt($("#weightmax").val())) {
+        correctHighlight($("#weightmax"));
+      }
+    }
+  });
+
+  $("#weight").on("click", function() {
+    if (!$("#weight")[0].checked) {
+      noErrorHighlight($("#weightmin"));
+      noErrorHighlight($("#weightmax"));
+    } else {
+      var element = $("#weightmin");
+      if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+        correctHighlight($("#weightmin"));
+      }
+
+      element = $("#weightmax");
+      if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+        correctHighlight($("#weightmax"));
+      }
+    }
+  });
+
+  $("#weightmax").focusout(function() {
+    var element = $("#weightmax");
+    if (isNumberInput(element) && checkMaxMin($("#weightmin"), $("#weightmax"))) {
+      correctHighlight($("#weightmax"));
+      if (parseInt($("#weightmin").val()) <= parseInt($("#weightmax").val())) {
+        correctHighlight($("#weightmin"));
+      }
+    }
+  });
+
   $("#repeatGraph").focusout(function() {
     var element = $("#repeatGraph");
     if (isNumberInput(element) && isPositiveInput(element)) {
@@ -542,10 +602,10 @@ function isNonNegativeInput(element) {
   return true;  
 }
 
-function checkMaxMin() {
-  if (parseInt($("#min").val()) > parseInt($("#max").val())) {
-    errorHighlight($("#min"));
-    errorHighlight($("#max"));
+function checkMaxMin(minElement, maxElement) {
+  if (parseInt($(minElement).val()) > parseInt($(maxElement).val())) {
+    errorHighlight(minElement);
+    errorHighlight(maxElement);
 
     return false;
   }
