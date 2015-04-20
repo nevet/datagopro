@@ -22,7 +22,6 @@ function chooseDataType(e) {
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
-    console.log("existing " + currentEntryIndex);
     preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({
@@ -206,7 +205,6 @@ function okclicked(e) {
 
   var obj = jQuery.extend({}, inputInfo.getLastElement());
 
-  console.log(obj);
   obj.identifier = undefined;
 
   preview.startLoading();

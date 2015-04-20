@@ -67,8 +67,6 @@
 
         var curWidth = preview.width();
 
-        // console.log(curWidth + " " + maxWidth + " " + lastWidth);
-
         if (curWidth < maxWidth && curWidth != lastWidth) {
           best = i;
           lastWidth = curWidth;
@@ -126,7 +124,6 @@
 
   preview.render = function (element, data) {
     var check = exist(element);
-    console.log(check);
     var newDiv = check[0];
     var divId = getDivId();
     var collapseButton = $(button);
