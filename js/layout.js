@@ -249,6 +249,7 @@ function clearData() {
   $("#max").val(100);
   $("#repeatNumber").val(10);
   $("#parity")[0].selectedIndex = 0;
+  $("#order")[0].selectedIndex = 0;
   correctHighlight($("#repeatNumber"));
   correctHighlight($("#max"));
   correctHighlight($("#min"));
@@ -256,6 +257,8 @@ function clearData() {
 
   $("#stringlength").val(100);
   $("#charset")[0].selectedIndex = 0;
+  $("#case")[0].selectedIndex = 0;
+  $("#hasnumber")[0].checked = false;
   $("#linelength").val("");
   $("#linebreak").val("\\n");
   $("#wordlength").val("");
@@ -267,8 +270,9 @@ function clearData() {
   $("#connect")[0].checked = true;
   $("#direct")[0].checked = true;
   $("#weight")[0].checked = false;
-  $("#weightmin").val("");
-  $("#weightmax").val("");
+  $("#weightmin").val(1);
+  $("#weightmax").val(1);
+  $(".weightrange").css("display", "none");
   $("#tree")[0].checked = false;
   $("#node").val(10);
   $("#edge").val(90);
@@ -276,4 +280,6 @@ function clearData() {
   correctHighlight($("#repeatGraph"));
   correctHighlight($("#node"));
   correctHighlight($("#edge"));
+  noErrorHighlight($("#weightmax"));
+  noErrorHighlight($("#weightmin"));
 }

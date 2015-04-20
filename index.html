@@ -264,6 +264,14 @@
                     <option value='odd'>Odd</option>
                   </select>
                 </div>
+                <div class='form-group'>
+                  <label for="order" >Order</label>
+                  <select id="order" class='form-control' data-toggle="tooltip" data-placement="right" data-original-title="Click to choose order of your integers">
+                    <option value='none'>None</option>
+                    <option value='ascending'>Ascending</option>
+                    <option value='descending'>Descending</option>
+                  </select>
+                </div>
               </div>
               <div class="form-inline">
                 <label>Repeat</label>
@@ -296,6 +304,22 @@
                     <option value='ascii'>ASCII</option>
                     <option value='unicode'>Unicode</option>
                   </select>
+                </div>
+              </div>
+              <div class="form-inline">
+                <div class='form-group'>
+                  <label>Upper/Lowercase</label>
+                  <select id="case" class='form-control' data-toggle="tooltip" data-placement="top" data-original-title="Click to choose a case of your string." style="width:95px">
+                    <option value='none'>None</option>
+                    <option value='upper'>Upper</option>
+                    <option value='lower'>Lower</option>
+                  </select>
+                </div>
+
+                <div class="checkbox">
+                  <label data-toggle="tooltip" data-placement="top" data-original-title="Check here if you want the string contains number.">
+                    <input id="hasnumber" type="checkbox"> Has Number
+                  </label>
                 </div>
               </div>
               <div class="row">
@@ -384,10 +408,12 @@
                   <label for="weightmin" >Weight min</label>
                   <input id="weightmin" class='form-control' type='number'></input>
                 </div>
+                <span id="weightminSpan"></span>
                 <div class='form-group'>
-                  <label for="weightmax" >Weight max</label>
+                  <label for="weightmax" >max</label>
                   <input id="weightmax" class='form-control' type='number'></input>
                 </div>
+                <span id="weightmaxSpan"></span>
               </div>
               <div class="row">
                 <div class="col-sm-12">

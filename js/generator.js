@@ -62,7 +62,21 @@ function generateString(stringObject) {
 
   var
   text = "",
-  possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  possibleUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  possibleLower = "abcdefghijklmnopqrstuvwxyz";
+  possibleNumber = "0123456789";
+
+  if (stringObject.casetype == "upper") {
+    possible = possibleUpper;
+  } else if (stringObject.casetype == "lower") {
+    possible = possibleLower;
+  } else {
+    possible = possibleUpper + possibleLower;
+  }
+
+  if (stringObject.hasnumber) {
+    possible = possible + possibleNumber;
+  }
 
   for (var i = 1; i <= stringLength; i++) {
     text = text + possible.charAt(Math.floor(Math.random() * possible.length));
@@ -86,24 +100,33 @@ function generateString(stringObject) {
 }
 
 function dealWithNumber(numberObject) {
+  var numberArray = [];
   switch (numberObject.numbertype) {
     case "integer":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateInteger(numberObject).toString();
-        generatedData = generatedData+string+" ";
+        numberArray.push(generateInteger(numberObject));
       };
       break;
 
     case "float":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateFloat(numberObject).toString();
-        generatedData = generatedData+string+" ";
+        numberArray.push(generateFloat(numberObject));
       };
       break;
 
     default:
       break;
   }
+
+  if (numberObject.order == "ascending") {
+    numberArray.sort(function(a, b){return a-b});
+  } else if (numberObject.order == "descending") {
+    numberArray.sort(function(a, b){return b-a});
+  };
+
+  for (var i = 0; i < numberArray.length; i++) {
+    generatedData = generatedData + numberArray[i] + " ";
+  };
 }
 
 function generateInteger(integerObject) {

@@ -70,7 +70,9 @@
       "identifier" : element,
       "datatype": "number",
       "parityindex": $("#parity")[0].selectedIndex,
-      "parity": undefined,
+      "parity":  $("#parity").val(),
+      "orderindex": $("#order")[0].selectedIndex,
+      "order": $("#order").val(),
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype")[0].selectedIndex == 0 ? "integer" : "float",
       "floatprecision": $("#precision").val(),
@@ -82,23 +84,6 @@
       newObject.repeattime = $("#repeatNumber").val();
     } else {
       newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
-    }
-
-    switch (newObject.parityindex) {
-      case 0:
-        newObject.parity = undefined;
-        break;
-
-      case 1:
-        newObject.parity = "even";
-        break;
-
-      case 2:
-        newObject.parity = "odd";
-        break;
-
-      default:
-        break;
     }
 
     var index = inputInfo.checkExistence(element);
@@ -120,10 +105,13 @@
       "datatype": "string",
       "stringlength": $("#stringlength").val(),
       "chartype": $("#charset")[0].selectedIndex,
+      "caseindex":$("#case")[0].selectedIndex,
+      "casetype": $("#case").val(),
+      "hasnumber": $("#hasnumber")[0].checked,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
-      "wordbreak": $("#wordbreak").val(),
+      "wordbreak": $("#wordbreak").val()
     }
 
     if ($("#repeatString").length) {
