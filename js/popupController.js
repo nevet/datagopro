@@ -22,10 +22,10 @@ function chooseDataType(e) {
     preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({
-                speed: 300,
-                transition: 'slideDown',
-                transitionClose: 'fadeIn'
-            });
+    speed: 300,
+    transition: 'slideDown',
+    transitionClose: 'fadeIn'
+  });
 }
 
 function numberChanged(e) {
@@ -299,75 +299,63 @@ function graphInfoMessage(object) {
 
 function checkNumberValidation() {
   var isValid = true;
+  var element;
 
-  if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
-    errorHighlight($("#repeatNumber"));
-    isValid = false;
+  element = $("#repeatNumber");
+  if (isNumberInput(element) && isPositiveInput(element)) {
+    correctHighlight(element);
   } else {
-    correctHighlight($("#repeatNumber"));
-  }
-
-  if ($("#max").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
-    errorHighlight($("#max"));
     isValid = false;
-  } else {
-    noErrorHighlight($("#max"));
   }
-
-  if ($("#min").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
-    errorHighlight($("#min"));
+  
+  element = $("#max");
+  if (isNumberInput(element) && checkMaxMin()) {
+    correctHighlight(element);
+  } else {
     isValid = false;
-  } else {
-    correctHighlight($("#min"));
-  }
+  };
 
+  element = $("#min");
+  if (isNumberInput(element) && checkMaxMin()) {
+    correctHighlight(element);
+  } else {
+    isValid = false;
+  };
+  
+  element = $("#precision");
   if ($("#numbertype")[0].selectedIndex == 1) {
-    if ($("#precision").val() == "" || $("#precision").val() < 0) {
-      errorHighlight($("#precision"));
-      isValid = false;
+    if (isNumberInput(element) && isNonNegativeInput(element)) {
+      correctHighlight(element);
     } else {
-      correctHighlight($("#precision"));
+      isValid = false;
     }
   } else {
-    noErrorHighlight($("#precision"));
+    noErrorHighlight(element);
   }
 
-  if ($("#parity")[0].selectedIndex == 1) {
-    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-      if (parseInt($("#min").val()) % 2 == 1) {
-        isValid = false; 
-        errorHighlight($("#min"));
-        errorHighlight($("#max"));
-      };
-    };
-  } else if ($("#parity")[0].selectedIndex == 2) {
-    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-      if (parseInt($("#min").val()) % 2 == 0) {
-        isValid = false;
-        errorHighlight($("#min"));
-        errorHighlight($("#max"));
-      };
-    };
-  };
+  if (!checkParity()) {
+    isValid = false;
+  }
 
   return isValid;
 }
 
 function checkStringValidation() {
   var isValid = true;
+  var element;
 
-  if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
-    errorHighlight($("#stringlength"));
-    isValid = false;
+  element = $("#stringlength");
+  if (isNumberInput(element) && isPositiveInput(element)) {
+    correctHighlight(element);
   } else {
-    correctHighlight($("#stringlength"));
+    isValid = false;
   }
 
-  if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
-    errorHighlight($("#repeatString"));
-    isValid = false;
+  element = $("#repeatString");
+  if (isNumberInput(element) && isPositiveInput(element)) {
+    correctHighlight(element);
   } else {
-    correctHighlight($("#repeatString"));
+    isValid = false;
   }
 
   return isValid;
@@ -375,27 +363,26 @@ function checkStringValidation() {
 
 function checkGraphValidation() {
   var isValid = true;
+  var element;
 
-  if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
-    errorHighlight($("#repeatGraph"));
-    isValid = false;
+  element = $("#repeatGraph");
+  if (isNumberInput(element) && isPositiveInput(element)) {
+    correctHighlight(element);
   } else {
-    correctHighlight($("#repeatGraph"));
+    isValid = false;
   }
 
-  if ($("#node").val() == "" || $("#node").val() <= 0) {
-    errorHighlight($("#node"));
-    isValid = false;
+  element = $("#node");
+  if (isNumberInput(element) && isPositiveInput(element)) {
+    correctHighlight(element);
   } else {
-    correctHighlight($("#node"));
+    isValid = false;
   }
 
   if (!$("#tree")[0].checked) {
-    if ($("#edge").val() == "" || $("#edge").val() <= 0) {
-      errorHighlight($("#edge"));
-      isValid = false;
-    } else {
-      correctHighlight($("#edge"));
+    element = $("#edge");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   } else {
     noErrorHighlight(("#edge"));
@@ -426,103 +413,45 @@ function correctHighlight(element) {
 
 $(function(){
   $("#min").focusout(function() {
-    if ($("#min").val() == "") {
-      errorHighlight($("#min"));
-    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
-      errorHighlight($("#min"));
-      errorHighlight($("#max"));
-    } else {
+    var element = $("#max");
+    if (isNumberInput(element) && checkMaxMin()) {
       correctHighlight($("#min"));
       if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
         correctHighlight($("#max"));
       }
     }
 
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
+    checkParity();
   });
 
   $("#max").focusout(function() {
-    if ($("#max").val() == "") {
-      errorHighlight($("#max"));
-    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
-      errorHighlight($("#min"));
-      errorHighlight($("#max"));
-    } else {
+    var element = $("#max");
+    if (isNumberInput(element) && checkMaxMin()) {
       correctHighlight($("#max"));
       if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
         correctHighlight($("#min"));
       }
     }
 
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
+    checkParity();
   });
 
   $("#parity").on('change', function() {
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
+    checkParity();
   })
 
   $("#repeatNumber").focusout(function() {
-    if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
-      errorHighlight($("#repeatNumber"));
-    } else {
-      correctHighlight($("#repeatNumber"));
+    var element = $("#repeatNumber");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   });
 
   $("#precision").focusout(function() {
-  if ($("#numbertype")[0].selectedIndex == 1) {
-    if ($("#precision").val() == "" || $("#precision").val() < 0) {
-        errorHighlight($("#precision"));
-      } else {
-        correctHighlight($("#precision"));
+    if ($("#numbertype")[0].selectedIndex == 1) {
+      var element = $("#precision");
+      if (isNumberInput(element) && isNonNegativeInput(element)) {
+        correctHighlight(element);
       }
     } else {
       noErrorHighlight($("#precision"));
@@ -530,46 +459,41 @@ $(function(){
   });
   
   $("#stringlength").focusout(function() {
-    if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
-      errorHighlight($("#stringlength"));
-    } else {
-      correctHighlight($("#stringlength"));
+    var element = $("#stringlength");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   });
 
   $("#repeatString").focusout(function() {
-    if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
-      errorHighlight($("#repeatString"));
-    } else {
-      correctHighlight($("#repeatString"));
+    var element = $("#repeatString");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   });
 
   $("#node").focusout(function() {
-    if ($("#node").val() == "" || $("#node").val() <= 0) {
-      errorHighlight($("#node"));
-    } else {
-      correctHighlight($("#node"));
+    var element = $("#node");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   });
 
   $("#edge").focusout(function() {
     if (!$("#tree")[0].checked) {
-      if ($("#edge").val() == "" || $("#edge").val() <= 0) {
-        errorHighlight($("#edge"));
-      } else {
-        correctHighlight($("#edge"));
+      var element = $("#edge");
+      if (isNumberInput(element) && isPositiveInput(element)) {
+        correctHighlight(element);
       }
     } else {
-      noErrorHighlight(("#edge"));
+      noErrorHighlight($("#edge"));
     }
   });
 
   $("#repeatGraph").focusout(function() {
-    if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
-      errorHighlight($("#repeatGraph"));
-    } else {
-      correctHighlight($("#repeatGraph"));
+    var element = $("#repeatGraph");
+    if (isNumberInput(element) && isPositiveInput(element)) {
+      correctHighlight(element);
     }
   });
 
@@ -583,3 +507,66 @@ $(function(){
     if (verified) {e.preventDefault();}
   });
 });
+
+function isNumberInput(element) {
+  if ($(element).val() == "") {
+    errorHighlight($(element));
+    return false;
+  }
+
+  return true;
+}
+
+function isPositiveInput(element) {
+  if ($(element).val() <= 0) {
+    errorHighlight(element);
+    return false;    
+  };
+
+  return true;
+}
+
+function isNonNegativeInput(element) {
+  if ($(element).val() < 0) {
+    errorHighlight(element);
+    return false;    
+  };
+
+  return true;  
+}
+
+function checkMaxMin() {
+  if (parseInt($("#min").val()) > parseInt($("#max").val())) {
+    errorHighlight($("#min"));
+    errorHighlight($("#max"));
+
+    return false;
+  }
+
+  return true;
+}
+
+function checkParity() {
+  if ($("#parity")[0].selectedIndex == 1) {
+    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
+      if (parseInt($("#min").val()) % 2 == 1) {
+        errorHighlight($("#min"));
+        errorHighlight($("#max"));
+
+        return false;
+      };
+    };
+  } else if ($("#parity")[0].selectedIndex == 2) {
+    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
+      if (parseInt($("#min").val()) % 2 == 0) {
+        isValid = false;
+        errorHighlight($("#min"));
+        errorHighlight($("#max"));
+
+        return false;
+      };
+    };
+  };
+
+  return true;
+}
