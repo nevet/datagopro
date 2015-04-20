@@ -145,12 +145,18 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.node + " " + graphObject.edge + "\n";
+    var string;
 
-    if (graphObject.isconnect) {
-      graph = generateConnectGraph(graphObject);
+    if (graphObject.isTree) {
+      string = graphObject.node + "\n";
+      graph = generateTree(graphObject);
     } else {
-      graph = generateDisconnectGraph(graphObject);
+      string = graphObject.node + " " + graphObject.edge + "\n";
+      if (graphObject.isconnect) {
+        graph = generateConnectGraph(graphObject);
+      } else {
+        graph = generateDisconnectGraph(graphObject);
+      }
     }
 
     string = string + graphToString(graph, graphObject);
@@ -287,6 +293,32 @@ function generateDisconnectGraph(graphObject) {
         };
       }
     };
+  };
+
+  return graph;
+}
+
+function generateTree(graphObject) {
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
+  var isDirected = graphObject.isdirected;
+  var nodes = [];
+  var graph = [];
+  for (var i=0; i<n; i++) {
+    nodes[i] = i;
+    graph[i] = [];
+  }
+
+  nodes = shuffle(nodes);
+
+  for (var i = 0; i < nodes.length; i++) {
+    if (i*2+1 < nodes.length) {
+      graph[nodes[i]].push(nodes[i*2+1]);
+    } else {break; }
+
+    if (i*2+2 < nodes.length) {
+      graph[nodes[i]].push(nodes[i*2+2]);      
+    } else {break; }
   };
 
   return graph;
