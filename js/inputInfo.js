@@ -105,10 +105,13 @@
       "datatype": "string",
       "stringlength": $("#stringlength").val(),
       "chartype": $("#charset")[0].selectedIndex,
+      "caseindex":$("#case")[0].selectedIndex,
+      "casetype": $("#case").val(),
+      "hasnumber": $("#hasnumber")[0].checked,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
-      "wordbreak": $("#wordbreak").val(),
+      "wordbreak": $("#wordbreak").val()
     }
 
     if ($("#repeatString").length) {

@@ -62,10 +62,21 @@ function generateString(stringObject) {
 
   var
   text = "",
-  possibleCapital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  possibleSmall = "abcdefghijklmnopqrstuvwxyz";
+  possibleUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  possibleLower = "abcdefghijklmnopqrstuvwxyz";
   possibleNumber = "0123456789";
-  possible = possibleCapital + possibleSmall + possibleNumber;
+
+  if (stringObject.casetype == "upper") {
+    possible = possibleUpper;
+  } else if (stringObject.casetype == "lower") {
+    possible = possibleLower;
+  } else {
+    possible = possibleUpper + possibleLower;
+  }
+
+  if (stringObject.hasnumber) {
+    possible = possible + possibleNumber;
+  }
 
   for (var i = 1; i <= stringLength; i++) {
     text = text + possible.charAt(Math.floor(Math.random() * possible.length));

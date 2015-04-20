@@ -257,6 +257,8 @@ function clearData() {
 
   $("#stringlength").val(100);
   $("#charset")[0].selectedIndex = 0;
+  $("#case")[0].selectedIndex = 0;
+  $("#hasnumber")[0].checked = false;
   $("#linelength").val("");
   $("#linebreak").val("\\n");
   $("#wordlength").val("");

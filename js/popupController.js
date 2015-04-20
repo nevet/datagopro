@@ -93,6 +93,8 @@ function prepareString(object) {
 
   $("#stringlength").val(object.stringlength);
   $("#charset")[0].selectedIndex = object.chartype;
+  $("#case")[0].selectedIndex = object.caseindex;
+  $("#hasnumber")[0].checked = object.hasnumber;
   $("#linelength").val(object.linelength);
   $("#linebreak").val(object.linebreak);
   $("#wordlength").val(object.wordlength);
