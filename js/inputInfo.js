@@ -154,6 +154,8 @@
       "isdirect": $("#direct")[0].checked,
       "isweighted": $("#weight")[0].checked,
       "isTree": $("#tree")[0].checked,
+      "weightmin": $("#weightmin").val(),
+      "weightmax": $("#weightmax").val(),
       "node": $("#node").val(),
       "edge": $("#edge").val(),
     }

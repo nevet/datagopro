@@ -267,6 +267,8 @@ function clearData() {
   $("#connect")[0].checked = true;
   $("#direct")[0].checked = true;
   $("#weight")[0].checked = false;
+  $("#weightmin").val("");
+  $("#weightmax").val("");
   $("#tree")[0].checked = false;
   $("#node").val(10);
   $("#edge").val(90);

@@ -107,6 +107,8 @@ function prepareGraph(object) {
   $("#connect")[0].checked = object.isconnect;
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
+  $("#weightmin").val(object.weightmin);
+  $("#weightmax").val(object.weightmin);
   $("#tree")[0].checked = object.isTree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);

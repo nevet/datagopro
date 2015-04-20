@@ -153,19 +153,28 @@ function dealWithGraph(graphObject) {
       graph = generateDisconnectGraph(graphObject);
     }
 
-    string = string + graphToString(graph);
+    string = string + graphToString(graph, graphObject);
 
     generatedData = generatedData+string;
   };
 }
 
-function graphToString(graph) {
+function graphToString(graph, graphObject) {
   var string = "";
-
+  var max, min;
+  if (graphObject.isweighted) {
+    max = graphObject.weightmax;
+    min = graphObject.weightmin;
+  };
   for (var i=0; i<graph.length; i++) {
     // graph[i].sort();
     for (var j=0; j<graph[i].length; j++) {
-      string = string + (i+1) + " " + (graph[i][j]+1) + "\n";
+      string = string + (i+1) + " " + (graph[i][j]+1);
+      if (graphObject.isweighted) {
+        var weight = Math.floor(Math.random() * (max - min)) + min;
+        string = string + " " + weight;
+      };
+      string = string + "\n";
     }
   }
 
