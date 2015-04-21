@@ -71,17 +71,16 @@ function groupDone() {
 	$("#grouppopup").bPopup().close();
 	var from = getEndPoints("#from");	
 	var to = getEndPoints("#to");
-	console.log("from: "+from);
-	console.log(to);
 
 	var fromExp = createEndExpression(from);
 	var toExp = createEndExpression(to);
+
 	var repeatGroup = $("#repeatGroup").val();
 	var position = (Array.isArray(to)) ? to[1]: to; // 1 base
-	console.log(position);
+
 	var group_info = $("<p></p>", {
 		"class": "group-info",
-		"html": "From: "+fromExp+", to: "+toExp+" Repeat: "+repeatGroup+" times.",
+		"html": "From: "+fromExp+" to: "+toExp+" repeat "+repeatGroup+" times.",
 	});
 	$($("#data-field").children()[position-1]).append(group_info);
 }
