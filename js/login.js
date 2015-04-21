@@ -86,7 +86,7 @@ function fb_login() {
         logintype = "facebook";
 
         data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
-
+        $(".helplogin").attr("data-id","afterlogin");
         startLoadingLogin();
 
         $.post("login.php", data, function (res) {
@@ -172,7 +172,7 @@ function loginCallback(result) {
         transitionClose: 'slideUp'
       });
 
-      $(".helplogin").attr("data-id","afterlogin");
+      $("#newdataguide>li.helplogin").attr("data-id","afterlogin");
 
       var postdata = {};
       postdata["name"] = username;
@@ -246,7 +246,7 @@ $(document).on("click", "#logout", function(event) {
     $("#afterlogin").css("display", "none");
   }
 
-  $(".helplogin").attr("data-id","login");
+  $("#newdataguide>li.helplogin").attr("data-id","login");
   var postdata = {};
   postdata["logintype"] = "logout";
   postdata["email"] = useremail;
