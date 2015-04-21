@@ -1,3 +1,4 @@
+var groupMap = {};
 
 function adjustTo(from) {
 	var fromOption = $(from).find("option:selected"); 
@@ -56,6 +57,8 @@ function groupDone() {
 		"class": "group-info",
 		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times.",
 	});
+
+	groupInputInfo(from, to, group_info);
 	$($("#data-field").children()[position-1]).append(group_info);
 }
 
@@ -169,4 +172,30 @@ $(function() {
 
 });
 
-  
+function groupInputInfo(from, to, group_info) {
+	var keyfrom = "[" + from.toString() +"]";
+	var keyto = "[" + to.toString() + "]";
+	var array = [];
+	var buttons = $("#data-field .data-block input");
+
+	if (!Array.isArray(from)) {
+		groupMap[keyfrom] = buttons[parseInt(from)-1];
+		array.push(parseInt(from));
+	} else {
+		array.push(from[0]);
+	}
+
+	if (!Array.isArray(to)) {
+		groupMap[keyto] = buttons[parseInt(to)-1];
+		array.push(parseInt(to));
+	} else {
+		array.push(to[to.length-1]);
+	}
+
+	var key = "["+array.toString()+"]";
+	groupMap[key] = group_info[0];
+	
+	console.log(groupMap[keyfrom]);
+	console.log(groupMap[keyto]);
+	console.log(groupMap[key]);
+}
