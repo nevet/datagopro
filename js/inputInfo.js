@@ -74,7 +74,7 @@
       "orderindex": $("#order")[0].selectedIndex,
       "order": $("#order").val(),
       "numberindex" : $("#numbertype")[0].selectedIndex,
-      "numbertype": $("#numbertype")[0].selectedIndex == 0 ? "integer" : "float",
+      "numbertype": $("#numbertype").val(),
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
