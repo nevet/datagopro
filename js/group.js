@@ -72,6 +72,7 @@ function groupDone() {
 	var from = getEndPoints("#from");	
 	var to = getEndPoints("#to");
 
+	group(from, to);//group logic functions - xudong
 	var fromExp = createEndExpression(from);
 	var toExp = createEndExpression(to);
 

@@ -8,7 +8,6 @@ $(function(){
 		var width =  $(this).width();
 		var x = left + width;
 		var y = top + height/2;
-		console.log(left+" "+top+" "+height+" "+width+" "+x+" "+y);
 		createSaveWindow(x, y);
 	});
 	
@@ -121,7 +120,6 @@ $(function(){
 		$("<input>", {
 			"type": "text",
 			"keydown": function(e){
-				console.log(e.which);
 				var tagname = $(this).val().trim();
 				if(e.which == 32) {
 					
@@ -138,7 +136,6 @@ $(function(){
 					}		
 				}
 				else if(e.which == 127 || e.which == 8) {
-					console.log($(".created").children());
 					if(tagname == "") {
 						$($(".created").children().last()).remove();
 					}
@@ -161,7 +158,6 @@ $(function(){
 				"margin": "0 5px",
 			},
 			"click": function(e){
-				console.log(e);
 				$(".addtagcontainer").css("display", "none");
 				$(".inputcontainer").css("display", "block");
 				$(".inputcontainer>input").trigger("focus");
@@ -171,7 +167,6 @@ $(function(){
 		$("<p></p>", {
 			"text": "Create new tags",
 			"click": function(e){
-				console.log(e);
 				$(".addtagcontainer").css("display", "none");
 				$(".inputcontainer").css("display", "block");
 				$(".inputcontainer>input").trigger("focus");
@@ -207,9 +202,8 @@ $(function(){
         	"text": "OK",
         	"class": "btn btn-primary",
         	"click" : function(){
-		        $(".savewindow").remove();
-				$(".cover").remove();
-		    },
+        		getTags();
+		    	},
         }).appendTo(".buttoncontainer");
 
         $("<button></button>", {
@@ -224,3 +218,34 @@ $(function(){
         
 	}
 });
+
+function getTags() {
+	var tags = [];
+	var tagsInput = $(".tagbox .selected"); 
+	for (var i=0; i<tagsInput.length; i++) {
+		var tagString = $(tagsInput)[i].innerHTML;
+		if (tags.indexOf(tagString) === -1) {
+			tags.push(tagString);			
+		}
+	};
+
+	tagsInput = $(".inputcontainer a");
+	for (var i=0; i<tagsInput.length; i++) {
+		var tagString = $(tagsInput)[i].innerHTML;
+		if (tags.indexOf(tagString) === -1) {
+			tags.push(tagString);			
+		}
+	};
+
+	if (tags.length < 5) {
+		tagsInput = $(".inputcontainer input");
+		var tagString = $(tagsInput).val();
+		if (tags.indexOf(tagString) === -1) {
+			tags.push(tagString);			
+		}
+	}
+
+	console.log(tags);
+  $(".savewindow").remove();
+	$(".cover").remove();
+}
