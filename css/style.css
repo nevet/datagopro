@@ -15,6 +15,9 @@ html body {
 	padding-top: 25px;
 	cursor: pointer;
 }
+.navbar-nav li > a > i, span#profile  {
+	margin-right: 10px;
+}
 
 .navbar-brand>img {
 	margin-left: 20px;
@@ -22,6 +25,14 @@ html body {
 	min-width: 155px;
 	margin-top: -11px;
 	margin-right: -100px;
+}
+.navbar p {
+	height: 65px;
+	padding-top: 25px;
+	padding-left: 100px;
+	color: white;
+	font-style: italic;
+	cursor: pointer;
 }
 
 div#mainbody {
@@ -37,6 +48,7 @@ div#editor, div#timeline, div#popular {
 	float: left;
 	width: 60%;
 	height: 100%;
+	min-height: 620px;
 	margin-right: 1%;
 	background-color: #B6D5FD;
 	padding: 1.5%;	
@@ -44,16 +56,16 @@ div#editor, div#timeline, div#popular {
 	position: relative;
 }
 div#preview {
-	font-family: 'Abel', sans-serif;
-	float: left;
 	width: 39%;
 	height: 100%;
+	min-height: 620px;
 	background-color: #E9F0F5;
-	overflow-y: auto;
-	overflow-x: hidden;
 }
 div#preview.showContent {
-	padding: 1% 1%;
+	padding: 10px 20px;
+	overflow-x: auto; 
+	overflow-y: auto;
+	font-family: 'Lucida Console', Monaco, monospace;
 }
 
 div#editor .fa {
@@ -109,7 +121,7 @@ div.data-block {
 	margin: 1% 0;
 }
 
-div#data-field .fa-folder-open{
+div.column .fa-folder-open{
 	position: absolute;
 	top: 3px;
 	left: 80%;
@@ -118,34 +130,47 @@ div#data-field .fa-folder-open{
 }
 div.column {
 	position: relative;
-	width: 35%;
+	width: 30%;
 	display: inline;
 }
 .order {
 	float: left;
 	top: 4px;
 }
+
 .column>input {
 	text-align: left;
-	margin: 0 1%; 
+	margin: 0 1%;
+	width: 160px; 
+	text-transform: capitalize;
 }
+
+p.group-info {
+	margin: 8px 40px;
+}
+
 div#add {
 	width: 200px;
 	position: absolute;
 	bottom: 27%;
 }
-div#add>i {
-	margin: 0 4px;
+div#groupbutton {
+	width: 200px;
+	position: absolute;
+	bottom: 27%;
+	left: 300px;
+}
+div#add>i, div#groupbutton>i {
+	margin: 4px;
 	padding-left: 2px;
 	float: left;
 	cursor: pointer;
 }
-div#add>p {
+div#add>p, div#groupbutton>p {
 	margin-top: 1%;
 	margin-left: 40px;
   	line-height: 34px;
-  	font-size: 18px;
-  	font-family: 'Open Sans',sans-serif;
+  	font-size: 17px;
   	cursor: pointer;
 }
 
@@ -199,11 +224,11 @@ div.setting>input {
 div#generate {
 	margin-top: 5px;
 	position: absolute;
-	width: 150px;
+	width: 140px;
 	bottom: 3%;
 }
 div#generate>button, div#saveDiv>button {
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: 600;
 	text-align: left;
 	margin: 3px 0;
@@ -213,7 +238,7 @@ div#generate>button, div#saveDiv>button {
  	background-color: #2272CB;
  	color: white;
 }
-div#generate .fa-download:before, div#saveDiv .fa-floppy-o:before{
+div#generate .fa-download:before, div#saveDiv .fa-tags:before{
 	color: white;
 }
 div#generate>span, div#saveDiv>span {
@@ -222,21 +247,21 @@ div#generate>span, div#saveDiv>span {
 div#generate i {
 	position: absolute;
 	bottom: 15px;
-	left: 123px;
+	left: 115px;
 	cursor: pointer;
 }
 div#saveDiv {
 	position: absolute;
 	bottom: 3%;
 	margin-top: 5px;
-	left: 22%;
+	left: 160px;
 	margin-left: 10px;
-	width: 100px;
+	width: 130px;
 }
 div#saveDiv i {
 	position: absolute;
 	bottom: 15px;
-	left: 73px;
+	left: 105px;
 	cursor: pointer;
 }
 div.savewindow {
@@ -277,8 +302,11 @@ div.savewindow button {
 }
 .tagbox, .addtagcontainer, .inputcontainer {
 	width: 100%;
-	height: 30px;
+	height: 34px;
 	clear: both;
+}
+.tagbox {
+	margin-top: 5px;
 }
 .info {
 	width: 100%;
@@ -287,23 +315,27 @@ div.savewindow button {
 	border: 1px solid #ccc;
 	background-color: aliceblue;
 	padding: 5px 0;
+	margin: 3px 0 0;
 	text-align: center;
 }
 .inputcontainer {
 	width: 100%;
-	margin: 0;
+	height: 35px;
+	margin: 3px 0 0;
 	overflow: hidden;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	line-height: 28px;
 	padding: 0 0 0 2px;
 	color: #000;
+	cursor: text;
 	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15) inset;
 }
 
 .inputcontainer>input {
 	padding: 0;
 	border: 0;
+	margin-top: 3px;
 	box-shadow: none;
 	background: none;
 	width: 100px;
@@ -322,18 +354,19 @@ div#timeline {
 	overflow-y: auto;
 }
 
-div#timeline::before {
+div.timeline-block::before {
 	content: "";
 	position: absolute;
-	left: 3em;
-	top:2%;
+	left: 2.4%;
+	top: 2%;
 	min-height: 100%;
 	width: 5px;
 	background-color: #D7E4ED;
 }
 div.timeline-block {
-	margin: 2em 0;
 	position: relative;
+	cursor: pointer;
+	padding:8px 0 12px;  
 }
 div.timeline-block:first-child {
 	margin-top: 0;
@@ -342,8 +375,8 @@ div.timeline-dot {
 	width: 25px;
 	height: 25px;
 	position: absolute;
-	left: 10px;
-	top: 8%;
+	left: 1%;
+	top: 12%;
 	border-radius: 50%;
 	background-color: white;
 }
@@ -351,31 +384,32 @@ div.timeline-content {
 	margin-left: 4em;
 	background-color: #BCD8FD;
 	border-radius: 5px;
-	padding: 0.2em 2em 2em;
+	padding: 0.2em 1em 2.5em;
 	position: relative;
+	border: 7px solid #BCD8FD;
 }
 div.timeline-content::before {
 	content: "";
 	position: absolute;
-	right: 100%;
-	top:12%;
-	width:0;
-	height:0;
+	right: 101%;
+	top: 12%;
+	width: 0;
+	height: 0;
 	border: 10px solid #E9F0F5;
 	border-right: 10px solid #BCD8FD;
 }
-
-div.timeline-content>a {
-	text-decoration: none;
-	height: 34px;
-	width: 80px;
-	border-radius: 5px;
-	background-color: #ACB7C0;
-	color: white;
-	float: right;
-	padding: 7px 8px;
-	margin-left: 7px;
-	cursor: pointer;
+div.timeline-content.selected {
+	border-color: #FFFAFA;
+}
+div.timeline-content.selected::before {
+	border-right-color: #FFFAFA;
+}
+div.timeline-content>h4 {
+	margin-right: 10px;
+}
+div.timeline-content>p {
+	font-size: 12px;
+	margin-bottom: 5px;
 }
 div.timeline-content>a>i {
 	color: white;
@@ -427,16 +461,16 @@ div#populartable {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
-div.popularblock>span {
+div.popular-block>span {
 	width: 100%;
 }
-div.popularblock>i {
+div.popular-block>i, div.timeline-content>i {
 	float: left;
 	color: #FFFFFF;
 	font-size: 20px;
 	margin: 5px 0;
 }
-div.popularblock>a{
+div.popular-block>a, div.timeline-content>a{
 	text-decoration: none;
 	height: 28px;
 	width: auto;
@@ -449,30 +483,35 @@ div.popularblock>a{
 	font-size: 12px;
 	cursor: pointer;
 }
-div.popularblock>a>i{
+div.popular-block>a>i{
 	color: white;
 	margin-left: 10px;
 	opacity: 1;
 	cursor: pointer;
 }
-div.popularblock>h4 {
+div.popular-block>h4 {
 	margin-right: 10px;
 }
-div.popularblock>p {
+div.popular-block>p {
 	font-size: 12px;
 	margin-bottom: 5px;
 }
-div.popularblock {
+div.popular-block {
 	position: relative;
 	overflow: auto;
 	padding: 5px 10px 5px;
 	margin: 10px 0;
 	border-radius: 5px;
 	width: 100%;
+	border: 7px solid #A1CDFF;
 	background-color: #A1CDFF;
+	cursor: pointer;
+}
+div.popular-block.selected {
+	border-color: #FFFAFA;
 }
 
-div#category {
+div#tag {
 	position: absolute;
 	bottom: 30px;
 	width: 95%;
@@ -484,7 +523,7 @@ div#category {
 	padding: 10px 20px;
 	overflow: auto;
 }
-div#category p {
+div#tag p {
 	font-size: 24px;
 	color: #4169E1;
 }
@@ -501,10 +540,7 @@ div#mainbody .label-size a{
 	text-decoration: none;
 	border-bottom-right-radius: 4px;
 	border-top-right-radius: 4px;
-}
-div#mainbody .label-size a:hover {
-	background: #FFFFFF;
-	color: #4169E1!important;
+	cursor: pointer;
 }
 div#mainbody .label-size a:before {
 	content: "";
@@ -518,9 +554,6 @@ div#mainbody .label-size a:before {
 	border-style: solid;
 	border-width: 12px 12px 12px 0;
 }
-div#mainbody .label-size a:hover:before{
-  border-color: transparent #FFFFFF transparent transparent;
-}
 div#mainbody .label-size a:after {
 	content: "";
 	position: absolute;
@@ -533,9 +566,29 @@ div#mainbody .label-size a:after {
 	background: #FFFFFF;
 	box-shadow: -1px -1px 2px #004977;
 }
+
+div#mainbody .label-size a:hover {
+	background: #FFFFFF;
+	color: #4169E1!important;
+}
+div#mainbody .label-size a:hover:before{
+  border-color: transparent #FFFFFF transparent transparent;
+}
 div#mainbody .label-size a:hover:after {
 	background: #4169E1;
 }
+
+div#mainbody .label-size a.selected {
+	background: #ACB7C0;
+	color: #4169E1!important;
+}
+div#mainbody .label-size a.selected:before{
+  border-color: transparent #ACB7C0 transparent transparent;
+}
+div#mainbody .label-size a.selected:after {
+	background: #4169E1;
+}
+
 div#popular #more{
 	border: 2px solid #4169E1;
 	border-radius: 5px;

@@ -75,14 +75,26 @@
     }
   }
 
+  inputInfo.clearInputList = function() {
+    inputList = [];
+  }
+
+  inputInfo.insertData = function(iden, data) {    
+    data.identifier = iden;
+    inputList.push(data);
+  }
+
   function createNewNumber(element) {
     var newObject = {
       "identifier" : element,
       "datatype": "number",
       "parityindex": $("#parity")[0].selectedIndex,
-      "parity": undefined,
+      "parity":  $("#parity").val(),
+      "orderindex": $("#order")[0].selectedIndex,
+      "order": $("#order").val(),
       "numberindex" : $("#numbertype")[0].selectedIndex,
-      "numbertype": $("#numbertype")[0].selectedIndex == 0 ? "integer" : "float",
+      "numbertype": $("#numbertype").val(),
+      "permutation": $("#permutation")[0].checked,
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
@@ -94,29 +106,10 @@
       newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
     }
 
-    switch (newObject.parityindex) {
-      case 0:
-        newObject.parity = undefined;
-        break;
-
-      case 1:
-        newObject.parity = "even";
-        break;
-
-      case 2:
-        newObject.parity = "odd";
-        break;
-
-      default:
-        break;
-    }
-
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 
@@ -129,10 +122,13 @@
       "datatype": "string",
       "stringlength": $("#stringlength").val(),
       "chartype": $("#charset")[0].selectedIndex,
+      "caseindex":$("#case")[0].selectedIndex,
+      "casetype": $("#case").val(),
+      "hasnumber": $("#hasnumber")[0].checked,
       "linelength": $("#linelength").val(),
       "linebreak": $("#linebreak").val(),
       "wordlength": $("#wordlength").val(),
-      "wordbreak": $("#wordbreak").val(),
+      "wordbreak": $("#wordbreak").val()
     }
 
     if ($("#repeatString").length) {
@@ -144,10 +140,8 @@
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 
@@ -162,8 +156,12 @@
       "isdirect": $("#direct")[0].checked,
       "isweighted": $("#weight")[0].checked,
       "isTree": $("#tree")[0].checked,
+      "weightmin": $("#weightmin").val(),
+      "weightmax": $("#weightmax").val(),
       "node": $("#node").val(),
       "edge": $("#edge").val(),
+      "graphformatindex": $("#graphformat")[0].selectedIndex,
+      "graphformat": $("#graphformat").val()
     }
 
     if ($("#repeatGraph").length) {
@@ -174,10 +172,8 @@
     
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
+
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 

@@ -33,7 +33,7 @@ generate = function (array) {
 function dealWithString(stringObject) {
   for (var i = stringObject.repeattime; i > 0; i--) {
     var string = generateString(stringObject);
-    generatedData = generatedData+string+" ";
+    generatedData = generatedData+string+"\n";
   };
 }
 
@@ -62,17 +62,36 @@ function generateString(stringObject) {
 
   var
   text = "",
-  possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  possibleUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  possibleLower = "abcdefghijklmnopqrstuvwxyz";
+  possibleNumber = "0123456789";
+
+  if (stringObject.casetype == "upper") {
+    possible = possibleUpper;
+  } else if (stringObject.casetype == "lower") {
+    possible = possibleLower;
+  } else {
+    possible = possibleUpper + possibleLower;
+  }
+
+  if (stringObject.hasnumber) {
+    possible = possible + possibleNumber;
+  }
 
   for (var i = 1; i <= stringLength; i++) {
-    if (i % lineLength == 0) {
-      text = text+lineBreak;
-    } else if ((i % lineLength) % wordLength == 0) {
-      text = text + wordBreak;
-    } else {
-      text = text + possible.charAt(
-        Math.floor(Math.random() * possible.length));
-    };
+    text = text + possible.charAt(Math.floor(Math.random() * possible.length));
+
+    if (lineLength > 0) {
+      if (i % lineLength == 0) {
+        text = text + lineBreak;
+      } else if (wordLength > 0 && (i % lineLength) % wordLength == 0) {
+        text = text + wordBreak;
+      }
+    } else if (wordLength > 0) {
+      if (i % wordLength == 0) {
+        text = text + wordBreak;
+      }
+    }
   };
 
   if (stringLength % lineLength != 0) { text += lineBreak;};
@@ -81,24 +100,63 @@ function generateString(stringObject) {
 }
 
 function dealWithNumber(numberObject) {
+  var numberArray = [];
   switch (numberObject.numbertype) {
     case "integer":
-      for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateInteger(numberObject).toString();
-        generatedData = generatedData+string+" ";
-      };
+      if (numberObject.permutation) {
+        numberArray = generatePermutation(numberObject);
+      } else {
+        for (var i = numberObject.repeattime; i > 0; i--) {
+          numberArray.push(generateInteger(numberObject));
+        };
+      }
       break;
 
     case "float":
       for (var i = numberObject.repeattime; i > 0; i--) {
-        var string = generateFloat(numberObject).toString();
-        generatedData = generatedData+string+" ";
+        numberArray.push(generateFloat(numberObject));
       };
       break;
 
     default:
       break;
   }
+
+  if (numberObject.order == "ascending") {
+    numberArray.sort(function(a, b){return a-b});
+  } else if (numberObject.order == "descending") {
+    numberArray.sort(function(a, b){return b-a});
+  };
+
+  for (var i = 0; i < numberArray.length; i++) {
+    generatedData = generatedData + numberArray[i] + " ";
+  };
+}
+
+function generatePermutation(integerObject) {
+  var
+  min = Math.ceil(integerObject.numbermin), 
+  max = Math.floor(integerObject.numbermax);
+  var array = [];
+  if (integerObject.parity == "even") {
+    if (min % 2 == 1) { min++;}
+    for (var i = min; i <= max; i+=2) {
+      array.push(i);
+    };
+  } else if (integerObject.parity == "odd"){
+    if (min % 2 == 0) { min++;}
+    for (var i = min; i <= max; i+=2) {
+      array.push(i);
+    };    
+  } else {
+    for (var i = min; i<=max; i++) {
+      array.push(i);
+    }
+  }
+  
+  array = shuffle(array);
+
+  return array;
 }
 
 function generateInteger(integerObject) {
@@ -106,7 +164,7 @@ function generateInteger(integerObject) {
   min = Math.ceil(integerObject.numbermin), 
   max = Math.floor(integerObject.numbermax);
 
-  var number = Math.floor(Math.random() * (max - min)) + min;
+  var number = Math.floor(Math.random() * (max - min + 1) + min);
   if (integerObject.parity) {
     if (integerObject.parity == "odd" && number % 2 == 0) {
       if (number < max) {
@@ -140,28 +198,76 @@ function generateFloat(floatObject) {
 function dealWithGraph(graphObject) {
   for (var i = graphObject.repeattime; i > 0; i--) {
     var graph = [];
-    var string = graphObject.node + " " + graphObject.edge + "\n";
+    var string;
 
-    if (graphObject.isconnect) {
-      graph = generateConnectGraph(graphObject);
+    if (graphObject.isTree) {
+      string = graphObject.node + "\n";
+      graph = generateTree(graphObject);
     } else {
-      graph = generateDisconnectGraph(graphObject);
+      string = graphObject.node + " " + graphObject.edge + "\n";
+      if (graphObject.isconnect) {
+        graph = generateConnectGraph(graphObject);
+      } else {
+        graph = generateDisconnectGraph(graphObject);
+      }
     }
 
-    string = string + graphToString(graph);
+    if (graphObject.graphformat == "adjmatrix") {
+      string = string + graphToMatrix(graph, graphObject);
+    } else {
+      string = string + graphToString(graph, graphObject);      
+    }
 
-    generatedData = generatedData+string;
+    generatedData = generatedData+string+"\n";
   };
 }
 
-function graphToString(graph) {
+function graphToString(graph, graphObject) {
   var string = "";
-
+  var max, min;
+  if (graphObject.isweighted) {
+    max = Math.floor(graphObject.weightmax);
+    min = Math.ceil(graphObject.weightmin);
+  };
   for (var i=0; i<graph.length; i++) {
-    // graph[i].sort();
     for (var j=0; j<graph[i].length; j++) {
-      string = string + (i+1) + " " + (graph[i][j]+1) + "\n";
+      string = string + (i+1) + " " + (graph[i][j]+1);
+
+      if (graphObject.isweighted) {
+        var weight = Math.floor(Math.random() * (max - min + 1) + min);
+        string = string + " " + weight;
+      };
+
+      string = string + "\n";
     }
+  }
+
+  return string;
+}
+
+function graphToMatrix(graph, graphObject) {
+  var string = "";
+  var n = parseInt(graphObject.node);
+  var max, min;
+  if (graphObject.isweighted) {
+    max = Math.floor(graphObject.weightmax);
+    min = Math.ceil(graphObject.weightmin);
+  };
+
+  for (var i=0; i<n; i++) {
+    for (var j=0; j<n; j++) {
+      if (graph[i].indexOf(j) === -1) {
+        string = string + " 0";
+      } else {
+        if (graphObject.isweighted) {
+          var weight = Math.floor(Math.random() * (max - min + 1) + min);
+          string = string + " " + weight;
+        } else {
+          string = string + " 1";
+        }
+      }
+    }
+    string = string + "\n";
   }
 
   return string;
@@ -271,6 +377,32 @@ function generateDisconnectGraph(graphObject) {
         };
       }
     };
+  };
+
+  return graph;
+}
+
+function generateTree(graphObject) {
+  var n = parseInt(graphObject.node);
+  var e = parseInt(graphObject.edge);
+  var isDirected = graphObject.isdirected;
+  var nodes = [];
+  var graph = [];
+  for (var i=0; i<n; i++) {
+    nodes[i] = i;
+    graph[i] = [];
+  }
+
+  nodes = shuffle(nodes);
+
+  for (var i = 0; i < nodes.length; i++) {
+    if (i*2+1 < nodes.length) {
+      graph[nodes[i]].push(nodes[i*2+1]);
+    } else {break; }
+
+    if (i*2+2 < nodes.length) {
+      graph[nodes[i]].push(nodes[i*2+2]);      
+    } else {break; }
   };
 
   return graph;

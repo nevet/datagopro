@@ -13,17 +13,22 @@ function cancelClicked(e) {
 
 function chooseDataType(e) {
   clearData();
+  $(".ok").show();
+  $(".cancel").text("Cancel");
+  $("#popup input").attr("disabled", false);
+  $("#popup select").attr("disabled", false);
+
   chosebutton = e;
   $(e).blur();
   currentEntryIndex = inputInfo.checkExistence(chosebutton);
   if (currentEntryIndex >= 0) {
-    preparePopup(currentEntryIndex);
+    preparePopup( inputInfo.getElement(currentEntryIndex) );
   };
   $("#popup").bPopup({
-                speed: 300,
-                transition: 'slideDown',
-                transitionClose: 'fadeIn'
-            });
+    speed: 300,
+    transition: 'slideDown',
+    transitionClose: 'fadeIn'
+  });
 }
 
 function numberChanged(e) {
@@ -31,28 +36,33 @@ function numberChanged(e) {
   if (element.val() == "float") {
     $("#precisionDiv").show();
     checkNumberValidation();
+    $("#parity")[0].selectedIndex = 0;
     $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
   } else {
     $("#precisionDiv").hide();
     noErrorHighlight($("#precision"));
     $("#parity").prop("disabled", false);
+    $("#permutationDiv").show();
   }
 }
 
-function preparePopup(index) {
-  var object = inputInfo.getElement(index);
+preparePopup = function (object) {
 
   switch (object.datatype) {
     case "number":
       prepareNumber(object);
+      checkNumberValidation();
       break;
 
     case "string":
       prepareString(object);
+      checkStringValidation();
       break;
 
     case "graph":
       prepareGraph(object);
+      checkGraphValidation();
       break;
 
     default:
@@ -65,11 +75,24 @@ function prepareNumber(object) {
   $("#number").css("display","block").siblings().css("display", "none");
 
   $("#numbertype")[0].selectedIndex = object.numberindex;
-  $("#precision").val(object.floatprecision);
+  if (object.numberindex == 1) {
+    $("#precision").val(object.floatprecision);
+    $("#precisionDiv").show();
+    $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
+  } else {
+    $("#precisionDiv").hide();
+    $("#parity").prop("disabled", false);
+    noErrorHighlight($("#precision"));
+    $("#permutation")[0].checked = object.permutation;
+    $("#permutationDiv").show();
+    checkPermutation();
+  }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
   $("#repeatNumber").val(object.repeattime);
   $("#parity")[0].selectedIndex = object.parityindex;
+  $("#order")[0].selectedIndex = object.orderindex;
 }
 
 function prepareString(object) {
@@ -78,6 +101,8 @@ function prepareString(object) {
 
   $("#stringlength").val(object.stringlength);
   $("#charset")[0].selectedIndex = object.chartype;
+  $("#case")[0].selectedIndex = object.caseindex;
+  $("#hasnumber")[0].checked = object.hasnumber;
   $("#linelength").val(object.linelength);
   $("#linebreak").val(object.linebreak);
   $("#wordlength").val(object.wordlength);
@@ -92,9 +117,12 @@ function prepareGraph(object) {
   $("#connect")[0].checked = object.isconnect;
   $("#direct")[0].checked = object.isdirect;
   $("#weight")[0].checked = object.isweighted;
+  $("#weightmin").val(object.weightmin);
+  $("#weightmax").val(object.weightmax);
   $("#tree")[0].checked = object.isTree;
   $("#node").val(object.node);
   $("#edge").val(object.edge);
+  $("#graphformat")[0].selectedIndex = object.graphformatindex;
   $("#repeatGraph").val(object.repeattime);
 }
 
@@ -106,13 +134,9 @@ function repeatTypeChanged(e) {
   var backrefSelect = inputGroup.find("select[id*='backref']");
   var customInput = inputGroup.find("input");
   
-  // if we are choosing custom input
   if (repeatTypeSelect[0].selectedIndex == 0) {
-    // if input field is not there
     if (!customInput.length) {
-      // check if we have select field first
       if (backrefSelect.length) {
-        // if we find a select, delete it
         backrefSelect.remove();
       }
 
@@ -120,12 +144,9 @@ function repeatTypeChanged(e) {
       customInput.attr("id", "repeat" + dataType);
       customInput.appendTo(inputGroup);
     }
-  } else { // if we are choosing backreference
-    // if backref select is not there
+  } else {
     if (!backrefSelect.length) {
-      // check if custom input field is there
       if (customInput.length) {
-        // if we find a custom input box, delete it
         customInput.remove();
       }
 
@@ -190,24 +211,25 @@ function okclicked(e) {
   inputInfo.saveSession();
 
   var obj = jQuery.extend({}, inputInfo.getLastElement());
-
-  console.log(obj);
   obj.identifier = undefined;
-
   preview.startLoading();
-  
-  // handle backreference case
   if (!obj.repeattime) {
     obj.repeattime = parseInt(preview.getData(obj.repeatref));
     obj.repeatref = undefined;
   }
-
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 }
 
-function changeInfoMessage(type) {
-  var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
-  var object = inputInfo.getLastElement();
+function changeInfoMessage(type, info_span, data) {
+  if (info_span) {
+    element = info_span;
+    object = data;
+  }
+  else {
+    var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
+    var object = inputInfo.getLastElement();
+  }
+
   var string = ""; 
 
   switch (type) {
@@ -280,290 +302,3 @@ function graphInfoMessage(object) {
 
   return string;
 }
-
-function checkNumberValidation() {
-  var isValid = true;
-
-  if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
-    errorHighlight($("#repeatNumber"));
-    isValid = false;
-  } else {
-    correctHighlight($("#repeatNumber"));
-  }
-
-  if ($("#max").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
-    errorHighlight($("#max"));
-    isValid = false;
-  } else {
-    noErrorHighlight($("#max"));
-  }
-
-  if ($("#min").val() == "" || parseInt($("#min").val()) > parseInt($("#max").val())) {
-    errorHighlight($("#min"));
-    isValid = false;
-  } else {
-    correctHighlight($("#min"));
-  }
-
-  if ($("#numbertype")[0].selectedIndex == 1) {
-    if ($("#precision").val() == "" || $("#precision").val() < 0) {
-      errorHighlight($("#precision"));
-      isValid = false;
-    } else {
-      correctHighlight($("#precision"));
-    }
-  } else {
-    noErrorHighlight($("#precision"));
-  }
-
-  if ($("#parity")[0].selectedIndex == 1) {
-    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-      if (parseInt($("#min").val()) % 2 == 1) {
-        isValid = false; 
-        errorHighlight($("#min"));
-        errorHighlight($("#max"));
-      };
-    };
-  } else if ($("#parity")[0].selectedIndex == 2) {
-    if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-      if (parseInt($("#min").val()) % 2 == 0) {
-        isValid = false;
-        errorHighlight($("#min"));
-        errorHighlight($("#max"));
-      };
-    };
-  };
-
-  return isValid;
-}
-
-function checkStringValidation() {
-  var isValid = true;
-
-  if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
-    errorHighlight($("#stringlength"));
-    isValid = false;
-  } else {
-    correctHighlight($("#stringlength"));
-  }
-
-  if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
-    errorHighlight($("#repeatString"));
-    isValid = false;
-  } else {
-    correctHighlight($("#repeatString"));
-  }
-
-  return isValid;
-}
-
-function checkGraphValidation() {
-  var isValid = true;
-
-  if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
-    errorHighlight($("#repeatGraph"));
-    isValid = false;
-  } else {
-    correctHighlight($("#repeatGraph"));
-  }
-
-  if ($("#node").val() == "" || $("#node").val() <= 0) {
-    errorHighlight($("#node"));
-    isValid = false;
-  } else {
-    correctHighlight($("#node"));
-  }
-
-  if (!$("#tree")[0].checked) {
-    if ($("#edge").val() == "" || $("#edge").val() <= 0) {
-      errorHighlight($("#edge"));
-      isValid = false;
-    } else {
-      correctHighlight($("#edge"));
-    }
-  } else {
-    noErrorHighlight(("#edge"));
-  }
-
-  return isValid;
-}
-
-function errorHighlight(element) {
-  $(element).parent().removeClass("has-success form-feedback");
-  $(element).parent().addClass("has-error form-feedback");
-  var string = "#"+$(element).attr("id")+"Span";
-  $(string).html(iconError);
-}
-
-function noErrorHighlight(element) {
-  $(element).parent().removeClass("has-error has-success form-feedback");
-  var string = "#"+$(element).attr("id")+"Span";
-  $(string).html("");
-}
-
-function correctHighlight(element) {
-  $(element).parent().removeClass("has-error form-feedback");
-  $(element).parent().addClass("has-success form-feedback");
-  var string = "#"+$(element).attr("id")+"Span";
-  $(string).html(iconCorrect);
-}
-
-$(function(){
-  $("#min").focusout(function() {
-    if ($("#min").val() == "") {
-      errorHighlight($("#min"));
-    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
-      errorHighlight($("#min"));
-      errorHighlight($("#max"));
-    } else {
-      correctHighlight($("#min"));
-      if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
-        correctHighlight($("#max"));
-      }
-    }
-
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
-  });
-
-  $("#max").focusout(function() {
-    if ($("#max").val() == "") {
-      errorHighlight($("#max"));
-    } else if (parseInt($("#min").val()) > parseInt($("#max").val())) {
-      errorHighlight($("#min"));
-      errorHighlight($("#max"));
-    } else {
-      correctHighlight($("#max"));
-      if (parseInt($("#min").val()) <= parseInt($("#max").val())) {
-        correctHighlight($("#min"));
-      }
-    }
-
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
-  });
-
-  $("#parity").on('change', function() {
-    if ($("#parity")[0].selectedIndex == 1) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 1) {
-          isValid = false; 
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    } else if ($("#parity")[0].selectedIndex == 2) {
-      if (parseInt($("#min").val()) == parseInt($("#max").val())) {
-        if (parseInt($("#min").val()) % 2 == 0) {
-          isValid = false;
-          errorHighlight($("#min"));
-          errorHighlight($("#max"));
-        };
-      };
-    };
-  })
-
-  $("#repeatNumber").focusout(function() {
-    if ($("#repeatNumber").val() == "" || $("#repeatNumber").val() <= 0) {
-      errorHighlight($("#repeatNumber"));
-    } else {
-      correctHighlight($("#repeatNumber"));
-    }
-  });
-
-  $("#precision").focusout(function() {
-  if ($("#numbertype")[0].selectedIndex == 1) {
-    if ($("#precision").val() == "" || $("#precision").val() < 0) {
-        errorHighlight($("#precision"));
-      } else {
-        correctHighlight($("#precision"));
-      }
-    } else {
-      noErrorHighlight($("#precision"));
-    }
-  });
-  
-  $("#stringlength").focusout(function() {
-    if ($("#stringlength").val() == "" || $("#stringlength").val() <= 0) {
-      errorHighlight($("#stringlength"));
-    } else {
-      correctHighlight($("#stringlength"));
-    }
-  });
-
-  $("#repeatString").focusout(function() {
-    if ($("#repeatString").val() == "" || $("#repeatString").val() <= 0) {
-      errorHighlight($("#repeatString"));
-    } else {
-      correctHighlight($("#repeatString"));
-    }
-  });
-
-  $("#node").focusout(function() {
-    if ($("#node").val() == "" || $("#node").val() <= 0) {
-      errorHighlight($("#node"));
-    } else {
-      correctHighlight($("#node"));
-    }
-  });
-
-  $("#edge").focusout(function() {
-    if (!$("#tree")[0].checked) {
-      if ($("#edge").val() == "" || $("#edge").val() <= 0) {
-        errorHighlight($("#edge"));
-      } else {
-        correctHighlight($("#edge"));
-      }
-    } else {
-      noErrorHighlight(("#edge"));
-    }
-  });
-
-  $("#repeatGraph").focusout(function() {
-    if ($("#repeatGraph").val() == "" || $("#repeatGraph").val() <= 0) {
-      errorHighlight($("#repeatGraph"));
-    } else {
-      correctHighlight($("#repeatGraph"));
-    }
-  });
-
-  $('#linelength').keypress(function(e) {
-    var verified = (e.which == 8 || e.which == undefined || e.which == 0) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
-    if (verified) {e.preventDefault();}
-  });
-
-  $('#wordlength').keypress(function(e) {
-    var verified = (e.which == 8 || e.which == undefined || e.which == 0) ? null : String.fromCharCode(e.which).match(/[^0-9]/);
-    if (verified) {e.preventDefault();}
-  });
-});

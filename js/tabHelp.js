@@ -34,7 +34,6 @@ $(function() {
 		return $("div.tabcontents>#"+content);
 	}
 	function numberHelp(container){
-		console.log("enter");
 		$("#numbertype").css("border", "3px solid #51CBEE");
 		$("#numbertype").tooltip("show");
 		$("#numbertype").val("integer").trigger("change");	

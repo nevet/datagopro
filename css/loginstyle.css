@@ -19,6 +19,29 @@
   background:#f0f0f0;
 }
 
+#grouppopup{
+  padding:10px 20px;
+  width:300px;
+  margin-top:3px;
+  border-radius: 5px 5px 5px 5px ;
+  background:#f0f0f0;
+  overflow: hidden;
+}
+
+.from, .to, .grouprepeat, .groupcanok{
+  padding:4px;
+}
+
+.grp-to{
+  margin-left: 40px;
+}
+.grp-from{
+  margin-left: 20px;
+}
+.grp-rep{
+  margin-left: 8px;
+}
+
 
 #triangle{
   width:400px;
