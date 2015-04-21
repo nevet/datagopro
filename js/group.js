@@ -74,6 +74,7 @@ function groupDone() {
 	console.log("from: "+from);
 	console.log(to);
 
+	group(from, to);//group logic functions - xudong
 	var fromExp = createEndExpression(from);
 	var toExp = createEndExpression(to);
 	var repeatGroup = $("#repeatGroup").val();
