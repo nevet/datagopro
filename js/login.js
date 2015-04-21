@@ -87,6 +87,7 @@ function fb_login() {
 
         data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
         $(".helplogin").attr("data-id","afterlogin");
+        $("#newdataguide>li.helplogin>p").text("Click here to see your past input or log out.");
         startLoadingLogin();
 
         $.post("login.php", data, function (res) {
@@ -173,6 +174,8 @@ function loginCallback(result) {
       });
 
       $("#newdataguide>li.helplogin").attr("data-id","afterlogin");
+      $("#newdataguide>li.helplogin>p").text("Click here to see your past input or log out.");
+
 
       var postdata = {};
       postdata["name"] = username;
@@ -247,6 +250,7 @@ $(document).on("click", "#logout", function(event) {
   }
 
   $("#newdataguide>li.helplogin").attr("data-id","login");
+  $("#newdataguide>li.helplogin>p").text("Click here to log in through facebook or Google+.");
   var postdata = {};
   postdata["logintype"] = "logout";
   postdata["email"] = useremail;
