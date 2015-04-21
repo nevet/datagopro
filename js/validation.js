@@ -23,6 +23,10 @@ $(function(){
     checkParity();
   });
 
+  $("#permutation").on('change', function() {
+    checkPermutation();
+  })
+
   $("#parity").on('change', function() {
     checkParity();
   })
@@ -328,4 +332,24 @@ function correctHighlight(element) {
   $(element).parent().addClass("has-success form-feedback");
   var string = "#"+$(element).attr("id")+"Span";
   $(string).html(iconCorrect);
+}
+
+function checkPermutation() {
+  if ($("#permutation")[0].checked) {
+    permutationChecked();
+  } else {
+    permutationNotChecked();
+  }
+}
+
+function permutationChecked() {
+  $("#repeatNumber").val(1);
+  $("#repeatNumber").attr("disabled", true);
+  $("#repeatTypeNumber").attr("disabled", true);
+}
+
+function permutationNotChecked() {
+  $("#repeatNumber").val(10);
+  $("#repeatNumber").attr("disabled", false);     
+  $("#repeatTypeNumber").attr("disabled", false);
 }

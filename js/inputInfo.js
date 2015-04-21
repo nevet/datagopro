@@ -75,6 +75,7 @@
       "order": $("#order").val(),
       "numberindex" : $("#numbertype")[0].selectedIndex,
       "numbertype": $("#numbertype").val(),
+      "permutation": $("#permutation")[0].checked,
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),

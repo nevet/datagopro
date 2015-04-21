@@ -103,9 +103,13 @@ function dealWithNumber(numberObject) {
   var numberArray = [];
   switch (numberObject.numbertype) {
     case "integer":
-      for (var i = numberObject.repeattime; i > 0; i--) {
-        numberArray.push(generateInteger(numberObject));
-      };
+      if (numberObject.permutation) {
+        numberArray = generatePermutation(numberObject);
+      } else {
+        for (var i = numberObject.repeattime; i > 0; i--) {
+          numberArray.push(generateInteger(numberObject));
+        };
+      }
       break;
 
     case "float":
@@ -127,6 +131,32 @@ function dealWithNumber(numberObject) {
   for (var i = 0; i < numberArray.length; i++) {
     generatedData = generatedData + numberArray[i] + " ";
   };
+}
+
+function generatePermutation(integerObject) {
+  var
+  min = Math.ceil(integerObject.numbermin), 
+  max = Math.floor(integerObject.numbermax);
+  var array = [];
+  if (integerObject.parity == "even") {
+    if (min % 2 == 1) { min++;}
+    for (var i = min; i <= max; i+=2) {
+      array.push(i);
+    };
+  } else if (integerObject.parity == "odd"){
+    if (min % 2 == 0) { min++;}
+    for (var i = min; i <= max; i+=2) {
+      array.push(i);
+    };    
+  } else {
+    for (var i = min; i<=max; i++) {
+      array.push(i);
+    }
+  }
+  
+  array = shuffle(array);
+
+  return array;
 }
 
 function generateInteger(integerObject) {

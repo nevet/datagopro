@@ -56,7 +56,6 @@ div#editor, div#timeline, div#popular {
 	position: relative;
 }
 div#preview {
-	float: left;
 	width: 39%;
 	height: 100%;
 	min-height: 620px;
