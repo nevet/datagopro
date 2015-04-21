@@ -27,10 +27,8 @@
 												 	 modal:true,
 												 	 expose: true	});
 												break;
-				case "help":
-												break;
-				case "login":
-												break;
+				case "help":  	break;
+				case "login":  	break;
 			}
 		});
 	});
