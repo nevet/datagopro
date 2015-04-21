@@ -200,7 +200,6 @@ function graphToString(graph, graphObject) {
     min = Math.ceil(graphObject.weightmin);
   };
   for (var i=0; i<graph.length; i++) {
-    // graph[i].sort();
     for (var j=0; j<graph[i].length; j++) {
       string = string + (i+1) + " " + (graph[i][j]+1);
 
