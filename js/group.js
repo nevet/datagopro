@@ -1,5 +1,3 @@
-data = [1, [2, [3, 4, 5]], 6, 7];
-
 
 function adjustTo(from) {
 	var fromOption = $(from).find("option:selected"); 
@@ -13,8 +11,8 @@ function adjustTo(from) {
 	$("#to option").show();
 	var selectedTo = $("#to").find("option:selected");
 	var needReSelect = false;
-	for(var i = 0; i < data.length-1; i++) {
-		var groupStart = findGroupStart(data[i+1]);
+	for(var i = 0; i < grouparray.length-1; i++) {
+		var groupStart = findGroupStart(grouparray[i+1]);
 		if(groupStart <= fromEnd){
 			$($("#to").children()[i]).hide();
 			if(selectedTo.val() == $($("#to").children()[i]).val() 
@@ -44,8 +42,8 @@ function adjustFrom(to) {
 	$("#from option").show();
 	var selectedFrom = $("#from").find("option:selected");
 	var needReSelect = false;
-	for(var i = data.length-2; i >= 0; i--) {
-		var groupEnd = findGroupEnd(data[i]); 
+	for(var i = grouparray.length-2; i >= 0; i--) {
+		var groupEnd = findGroupEnd(grouparray[i]); 
 		if(groupEnd >= toStart){
 			$($("#from").children()[i]).hide();
 			if(selectedFrom.val() == $($("#from").children()[i]).val() 
@@ -71,20 +69,19 @@ function groupDone() {
 	$("#grouppopup").bPopup().close();
 	var from = getEndPoints("#from");	
 	var to = getEndPoints("#to");
-	console.log("from: "+from);
-	console.log(to);
 
 	group(from, to);//group logic functions - xudong
 	var fromExp = createEndExpression(from);
 	var toExp = createEndExpression(to);
+
 	var repeatGroup = $("#repeatGroup").val();
 	var position = (Array.isArray(to)) ? to[1]: to; // 1 base
-	console.log(position);
+
 	var group_info = $("<p></p>", {
 		"class": "group-info",
-		"html": "From: "+fromExp+", to: "+toExp+" Repeat: "+repeatGroup+" times.",
+		"html": "From: "+fromExp+" to: "+toExp+" repeat "+repeatGroup+" times.",
 	});
-	$($("#data-field").children()[position-1]).append(group_info);
+	$($("#grouparray-field").children()[position-1]).append(group_info);
 }
 
 function getEndPoints(container) {
@@ -139,33 +136,39 @@ function findGroupEnd(arr) {
 
 $(function() {
 
-	$(document).on("click","#groupbutton>i", function(){
-	    $("#grouppopup").bPopup({ //uses jQuery easing plugin
-	    speed: 500,
-	    transition: 'slideDown',
-	    transitionClose: 'slideUp'});
-	    $("#from").children().remove();
-	    $("#to").children().remove();
-	    $("#repeatGroup").val("10");
-	    fillFromTo();
+<<<<<<< HEAD
+	$(document).on("click","#groupbutton>i,#groupbutton>p", function(){
+		if (grouparray.length < 2) {
+			alert("You have less than two portions of data, which cannot be grouped.");
+		}
+		else {
+		    $("#grouppopup").bPopup({ //uses jQuery easing plugin
+		    speed: 500,
+		    transition: 'slideDown',
+		    transitionClose: 'slideUp'});
+		    $("#from").children().remove();
+		    $("#to").children().remove();
+		    $("#repeatGroup").val("10");
+		    fillFromTo();
+		}
 	});
 	function fillFromTo() {
-		for(var i = 0; i < data.length; i++) {
-			if(!Array.isArray(data[i])) {
-				//a stand alone data
-				if(i != data.length - 1) {
-					addNumberOption(data[i], "#from");
+		for(var i = 0; i < grouparray.length; i++) {
+			if(!Array.isArray(grouparray[i])) {
+				//a stand alone grouparray
+				if(i != grouparray.length - 1) {
+					addNumberOption(grouparray[i], "#from");
 				}
 				if(i != 0) {
-					addNumberOption(data[i], "#to");
+					addNumberOption(grouparray[i], "#to");
 				}
 			}
 			else {
 				//a group
-				var start = findGroupStart(data[i]);
-				var end = findGroupEnd(data[i]);
+				var start = findGroupStart(grouparray[i]);
+				var end = findGroupEnd(grouparray[i]);
 				//console.log(end);
-				if(i != data.length - 1) {
+				if(i != grouparray.length - 1) {
 					addGroupOption(start, end, "#from");
 				}
 				if(i != 0) {

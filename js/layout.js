@@ -27,45 +27,39 @@ $(function(){
 				$("#preview").append(latestNewDataPreview);
 			}
 		}
-
-    $("#preview").css("font-family", "'Lucida Console', Monaco, monospace");
 	});
 
 	$("#popularinput").on("click", function(e){
 		var prev = $(".navbar-nav > li.active");
-		if (prev.length == 0) {
-			// timeline is displayed now
-			$("#timeline").css("display", "none");
-			$(this).parent().addClass("active");
-			$("#popular").css("display", "block");	
-			$("#preview").children().not(".previewLoadingCover").remove();
-		}
-		else if($(prev.find("a")[0]).attr("id") == "newdata"){
-			prev.removeClass();
-			$("#editor").css("display", "none");
-			$(this).parent().addClass("active");
-			$("#popular").css("display", "block");	
-			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
-		}
-
-    $("#preview").css("font-family", "inherit");
+			if (prev.length == 0) {
+				// timeline is displayed now
+				$("#timeline").css("display", "none");
+				$(this).parent().addClass("active");
+				$("#popular").css("display", "block");	
+				$("#preview").children().not(".previewLoadingCover").remove();
+			}
+			else if($(prev.find("a")[0]).attr("id") == "newdata"){
+				prev.removeClass();
+				$("#editor").css("display", "none");
+				$(this).parent().addClass("active");
+				$("#popular").css("display", "block");	
+				latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
+			}
 	});
 
 	$("#myinput").on("click", function(e){
 		var prev = $(".navbar-nav > li.active");
-		if ($(prev.find("a")[0]).attr("id") == "popularinput") {
-			$("#popular").css("display", "none");
-			$("#timeline").css("display", "block");	
-			$("#preview").children().not(".previewLoadingCover").remove();
-		}
-		else if($(prev.find("a")[0]).attr("id") == "newdata"){
-			prev.removeClass();
-			$("#editor").css("display", "none");
-			$("#timeline").css("display", "block");	
-			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
-		}
-    
-    $("#preview").css("font-family", "inherit");
+			if ($(prev.find("a")[0]).attr("id") == "popularinput") {
+				$("#popular").css("display", "none");
+				$("#timeline").css("display", "block");	
+				$("#preview").children().not(".previewLoadingCover").remove();
+			}
+			else if($(prev.find("a")[0]).attr("id") == "newdata"){
+				prev.removeClass();
+				$("#editor").css("display", "none");
+				$("#timeline").css("display", "block");	
+				latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
+			}
 	});
 
 	$(".navbar img").click(function(e) {
@@ -107,6 +101,7 @@ $(function(){
   	}
 
   	order++;
+    insertEntry(order);//group function.
 
   	var datablock = $("<div class='data-block'><span class='order fa-stack'> <i class='fa fa-circle-thin fa-stack-2x'></i> <i class='fa fa-stack-1x'>"
   		+order+"</i> </span><div class='column'> <input class='btn btn-default' editable='false' readonly='on' placeholder='Data Type' onclick='chooseDataType(this)'>"+
@@ -184,7 +179,9 @@ $(function(){
     inputInfo.removeElement(dataBlock.find("input")[0]);
         dataBlock.remove();
 
+        deleteEntry(order);
         order --;
+
         renumberDatablocks();
   });
 
@@ -249,9 +246,9 @@ function clearData() {
   $("#number").css("display","block").siblings().css("display", "none");
   
   $("#numbertype")[0].selectedIndex = 0;
-  $("#precision").val(2);
+  $("#precision").val(3);
   $("#precisionDiv").hide();
-  $("#min").val(-100);
+  $("#min").val(0);
   $("#max").val(100);
   $("#repeatNumber").val(10);
   $("#parity")[0].selectedIndex = 0;
@@ -261,7 +258,7 @@ function clearData() {
   correctHighlight($("#min"));
   noErrorHighlight($("#precision"));
 
-  $("#stringlength").val(20);
+  $("#stringlength").val(100);
   $("#charset")[0].selectedIndex = 0;
   $("#case")[0].selectedIndex = 0;
   $("#hasnumber")[0].checked = false;
@@ -269,7 +266,7 @@ function clearData() {
   $("#linebreak").val("\\n");
   $("#wordlength").val("");
   $("#wordbreak").val("");
-  $("#repeatString").val(5);
+  $("#repeatString").val(10);
   correctHighlight($("#stringlength"));
   correctHighlight($("#repeatString"));
 
@@ -281,7 +278,7 @@ function clearData() {
   $(".weightrange").css("display", "none");
   $("#tree")[0].checked = false;
   $("#node").val(10);
-  $("#edge").val(10);
+  $("#edge").val(90);
   $("#graphformat")[0].selectedIndex = 0;
   $("#repeatGraph").val(1);
   correctHighlight($("#repeatGraph"));
