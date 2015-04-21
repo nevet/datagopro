@@ -91,7 +91,7 @@
 
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
+        // alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -126,7 +126,7 @@
 
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
+        // alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
@@ -161,7 +161,7 @@
 
     if (index >= 0) {
       if (object.datatype != newObject.datatype) {
-        alert("Different datatype");
+        // alert("Different datatype");
       };
       inputList.splice(index, 1);
     }
