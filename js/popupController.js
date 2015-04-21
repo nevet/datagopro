@@ -38,10 +38,12 @@ function numberChanged(e) {
     checkNumberValidation();
     $("#parity")[0].selectedIndex = 0;
     $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
   } else {
     $("#precisionDiv").hide();
     noErrorHighlight($("#precision"));
     $("#parity").prop("disabled", false);
+    $("#permutationDiv").show();
   }
 }
 
@@ -77,10 +79,12 @@ function prepareNumber(object) {
     $("#precision").val(object.floatprecision);
     $("#precisionDiv").show();
     $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
   } else {
     $("#precisionDiv").hide();
     $("#parity").prop("disabled", false);
     noErrorHighlight($("#precision"));
+    $("#permutationDiv").show();
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
