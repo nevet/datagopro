@@ -245,7 +245,6 @@ function getTags() {
 		}
 	}
 
-	console.log(tags);
   $(".savewindow").remove();
 	$(".cover").remove();
 }

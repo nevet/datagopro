@@ -10,7 +10,7 @@ function group(from, end)
   if(Array.isArray(from)) fromInt = from[0];
   else fromInt = from;
 
-  if(Array.isArray(end)) endInt = end[length-1];
+  if(Array.isArray(end)) endInt = end[end.length-1];
   else endInt = end;
 
   var index1 = jsonstring.search(fromInt.toString());

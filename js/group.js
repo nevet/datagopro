@@ -8,23 +8,12 @@ function adjustTo(from) {
 	else {
 		fromEnd = $(fromOption).val();
 	}
-	$("#to option").show();
-	var selectedTo = $("#to").find("option:selected");
-	var needReSelect = false;
 	for(var i = 0; i < grouparray.length-1; i++) {
 		var groupStart = findGroupStart(grouparray[i+1]);
-		if(groupStart <= fromEnd){
-			$($("#to").children()[i]).hide();
-			if(selectedTo.val() == $($("#to").children()[i]).val() 
-				&& selectedTo.attr("start") == $($("#to").children()[i]).attr("start")) {
-				needReSelect = true;
-			}
-		}
-		else {
-			if(needReSelect) {
-				$("#to")[0].selectedIndex = i;
-			}
-			break;
+		if(groupStart-1 == fromEnd ){
+			$($("#to").children()[i]).show();
+			$("#to")[0].selectedIndex = i;
+			
 		}
 	}
 }
@@ -32,37 +21,23 @@ function adjustTo(from) {
 function adjustFrom(to) {
 	var toOption = $(to).find("option:selected"); 
 	var toStart;
-
 	if(toOption.val() == "group") {
 		toStart = toOption.attr("start");
 	}
 	else {
 		toStart = $(toOption).val();
 	}
-	$("#from option").show();
-	var selectedFrom = $("#from").find("option:selected");
-	var needReSelect = false;
 	for(var i = grouparray.length-2; i >= 0; i--) {
-		var groupEnd = findGroupEnd(grouparray[i]); 
-		if(groupEnd >= toStart){
-			$($("#from").children()[i]).hide();
-			if(selectedFrom.val() == $($("#from").children()[i]).val() 
-				&& selectedFrom.attr("start") == $($("#from").children()[i]).attr("start")) {
-				needReSelect = true;
-			}
-		}
-		else {
-			if(needReSelect) {
-				$("#from")[0].selectedIndex = i;
-			}
-			break;
+		var groupEnd = findGroupEnd(grouparray[i]);
+		if(groupEnd == toStart-1 ){
+			$($("#from").children()[i]).show();
+			$("#from")[0].selectedIndex = i;
 		}
 	}
 }
 
 function groupCancelled() {
 	$("#grouppopup").bPopup().close();
-
 }
 
 function groupDone() {
@@ -79,9 +54,9 @@ function groupDone() {
 
 	var group_info = $("<p></p>", {
 		"class": "group-info",
-		"html": "From: "+fromExp+" to: "+toExp+" repeat "+repeatGroup+" times.",
+		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times.",
 	});
-	$($("#grouparray-field").children()[position-1]).append(group_info);
+	$($("#data-field").children()[position-1]).append(group_info);
 }
 
 function getEndPoints(container) {
@@ -136,7 +111,6 @@ function findGroupEnd(arr) {
 
 $(function() {
 
-<<<<<<< HEAD
 	$(document).on("click","#groupbutton>i,#groupbutton>p", function(){
 		if (grouparray.length < 2) {
 			alert("You have less than two portions of data, which cannot be grouped.");
@@ -155,7 +129,7 @@ $(function() {
 	function fillFromTo() {
 		for(var i = 0; i < grouparray.length; i++) {
 			if(!Array.isArray(grouparray[i])) {
-				//a stand alone grouparray
+				//a stand alone data
 				if(i != grouparray.length - 1) {
 					addNumberOption(grouparray[i], "#from");
 				}
@@ -167,7 +141,6 @@ $(function() {
 				//a group
 				var start = findGroupStart(grouparray[i]);
 				var end = findGroupEnd(grouparray[i]);
-				//console.log(end);
 				if(i != grouparray.length - 1) {
 					addGroupOption(start, end, "#from");
 				}
