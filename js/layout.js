@@ -27,40 +27,43 @@ $(function(){
 				$("#preview").append(latestNewDataPreview);
 			}
 		}
+    $("#preview").css("font-family", "'Lucida Console',Monaco,monospace");
 	});
 
 	$("#popularinput").on("click", function(e){
 		var prev = $(".navbar-nav > li.active");
-			if (prev.length == 0) {
-				// timeline is displayed now
-				$("#timeline").css("display", "none");
-				$(this).parent().addClass("active");
-				$("#popular").css("display", "block");	
-				$("#preview").children().not(".previewLoadingCover").remove();
-			}
-			else if($(prev.find("a")[0]).attr("id") == "newdata"){
-				prev.removeClass();
-				$("#editor").css("display", "none");
-				$(this).parent().addClass("active");
-				$("#popular").css("display", "block");	
-				latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
-			}
+		if (prev.length == 0) {
+			// timeline is displayed now
+			$("#timeline").css("display", "none");
+			$(this).parent().addClass("active");
+			$("#popular").css("display", "block");	
+			$("#preview").children().not(".previewLoadingCover").remove();
+		}
+		else if($(prev.find("a")[0]).attr("id") == "newdata"){
+			prev.removeClass();
+			$("#editor").css("display", "none");
+			$(this).parent().addClass("active");
+			$("#popular").css("display", "block");	
+			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
+		}
+    $("#preview").css("font-family", "inherit");
 	});
 
 	$("#myinput").on("click", function(e){
 		var prev = $(".navbar-nav > li.active");
-			if ($(prev.find("a")[0]).attr("id") == "popularinput") {
-				prev.removeClass();
-				$("#popular").css("display", "none");
-				$("#timeline").css("display", "block");	
-				$("#preview").children().not(".previewLoadingCover").remove();
-			}
-			else if($(prev.find("a")[0]).attr("id") == "newdata"){
-				prev.removeClass();
-				$("#editor").css("display", "none");
-				$("#timeline").css("display", "block");	
-				latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
-			}
+		if ($(prev.find("a")[0]).attr("id") == "popularinput") {
+			prev.removeClass();
+			$("#popular").css("display", "none");
+			$("#timeline").css("display", "block");	
+			$("#preview").children().not(".previewLoadingCover").remove();
+		}
+		else if($(prev.find("a")[0]).attr("id") == "newdata"){
+			prev.removeClass();
+			$("#editor").css("display", "none");
+			$("#timeline").css("display", "block");	
+			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
+		}
+   		$("#preview").css("font-family", "inherit");
 	});
 
 	$(".navbar img").click(function(e) {
@@ -245,6 +248,7 @@ function clearData() {
   $("#number").css("display","block").siblings().css("display", "none");
   
   $("#numbertype")[0].selectedIndex = 0;
+  $("#permutation")[0].checked = false;
   $("#precision").val(3);
   $("#precisionDiv").hide();
   $("#min").val(0);
