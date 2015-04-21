@@ -224,7 +224,7 @@ function getTags() {
 	var tagsInput = $(".tagbox .selected"); 
 	for (var i=0; i<tagsInput.length; i++) {
 		var tagString = $(tagsInput)[i].innerHTML;
-		if (tags.indexOf(tagString) === -1) {
+		if (tagString != "" && tags.indexOf(tagString) === -1) {
 			tags.push(tagString);			
 		}
 	};
@@ -232,7 +232,7 @@ function getTags() {
 	tagsInput = $(".inputcontainer a");
 	for (var i=0; i<tagsInput.length; i++) {
 		var tagString = $(tagsInput)[i].innerHTML;
-		if (tags.indexOf(tagString) === -1) {
+		if (tagString != "" && tags.indexOf(tagString) === -1) {
 			tags.push(tagString);			
 		}
 	};
@@ -240,7 +240,7 @@ function getTags() {
 	if (tags.length < 5) {
 		tagsInput = $(".inputcontainer input");
 		var tagString = $(tagsInput).val();
-		if (tags.indexOf(tagString) === -1) {
+		if (tagString != "" && tags.indexOf(tagString) === -1) {
 			tags.push(tagString);			
 		}
 	}
