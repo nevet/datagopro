@@ -139,7 +139,7 @@ function findGroupEnd(arr) {
 
 $(function() {
 
-	$(document).on("click","#groupbutton>i", function(){
+	$(document).on("click","#groupbutton>i,#groupbutton>p", function(){
 	    $("#grouppopup").bPopup({ //uses jQuery easing plugin
 	    speed: 500,
 	    transition: 'slideDown',
