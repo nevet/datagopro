@@ -38,10 +38,12 @@ function numberChanged(e) {
     checkNumberValidation();
     $("#parity")[0].selectedIndex = 0;
     $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
   } else {
     $("#precisionDiv").hide();
     noErrorHighlight($("#precision"));
     $("#parity").prop("disabled", false);
+    $("#permutationDiv").show();
   }
 }
 
@@ -77,10 +79,12 @@ function prepareNumber(object) {
     $("#precision").val(object.floatprecision);
     $("#precisionDiv").show();
     $("#parity").prop("disabled", "disabled");
+    $("#permutationDiv").hide();
   } else {
     $("#precisionDiv").hide();
     $("#parity").prop("disabled", false);
     noErrorHighlight($("#precision"));
+    $("#permutationDiv").show();
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
@@ -128,13 +132,9 @@ function repeatTypeChanged(e) {
   var backrefSelect = inputGroup.find("select[id*='backref']");
   var customInput = inputGroup.find("input");
   
-  // if we are choosing custom input
   if (repeatTypeSelect[0].selectedIndex == 0) {
-    // if input field is not there
     if (!customInput.length) {
-      // check if we have select field first
       if (backrefSelect.length) {
-        // if we find a select, delete it
         backrefSelect.remove();
       }
 
@@ -142,12 +142,9 @@ function repeatTypeChanged(e) {
       customInput.attr("id", "repeat" + dataType);
       customInput.appendTo(inputGroup);
     }
-  } else { // if we are choosing backreference
-    // if backref select is not there
+  } else {
     if (!backrefSelect.length) {
-      // check if custom input field is there
       if (customInput.length) {
-        // if we find a custom input box, delete it
         customInput.remove();
       }
 
@@ -210,17 +207,12 @@ function okclicked(e) {
   }
 
   var obj = jQuery.extend({}, inputInfo.getLastElement());
-
   obj.identifier = undefined;
-
   preview.startLoading();
-  
-  // handle backreference case
   if (!obj.repeattime) {
     obj.repeattime = parseInt(preview.getData(obj.repeatref));
     obj.repeatref = undefined;
   }
-
   worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
 }
 

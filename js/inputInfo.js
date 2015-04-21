@@ -90,9 +90,6 @@
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        // alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 
@@ -125,9 +122,6 @@
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        // alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 
@@ -160,9 +154,6 @@
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
-      if (object.datatype != newObject.datatype) {
-        // alert("Different datatype");
-      };
       inputList.splice(index, 1);
     }
 
