@@ -1,4 +1,4 @@
-grouparray = [1,2,3,4,5];
+grouparray = [1];
 
 
 function group(from, end)
