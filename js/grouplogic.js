@@ -42,44 +42,14 @@ function deleteEntry(data)
   }
   else jsonstring = jsonstring.replace(','+data.toString(), '');
 
-  // var bucket = [];
-  // var lastDel, lastIndex;
-  // var del1 = undefined, del2=undefined;
-  // for (var i = 0; i < jsonstring.length-1; i++) {
-  //     if(jsonstring[i] == '[')
-  //     {
-  //       bucket.push(i);
-  //     }
-  //     else if(jsonstring[i] == ']')
-  //     {
-  //       if(i == lastDel+1 && bucket.length!=1)
-  //       {
-  //         del1 = lastIndex;
-  //         del2 = i;
-  //         break
-  //       }
-  //       lastIndex = bucket[bucket.length-1];
-  //       bucket = bucket.splice(bucket.length-1,1);
-  //       lastDel = i;
-  //     }
-  // }
-
-  // if(del1!=undefined&&del2!=undefined){
-  //   deleteIndexInString(jsonstring, del1);
-  //   deleteIndexInString(jsonstring, del2);
-  // }
-
   grouparray = JSON.parse(jsonstring);
   console.log(grouparray[0][0]);
 
   var content;
   for (var i = 0; i < grouparray.length; i++) {
     if(Array.isArray(grouparray[i]))
-    {
-      
+    {   
       content = grouparray[i][0];
-
-      console.log("content: "+content);
       grouparray.splice(i,1);
       grouparray.unshift(content);
     }

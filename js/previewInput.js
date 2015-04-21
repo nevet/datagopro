@@ -373,5 +373,9 @@ $(function() {
 		$("#data-field").children().remove();
 		insertDataSet("#data-field", event);
     order = dataArray.length;
+    grouparray=[];
+    for (var i = 1; i <= order; i++) {
+        grouparray.push(i);
+    }
 	}
 });
