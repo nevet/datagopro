@@ -13,18 +13,24 @@ html body {
 .navbar-nav > li > a {
 	height: 65px;
 	padding-top: 25px;
+}
+.navbar-nav li > a {	
 	cursor: pointer;
 }
+
 .navbar-nav li > a > i, span#profile  {
 	margin-right: 10px;
 }
-
+.navbar-brand {
+	cursor: default;
+}
 .navbar-brand>img {
 	margin-left: 20px;
 	width: 15%;
 	min-width: 155px;
 	margin-top: -11px;
 	margin-right: -100px;
+	cursor: pointer;
 }
 .navbar p {
 	height: 65px;
@@ -32,7 +38,7 @@ html body {
 	padding-left: 100px;
 	color: white;
 	font-style: italic;
-	cursor: pointer;
+	cursor: default;
 }
 
 div#mainbody {
@@ -72,7 +78,7 @@ div#editor .fa {
 	color: #0858B2;
 }
 div#editor>input.form-control {
-	width: 60%;
+	width: 80%;
 	float: left;
 	margin-right: 20px;
 }
@@ -112,7 +118,7 @@ div#editor .btn-delete:hover{
 
 div#data-field {
 	margin: 2% 0.5% 1%;
-	max-height: 58%;
+	max-height: 75%;
 	width: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -152,12 +158,12 @@ p.group-info {
 div#add {
 	width: 200px;
 	position: absolute;
-	bottom: 27%;
+	bottom: 12%;
 }
 div#groupbutton {
 	width: 200px;
 	position: absolute;
-	bottom: 27%;
+	bottom: 10%;
 	left: 300px;
 }
 div#add>i, div#groupbutton>i {
@@ -179,7 +185,7 @@ div#export{
 	overflow: hidden;
 	font-size: 18px;
 	position: absolute;
-	bottom: 12%;
+	bottom: 10%;
 }
 div#export>p {
 	margin: 0 5px 5px;
@@ -225,7 +231,7 @@ div#generate {
 	margin-top: 5px;
 	position: absolute;
 	width: 140px;
-	bottom: 3%;
+	bottom: 5%;
 }
 div#generate>button, div#saveDiv>button {
 	font-size: 17px;
@@ -252,9 +258,9 @@ div#generate i {
 }
 div#saveDiv {
 	position: absolute;
-	bottom: 3%;
+	bottom: 5%;
 	margin-top: 5px;
-	left: 160px;
+	left: 170px;
 	margin-left: 10px;
 	width: 130px;
 }
