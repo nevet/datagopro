@@ -66,6 +66,7 @@ div#preview.showContent {
 	padding: 10px 20px;
 	overflow-x: auto; 
 	overflow-y: auto;
+	font-family: 'Lucida Console', Monaco, monospace;
 }
 
 div#editor .fa {
