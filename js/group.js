@@ -1,3 +1,4 @@
+var groupMap = {};
 
 function adjustTo(from) {
 	var fromOption = $(from).find("option:selected"); 
@@ -54,8 +55,13 @@ function groupDone() {
 
 	var group_info = $("<p></p>", {
 		"class": "group-info",
-		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times.",
+		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times."
+				+" <a class='btn-delete' href='#''><i class='fa fa-trash-o fa-lg fa-delete'></i></a>",
+		"start": from,
+		"endding": to,
 	});
+
+	groupInputInfo(from, to, group_info);
 	$($("#data-field").children()[position-1]).append(group_info);
 }
 
@@ -126,6 +132,11 @@ $(function() {
 		    fillFromTo();
 		}
 	});
+	$(document).on("click", ".group-info .btn-delete", function(e) {
+		var group = $(e.target);
+		deleteGroup(group.attr("start"), group.attr("endding"));
+		group.remove();
+	});
 	function fillFromTo() {
 		for(var i = 0; i < grouparray.length; i++) {
 			if(!Array.isArray(grouparray[i])) {
@@ -169,4 +180,30 @@ $(function() {
 
 });
 
-  
+function groupInputInfo(from, to, group_info) {
+	var keyfrom = "[" + from.toString() +"]";
+	var keyto = "[" + to.toString() + "]";
+	var array = [];
+	var buttons = $("#data-field .data-block input");
+
+	if (!Array.isArray(from)) {
+		groupMap[keyfrom] = buttons[parseInt(from)-1];
+		array.push(parseInt(from));
+	} else {
+		array.push(from[0]);
+	}
+
+	if (!Array.isArray(to)) {
+		groupMap[keyto] = buttons[parseInt(to)-1];
+		array.push(parseInt(to));
+	} else {
+		array.push(to[to.length-1]);
+	}
+
+	var key = "["+array.toString()+"]";
+	groupMap[key] = group_info[0];
+	
+	console.log(groupMap[keyfrom]);
+	console.log(groupMap[keyto]);
+	console.log(groupMap[key]);
+}
