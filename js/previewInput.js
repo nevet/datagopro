@@ -249,7 +249,6 @@ $(function() {
 
 	function viewDataSet(event) {
 		$("#preview").children().not(".previewLoadingCover").remove();
-		//$(".previewLoadingCover").css("display", "none");
 		insertDataSet("#preview", event);
 	}
 
