@@ -146,6 +146,8 @@
       "weightmax": $("#weightmax").val(),
       "node": $("#node").val(),
       "edge": $("#edge").val(),
+      "graphformatindex": $("#graphformat")[0].selectedIndex,
+      "graphformat": $("#graphformat").val()
     }
 
     if ($("#repeatGraph").length) {

@@ -276,6 +276,7 @@ function clearData() {
   $("#tree")[0].checked = false;
   $("#node").val(10);
   $("#edge").val(90);
+  $("#graphformat")[0].selectedIndex = 0;
   $("#repeatGraph").val(1);
   correctHighlight($("#repeatGraph"));
   correctHighlight($("#node"));
