@@ -54,9 +54,12 @@ function groupDone() {
 
 	var group_info = $("<p></p>", {
 		"class": "group-info",
-		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times.",
+		"html": "From "+fromExp+" to "+toExp+" repeat "+repeatGroup+" times."
+				+" <a class='btn-delete' href='#''><i class='fa fa-trash-o fa-lg fa-delete'></i></a>",
+		"start": from,
+		"endding": to,
 	});
-	$($("#data-field").children()[position-1]).append(group_info);
+	$($("#data-field").children()[position-1]).after(group_info);
 }
 
 function getEndPoints(container) {
@@ -125,6 +128,11 @@ $(function() {
 		    $("#repeatGroup").val("10");
 		    fillFromTo();
 		}
+	});
+	$(document).on("click", ".group-info .btn-delete", function(e) {
+		var group = $(e.target);
+		deleteGroup(group.attr("start"), group.attr("endding"));
+		group.remove();
 	});
 	function fillFromTo() {
 		for(var i = 0; i < grouparray.length; i++) {

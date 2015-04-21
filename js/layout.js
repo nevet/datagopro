@@ -50,6 +50,7 @@ $(function(){
 	$("#myinput").on("click", function(e){
 		var prev = $(".navbar-nav > li.active");
 			if ($(prev.find("a")[0]).attr("id") == "popularinput") {
+				prev.removeClass();
 				$("#popular").css("display", "none");
 				$("#timeline").css("display", "block");	
 				$("#preview").children().not(".previewLoadingCover").remove();
