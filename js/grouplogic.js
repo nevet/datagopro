@@ -1,27 +1,35 @@
-groupinfor = [1,2,3,4,5];
+grouparray = [1,2,3,4,5];
 
 
 function group(from, end)
 {
-  var jsonstring = JSON.stringify(groupinfor);
+  var jsonstring = JSON.stringify(grouparray);
   
-  var index1 = jsonstring.search(from);
-  var index2 = jsonstring.search(end); 
+  var fromInt, endInt;
+  
+  if(Array.isArray(from)) fromInt = from[0];
+  else fromInt = from;
+
+  if(Array.isArray(end)) endInt = end[length-1];
+  else endInt = end;
+
+  var index1 = jsonstring.search(fromInt.toString());
+  var index2 = jsonstring.search(endInt.toString()); 
   var output = jsonstring.slice(0,index1)+'['+jsonstring.slice(index1,index2+1)+']'+jsonstring.slice(index2+1, jsonstring.length);
-  groupinfor = JSON.parse(output);
+  grouparray = JSON.parse(output);
 
 }
 
 function insertEntry(data)
 {
-  groupinfor.push(data);
+  grouparray.push(data);
 }
 
 function deleteEntry(data)
 {
-  var jsonstring = JSON.stringify(groupinfor);
+  var jsonstring = JSON.stringify(grouparray);
   var index = jsonstring.search(data);
-  for(var i=index+2;i<jsonstring.length-1;i=i+2)
+  for(var i=index+2;i<jsonstring.length-1;i++)
   {
     if(!isNaN(jsonstring.charAt(i))) //means it is a number.(parseInt(jsonstring.charAt(i))-1).toString()
     {
@@ -34,5 +42,23 @@ function deleteEntry(data)
   }
   else jsonstring = jsonstring.replace(','+data.toString(), '');
 
-  groupinfor = JSON.parse(jsonstring);
+  grouparray = JSON.parse(jsonstring);
+}
+
+function deleteGroup(from, end)
+{
+  var jsonstring = JSON.stringify(grouparray);
+  
+  var fromInt, endInt;
+  
+  if(Array.isArray(from)) fromInt = from[0];
+  else fromInt = from;
+
+  if(Array.isArray(end)) endInt = end[0];
+  else endInt = end;
+
+  var index1 = jsonstring.search(fromInt.toString());
+  var index2 = jsonstring.search(endInt.toString()); 
+  var output = jsonstring.slice(0,index1-1)+jsonstring.slice(index1,index2+1)+jsonstring.slice(index2+2, jsonstring.length);
+  grouparray = JSON.parse(output);
 }
