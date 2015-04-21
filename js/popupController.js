@@ -84,7 +84,9 @@ function prepareNumber(object) {
     $("#precisionDiv").hide();
     $("#parity").prop("disabled", false);
     noErrorHighlight($("#precision"));
+    $("#permutation")[0].checked = object.permutation;
     $("#permutationDiv").show();
+    checkPermutation();
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);

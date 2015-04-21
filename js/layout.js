@@ -246,6 +246,7 @@ function clearData() {
   $("#number").css("display","block").siblings().css("display", "none");
   
   $("#numbertype")[0].selectedIndex = 0;
+  $("#permutation")[0].checked = false;
   $("#precision").val(3);
   $("#precisionDiv").hide();
   $("#min").val(0);
