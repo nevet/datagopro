@@ -166,7 +166,9 @@ function generateFloat(floatObject) {
 }
 
 function dealWithGraph(graphObject) {
+  console.log("come in graph");
   for (var i = graphObject.repeattime; i > 0; i--) {
+    console.log("come in for loop");
     var graph = [];
     var string;
 
@@ -182,9 +184,14 @@ function dealWithGraph(graphObject) {
       }
     }
 
-    string = string + graphToString(graph, graphObject);
+    console.log("format "+ graphObject.graphformat);
+    if (graphObject.graphformat == "adjmatrix") {
+      string = string + graphToMatrix(graph, graphObject);
+    } else {
+      string = string + graphToString(graph, graphObject);      
+    }
 
-    generatedData = generatedData+string;
+    generatedData = generatedData+string+"\n";
   };
 }
 
@@ -209,6 +216,35 @@ function graphToString(graph, graphObject) {
     }
   }
 
+  return string;
+}
+
+function graphToMatrix(graph, graphObject) {
+  console.log("come in matrix");
+  var string = "";
+  var n = parseInt(graphObject.node);
+  var max, min;
+  if (graphObject.isweighted) {
+    max = Math.floor(graphObject.weightmax);
+    min = Math.ceil(graphObject.weightmin);
+  };
+
+  for (var i=0; i<n; i++) {
+    for (var j=0; j<n; j++) {
+      if (graph[i].indexOf(j) === -1) {
+        string = string + " 0";
+      } else {
+        if (graphObject.isweighted) {
+          var weight = Math.floor(Math.random() * (max - min + 1) + min);
+          string = string + " " + weight;
+        } else {
+          string = " 1";
+        }
+      }
+    }
+    string = string + "\n";
+  }
+  console.log(string);
   return string;
 }
 

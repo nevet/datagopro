@@ -81,11 +81,11 @@ $(function(){
 		if(document.documentElement.clientWidth > 768){
 			//big screen
 	  		var cHeight = document.documentElement.clientHeight;
-	  		console.log(cHeight);
+	  		// console.log(cHeight);
 	  		var np = 64/cHeight;
 	  		//main body height
 	  		var mbHeight = cHeight * (1-np);
-	  		console.log(mbHeight);
+	  		// console.log(mbHeight);
 	  		$("#mainbody").css("height", mbHeight+"px");
 	  	}
 	}
