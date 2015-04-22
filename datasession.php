@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($cmd) {
       case "upload":
         $inputId = trim_input("id");
-        $userId = $_SESSION["curuserid"];
+        $userId = isset($_SESSION["curuserid"]) ? $_SESSION["curuserid"] : NULL;
         $input = trim_input("jsoninput");
         $setname = trim_input("setname");
         $tag = trim_input("tag");
