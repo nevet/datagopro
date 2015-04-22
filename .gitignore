@@ -1,9 +1,5 @@
 # ignore mac crap
 .DS_Store
 
-# ignore apache crap
-.htaccess
-passwd
-
 # ignore php config
 config.php

@@ -14,7 +14,10 @@ function udpateLoginRegion(name) {
 
 function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
-  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.datasession}, function (res) {
+  inputInfo.saveSession();
+  localStorage.setName = $("#setName").val();
+
+  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
     var data = JSON.parse(res);
 
     if (data.status == "ok") {
@@ -94,8 +97,6 @@ function fb_login() {
         logintype = "facebook";
 
         data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
-        $(".helplogin").attr("data-id","afterlogin");
-        $("#newdataguide>li.helplogin>div>p").html("Click here to see your past input or log out.");
         startLoadingLogin();
 
         $.post("login.php", data, function (res) {
@@ -181,8 +182,6 @@ function loginCallback(result) {
         transitionClose: 'slideUp'
       });
 
-      $("#newdataguide>li.helplogin").attr("data-id","afterlogin");
-      $("#newdataguide>li.helplogin>div>p").html("Click here to see your past input or log out.");
 
 
       var postdata = {};
@@ -211,25 +210,21 @@ function google_logout() {
 }
 
 $(document).ready(function() {
-  var sid = getSession();
+  startLoadingLogin();
 
-  if (!sid) {
-    // user with no session in cookie, proceed to new user logic
-    popupLoginOptions(true);
-  } else {
-    startLoadingLogin();
-    $.post("login.php", {"posttype": "session"}, function (res) {
-      var data = JSON.parse(res);
-      
-      if (data.status == "return") {
-        udpateLoginRegion(data.username);
-        username = data.username;
-        finishLoadingLogin();
-      } else {
-        popupLoginOptions(true);
-      }
-    });
-  }
+  $.post("login.php", {"posttype": "session"}, function (res) {
+    var data = JSON.parse(res);
+    
+    if (data.status == "return") {
+      udpateLoginRegion(data.username);
+      username = data.username;
+      finishLoadingLogin();
+      uploadLocalSession();
+    } else {
+      finishLoadingLogin();
+      popupLoginOptions(true);
+    }
+  });
 });
 
 $(document).on("click", "#login", function(event) {
@@ -258,8 +253,7 @@ $(document).on("click", "#logout", function(event) {
     $("#afterlogin").css("display", "none");
   }
 
-  $("#newdataguide>li.helplogin").attr("data-id","login");
-  $("#newdataguide>li.helplogin>div>p").html("Click here to log in through facebook or Google+.");
+  
   var postdata = {};
   postdata["logintype"] = "logout";
   $.ajax({
