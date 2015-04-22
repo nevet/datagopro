@@ -269,7 +269,7 @@ function insertDataSet(container, dataArray, event){
 
   worker.onmessage = function(event) {
     preview.endLoading();
-    preview.render(buttonArray[index++], event.data);
+    preview.render(buttonArray[index++], event.data[0]);
   };
 
 	for (var i = 0; i <= dataArray.length-1; i++) {
@@ -382,7 +382,7 @@ function cloneDataSet(event) {
 
 	insertDataSet("#data-field", alldata[curIndex].input, event);
   
-  order = dataArray.length;
+  order = alldata[curIndex].input.length;
   grouparray=[];
   for (var i = 1; i <= order; i++) {
       grouparray.push(i);
