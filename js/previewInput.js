@@ -19,15 +19,6 @@ function createPopularBlock(datasetName, createTime, tags, dataArray){
 		},
 	}).appendTo("#populartable > .popular-block:last");
 
-	//author and created time
-	$("<p></p>", {
-		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
-		"click": function(e) {
-			e.stopPropagation();
-			$(this).closest('.popular-block').trigger('click');
-		},
-	}).appendTo("#populartable > .popular-block:last");
-
 	//tags
 	$("<i></i>",{
 		"class": "fa fa-tags fa-2x",
