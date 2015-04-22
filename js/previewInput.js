@@ -223,7 +223,7 @@ function viewDataSet(event, curIndex) {
 	insertDataSet("#preview", alldata[curIndex].input, event);
 }
 
-function insertDataSet(container, dataArray, event){
+function insertDataSet(container, dataArray){
   var buttonArray = [];
   var index = 0;
 
@@ -344,7 +344,7 @@ function cloneDataSet(event, curIndex) {
   
   localStorage.dataSid = alldata[curIndex].id;
 
-	insertDataSet("#data-field", alldata[curIndex].input, event);
+	insertDataSet("#data-field", alldata[curIndex].input);
   
   order = alldata[curIndex].input.length;
   grouparray=[];

@@ -11,7 +11,8 @@ $res = $db->query($sql);
 if ($res && $res->num_rows > 0) {
   $row = $res->fetch_assoc();
 
-  header("Location:datasession.php?cmd=retrieveInp&id=".$row["input"]);
+  $_SESSION["tinyInput"] = $row["input"];
+  header("Location:index.html");
 } else {
   echo "invalid short url";
 }

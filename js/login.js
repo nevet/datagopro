@@ -219,6 +219,17 @@ $(document).ready(function() {
   $.post("login.php", {"posttype": "session"}, function (res) {
     var data = JSON.parse(res);
     
+    if (data.status == "tiny") {
+      finishLoadingLogin();
+      localStorage.dataSid = data.id;
+      
+      $.get("datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
+        var data = JSON.parse(res);
+        var input = data.input.replace(/(?:&quot;)/g, '\"');
+        input = JSON.parse(input);
+        insertDataSet("#data-field", input);
+      });
+    } else
     if (data.status == "return") {
       udpateLoginRegion(data.username);
       username = data.username;

@@ -12,6 +12,10 @@ $conn = db_connect();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input("posttype")) {
 		case "session":
+			if (isset($_SESSION["tinyInput"])) {
+				echo json_encode(array("status" => "tiny", "id" => $_SESSION["tinyInput"]));
+				unset($_SESSION["tinyInput"]);
+			}
 			if (isset($_SESSION["curname"])) {
 				echo json_encode(array("status" => "return", "username" => $_SESSION["curname"]));
 			} else {

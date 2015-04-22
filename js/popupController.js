@@ -19,7 +19,7 @@ worker.onmessage = function(event) {
 
   // we must handle reference updating here, since we need to wait the reference to
   // be updated
-  if (refindex.length) {
+  if (refindex && refindex.length) {
     for (var i = 0; i < refindex.length; i ++) {
       var domObj = $("#data-field").find("input")[refindex[i]];
       var internalIndex = inputInfo.checkExistence(domObj);
