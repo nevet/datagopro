@@ -58,6 +58,7 @@
 
     var index = 0;
     for (var i=0; i<data.length; i++) {
+      if (i < 50 && data[i] == "\n") {break; } 
       if (i !=0 && i % 50 == 0) {
         temp = temp.substr(0, i+index) + " " + temp.substr(i+index+1);
         index++;
