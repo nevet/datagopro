@@ -87,15 +87,6 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
-  			"click": function(e) {
-  				e.stopPropagation();
-				if($(this).hasClass("selected")) {
-					$(this).removeClass("selected");
-				}
-				else {
-					$(this).attr("class", "selected");
-				}
-  			},
   		}).appendTo("#populartable > .popular-block:last .label-size:last");
     }
 
@@ -185,15 +176,6 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
-  			"click": function(e) {
-  				e.stopPropagation();
-				if($(this).hasClass("selected")) {
-					$(this).removeClass("selected");
-				}
-				else {
-					$(this).attr("class", "selected");
-				}
-  			},
   		}).appendTo("#timeline > .timeline-block:last .label-size:last");
     }
 
@@ -249,7 +231,7 @@ $(function() {
 		}
 	}
 
-	$("div#mainbody .label-size a").click(function(e){
+	$("div#mainbody").on("click",".label-size a", function(e){
 		e.stopPropagation();
 		if($(this).hasClass("selected")) {
 			$(this).removeClass("selected");
