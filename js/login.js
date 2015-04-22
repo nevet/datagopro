@@ -14,7 +14,10 @@ function udpateLoginRegion(name) {
 
 function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
-  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.datasession}, function (res) {
+  inputInfo.saveSession();
+  localStorage.setName = $("#setName").val();
+
+  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
     var data = JSON.parse(res);
 
     if (data.status == "ok") {
@@ -211,25 +214,20 @@ function google_logout() {
 }
 
 $(document).ready(function() {
-  var sid = getSession();
+  startLoadingLogin();
 
-  if (!sid) {
-    // user with no session in cookie, proceed to new user logic
-    popupLoginOptions(true);
-  } else {
-    startLoadingLogin();
-    $.post("login.php", {"posttype": "session"}, function (res) {
-      var data = JSON.parse(res);
-      
-      if (data.status == "return") {
-        udpateLoginRegion(data.username);
-        username = data.username;
-        finishLoadingLogin();
-      } else {
-        popupLoginOptions(true);
-      }
-    });
-  }
+  $.post("login.php", {"posttype": "session"}, function (res) {
+    var data = JSON.parse(res);
+    
+    if (data.status == "return") {
+      udpateLoginRegion(data.username);
+      username = data.username;
+      finishLoadingLogin();
+    } else {
+      finishLoadingLogin();
+      popupLoginOptions(true);
+    }
+  });
 });
 
 $(document).on("click", "#login", function(event) {
