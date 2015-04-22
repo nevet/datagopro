@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if ($resultQ->num_rows > 0) {
             // if input is filled, update input field
             if (!is_null($input)) {
-              $sql = "UPDATE input SET input='$input', date='$date' WHERE id=$inputId";
+              $sql = "UPDATE input SET jsoninput='$input', date='$date' WHERE id=$inputId";
               $res = $db->query($sql);
 
               if (!$res) {
