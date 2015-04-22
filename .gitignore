@@ -4,3 +4,6 @@
 # ignore apache crap
 .htaccess
 passwd
+
+# ignore php config
+config.php

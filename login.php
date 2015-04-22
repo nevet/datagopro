@@ -2,24 +2,12 @@
 
 session_start();
 
+require_once("utils.php");
+
 $sessionid = session_id();
 
-$servername = "localhost";
-$username = "root";
-$password = "7*aIo92d";
-$dbname = "datagopro";
-
-function printSQLError() {
-	return $conn->errno . ": " . $conn->error . "\n";
-}
-
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-	die("Connection failed: " . $conn->connect_error);
-}
+$conn = db_connect();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input("posttype")) {
@@ -50,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				// already known in front end
 				$res = $res->fetch_assoc();
 				$_SESSION["curname"] = $res["name"];
+        $_SESSION["curuserid"] = $res["id"];
 
 				echo json_encode(array("status" => "ok", "username" => $res["name"]));
 			} else {
@@ -58,59 +47,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$sql = "INSERT INTO user(logintype, name, email) VALUES('" . $type . "','" . $name . "','" . $email . "')";
 
 				$resultQ = $conn->query($sql);
-				$_SESSION["curname"] = $name;
 
 				if ($resultQ) {
+          $_SESSION["curname"] = $name;
+          $_SESSION["curuserid"] = get_auto_id($conn);
+
 					echo json_encode(array("status" => "ok"));
 				} else {
-					echo json_encode(array("status" => "fail", "msg" => printSQLError()));
+					echo json_encode(array("status" => "fail", "msg" => print_SQL_error()));
 				}
 			}
 
 			break;
-		case "logout":
-			$email = trim_input("email");
-
-			if ($email == $currentuser) {
-				$currentuser = '';
-				$return["json"] = "success logged out";
-			} else {
-				$return["json"] = "logged-in email is not the logged out email.";
-			}
-
-			echo json_encode($return);
-		case "storeinput":
-			$email = $currentuser;
-			$input = trim_input("jsoninput");
-			$date = trim_input("date");
-			$tag = trim_input("tag");
-			$setname = trim_input("setname");
-
-			$sql = "SELECT setname FROM input WHERE useremail='" . $email . "'";
-			$resultQ = $conn->query($sql);
-			if ($resultQ->num_rows > 0) {
-				$sql = "UPDATE input SET input='$input', date='$date',tag='$tag' WHERE useremail='$email'";
-				$conn->query($sql);
-			} else {
-				$sql = "INSERT INTO input(useremail, jsoninput, date, tag, setname) VALUES('$email','$input','$date','$tag','$setname')";
-				$conn->query($sql);
-			}
-
-			echo json_encode("your data has been saved");
-			break;
 		default:
 			break;
 	}
-
-}
-
-function trim_input($data) {
-	if (!isset($_POST[$data])) {
-		return null;
-	}
-
-	$data = trim($_POST[$data]);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
 }

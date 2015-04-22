@@ -121,8 +121,6 @@ $(function(){
 		$("#"+type).css("display", "block");
 	}
 
-	
-
 	function clearDeleteState(icon, iconHtml) {
 		icon.html(iconHtml);
 		icon.removeClass("fa-times");
@@ -171,10 +169,6 @@ $(function(){
 			inDeleteIcon = undefined;
 		}
 	});
-
-  /*
-   Delete functions and Select functions.
-   */
   
   $(document).on("click", "#data-field .btn-delete",function(event){
     var dataBlock = $(this).closest(".data-block");
@@ -185,6 +179,59 @@ $(function(){
         order --;
 
         renumberDatablocks();
+  });
+
+  $("#fbShare").on("click", function (e) {
+    // TODO: need to revise this logic
+
+    if (localStorage.dataSid) {
+      // we logged in, all data has been pushed to server, and has been assigned
+      // a data session id. In this case, we can share the input id directly
+      $.get("tinyurl.php", {"id": localStorage.dataSid}, function (res) {
+        var data = JSON.parse(res);
+
+        if (data.status == "ok") {
+          var tiny = data.url;
+          var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
+          
+          window.open(url);
+        }
+      });
+    } else
+    if (localStorage.dataSession) {
+      // upload to server with annoymous user, then use the return data session id
+      // to get url
+      $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
+        var data = JSON.parse(res);
+
+        $.get("tinyurl.php", {"id": data.sid}, function (res) {
+          var data = JSON.parse(res);
+
+          if (data.status == "ok") {
+            var tiny = data.url;
+            var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
+            
+            // create a instant link
+          }
+        });
+      });
+    }
+
+    e.preventDefault();
+  });
+
+  $("#setname").on("blur", function () {
+    if (localStorage.dataSid) {
+      // we are online, upload the session to server
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
+        $("#notice").html("All changes saved");
+      });
+    } else {
+      // we are offline, store the data in local storage
+      localStorage.setName = setName;
+
+      $("#notice").html("All changes saved locally");
+    }
   });
 
   $("#data-field").on("mouseenter", ".data-block-info .fa-stack", function () {
