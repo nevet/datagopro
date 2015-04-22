@@ -93,7 +93,7 @@ $(function() {
 					$(this).removeClass("selected");
 				}
 				else {
-					$(this).addClass("selected");
+					$(this).attr("class", "selected");
 				}
   			},
   		}).appendTo("#populartable > .popular-block:last .label-size:last");
@@ -191,7 +191,7 @@ $(function() {
 					$(this).removeClass("selected");
 				}
 				else {
-					$(this).addClass("selected");
+					$(this).attr("class", "selected");
 				}
   			},
   		}).appendTo("#timeline > .timeline-block:last .label-size:last");
