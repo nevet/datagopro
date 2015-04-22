@@ -223,7 +223,7 @@ function createTimeLine() {
   $.get("datasession.php", {"cmd": "retrieveUInp"}, function (res) {
     var data = JSON.parse(res);
 
-    alldata = data[1];
+    alldata = data.data;
 
     for (var i = 0; i < alldata.length; i ++) {
       var input = JSON.parse(alldata[i].input);
