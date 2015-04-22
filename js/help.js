@@ -12,7 +12,8 @@
 			{
 				case "newdata":
 												var logincss = $("#login").css("display");
-												if(logincss == ''){
+												console.log(logincss);
+												if(logincss == 'block'){
 													$("#newdataguide>li.helplogin").attr("data-id","login");
   												$("#newdataguide>li.helplogin>div>p").html("Click here to log in through facebook or Google+.");
 												}
