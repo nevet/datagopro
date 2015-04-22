@@ -46,7 +46,12 @@ $(function(){
 			$("#popular").css("display", "block");	
 			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
 		}
-    $("#preview").css("font-family", "inherit");
+    	$("#preview").css("font-family", "inherit");
+    	$("#popular").children().not("#tag").remove();
+    	$("#tag").children().not("h4").remove();
+    	createPopularBlock();
+    	createPopularBlock();
+    	createPopularBlock();
 	});
 
 	$("#myinput").on("click", function(e){
@@ -64,6 +69,10 @@ $(function(){
 			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
 		}
    		$("#preview").css("font-family", "inherit");
+   		$("#timeline").children().remove();
+   		createTimelineBlock();
+   		createTimelineBlock();
+   		createTimelineBlock();
 	});
 
 	$(".navbar img").click(function(e) {
