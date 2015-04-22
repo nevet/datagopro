@@ -249,15 +249,15 @@ $(function() {
 		}
 	}
 
-	$("div#mainbody .label-size a").click(function(e){
-		e.stopPropagation();
-		if($(this).hasClass("selected")) {
-			$(this).removeClass("selected");
-		}
-		else {
-			$(this).addClass("selected");
-		}
-	});
+	// $("div#mainbody .label-size a").click(function(e){
+	// 	e.stopPropagation();
+	// 	if($(this).hasClass("selected")) {
+	// 		$(this).removeClass("selected");
+	// 	}
+	// 	else {
+	// 		$(this).addClass("selected");
+	// 	}
+	// });
 
 	function viewDataSet(event) {
 		$("#preview").children().not(".previewLoadingCover").remove();
