@@ -1,5 +1,3 @@
-
-
 var datasetName = "My first input";
 var author = "My name";
 var createTime = "Sat Apr 04 2015 15:28:10";
@@ -49,174 +47,182 @@ var dataArray = [{
   "repeattime": 2
 }];
 
-	function createPopularBlock(){
-  	//block wrap
-  	$("<div></div>", {
-  		"class": "popular-block",
-  		"click": function(e) {
-  			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
-  		},
-  	}).appendTo("#populartable");
+function createPopularBlock(){
+	//block wrap
+	$("<div></div>", {
+		"class": "popular-block",
+		"click": function(e) {
+			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
+		},
+	}).appendTo("#populartable");
 
-  	//dataset name
-  	$("<h4></h4>", {
-  		"text": datasetName,
-  		"click": function(e) {
-  			e.stopPropagation();
-  			$(this).closest('.popular-block').trigger('click');
-  		},
-  	}).appendTo("#populartable > .popular-block:last");
+	//dataset name
+	$("<h4></h4>", {
+		"text": datasetName,
+		"click": function(e) {
+			e.stopPropagation();
+			$(this).closest('.popular-block').trigger('click');
+		},
+	}).appendTo("#populartable > .popular-block:last");
 
-  	//author and created time
-  	$("<p></p>", {
-  		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
-  		"click": function(e) {
-  			e.stopPropagation();
-  			$(this).closest('.popular-block').trigger('click');
-  		},
-  	}).appendTo("#populartable > .popular-block:last");
+	//author and created time
+	$("<p></p>", {
+		"html": "Author: "+author+"&nbsp;&nbsp;"+createTime,
+		"click": function(e) {
+			e.stopPropagation();
+			$(this).closest('.popular-block').trigger('click');
+		},
+	}).appendTo("#populartable > .popular-block:last");
 
-  	//tags
-  	$("<i></i>",{
-  		"class": "fa fa-tags fa-2x",
-  	}).appendTo("#populartable > .popular-block:last");
+	//tags
+	$("<i></i>",{
+		"class": "fa fa-tags fa-2x",
+	}).appendTo("#populartable > .popular-block:last");
 
-  	for (var i=0; i < tags.length; i++){
-  		$("<span></span>", {
-  		"class": "label-size",
-  		}).appendTo("#populartable > .popular-block:last");
+	for (var i=0; i < tags.length; i++){
+		$("<span></span>", {
+		"class": "label-size",
+		}).appendTo("#populartable > .popular-block:last");
 
-  		$("<a></a>", {
-  			"text": tags[i],
-  			"click": function(e) {
-	    		e.stopPropagation();
-	    	},
-  		}).appendTo("#populartable > .popular-block:last .label-size:last");
-    }
-
-    //clone
-    $("<a></a>",{
-    	"class":"clone",
-    	"data-target": "1",
-    	"text": "Clone",
-    	"click": function(e){
+		$("<a></a>", {
+			"text": tags[i],
+			"click": function(e) {
     		e.stopPropagation();
-			e.preventDefault();
-    		cloneDataSet(e);
     	},
-    }).appendTo("#populartable > .popular-block:last");
+		}).appendTo("#populartable > .popular-block:last .label-size:last");
+  }
 
-    $("<i></i>", {
-    	"class": "fa fa-pencil",
-    }).appendTo("#populartable > .popular-block:last .clone:last");
+  //clone
+  $("<a></a>",{
+  	"class":"clone",
+  	"data-target": "1",
+  	"text": "Clone",
+  	"click": function(e){
+  		e.stopPropagation();
+		e.preventDefault();
+  		cloneDataSet(e);
+  	},
+  }).appendTo("#populartable > .popular-block:last");
 
-    //view
-    $("<a></a>",{
-    	"class":"view",
-    	"data-target": "1",
-    	"text": "View",
-    	"click": function(e) {
-    		e.stopPropagation();
-			e.preventDefault();
-    		viewDataSet(e);
-    	},
-    }).appendTo("#populartable > .popular-block:last");
+  $("<i></i>", {
+  	"class": "fa fa-pencil",
+  }).appendTo("#populartable > .popular-block:last .clone:last");
 
-    $("<i></i>", {
-    	"class": "fa fa-eye",
-    }).appendTo("#populartable > .popular-block:last .view:last");
-	}
+  //view
+  $("<a></a>",{
+  	"class":"view",
+  	"data-target": "1",
+  	"text": "View",
+  	"click": function(e) {
+  		e.stopPropagation();
+		e.preventDefault();
+  		viewDataSet(e);
+  	},
+  }).appendTo("#populartable > .popular-block:last");
 
-  function createTimelineBlock(){
-  	//block wrap
-  	$("<div></div>", {
-  		"class": "timeline-block",
-  		"click": function(e) {
-  			
-  		},
-  	}).appendTo("#timeline");
+  $("<i></i>", {
+  	"class": "fa fa-eye",
+  }).appendTo("#populartable > .popular-block:last .view:last");
+}
 
-  	//dot on timeline
-  	$("<div></div>", {
-  		"class": "timeline-dot",
-  	}).appendTo("#timeline .timeline-block:last");
+function createTimelineBlock(){
+	//block wrap
+	$("<div></div>", {
+		"class": "timeline-block",
+		"click": function(e) {
+			
+		},
+	}).appendTo("#timeline");
 
-  	//content
-  	$("<div></div>", {
-  		"class": "timeline-content",
-  		"click": function(e) {
-  			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
-  		}
-  	}).appendTo("#timeline .timeline-block:last");
+	//dot on timeline
+	$("<div></div>", {
+		"class": "timeline-dot",
+	}).appendTo("#timeline .timeline-block:last");
+
+	//content
+	$("<div></div>", {
+		"class": "timeline-content",
+		"click": function(e) {
+			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
+		}
+	}).appendTo("#timeline .timeline-block:last");
 
 
-  	//dataset name
-  	$("<h4></h4>", {
-  		"text": datasetName,
-  		"click": function(e) {
+	//dataset name
+	$("<h4></h4>", {
+		"text": datasetName,
+		"click": function(e) {
+			e.stopPropagation();
+			$(this).closest('.timeline-content').trigger('click');
+		},
+	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+	//created time
+	$("<p></p>", {
+		"html": createTime,
+		"click": function(e) {
+			e.stopPropagation();
+			$(this).closest('.timeline-content').trigger('click');
+		},
+	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+	//tags
+	$("<i></i>",{
+		"class": "fa fa-tags fa-2x",
+	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+	for (var i=0; i < tags.length; i++){
+		$("<span></span>", {
+		  "class": "label-size",
+		}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+
+		$("<a></a>", {
+			"text": tags[i],
+			"click": function(e) {
   			e.stopPropagation();
-  			$(this).closest('.timeline-content').trigger('click');
   		},
-  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+		}).appendTo("#timeline > .timeline-block:last .label-size:last");
+  }
 
-  	//created time
-  	$("<p></p>", {
-  		"html": createTime,
-  		"click": function(e) {
-  			e.stopPropagation();
-  			$(this).closest('.timeline-content').trigger('click');
-  		},
-  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  //clone
+  $("<a></a>",{
+  	"class":"clone",
+  	"data-target": "1",
+  	"text": "Clone",
+  	"click": function(e){
+  		e.stopPropagation();
+		e.preventDefault();
+  		cloneDataSet(e);
+  	},
+  }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-  	//tags
-  	$("<i></i>",{
-  		"class": "fa fa-tags fa-2x",
-  	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  $("<i></i>", {
+  	"class": "fa fa-pencil",
+  }).appendTo("#timeline > .timeline-block:last .clone:last");
 
-  	for (var i=0; i < tags.length; i++){
-  		$("<span></span>", {
-  		  "class": "label-size",
-  		}).appendTo("#timeline > .timeline-block:last > .timeline-content");
+  //view
+  $("<a></a>",{
+  	"class":"view",
+  	"data-target": "1",
+  	"text": "View",
+  	"click": function(e) {
+  		e.stopPropagation();
+		e.preventDefault();
+  		viewDataSet(e);
+  	}
+  }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
-  		$("<a></a>", {
-  			"text": tags[i],
-  			"click": function(e) {
-    			e.stopPropagation();
-    		},
-  		}).appendTo("#timeline > .timeline-block:last .label-size:last");
-    }
+  $("<i></i>", {
+  	"class": "fa fa-eye",
+  }).appendTo("#timeline > .timeline-block:last .view:last");
+}
 
-    //clone
-    $("<a></a>",{
-    	"class":"clone",
-    	"data-target": "1",
-    	"text": "Clone",
-    	"click": function(e){
-    		e.stopPropagation();
-			e.preventDefault();
-    		cloneDataSet(e);
-    	},
-    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
+function createTimeLine() {
+  $.get("datasession.php", {"cmd": "retrieveUInp"}, function (res) {
+    var data = JSON.parse(res);
 
-    $("<i></i>", {
-    	"class": "fa fa-pencil",
-    }).appendTo("#timeline > .timeline-block:last .clone:last");
-
-    //view
-    $("<a></a>",{
-    	"class":"view",
-    	"data-target": "1",
-    	"text": "View",
-    	"click": function(e) {
-    		e.stopPropagation();
-			e.preventDefault();
-    		viewDataSet(e);
-    	}
-    }).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-    $("<i></i>", {
-    	"class": "fa fa-eye",
-    }).appendTo("#timeline > .timeline-block:last .view:last");
+    console.log(data);
+  });
 }
 
 function highlightSelectedBlock(container, block){

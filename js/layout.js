@@ -71,9 +71,7 @@ $(function(){
 		}
    		$("#preview").css("font-family", "inherit");
    		$("#timeline").children().remove();
-   		createTimelineBlock();
-   		createTimelineBlock();
-   		createTimelineBlock();
+      createTimeLine();
 	});
 
 	$(".navbar img").click(function(e) {
