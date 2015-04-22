@@ -262,16 +262,11 @@ $(document).on("click", "#logout", function(event) {
   $("#newdataguide>li.helplogin>div>p").html("Click here to log in through facebook or Google+.");
   var postdata = {};
   postdata["logintype"] = "logout";
-  postdata["email"] = useremail;
   $.ajax({
     type: "POST",
     dataType: "json",
     url: "login.php", //Relative or absolute path to response.php file
-    data: postdata,
-    success: function(data) {
-      var returndata = data["json"];
-      console.log(returndata);
-    }
+    data: postdata
   });
 
   logintype = undefined;
