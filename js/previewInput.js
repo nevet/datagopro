@@ -7,47 +7,47 @@ var tags = [ tag1, tag2 ];
 var allTags = ["1", "2", "3", "4", "5", "6", "7"];
 var worker = new Worker("js/dataInfo.js");
 
-var dataArray = [{
-  "datatype": "number",
-  "parityindex": 1,
-  "parity": undefined,
-  "numberindex" :0,
-  "numbertype": "integer",
-  "floatprecision": "",
-  "numbermin": 10,
-  "numbermax": 20,
-  "repeattime": 20
-}, {
-  "datatype": "number",
-  "parityindex": 0,
-  "parity": undefined,
-  "numberindex" :1,
-  "numbertype": "float",
-  "floatprecision": 3,
-  "numbermin": -30,
-  "numbermax": 30,
-  "repeattime": 30
-}, {
-  "datatype": "string",
-  "stringlength": 200,
-  "chartype": "unicode",
-  "linelength": "",
-  "linebreak": "\\n",
-  "wordlength":"",
-  "wordbreak": "",
-  "repeattime": 11
-}, {
-  "datatype": "graph",
-  "isconnect": true,
-  "isdirect": true,
-  "isweighted": false,
-  "isTree": false,
-  "node": 5,
-  "edge": 7,
-  "repeattime": 2
-}];
+// var dataArray = [{
+//   "datatype": "number",
+//   "parityindex": 1,
+//   "parity": undefined,
+//   "numberindex" :0,
+//   "numbertype": "integer",
+//   "floatprecision": "",
+//   "numbermin": 10,
+//   "numbermax": 20,
+//   "repeattime": 20
+// }, {
+//   "datatype": "number",
+//   "parityindex": 0,
+//   "parity": undefined,
+//   "numberindex" :1,
+//   "numbertype": "float",
+//   "floatprecision": 3,
+//   "numbermin": -30,
+//   "numbermax": 30,
+//   "repeattime": 30
+// }, {
+//   "datatype": "string",
+//   "stringlength": 200,
+//   "chartype": "unicode",
+//   "linelength": "",
+//   "linebreak": "\\n",
+//   "wordlength":"",
+//   "wordbreak": "",
+//   "repeattime": 11
+// }, {
+//   "datatype": "graph",
+//   "isconnect": true,
+//   "isdirect": true,
+//   "isweighted": false,
+//   "isTree": false,
+//   "node": 5,
+//   "edge": 7,
+//   "repeattime": 2
+// }];
 
-var allData = [];
+var alldata = [];
 
 function createPopularBlock(){
 	//block wrap
@@ -127,7 +127,7 @@ function createPopularBlock(){
   }).appendTo("#populartable > .popular-block:last .view:last");
 }
 
-function createTimelineBlock(datasetName, createTime, dataArray){
+function createTimelineBlock(datasetName, createTime, tags, dataArray){
 	//block wrap
 	$("<div></div>", {
 		"class": "timeline-block",
@@ -230,8 +230,9 @@ function createTimeLine() {
       var input = alldata[i].input.replace(/(?:&quot;)/g, '\"');
       // console.log(input);
       input = JSON.parse(input);
+      alldata[i].input = input;
       // console.log(input);
-      createTimelineBlock(alldata[i].setname, alldata[i].date, input);
+      createTimelineBlock(alldata[i].setname, alldata[i].date, alldata[i].tag, input);
     }
   });
 }
@@ -250,26 +251,28 @@ function highlightSelectedBlock(container, block){
 
 
 function viewDataSet(event) {
+  var curBlock = $(this).parents(".timeline-block");
+  var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
+
 	$("#preview").children().not(".previewLoadingCover").remove();
-	insertDataSet("#preview", event);
+	insertDataSet("#preview", alldata[curIndex].input, event);
 }
 
-function insertDataSet(container, event){
-    var buttonArray = [];
-    var index = 0;
+function insertDataSet(container, dataArray, event){
+  var buttonArray = [];
+  var index = 0;
 
-    if(container != "#preview") {
-		  preview.startLoading();
+  if(container != "#preview") {
+	  preview.startLoading();
     inputInfo.clearInputList();
-    }
+  }
 
-    worker.onmessage = function(event) {
-      preview.endLoading();
-      preview.render(buttonArray[index++], event.data);
-    };
+  worker.onmessage = function(event) {
+    preview.endLoading();
+    preview.render(buttonArray[index++], event.data);
+  };
 
 	for (var i = 0; i <= dataArray.length-1; i++) {
-
 		var data = dataArray[i];
 		//data-block
 		$("<div></div>", {
