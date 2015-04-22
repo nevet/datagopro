@@ -225,7 +225,7 @@ $(function(){
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
+      $.post("datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
         $("#notice").html("All changes saved");
       });
     } else {
