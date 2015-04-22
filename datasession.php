@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // we need to increase the visitcnt by 1
             $assocId = $row["user"];
 
-            if ($assocId != $_SESSION["curuserid"]) {
+            if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
               $visCnt = $row["visitcnt"] + 1;
 
               $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'"
