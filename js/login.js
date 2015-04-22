@@ -223,6 +223,7 @@ $(document).ready(function() {
       udpateLoginRegion(data.username);
       username = data.username;
       finishLoadingLogin();
+      uploadLocalSession();
     } else {
       finishLoadingLogin();
       popupLoginOptions(true);
