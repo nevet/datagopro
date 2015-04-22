@@ -64,6 +64,6 @@ if (!is_null($inputId) && hasInput($inputId)) {
   if ($res) {
     echo json_encode(array("status" => "ok", "url" => $domain."/".$tiny));
   } else {
-    echo json_encode(array("status" => "error", "msg" => print_SQL_error($db));
+    echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
   }
 }
