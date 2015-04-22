@@ -215,9 +215,12 @@ $(function(){
 				$(".cover").remove();
 		    },
         }).appendTo(".buttoncontainer");
-        
 	}
 });
+
+function updateTags() {
+	
+}
 
 function getTags() {
 	var tags = [];
@@ -247,4 +250,6 @@ function getTags() {
 
   $(".savewindow").remove();
 	$(".cover").remove();
+
+	updateTags();
 }

@@ -14,6 +14,14 @@ function udpateLoginRegion(name) {
 
 function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
+  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.datasession}, function (res) {
+    var data = JSON.parse(res);
+
+    if (data.status == "ok") {
+      localStorage.dataSid = data.sid;
+      $("#notice").html("All changes saved");
+    }
+  });
 }
 
 function getSession() {
@@ -215,6 +223,7 @@ $(document).ready(function() {
       
       if (data.status == "return") {
         udpateLoginRegion(data.username);
+        username = data.username;
         finishLoadingLogin();
       } else {
         popupLoginOptions(true);

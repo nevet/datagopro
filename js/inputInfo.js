@@ -38,7 +38,7 @@
           inputList[i].numbertype == "integer" &&
           inputList[i].repeattime == "1") {
         // validRef.push(inputList[i].closest(".data-block").find(".fa-stack-1x").html());
-        validRef.push(i + 1);
+        validRef.push(findElementDomIndex(inputList[i].identifier) + 1);
       }
     }
 
@@ -51,8 +51,33 @@
         preview.removeEntry(identifier);
         inputList.splice(i, 1);
 
+        inputInfo.saveSession();
+
         break;
       }
+    }
+  }
+
+  inputInfo.saveSession = function () {
+    // TODO: saving is currently sequential, could be made as parallel in the
+    // future
+    var data = serializeInput();
+    var setName = $("setname").val();
+    console.log(data);
+
+    $("#notice").html("Saving changes...");
+
+    if (localStorage.dataSid) {
+      // we are online, upload the session to server
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data, "setname": setName}, function (res) {
+        $("#notice").html("All changes saved");
+      });
+    } else {
+      // we are offline, store the data in local storage
+      localStorage.dataSession = data;
+      localStorage.setName = setName;
+
+      $("#notice").html("All changes saved locally");
     }
   }
 
@@ -79,18 +104,26 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
+      "refindex": []
     }
 
     if ($("#repeatNumber").length) {
       newObject.repeattime = $("#repeatNumber").val();
     } else {
-      newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
+      var refDomIndex = parseInt($("#backrefNumber").val());
+      var refObj = $("#data-field").find("input")[refDomIndex];
+      var internalIndex = inputInfo.checkExistence(refObj);
+
+      newObject.repeatref = inputList[internalIndex].identifier;
+      newObject.repeatindex = refDomIndex;
+      inputList[internalIndex].refindex.push(findElementDomIndex(element));
     }
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
+      newObject.refindex = object.refindex;
       inputList.splice(index, 1);
     }
 
@@ -117,7 +150,6 @@
     } else {
       newObject.repeatref = inputList[parseInt($("#backrefString").val())].identifier;
     }
-
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
@@ -159,5 +191,29 @@
     }
 
     inputList.push(newObject);
+  }
+
+  function findElementDomIndex(element) {
+    return $("#data-field").find("input").index(element);
+  }
+
+  function serializeInput() {
+    var output = [];
+
+    var inputs = $("#data-field").find("input");
+
+    for (var i = 0; i < inputs.length; i ++) {
+      for (var j = 0; j < inputList.length; j ++) {
+        if (inputList[j].identifier === inputs[i]) {
+          var obj = jQuery.extend({}, inputList[j]);
+          obj.identifier = undefined;
+          obj.reflist = undefined;
+          obj.repeatref = undefined;
+          output.push(obj);
+        }
+      }
+    }
+
+    return JSON.stringify(output);
   }
 }) (window.inputInfo = window.inputInfo || {}, jQuery);
