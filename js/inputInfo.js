@@ -104,33 +104,27 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
-      "reflist": []
+      "refindex": []
     }
 
     if ($("#repeatNumber").length) {
       newObject.repeattime = $("#repeatNumber").val();
     } else {
-      var refObj = inputList[parseInt($("#backrefNumber").val())];
+      var refDomIndex = parseInt($("#backrefNumber").val());
+      var refObj = $("#data-field").find("input")[refDomIndex];
+      var internalIndex = inputInfo.checkExistence(refObj);
 
-      newObject.repeatref = refObj.identifier;
-      refObj.reflist.push(newObject);
+      newObject.repeatref = inputList[internalIndex].identifier;
+      newObject.repeatindex = refDomIndex;
+      inputList[internalIndex].refindex.push(findElementDomIndex(element));
     }
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
-      newObject.reflist = object.reflist;
-      
+      newObject.refindex = object.refindex;
       inputList.splice(index, 1);
-
-      if (newObject.reflist.length) {
-        for (var i = 0; i < newObject.reflist.length; i ++) {
-          var obj = newObject.reflist[i];
-
-          createNewNumber(obj.identifier);
-        }
-      }
     }
 
     inputList.push(newObject);
@@ -156,7 +150,6 @@
     } else {
       newObject.repeatref = inputList[parseInt($("#backrefString").val())].identifier;
     }
-
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
@@ -200,6 +193,10 @@
     inputList.push(newObject);
   }
 
+  function findElementDomIndex(element) {
+    return $("#data-field").find("input").index(element);
+  }
+
   function serializeInput() {
     var output = [];
 
@@ -209,8 +206,9 @@
       for (var j = 0; j < inputList.length; j ++) {
         if (inputList[j].identifier === inputs[i]) {
           var obj = jQuery.extend({}, inputList[j]);
-
           obj.identifier = undefined;
+          obj.reflist = undefined;
+          obj.repeatref = undefined;
           output.push(obj);
         }
       }

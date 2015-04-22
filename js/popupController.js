@@ -7,6 +7,29 @@ var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"
 var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
 var backrefSelectHtml = '<select class="form-control" style="width: 125px"></select>';
 
+worker.onmessage = function(event) {
+  var data = event.data;
+  var curindex = data[1];
+  var refindex = data[2];
+
+  var chosenElement = $("#data-field").find("input")[curindex];
+
+  preview.endLoading();
+  preview.render(chosenElement, data[0]);
+
+  // we must handle reference updating here, since we need to wait the reference to
+  // be updated
+  if (refindex.length) {
+    for (var i = 0; i < refindex.length; i ++) {
+      var domObj = $("#data-field").find("input")[refindex[i]];
+      var internalIndex = inputInfo.checkExistence(domObj);
+      var refObj = inputInfo.getElement(internalIndex);
+      // TODO: this is only for demo, need to create new thread for each ref later!!
+      printEntry(jQuery.extend({}, refObj), worker);
+    }
+  }
+};
+
 function cancelClicked(e) {
   $("#popup").bPopup().close();
 }
@@ -168,13 +191,22 @@ function repeatTypeChanged(e) {
   }
 }
 
+function printEntry(obj, thread) {
+  var curindex = $("#data-field").find("input").index(obj.identifier);
+  obj.identifier = undefined;
+
+  preview.startLoading();
+
+  if (!obj.repeattime) {
+    obj.repeattime = parseInt(preview.getData(obj.repeatref));
+    obj.repeatref = undefined;
+  }
+
+  thread.postMessage({"cmd":"start", "data": JSON.stringify(obj), "curindex": curindex, "refindex": obj.refindex});
+}
+
 function okclicked(e) {
   var element = $(e);
-
-  worker.onmessage = function(event) {
-    preview.endLoading();
-    preview.render(chosebutton, event.data);
-  };
 
   switch (element.val()) {
     case "number":
@@ -211,13 +243,8 @@ function okclicked(e) {
   inputInfo.saveSession();
 
   var obj = jQuery.extend({}, inputInfo.getLastElement());
-  obj.identifier = undefined;
-  preview.startLoading();
-  if (!obj.repeattime) {
-    obj.repeattime = parseInt(preview.getData(obj.repeatref));
-    obj.repeatref = undefined;
-  }
-  worker.postMessage({"cmd":"start", "data": JSON.stringify(obj)});
+
+  printEntry(obj, worker);
 }
 
 function changeInfoMessage(type, info_span, data) {
