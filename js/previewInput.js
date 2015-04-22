@@ -376,13 +376,19 @@ function cloneDataSet(event) {
 	$("#preview").children().not(".previewLoadingCover").remove();
 	$("#newdata").trigger("click");
 	$("#data-field").children().remove();
-	insertDataSet("#data-field", event);
-    order = dataArray.length;
-    grouparray=[];
-    for (var i = 1; i <= order; i++) {
-        grouparray.push(i);
-    }
+  
+  var curBlock = $(event.target).parents(".timeline-block");
+  var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
+
+	insertDataSet("#data-field", alldata[curIndex].input, event);
+  
+  order = dataArray.length;
+  grouparray=[];
+  for (var i = 1; i <= order; i++) {
+      grouparray.push(i);
+  }
 }
+
 function showAllTags() {
 
 	$("<a></a>", {
