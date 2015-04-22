@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include("utils.php");
 
 $db = db_connect();
