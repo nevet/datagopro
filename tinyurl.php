@@ -38,7 +38,7 @@ function isUnique($chars) {
 function hasInput($inputId) {
   global $db;
   
-  $sql = "SELECT * FROM urls WHERE input=$inputId";
+  $sql = "SELECT * FROM input WHERE input=$inputId";
   $res = $db->query($sql);
 
   if (!$res && $res->num_row > 0) {
