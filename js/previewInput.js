@@ -380,6 +380,8 @@ function cloneDataSet(event) {
   var curBlock = $(event.target).parents(".timeline-block");
   var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
 
+  localStorage.dataSid = alldata[curIndex].id;
+
 	insertDataSet("#data-field", alldata[curIndex].input, event);
   
   order = alldata[curIndex].input.length;
