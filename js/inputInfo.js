@@ -38,7 +38,7 @@
           inputList[i].numbertype == "integer" &&
           inputList[i].repeattime == "1") {
         // validRef.push(inputList[i].closest(".data-block").find(".fa-stack-1x").html());
-        validRef.push(i + 1);
+        validRef.push(findElementDomIndex(inputList[i].identifier) + 1);
       }
     }
 
