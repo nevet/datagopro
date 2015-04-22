@@ -17,7 +17,7 @@ function uploadLocalSession() {
   inputInfo.saveSession();
   localStorage.setName = $("#setName").val();
 
-  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
+  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession, "setname": localStorage.setName}, function (res) {
     var data = JSON.parse(res);
 
     if (data.status == "ok") {
@@ -210,6 +210,10 @@ function google_logout() {
 }
 
 $(document).ready(function() {
+  // on every load, clear data stored in local storage for SIMPLICITY!! need to
+  // be handled carefully if have time
+  localStorage.clear();
+
   startLoadingLogin();
 
   $.post("login.php", {"posttype": "session"}, function (res) {
