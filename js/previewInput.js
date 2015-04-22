@@ -1,5 +1,4 @@
 var alldata = [];
-var allpopdata = [];
 
 function createPopularBlock(datasetName, createTime, tags, dataArray){
 	//block wrap
@@ -184,16 +183,16 @@ function createPopular() {
   $.get("datasession.php", {"cmd": "retrievePInp"}, function (res) {
     var data = JSON.parse(res);
 
-    allpopdata = data.data;
+    alldata = data.data;
 
-    for (var i = 0; i < allpopdata.length; i ++) {
+    for (var i = 0; i < alldata.length; i ++) {
 
-      var input = allpopdata[i].input.replace(/(?:&quot;)/g, '\"');
+      var input = alldata[i].input.replace(/(?:&quot;)/g, '\"');
       // console.log(input);
       input = JSON.parse(input);
-      allpopdata[i].input = input;
+      alldata[i].input = input;
       // console.log(input);
-      createPopularBlock(allpopdata[i].setname, allpopdata[i].date, allpopdata[i].tag, input);
+      createPopularBlock(alldata[i].setname, alldata[i].date, alldata[i].tag, input);
     }
   });
 }
