@@ -180,7 +180,13 @@ $(function() {
   		$("<a></a>", {
   			"text": tags[i],
   			"click": function() {
-  				$(this).addClass("selected");
+  				e.stopPropagation();
+				if($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+				}
+				else {
+					$(this).addClass("selected");
+				}
   			},
   		}).appendTo("#timeline > .timeline-block:last .label-size:last");
     }
