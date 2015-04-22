@@ -101,12 +101,17 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
+      "repeatypeindex": $("#repeatTypeNumber")[0].selectedIndex,
       "refindex": []
     }
 
-    if ($("#repeatNumber").length) {
+    if (newObject.repeatypeindex == 0) {
       newObject.repeattime = $("#repeatNumber").val();
+      newObject.repeatVal = $("#repeatNumber").val();
     } else {
+      newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
+      newObject.repeatVal = $("#backrefNumber").val();
+
       var refDomIndex = parseInt($("#backrefNumber").val());
       var refObj = $("#data-field").find("input")[refDomIndex];
       var internalIndex = inputInfo.checkExistence(refObj);

@@ -113,9 +113,16 @@ function prepareNumber(object) {
   }
   $("#min").val(object.numbermin);
   $("#max").val(object.numbermax);
-  $("#repeatNumber").val(object.repeattime);
   $("#parity")[0].selectedIndex = object.parityindex;
   $("#order")[0].selectedIndex = object.orderindex;
+  $("#repeatTypeNumber")[0].selectedIndex = object.repeatypeindex;
+  repeatTypeChanged($("#repeatTypeNumber"));
+
+  if (object.repeatypeindex == 0) {
+    $("#repeatNumber").val(object.repeatVal);
+  } else {
+    $("#backrefNumber").val(object.repeatVal);
+  }
 }
 
 function prepareString(object) {

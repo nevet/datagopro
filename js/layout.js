@@ -302,9 +302,11 @@ function clearData() {
   $("#precisionDiv").hide();
   $("#min").val(0);
   $("#max").val(100);
-  $("#repeatNumber").val(10);
   $("#parity")[0].selectedIndex = 0;
   $("#order")[0].selectedIndex = 0;
+  $("#repeatTypeNumber")[0].selectedIndex = 0;
+  repeatTypeChanged($("#repeatTypeNumber"));
+  $("#repeatNumber").val(10);  
   correctHighlight($("#repeatNumber"));
   correctHighlight($("#max"));
   correctHighlight($("#min"));
