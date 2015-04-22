@@ -41,11 +41,9 @@ function hasInput($inputId) {
   $sql = "SELECT * FROM input WHERE input=$inputId";
   $res = $db->query($sql);
 
-  if (!$res && $res->num_row > 0) {
-    return true;
-  }
+  if (!$res || $res->num_row == 0) return false;
 
-  return false;
+  return true;
 }
 
 $inputId = trim_input("id");
