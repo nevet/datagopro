@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
               $visCnt = $row["visitcnt"] + 1;
 
-              $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'"
+              $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'";
               $res = $db->query($sql);
 
               if (!$res) {
