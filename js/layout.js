@@ -221,6 +221,8 @@ $(function(){
   });
 
   $("#setname").on("blur", function () {
+    var setName = $(this).val();
+
     if (localStorage.dataSid) {
       // we are online, upload the session to server
       $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {

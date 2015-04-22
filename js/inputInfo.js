@@ -62,20 +62,17 @@
     // TODO: saving is currently sequential, could be made as parallel in the
     // future
     var data = serializeInput();
-    var setName = $("setname").val();
-    console.log(data);
 
     $("#notice").html("Saving changes...");
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data, "setname": setName}, function (res) {
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data}, function (res) {
         $("#notice").html("All changes saved");
       });
     } else {
       // we are offline, store the data in local storage
       localStorage.dataSession = data;
-      localStorage.setName = setName;
 
       $("#notice").html("All changes saved locally");
     }
