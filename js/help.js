@@ -11,6 +11,16 @@
 			switch(activeId)
 			{
 				case "newdata":
+												var logincss = $("#login").css("display");
+												if(logincss == ''){
+													$("#newdataguide>li.helplogin").attr("data-id","login");
+  												$("#newdataguide>li.helplogin>div>p").html("Click here to log in through facebook or Google+.");
+												}
+												else{ 
+														$(".helplogin").attr("data-id","afterlogin");
+		        								$("#newdataguide>li.helplogin>div>p").html("Click here to see your past input or log out.");
+        						    }
+
 												$('#newdataguide').joyride({
 												   autoStart : true,
 												 	 nubPosition: 'top',
