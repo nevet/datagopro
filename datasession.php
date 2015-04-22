@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
       break;
     case "retrievePInp":
-      $sql = "SELECT * FROM input ORDER BY visitcnt DESC LIMIT 25";
+      $sql = "SELECT * FROM input WHERE CHAR_LENGTH(`jsoninput`) > 5 ORDER BY visitcnt DESC LIMIT 25";
       $res = $db->query($sql);
 
       if (!$res || $res->num_rows == 0) {
