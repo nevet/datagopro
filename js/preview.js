@@ -54,16 +54,27 @@
   }
 
   function splitData(data, preview, collapse) {
-    data = data.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-    preview.html(data);
+    var temp = data.toString();
+
+    var index = 0;
+    for (var i=0; i<data.length; i++) {
+      if (i !=0 && i % 50 == 0) {
+        temp = temp.substr(0, i+index) + " " + temp.substr(i+index+1);
+        index++;
+      }
+    }
+
+    temp = temp.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    console.log(temp);
+    preview.html(temp);
 
     var maxWidth = preview.parent().width();
     var lastWidth = 0;
     var best = 0;
 
-    for (var i = 0; i < data.length; i ++) {
-      if (data[i] == ' ' || data[i] == '>') {
-        preview.html(data.substr(0, i));
+    for (var i = 0; i < temp.length; i ++) {
+      if (temp[i] == ' ' || temp[i] == '>') {
+        preview.html(temp.substr(0, i));
 
         var curWidth = preview.width();
 
@@ -71,8 +82,8 @@
           best = i;
           lastWidth = curWidth;
         } else {
-          preview.html(data.substr(0, best));
-          collapse.html(data.substr(best + 1));
+          preview.html(temp.substr(0, best));
+          collapse.html(temp.substr(best + 1));
 
           break;
         }
