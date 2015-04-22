@@ -79,9 +79,6 @@ function generateString(stringObject) {
   }
 
   for (var i = 1; i <= stringLength; i++) {
-    if ((i-1) != 0 && (i-1) % 50 == 0) {
-      text = text + " ";
-    }
     text = text + possible.charAt(Math.floor(Math.random() * possible.length));
 
     if (lineLength > 0) {
