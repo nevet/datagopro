@@ -228,10 +228,10 @@ function createTimeLine() {
     for (var i = 0; i < alldata.length; i ++) {
 
       var input = alldata[i].input.replace(/(?:&quot;)/g, '\"');
-      console.log(input);
+      // console.log(input);
       input = JSON.parse(input);
-      console.log(input);
-      // createTimelineBlock(alldata[i].setname, alldata[i].date, input);
+      // console.log(input);
+      createTimelineBlock(alldata[i].setname, alldata[i].date, input);
     }
   });
 }
