@@ -47,11 +47,12 @@ $(function(){
 			latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
 		}
     	$("#preview").css("font-family", "inherit");
-    	$("#popular").children().not("#tag").remove();
+    	$("#populartable").children().remove();
     	$("#tag").children().not("h4").remove();
     	createPopularBlock();
     	createPopularBlock();
     	createPopularBlock();
+    	showAllTags();
 	});
 
 	$("#myinput").on("click", function(e){
