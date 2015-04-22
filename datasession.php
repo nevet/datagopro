@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = date("Y-m-d H:i:s");
 
         if (is_null($input) && is_null($setname) && is_null($tag)) {
-          echo json_encode(array("status" => "error", "msg": "no information is retrieved."));
+          echo json_encode(array("status" => "error", "msg" => "no information is retrieved."));
           break;
         }
 
@@ -30,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $res = $db->query($sql);
 
           if (!$res) {
-            echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+            echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
           } else {
-            echo json_encode(array("status" => "ok", "sid": get_auto_id($db)));
+            echo json_encode(array("status" => "ok", "sid" => get_auto_id($db)));
           }
         } else {
           $sql = "SELECT * FROM input WHERE id=$inputId";
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
                 break;
               }
             }
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
                 break;
               }
             }
@@ -92,11 +92,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
               $visCnt = $row["visitcnt"] + 1;
 
-              $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'"
+              $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'";
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
               }
             }
           }
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = $db->query($sql);
 
         if (!$res) {
-          echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+          echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
         } else
         if ($res->num_rows > 0) {
           $return = array();
@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = $db->query($sql);
 
         if (!$res || $res->num_rows == 0) {
-          echo json_encode(array("status" => "error", "msg": print_SQL_error()));
+          echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
         } else {
           $return = array();
 
