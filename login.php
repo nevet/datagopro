@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			if (isset($_SESSION["tinyInput"])) {
 				echo json_encode(array("status" => "tiny", "id" => $_SESSION["tinyInput"]));
 				unset($_SESSION["tinyInput"]);
-			}
+			} else
 			if (isset($_SESSION["curname"])) {
 				echo json_encode(array("status" => "return", "username" => $_SESSION["curname"]));
 			} else {
