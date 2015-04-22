@@ -481,13 +481,16 @@ div.popular-block>a, div.timeline-content>a{
 	height: 28px;
 	width: auto;
 	border-radius: 5px;
-	background-color: #ACB7C0;
+	background-color: #FFB6C1;
 	color: white;
 	float: right;
 	padding: 7px 8px;
 	margin-left: 7px;
 	font-size: 12px;
 	cursor: pointer;
+}
+div.popular-block>a:hover, div.timeline-content>a:hover {
+	background-color: #FFC0CB;
 }
 div.popular-block>a>i{
 	color: white;
@@ -585,11 +588,11 @@ div#mainbody .label-size a:hover:after {
 }
 
 div#mainbody .label-size a.selected {
-	background: #ACB7C0;
+	background: #F0F8FF;
 	color: #4169E1!important;
 }
 div#mainbody .label-size a.selected:before{
-  border-color: transparent #ACB7C0 transparent transparent;
+  border-color: transparent #F0F8FF transparent transparent;
 }
 div#mainbody .label-size a.selected:after {
 	background: #4169E1;
