@@ -21,11 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date = date("Y-m-d H:i:s");
 
         if (is_null($input) && is_null($setname) && is_null($tag)) {
+          // none of the fields are filled
           echo json_encode(array("status" => "error", "msg" => "no information is retrieved."));
           break;
         }
 
         if (is_null($inputId)) {
+          // this is a new entry, insert into the db
           $sql = "INSERT INTO input(user, jsoninput, date, tag, setname, visitcnt) VALUES($userId,'$input','$date','$tag','$setname',0)";
           $res = $db->query($sql);
 
@@ -35,13 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(array("status" => "ok", "sid" => get_auto_id($db)));
           }
         } else {
+          // we've got the input in the database, we need to update whatever fields are made
           $sql = "SELECT * FROM input WHERE id=$inputId";
-          
           $resultQ = $db->query($sql);
           
           if ($resultQ->num_rows > 0) {
-            if (!is_null($setname)) {
-              $sql = "UPDATE input SET input='$input', date='$date',setname='$setname' WHERE id='$inputId'";
+            // if input is filled, update input field
+            if (!is_null($input)) {
+              $sql = "UPDATE input SET input='$input', date='$date' WHERE id=$inputId";
               $res = $db->query($sql);
 
               if (!$res) {
@@ -50,8 +53,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               }
             }
 
+            // if setname is filled, update setname field
+            if (!is_null($setname)) {
+              $sql = "UPDATE input SET date='$date', setname='$setname' WHERE id=$inputId";
+              $res = $db->query($sql);
+
+              if (!$res) {
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+                break;
+              }
+            }
+
+            // if tag is filled, update tag field
             if (!is_null($tag)) {
-              $sql = "UPDATE input SET input='$input', date='$date',tag='$tag' WHERE id='$inputId'";
+              $sql = "UPDATE input SET date='$date', tag='$tag' WHERE id=$inputId";
               $res = $db->query($sql);
 
               if (!$res) {
