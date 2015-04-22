@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($cmd) {
       case "upload":
         $inputId = trim_input("id");
-        $userId = $_SESSION["curuserid"];
+        $userId = isset($_SESSION["curuserid"]) ? $_SESSION["curuserid"] : NULL;
         $input = trim_input("jsoninput");
         $setname = trim_input("setname");
         $tag = trim_input("tag");
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $res = $db->query($sql);
 
           if (!$res) {
-            echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+            echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
           } else {
             echo json_encode(array("status" => "ok", "sid" => get_auto_id($db)));
           }
@@ -44,11 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if ($resultQ->num_rows > 0) {
             // if input is filled, update input field
             if (!is_null($input)) {
-              $sql = "UPDATE input SET input='$input', date='$date' WHERE id=$inputId";
+              $sql = "UPDATE input SET jsoninput='$input', date='$date' WHERE id=$inputId";
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
                 break;
               }
             }
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
                 break;
               }
             }
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
                 break;
               }
             }
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $res = $db->query($sql);
 
               if (!$res) {
-                echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+                echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
               }
             }
           }
@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = $db->query($sql);
 
         if (!$res) {
-          echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+          echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
         } else
         if ($res->num_rows > 0) {
           $return = array();
@@ -148,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = $db->query($sql);
 
         if (!$res || $res->num_rows == 0) {
-          echo json_encode(array("status" => "error", "msg" => print_SQL_error()));
+          echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
         } else {
           $return = array();
 

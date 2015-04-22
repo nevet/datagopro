@@ -197,8 +197,7 @@ $(function(){
           window.open(url);
         }
       });
-    } else
-    if (localStorage.dataSession) {
+    } else {
       // upload to server with annoymous user, then use the return data session id
       // to get url
       $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
@@ -211,7 +210,7 @@ $(function(){
             var tiny = data.url;
             var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
             
-            // create a instant link
+            window.open(url);
           }
         });
       });

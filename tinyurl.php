@@ -38,17 +38,15 @@ function isUnique($chars) {
 function hasInput($inputId) {
   global $db;
   
-  $sql = "SELECT * FROM urls WHERE input=$inputId";
+  $sql = "SELECT * FROM input WHERE id=$inputId";
   $res = $db->query($sql);
 
-  if (!$res && $res->num_row > 0) {
-    return true;
-  }
+  if (!$res || $res->num_rows == 0) return false;
 
-  return false;
+  return true;
 }
 
-$inputId = trim_input("id");
+$inputId = $db->escape_string($_GET["id"]);
 $tiny = generate_chars();
 
 while (!isUnique($tiny)) {
@@ -64,6 +62,6 @@ if (!is_null($inputId) && hasInput($inputId)) {
   if ($res) {
     echo json_encode(array("status" => "ok", "url" => $domain."/".$tiny));
   } else {
-    echo json_encode(array("status" => "error", print_SQL_error());
+    echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
   }
 }
