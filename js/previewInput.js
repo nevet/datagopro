@@ -251,7 +251,7 @@ function highlightSelectedBlock(container, block){
 
 
 function viewDataSet(event) {
-  var curBlock = $(this).parents(".timeline-block");
+  var curBlock = $(event.target).parents(".timeline-block");
   var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
 
 	$("#preview").children().not(".previewLoadingCover").remove();
