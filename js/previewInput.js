@@ -226,8 +226,10 @@ function createTimeLine() {
     alldata = data.data;
 
     for (var i = 0; i < alldata.length; i ++) {
-      var input = JSON.parse(alldata[i].input);
 
+      var input = alldata[i].input.replace(/(?:&quot;)/g, '\"');
+      console.log(input);
+      input = JSON.parse(input);
       console.log(input);
       // createTimelineBlock(alldata[i].setname, alldata[i].date, input);
     }
