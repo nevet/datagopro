@@ -222,9 +222,9 @@ $(document).ready(function() {
     if (data.status == "tiny") {
       finishLoadingLogin();
       localStorage.dataSid = data.id;
-      
+
       $.get("datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
-        var data = JSON.parse(res);
+        var data = JSON.parse(res).data;
         var input = data.input.replace(/(?:&quot;)/g, '\"');
         input = JSON.parse(input);
         insertDataSet("#data-field", input);
