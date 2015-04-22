@@ -62,16 +62,22 @@
     // TODO: saving is currently sequential, could be made as parallel in the
     // future
     var data = serializeInput();
+    var setName = $("setname").val();
     console.log(data);
+
+    $("#notice").html("Saving changes...");
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data}, function (res) {
-        // update label
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data, "setname": setName}, function (res) {
+        $("#notice").html("All changes saved");
       });
     } else {
       // we are offline, store the data in local storage
       localStorage.dataSession = data;
+      localStorage.setName = setName;
+
+      $("#notice").html("All changes saved locally");
     }
   }
 
@@ -98,19 +104,33 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
+      "reflist": []
     }
 
     if ($("#repeatNumber").length) {
       newObject.repeattime = $("#repeatNumber").val();
     } else {
-      newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
+      var refObj = inputList[parseInt($("#backrefNumber").val())];
+
+      newObject.repeatref = refObj.identifier;
+      refObj.reflist.push(newObject);
     }
 
     var index = inputInfo.checkExistence(element);
     var object = inputInfo.getElement(index);
 
     if (index >= 0) {
+      newObject.reflist = object.reflist;
+      
       inputList.splice(index, 1);
+
+      if (newObject.reflist.length) {
+        for (var i = 0; i < newObject.reflist.length; i ++) {
+          var obj = newObject.reflist[i];
+
+          createNewNumber(obj.identifier);
+        }
+      }
     }
 
     inputList.push(newObject);

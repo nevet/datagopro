@@ -117,8 +117,6 @@ $(function(){
 		$("#"+type).css("display", "block");
 	}
 
-	
-
 	function clearDeleteState(icon, iconHtml) {
 		icon.html(iconHtml);
 		icon.removeClass("fa-times");
@@ -167,10 +165,6 @@ $(function(){
 			inDeleteIcon = undefined;
 		}
 	});
-
-  /*
-   Delete functions and Select functions.
-   */
   
   $(document).on("click", "#data-field .btn-delete",function(event){
     var dataBlock = $(this).closest(".data-block");
@@ -196,7 +190,7 @@ $(function(){
           var tiny = data.url;
           var url = "https://www.facebook.com/sharer/sharer.php?u=" + tiny;
           
-          // create a instant link
+          window.open(url);
         }
       });
     } else
@@ -220,6 +214,20 @@ $(function(){
     }
 
     e.preventDefault();
+  });
+
+  $("#setname").on("blur", function () {
+    if (localStorage.dataSid) {
+      // we are online, upload the session to server
+      $.post("dataSession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
+        $("#notice").html("All changes saved");
+      });
+    } else {
+      // we are offline, store the data in local storage
+      localStorage.setName = setName;
+
+      $("#notice").html("All changes saved locally");
+    }
   });
 
   $("#data-field").on("mouseenter", ".data-block-info .fa-stack", function () {
@@ -258,8 +266,6 @@ $(function(){
 			}
 		}
 	});
-
-
 
 	$("#tree").click(function(e){
 		if($(this).is(":checked")) {
