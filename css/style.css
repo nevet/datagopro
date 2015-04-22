@@ -588,17 +588,17 @@ div#mainbody .label-size a:hover:after {
 }
 
 div#mainbody .label-size a.selected {
-	background: #F0F8FF;
+	background: #A1CDFF;
 	color: #4169E1!important;
 }
 div#mainbody .label-size a.selected:before{
-  border-color: transparent #F0F8FF transparent transparent;
+  border-color: transparent #A1CDFF transparent transparent;
 }
 div#mainbody .label-size a.selected:after {
 	background: #4169E1;
 }
 
-div#popular #more{
+div#popular #show-all, #filter{
 	border: 2px solid #4169E1;
 	border-radius: 5px;
 	height: 26px;

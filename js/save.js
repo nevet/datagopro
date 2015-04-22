@@ -95,9 +95,16 @@ $(function(){
 			}).appendTo(".tagbox");
 			$("<a></a>", {
 				"text": taglist[i],
-				"click": function() {
-					$(this).addClass("selected");
-				},
+				"click": function(e) {
+	    			e.stopPropagation();
+					var tag = $(e.target);
+					if(tag.hasClass("selected")) {
+						tag.removeClass("selected");
+					}
+					else {
+						tag.addClass("selected");
+					}
+	    		},
 			}).appendTo(".savewindow .label-size:last");
 		}
 
