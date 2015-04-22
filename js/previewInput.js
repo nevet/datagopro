@@ -47,6 +47,8 @@ var dataArray = [{
   "repeattime": 2
 }];
 
+var allData = [];
+
 function createPopularBlock(){
 	//block wrap
 	$("<div></div>", {
@@ -125,7 +127,7 @@ function createPopularBlock(){
   }).appendTo("#populartable > .popular-block:last .view:last");
 }
 
-function createTimelineBlock(){
+function createTimelineBlock(datasetName, createTime, dataArray){
 	//block wrap
 	$("<div></div>", {
 		"class": "timeline-block",
@@ -221,7 +223,14 @@ function createTimeLine() {
   $.get("datasession.php", {"cmd": "retrieveUInp"}, function (res) {
     var data = JSON.parse(res);
 
-    console.log(data);
+    alldata = data[1];
+
+    for (var i = 0; i < alldata.length; i ++) {
+      var input = JSON.parse(alldata[i].input);
+
+      console.log(input);
+      // createTimelineBlock(alldata[i].setname, alldata[i].date, input);
+    }
   });
 }
 

@@ -141,8 +141,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
           $setname = $row["setname"];
           $input = $row["jsoninput"];
           $tag = $row["tag"];
+          $time = $row["date"];
 
-          array_push($return, array("id" => $inputId, "setname" => $setname, "input" => $input, "tag" => $tag));
+          array_push($return, array("id" => $inputId, "setname" => $setname, "date" => $time, "input" => $input, "tag" => $tag));
         }
 
         echo json_encode(array("status" => "ok", "data" => $return));
