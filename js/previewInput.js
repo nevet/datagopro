@@ -87,8 +87,14 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
-  			"click": function() {
-  				$(this).addClass("selected");
+  			"click": function(e) {
+  				e.stopPropagation();
+				if($(this).hasClass("selected")) {
+					$(this).removeClass("selected");
+				}
+				else {
+					$(this).addClass("selected");
+				}
   			},
   		}).appendTo("#populartable > .popular-block:last .label-size:last");
     }
@@ -179,7 +185,7 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
-  			"click": function() {
+  			"click": function(e) {
   				e.stopPropagation();
 				if($(this).hasClass("selected")) {
 					$(this).removeClass("selected");
