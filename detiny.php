@@ -14,7 +14,7 @@ if ($res && $res->num_rows > 0) {
   $row = $res->fetch_assoc();
 
   $_SESSION["tinyInput"] = $row["input"];
-  header("Location:index.html");
+  header("Location:/");
 } else {
   echo "invalid short url";
 }
