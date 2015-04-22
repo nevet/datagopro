@@ -212,9 +212,7 @@ function google_logout() {
 $(document).ready(function() {
   // on every load, clear data stored in local storage for SIMPLICITY!! need to
   // be handled carefully if have time
-  localStorage.dataSid = undefined;
-  localStorage.dataSession = undefined;
-  localStorage.setName = undefined;
+  localStorage.clear();
 
   startLoadingLogin();
 
