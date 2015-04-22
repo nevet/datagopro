@@ -5,7 +5,6 @@ var tag1 = "first";
 var tag2 = "second";
 var tags = [ tag1, tag2 ];
 var allTags = ["1", "2", "3", "4", "5", "6", "7"];
-var worker = new Worker("js/dataInfo.js");
 
 // var dataArray = [{
 //   "datatype": "number",
