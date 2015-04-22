@@ -43,8 +43,10 @@ function createPopularBlock(datasetName, createTime, tags, dataArray){
   	"text": "Clone",
   	"click": function(e){
   		e.stopPropagation();
-		e.preventDefault();
-  		cloneDataSet(e);
+		  e.preventDefault();
+      var curBlock = $(e.target).parents(".popular-block");
+      var curIndex = curBlock.parent().find(".popular-block").index(curBlock);
+  		cloneDataSet(e, curIndex);
   	},
   }).appendTo("#populartable > .popular-block:last");
 
@@ -59,8 +61,10 @@ function createPopularBlock(datasetName, createTime, tags, dataArray){
   	"text": "View",
   	"click": function(e) {
   		e.stopPropagation();
-		e.preventDefault();
-  		viewDataSet(e);
+		  e.preventDefault();
+      var curBlock = $(e.target).parents(".popular-block");
+      var curIndex = curBlock.parent().find(".popular-block").index(curBlock);
+  		viewDataSet(e, curIndex);
   	},
   }).appendTo("#populartable > .popular-block:last");
 
@@ -135,8 +139,10 @@ function createTimelineBlock(datasetName, createTime, tags, dataArray){
   	"text": "Clone",
   	"click": function(e){
   		e.stopPropagation();
-		e.preventDefault();
-  		cloneDataSet(e);
+		  e.preventDefault();
+      var curBlock = $(e.target).parents(".timeline-block");
+      var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
+  		cloneDataSet(e, curIndex);
   	},
   }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
@@ -151,8 +157,10 @@ function createTimelineBlock(datasetName, createTime, tags, dataArray){
   	"text": "View",
   	"click": function(e) {
   		e.stopPropagation();
-		e.preventDefault();
-  		viewDataSet(e);
+		  e.preventDefault();
+      var curBlock = $(e.target).parents(".timeline-block");
+      var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
+  		viewDataSet(e, curIndex);
   	}
   }).appendTo("#timeline > .timeline-block:last > .timeline-content");
 
@@ -210,10 +218,7 @@ function highlightSelectedBlock(container, block){
 }
 
 
-function viewDataSet(event) {
-  var curBlock = $(event.target).parents(".timeline-block");
-  var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
-
+function viewDataSet(event, curIndex) {
 	$("#preview").children().not(".previewLoadingCover").remove();
 	insertDataSet("#preview", alldata[curIndex].input, event);
 }
@@ -331,15 +336,12 @@ function insertDataSet(container, dataArray, event){
 	};
 }
 
-function cloneDataSet(event) {
+function cloneDataSet(event, curIndex) {
 	latestNewDataPreview = null;
 	$("#preview").children().not(".previewLoadingCover").remove();
 	$("#newdata").trigger("click");
 	$("#data-field").children().remove();
   
-  var curBlock = $(event.target).parents(".timeline-block");
-  var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
-
   localStorage.dataSid = alldata[curIndex].id;
 
 	insertDataSet("#data-field", alldata[curIndex].input, event);
