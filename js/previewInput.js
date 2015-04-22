@@ -54,7 +54,7 @@ $(function() {
   		"class": "popular-block",
   		"click": function(e) {
   			highlightSelectedBlock("#popular .popular-block", $(e.target).closest(".popular-block"));
-  		}
+  		},
   	}).appendTo("#populartable");
 
   	//dataset name
@@ -87,6 +87,9 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
+  			"click": function(e) {
+	    		e.stopPropagation();
+	    	},
   		}).appendTo("#populartable > .popular-block:last .label-size:last");
     }
 
@@ -115,7 +118,7 @@ $(function() {
     		e.stopPropagation();
 			e.preventDefault();
     		viewDataSet(e);
-    	}
+    	},
     }).appendTo("#populartable > .popular-block:last");
 
     $("<i></i>", {
@@ -176,6 +179,9 @@ $(function() {
 
   		$("<a></a>", {
   			"text": tags[i],
+  			"click": function(e) {
+    			e.stopPropagation();
+    		},
   		}).appendTo("#timeline > .timeline-block:last .label-size:last");
     }
 
@@ -233,11 +239,12 @@ $(function() {
 
 	$("div#mainbody").on("click",".label-size a", function(e){
 		e.stopPropagation();
-		if($(this).hasClass("selected")) {
-			$(this).removeClass("selected");
+		var tag = $(e.target);
+		if(tag.hasClass("selected")) {
+			tag.removeClass("selected");
 		}
 		else {
-			$(this).addClass("selected");
+			tag.addClass("selected");
 		}
 	});
 
