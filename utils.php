@@ -15,7 +15,7 @@ function get_auto_id($db) {
   return $db->insert_id;
 }
 
-function print_SQL_error() {
+function print_SQL_error($conn) {
   return $conn->errno . ": " . $conn->error . "\n";
 }
 
