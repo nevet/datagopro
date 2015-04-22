@@ -49,10 +49,7 @@ $(function(){
     	$("#preview").css("font-family", "inherit");
     	$("#populartable").children().remove();
     	$("#tag").children().not("h4").remove();
-    	createPopularBlock();
-    	createPopularBlock();
-    	createPopularBlock();
-    	showAllTags();
+      createPopular();
 	});
 
 	$("#myinput").on("click", function(e){

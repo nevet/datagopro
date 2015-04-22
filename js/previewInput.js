@@ -1,54 +1,7 @@
-var datasetName = "My first input";
-var author = "My name";
-var createTime = "Sat Apr 04 2015 15:28:10";
-var tag1 = "first";
-var tag2 = "second";
-var tags = [ tag1, tag2 ];
-var allTags = ["1", "2", "3", "4", "5", "6", "7"];
-
-// var dataArray = [{
-//   "datatype": "number",
-//   "parityindex": 1,
-//   "parity": undefined,
-//   "numberindex" :0,
-//   "numbertype": "integer",
-//   "floatprecision": "",
-//   "numbermin": 10,
-//   "numbermax": 20,
-//   "repeattime": 20
-// }, {
-//   "datatype": "number",
-//   "parityindex": 0,
-//   "parity": undefined,
-//   "numberindex" :1,
-//   "numbertype": "float",
-//   "floatprecision": 3,
-//   "numbermin": -30,
-//   "numbermax": 30,
-//   "repeattime": 30
-// }, {
-//   "datatype": "string",
-//   "stringlength": 200,
-//   "chartype": "unicode",
-//   "linelength": "",
-//   "linebreak": "\\n",
-//   "wordlength":"",
-//   "wordbreak": "",
-//   "repeattime": 11
-// }, {
-//   "datatype": "graph",
-//   "isconnect": true,
-//   "isdirect": true,
-//   "isweighted": false,
-//   "isTree": false,
-//   "node": 5,
-//   "edge": 7,
-//   "repeattime": 2
-// }];
-
 var alldata = [];
+var allpopdata = [];
 
-function createPopularBlock(){
+function createPopularBlock(datasetName, createTime, tags, dataArray){
 	//block wrap
 	$("<div></div>", {
 		"class": "popular-block",
@@ -232,6 +185,24 @@ function createTimeLine() {
       alldata[i].input = input;
       // console.log(input);
       createTimelineBlock(alldata[i].setname, alldata[i].date, alldata[i].tag, input);
+    }
+  });
+}
+
+function createPopular() {
+  $.get("datasession.php", {"cmd": "retrievePInp"}, function (res) {
+    var data = JSON.parse(res);
+
+    allpopdata = data.data;
+
+    for (var i = 0; i < allpopdata.length; i ++) {
+
+      var input = allpopdata[i].input.replace(/(?:&quot;)/g, '\"');
+      // console.log(input);
+      input = JSON.parse(input);
+      allpopdata[i].input = input;
+      // console.log(input);
+      createPopularBlock(allpopdata[i].setname, allpopdata[i].date, allpopdata[i].tag, input);
     }
   });
 }

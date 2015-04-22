@@ -160,11 +160,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $return = array();
 
         while ($row = $res->fetch_assoc()) {
+          $inputId = $row["id"];
           $setname = $row["setname"];
           $input = $row["jsoninput"];
           $tag = $row["tag"];
+          $time = $row["date"];
 
-          array_push($return, array("setname" => $setname, "input" => $input, "tag" => $tag));
+          array_push($return, array("setname" => $setname, "input" => $input, "tag" => $tag, "date" => $time, "id" => $inputId));
         }
 
         echo json_encode(array("status" => "ok", "data" => $return));
