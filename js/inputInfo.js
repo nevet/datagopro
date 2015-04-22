@@ -79,12 +79,15 @@
       "floatprecision": $("#precision").val(),
       "numbermin": $("#min").val(),
       "numbermax": $("#max").val(),
+      "repeatindex": $("#repeatTypeNumber")[0].selectedIndex
     }
 
-    if ($("#repeatNumber").length) {
+    if (newObject.repeatindex == 0) {
       newObject.repeattime = $("#repeatNumber").val();
+      newObject.repeatVal = $("#repeatNumber").val();
     } else {
       newObject.repeatref = inputList[parseInt($("#backrefNumber").val())].identifier;
+      newObject.repeatVal = $("#backrefNumber").val();
     }
 
     var index = inputInfo.checkExistence(element);
