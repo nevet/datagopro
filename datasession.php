@@ -6,7 +6,7 @@ require_once("utils.php");
 $db = db_connect();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $cmd = trim_input($_POST["cmd"]);
+  $cmd = trim_input("cmd");
 
   if (is_null($cmd)) {
     echo "empty command";
