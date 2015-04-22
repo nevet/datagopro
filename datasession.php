@@ -80,88 +80,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         break;
-      case "retrieveInp":
-        $inputId = trim_input("id");
+    }
+  }
+} else
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  $cmd = $db->escape_string($_GET["cmd"]);
 
-        if (!is_null($inputId)) {
-          $sql = "SELECT * FROM input WHERE id=$inputId";
-          $res = $db->query($sql);
+  switch ($cmd) {
+    case "retrieveInp":
+      $inputId = trim_input("id");
 
-          if (!$res || $res->num_rows > 1) {
-            echo array("status" => "error", "msg" => "duplicate input found");
-          } else {
-            $row = $res->fetch_assoc();
+      if (!is_null($inputId)) {
+        $sql = "SELECT * FROM input WHERE id=$inputId";
+        $res = $db->query($sql);
 
-            $setname = $row["setname"];
-            $input = $row["jsoninput"];
-            $tag = $row["tag"];
+        if (!$res || $res->num_rows > 1) {
+          echo array("status" => "error", "msg" => "duplicate input found");
+        } else {
+          $row = $res->fetch_assoc();
 
-            $data = array("setname" => $setname, "input" => $input, "tag" => $tag);
+          $setname = $row["setname"];
+          $input = $row["jsoninput"];
+          $tag = $row["tag"];
 
-            echo array("status" => "ok", "data" => $data);
+          $data = array("setname" => $setname, "input" => $input, "tag" => $tag);
 
-            // if current requesting id is different from the associated user's id,
-            // we need to increase the visitcnt by 1
-            $assocId = $row["user"];
+          echo array("status" => "ok", "data" => $data);
 
-            if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
-              $visCnt = $row["visitcnt"] + 1;
+          // if current requesting id is different from the associated user's id,
+          // we need to increase the visitcnt by 1
+          $assocId = $row["user"];
 
-              $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'";
-              $res = $db->query($sql);
+          if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
+            $visCnt = $row["visitcnt"] + 1;
 
-              if (!$res) {
-                echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
-              }
+            $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'";
+            $res = $db->query($sql);
+
+            if (!$res) {
+              echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
             }
           }
         }
+      }
 
-        break;
-      case "retrieveUInp":
-        $userId = $_SESSION["curuserid"];
+      break;
+    case "retrieveUInp":
+      $userId = $_SESSION["curuserid"];
 
-        $sql = "SELECT * FROM input WHERE user=$userId";
-        $res = $db->query($sql);
+      $sql = "SELECT * FROM input WHERE user=$userId";
+      $res = $db->query($sql);
 
-        if (!$res) {
-          echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
-        } else
-        if ($res->num_rows > 0) {
-          $return = array();
+      if (!$res) {
+        echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
+      } else
+      if ($res->num_rows > 0) {
+        $return = array();
 
-          while ($row = $res->fetch_assoc()) {
-            $inputId = $row["id"];
-            $setname = $row["setname"];
-            $input = $row["jsoninput"];
-            $tag = $row["tag"];
+        while ($row = $res->fetch_assoc()) {
+          $inputId = $row["id"];
+          $setname = $row["setname"];
+          $input = $row["jsoninput"];
+          $tag = $row["tag"];
 
-            array_push($return, array("id" => $inputId, "setname" => $setname, "input" => $input, "tag" => $tag));
-          }
-
-          echo json_encode(array("status" => "ok", "data" => $return));
+          array_push($return, array("id" => $inputId, "setname" => $setname, "input" => $input, "tag" => $tag));
         }
 
-        break;
-      case "retrievePInp":
-        $sql = "SELECT * FROM input ORDER BY visitcnt DESC LIMIT 25";
-        $res = $db->query($sql);
+        echo json_encode(array("status" => "ok", "data" => $return));
+      }
 
-        if (!$res || $res->num_rows == 0) {
-          echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
-        } else {
-          $return = array();
+      break;
+    case "retrievePInp":
+      $sql = "SELECT * FROM input ORDER BY visitcnt DESC LIMIT 25";
+      $res = $db->query($sql);
 
-          while ($row = $res->fetch_assoc()) {
-            $setname = $row["setname"];
-            $input = $row["jsoninput"];
-            $tag = $row["tag"];
+      if (!$res || $res->num_rows == 0) {
+        echo json_encode(array("status" => "error", "msg" => print_SQL_error($db)));
+      } else {
+        $return = array();
 
-            array_push($return, array("setname" => $setname, "input" => $input, "tag" => $tag));
-          }
+        while ($row = $res->fetch_assoc()) {
+          $setname = $row["setname"];
+          $input = $row["jsoninput"];
+          $tag = $row["tag"];
 
-          echo json_encode(array("status" => "ok", "data" => $return));
+          array_push($return, array("setname" => $setname, "input" => $input, "tag" => $tag));
         }
-    }
+
+        echo json_encode(array("status" => "ok", "data" => $return));
+      }
+
+      break;
   }
 }
