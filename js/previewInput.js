@@ -363,7 +363,7 @@ $(function() {
 	        grouparray.push(i);
 	    }
 	}
-	function showAllTags() {<a id="more" >Show more</a>
+	function showAllTags() {
 
 		$("<a></a>", {
 			"id": "show-all",
