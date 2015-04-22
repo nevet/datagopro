@@ -38,15 +38,15 @@ function isUnique($chars) {
 function hasInput($inputId) {
   global $db;
   
-  $sql = "SELECT * FROM input WHERE input=$inputId";
+  $sql = "SELECT * FROM input WHERE id=$inputId";
   $res = $db->query($sql);
 
-  if (!$res || $res->num_row == 0) return false;
+  if (!$res || $res->num_rows == 0) return false;
 
   return true;
 }
 
-$inputId = trim_input("id");
+$inputId = $db->escape_string($_GET["id"]);
 $tiny = generate_chars();
 
 while (!isUnique($tiny)) {
