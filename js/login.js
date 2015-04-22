@@ -227,6 +227,7 @@ $(document).ready(function() {
         var data = JSON.parse(res).data;
         var input = data.input.replace(/(?:&quot;)/g, '\"');
         input = JSON.parse(input);
+        $("#data-field").children().remove();
         insertDataSet("#data-field", input);
       });
     } else
