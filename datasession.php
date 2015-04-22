@@ -85,10 +85,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
   $cmd = $db->escape_string($_GET["cmd"]);
-
   switch ($cmd) {
     case "retrieveInp":
-      $inputId = trim_input("id");
+      $inputId = $db->escape_string($_GET["id"]);
 
       if (!is_null($inputId)) {
         $sql = "SELECT * FROM input WHERE id=$inputId";
@@ -105,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
           $data = array("setname" => $setname, "input" => $input, "tag" => $tag);
 
-          echo array("status" => "ok", "data" => $data);
+          echo json_encode(array("status" => "ok", "data" => $data));
 
           // if current requesting id is different from the associated user's id,
           // we need to increase the visitcnt by 1
