@@ -620,7 +620,7 @@ div#popular #show-all, #filter{
   left: 0;
   height: 100%;
   width: 100%;
-  background: #222222 url('../ajax-loader small.gif') 50% 50% no-repeat;
+  background: #222222 url('../img/ajax-loader small.gif') 50% 50% no-repeat;
 }
 
 /* dataset preview*/
@@ -652,7 +652,7 @@ div#popular #show-all, #filter{
     height:     100%;
     width:      100%;
     background: rgba( 255, 255, 255, .5 ) 
-                url('../ajax-loader.gif') 
+                url('../img/ajax-loader.gif') 
                 50% 50%
                 no-repeat;
 }
