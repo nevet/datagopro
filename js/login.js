@@ -17,7 +17,7 @@ function uploadLocalSession() {
   inputInfo.saveSession();
   localStorage.setName = $("#setName").val();
 
-  $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession, "setname": localStorage.setName}, function (res) {
+  $.post("/api/datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession, "setname": localStorage.setName}, function (res) {
     var data = JSON.parse(res);
 
     if (data.status == "ok") {
@@ -99,7 +99,7 @@ function fb_login() {
         data = {"name": username, "email": useremail, "type": logintype, "posttype": "login"};
         startLoadingLogin();
 
-        $.post("login.php", data, function (res) {
+        $.post("/api/login.php", data, function (res) {
           if (res.status == "ok") {
             udpateLoginRegion(username);
             finishLoadingLogin();
@@ -192,7 +192,7 @@ function loginCallback(result) {
       $.ajax({
         type: "POST",
         dataType: "json",
-        url: "login.php", //Relative or absolute path to response.php file
+        url: "/api/login.php", //Relative or absolute path to response.php file
         data: postdata,
         success: function(data) {
           var returndata = data["json"];
@@ -216,14 +216,14 @@ $(document).ready(function() {
 
   startLoadingLogin();
 
-  $.post("login.php", {"posttype": "session"}, function (res) {
+  $.post("/api/login.php", {"posttype": "session"}, function (res) {
     var data = JSON.parse(res);
     
     if (data.status == "tiny") {
       finishLoadingLogin();
       localStorage.dataSid = data.id;
 
-      $.get("datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
+      $.get("/api/datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
         var data = JSON.parse(res).data;
         var input = data.input.replace(/(?:&quot;)/g, '\"');
         input = JSON.parse(input);
@@ -275,7 +275,7 @@ $(document).on("click", "#logout", function(event) {
   $.ajax({
     type: "POST",
     dataType: "json",
-    url: "login.php", //Relative or absolute path to response.php file
+    url: "/api/login.php", //Relative or absolute path to response.php file
     data: postdata
   });
 

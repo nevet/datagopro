@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule   ^([1-9a-zA-Z]*)$ detiny.php\?u=$1 [L]
+RewriteRule   ^([1-9a-zA-Z]*)$ /api/detiny.php\?u=$1 [L]

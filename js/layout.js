@@ -192,7 +192,7 @@ $(function(){
     if (localStorage.dataSid) {
       // we logged in, all data has been pushed to server, and has been assigned
       // a data session id. In this case, we can share the input id directly
-      $.get("tinyurl.php", {"id": localStorage.dataSid}, function (res) {
+      $.get("/api/tinyurl.php", {"id": localStorage.dataSid}, function (res) {
         var data = JSON.parse(res);
 
         if (data.status == "ok") {
@@ -205,10 +205,10 @@ $(function(){
     } else {
       // upload to server with annoymous user, then use the return data session id
       // to get url
-      $.post("datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
+      $.post("/api/datasession.php", {"cmd": "upload", "jsoninput": localStorage.dataSession}, function (res) {
         var data = JSON.parse(res);
 
-        $.get("tinyurl.php", {"id": data.sid}, function (res) {
+        $.get("/api/tinyurl.php", {"id": data.sid}, function (res) {
           var data = JSON.parse(res);
 
           if (data.status == "ok") {
@@ -229,7 +229,7 @@ $(function(){
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
+      $.post("/api/datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "setname": setName, "tags": ""}, function (res) {
         $("#notice").html("All changes saved");
       });
     } else {

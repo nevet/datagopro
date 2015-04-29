@@ -67,7 +67,7 @@
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
-      $.post("datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data}, function (res) {
+      $.post("/api/datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": data}, function (res) {
         $("#notice").html("All changes saved");
       });
     } else {

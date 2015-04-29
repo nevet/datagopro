@@ -170,7 +170,7 @@ function createTimelineBlock(datasetName, createTime, tags, dataArray){
 }
 
 function createTimeLine() {
-  $.get("datasession.php", {"cmd": "retrieveUInp"}, function (res) {
+  $.get("/api/datasession.php", {"cmd": "retrieveUInp"}, function (res) {
     var data = JSON.parse(res);
 
     alldata = data.data;
@@ -188,7 +188,7 @@ function createTimeLine() {
 }
 
 function createPopular() {
-  $.get("datasession.php", {"cmd": "retrievePInp"}, function (res) {
+  $.get("/api/datasession.php", {"cmd": "retrievePInp"}, function (res) {
     var data = JSON.parse(res);
 
     alldata = data.data;
