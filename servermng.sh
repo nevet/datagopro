@@ -8,9 +8,9 @@ if { $passwd == "" || $action == ""} {
 	puts "action_code: monitor, update"
 } else {
 	if { $action == "monitor"} {
-		set cmd "sudo /var/www/html/monitor_remote.sh"
+		set cmd "sudo /var/www/html/misc/monitor_remote.sh"
 	} elseif { $action == "update"} {
-		set cmd "sudo /var/www/html/update_remote.sh"
+		set cmd "sudo /var/www/html/misc/update_remote.sh"
 	}
 
 	spawn ssh admin@datagopro.com $cmd
