@@ -1,7 +1,7 @@
 <?php
 
-require_once("/api/config.php");
-require_once("/api/utils.php");
+require_once(__DIR__ . "/config.php");
+require_once(__DIR__ . "/utils.php");
 
 $db = db_connect();
 $domain = "datagopro.com";

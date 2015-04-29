@@ -1,6 +1,6 @@
 <?php
 
-require_once("/api/config.php");
+require_once(__DIR__ . "/config.php");
 
 function db_connect() {
   $db = new mysqli(db_host, db_uid, db_pwd, db_name);

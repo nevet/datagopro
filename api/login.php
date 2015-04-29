@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once("/api/utils.php");
+require_once(__DIR__ . "/utils.php");
 
 $sessionid = session_id();
 
