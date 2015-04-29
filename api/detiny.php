@@ -2,7 +2,7 @@
 
 session_start();
 
-include("utils.php");
+include("/api/utils.php");
 
 $db = db_connect();
 $tiny = $_GET["u"];//shortened chars
