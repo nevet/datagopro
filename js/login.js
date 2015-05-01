@@ -1,17 +1,3 @@
-function startLoadingLogin() {
-  $(".loginLoadingCover").css("display", "block");
-}
-
-function finishLoadingLogin() {
-  $(".loginLoadingCover").css("display", "none");
-}
-
-function udpateLoginRegion(name) {
-  $("span#profile").html("Welcome, " + name + "!");
-  $("#login").css("display", "none");
-  $("#afterlogin").css("display", "");
-}
-
 function uploadLocalSession() {
   // unuploaded session will be uploaded once user logged in
   inputInfo.saveSession();
@@ -26,63 +12,6 @@ function uploadLocalSession() {
     }
   });
 }
-
-function popupLoginClose() {
-  var bPopup = $("#element_to_pop_up").bPopup();
-  bPopup.close({
-    transitionClose: 'slideUp'
-  });
-}
-
-function popupLoginOptions(isNewUser) {
-  $("#element_to_pop_up").bPopup({ //uses jQuery easing plugin
-    speed: 500,
-    transition: 'slideDown',
-    transitionClose: 'slideUp',
-    onClose: function() {
-      if (isNewUser) {
-        $('#tutorialguide').joyride({
-          autoStart: true,
-          nubPosition: 'top',
-          modal: true,
-          expose: true
-        });
-      }
-    }
-  });
-}
-
-var logintype = undefined;
-var username = undefined;
-var useremail = undefined;
-
-$(function () {
-  startLoadingLogin();
-
-  $.ajaxSetup({cache: true});
-  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
-    FB.init({
-      appId: '1567423636871440',
-      status: true, // check login status
-      cookie: true, // enable cookies to allow the server to access the session
-      xfbml: true, // parse XFBML
-      version: 'v2.3'
-    });
-
-    FB.getLoginStatus(function (res) {
-      if (res.status == "connected") {
-        FB.api('/me', function(response) {
-          udpateLoginRegion(response.name);
-          finishLoadingLogin();
-
-          $("html").trigger("login", [response]);
-        });
-      } else {
-        finishLoadingLogin();
-      }
-    });
-  });
-});
 
 function fb_login() {
   FB.login(function(response) {
@@ -194,7 +123,6 @@ function loginCallback(result) {
 
     });
   }
-
 }
 
 function google_logout() {

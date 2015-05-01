@@ -67,7 +67,7 @@
             <li >
             	<a id='popularinput' data-target="#popular"><i class="fa fa-list-ul"></i>Popular Input</a>
             </li>
-            <li><p id="notice">All changes saved</p></li>
+            <li><p id="notice"></p></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a id='help' data-target="#help"><i class="fa fa-question-circle"></i>Help</a></li>
@@ -104,18 +104,7 @@
               </span>
             </p>
             <div id="data-field">
-              <div class='data-block'>
-                <span class="order fa-stack">
-                  <i class="fa fa-circle-thin fa-stack-2x"></i>
-                  <i class="fa fa-stack-1x">1</i>
-                </span>
-                <div class="column">
-                  <input class="btn btn-default" editable="false" readonly="on" placeholder="Data Type" onclick="chooseDataType(this)">
-                  <i class="fa fa-folder-open"></i>
-                </div>
-                  <a class="btn-delete" href="#"><i class="fa fa-trash-o fa-lg fa-delete"></i></a><span class="data-block-info"><span>
-              </div>
-       	 	</div>
+       	 	  </div>
             <div id="add">
               <i class="fa fa-plus-circle fa-2x"></i>
               <p>Add more data...</p>
@@ -540,8 +529,9 @@
         <script src='js/popupController.js'></script>
         <script src="js/validation.js"></script>
         <script src="js/layout.js"></script>
-        <script async src='js/user.js'></script>
-	      <script async src='js/login.js'></script>
+        <script src='js/model/user.js'></script>
+        <script src='js/view.js'></script>
+        <script src='js/controller.js'></script>
         <script async src='js/group.js'></script>
         <script async src='js/grouplogic.js'></script>
         <script async src='js/generator.js'></script>
