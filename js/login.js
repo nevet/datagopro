@@ -27,11 +27,11 @@ function uploadLocalSession() {
   });
 }
 
-function getSession() {
-  var regex = /phpsessid=(.+?);/gi;
-  var token = regex.exec(document.cookie);
-
-  return token ? token[1] : undefined;
+function popupLoginClose() {
+  var bPopup = $("#element_to_pop_up").bPopup();
+  bPopup.close({
+    transitionClose: 'slideUp'
+  });
 }
 
 function popupLoginOptions(isNewUser) {
@@ -56,39 +56,39 @@ var logintype = undefined;
 var username = undefined;
 var useremail = undefined;
 
-//facebook log in
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: '1567423636871440',
-    oauth: true,
-    status: true, // check login status
-    cookie: true, // enable cookies to allow the server to access the session
-    xfbml: true, // parse XFBML
-    version: 'v2.3'
-  });
-};
+$(function () {
+  startLoadingLogin();
 
-// (function(d, s, id) {
-//   var js, fjs = d.getElementsByTagName(s)[0];
-//   if (d.getElementById(id)) {
-//     return;
-//   }
-//   js = d.createElement(s);
-//   js.id = id;
-//   js.src = "//connect.facebook.net/en_US/sdk.js";
-//   fjs.parentNode.insertBefore(js, fjs);
-// }(document, 'script', 'facebook-jssdk'));
+  $.ajaxSetup({cache: true});
+  $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+    FB.init({
+      appId: '1567423636871440',
+      status: true, // check login status
+      cookie: true, // enable cookies to allow the server to access the session
+      xfbml: true, // parse XFBML
+      version: 'v2.3'
+    });
+
+    FB.getLoginStatus(function (res) {
+      if (res.status == "connected") {
+        FB.api('/me', function(response) {
+          udpateLoginRegion(response.name);
+          finishLoadingLogin();
+
+          $("html").trigger("login", [response]);
+        });
+      } else {
+        finishLoadingLogin();
+      }
+    });
+  });
+});
 
 function fb_login() {
   FB.login(function(response) {
     if (response.authResponse) {
       access_token = response.authResponse.accessToken; //get access token
       var user_id = response.authResponse.userID; //get FB UID
-
-      var bPopup = $("#element_to_pop_up").bPopup();
-      bPopup.close({
-        transitionClose: 'slideUp'
-      });
 
       FB.api('/me', function(response) {
         useremail = response.email;
@@ -206,33 +206,31 @@ $(document).ready(function() {
   // be handled carefully if have time
   localStorage.clear();
 
-  startLoadingLogin();
-
-  $.post("/api/login.php", {"posttype": "session"}, function (res) {
-    var data = JSON.parse(res);
+  // $.post("/api/login.php", {"posttype": "session"}, function (res) {
+  //   var data = JSON.parse(res);
     
-    if (data.status == "tiny") {
-      finishLoadingLogin();
-      localStorage.dataSid = data.id;
+  //   if (data.status == "tiny") {
+  //     finishLoadingLogin();
+  //     localStorage.dataSid = data.id;
 
-      $.get("/api/datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
-        var data = JSON.parse(res).data;
-        var input = data.input.replace(/(?:&quot;)/g, '\"');
-        input = JSON.parse(input);
-        $("#data-field").children().remove();
-        insertDataSet("#data-field", input);
-      });
-    } else
-    if (data.status == "return") {
-      udpateLoginRegion(data.username);
-      username = data.username;
-      finishLoadingLogin();
-      uploadLocalSession();
-    } else {
-      finishLoadingLogin();
-      popupLoginOptions(true);
-    }
-  });
+  //     $.get("/api/datasession.php", {"cmd": "retrieveInp", "id": data.id}, function (res) {
+  //       var data = JSON.parse(res).data;
+  //       var input = data.input.replace(/(?:&quot;)/g, '\"');
+  //       input = JSON.parse(input);
+  //       $("#data-field").children().remove();
+  //       insertDataSet("#data-field", input);
+  //     });
+  //   } else
+  //   if (data.status == "return") {
+  //     udpateLoginRegion(data.username);
+  //     username = data.username;
+  //     finishLoadingLogin();
+  //     uploadLocalSession();
+  //   } else {
+  //     finishLoadingLogin();
+  //     popupLoginOptions(true);
+  //   }
+  // });
 });
 
 $(document).on("click", "#login", function(event) {
