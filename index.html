@@ -105,9 +105,9 @@
             </p>
             <div id="data-field">
        	 	  </div>
-            <div id="add">
-              <i class="fa fa-plus-circle fa-2x"></i>
-              <p>Add more data...</p>
+            <div id="add" class="empty">
+              <i class="fa fa-plus-circle fa-5x"></i>
+              <p class="empty">Click here to add data...</p>
             </div>
             <div id="groupbutton" style="display: none">
               <i class="fa fa-plus-square fa-2x"></i>
@@ -265,7 +265,7 @@
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel b-close">Cancel</button>
                 <button class="btn btn-primary ok" value="number" onClick="okclicked(this)">OK</button>
               </div>
             </div>
@@ -339,7 +339,7 @@
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel b-close">Cancel</button>
                 <button class="btn btn-primary ok" value="string" onClick="okclicked(this)">OK</button>
               </div>
             </div>
@@ -421,7 +421,7 @@
                 <label>Times</label>
               </div>
               <div class="row popup-btn">
-                <button class="btn btn-danger cancel" onClick="cancelClicked(this)">Cancel</button>
+                <button class="btn btn-danger cancel b-close">Cancel</button>
                 <button class="btn btn-primary ok" value="graph" onClick="okclicked(this)">OK</button>
               </div>
             </div>
@@ -526,13 +526,15 @@
         <script async src="js/lib/modernizr.mq.js"></script>
         <script async src="js/lib/jquery.joyride-2.1.js"></script>
 
-        <script src='js/popupController.js'></script>
-        <script src="js/validation.js"></script>
-        <script src="js/layout.js"></script>
         <script src='js/model/user.js'></script>
         <script src='js/model/dataSession.js'></script>
         <script src='js/view.js'></script>
+        <script src='js/dataSessionView.js'></script>
+        <script src='js/popupView.js'></script>
         <script src='js/controller.js'></script>
+        <script src='js/dataSessionController.js'></script>
+        <script src='js/popupController.js'></script>
+        <script src="js/validation.js"></script>
         <script async src='js/group.js'></script>
         <script async src='js/grouplogic.js'></script>
         <script async src='js/generator.js'></script>

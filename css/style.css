@@ -127,11 +127,11 @@ div.data-block {
 	margin: 1% 0;
 }
 
-div.column .fa-folder-open{
+div.column .fa-cog{
 	position: absolute;
-	top: 3px;
-	left: 80%;
-	opacity: 0.5;
+	top: -4px;
+	left: 75%;
+	opacity: 0.6;
 	cursor: pointer;
 }
 div.column {

@@ -1,3 +1,48 @@
+(function (popupController, $, undefined) {
+  $("#popup").on("click", ".fa-angle-double-down",function(e){
+    e.preventDefault();
+    popupView.expandAdvance($(this));
+  });
+  
+  $("#popup").on("click", ".fa-angle-double-up", function(e){
+    e.preventDefault();
+    popupView.collapseAdvance($(this));
+  });
+
+  // auto click ok when enter key is pressed
+  $("body").on("keypress", function (e) {
+    if (!$("#popup[style*='block']").length) return;
+
+    if (e.which == 13) {
+      // find which tab are we in
+      var tab = $(this).find("div[class*='container'][style*='block']").attr("id");
+      var okButton = $(this).find("button[value='" + tab + "'][onclick*='ok']");
+       
+      if (okButton) {
+        okButton.click();
+      }
+    }
+  });
+
+  $("#tree").click(function(e){
+    if($(this).is(":checked")) {
+      $(".nottree").css("display", "none");
+    }
+    else {
+      $(".nottree").css("display", "block");
+    }
+  });
+
+  $("#weight").click(function(e){
+    if($(this).is(":checked")) {
+      $(".weightrange").css("display", "block");
+    }
+    else {
+      $(".weightrange").css("display", "none");
+    }
+  });
+} (window.popupController = window.popupController || {}, jQuery));
+
 var chosebutton;
 var worker = new Worker("js/dataInfo.js");
 var currentEntryIndex;
@@ -29,30 +74,6 @@ worker.onmessage = function(event) {
     }
   }
 };
-
-function cancelClicked(e) {
-  $("#popup").bPopup().close();
-}
-
-function chooseDataType(e) {
-  clearData();
-  $(".ok").show();
-  $(".cancel").text("Cancel");
-  $("#popup input").attr("disabled", false);
-  $("#popup select").attr("disabled", false);
-
-  chosebutton = e;
-  $(e).blur();
-  currentEntryIndex = inputInfo.checkExistence(chosebutton);
-  if (currentEntryIndex >= 0) {
-    preparePopup( inputInfo.getElement(currentEntryIndex) );
-  };
-  $("#popup").bPopup({
-    speed: 300,
-    transition: 'slideDown',
-    transitionClose: 'fadeIn'
-  });
-}
 
 function numberChanged(e) {
   var element = $(e);

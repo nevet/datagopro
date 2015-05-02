@@ -1,5 +1,6 @@
-$(function() {
+(function (tabHelp, $, undefined) {
 	$('[data-toggle="tooltip"]').tooltip(); 
+
 	$("div.tabcontents>i").on("click", function(e) {
 		var content = getActiveContent();
 		if (content.attr("id") == "number") {
@@ -15,6 +16,7 @@ $(function() {
 			console.log(content.attr("id"));
 		}
 	});
+
 	function getActiveContent() {
 		var tabName = $("ul.tabs>li.selected").attr("id");
 		var content;
@@ -33,6 +35,7 @@ $(function() {
 		}
 		return $("div.tabcontents>#"+content);
 	}
+
 	function numberHelp(container){
 		$("#numbertype").css("border", "3px solid #51CBEE");
 		$("#numbertype").tooltip("show");
@@ -84,8 +87,9 @@ $(function() {
 			},1500);
 		},1500);
 
-		clearData();
+		popupView.clearData();
 	}
+
 	function stringHelp(container){
 
 		$("#stringlength").css("border", "3px solid #51CBEE");
@@ -133,8 +137,9 @@ $(function() {
 			},1500);
 		},1500);
 
-		clearData();
+		popupView.clearData();
 	}
+
 	function graphHelp(container){
 		$("#node").css("border", "3px solid #51CBEE");
 		$("#node").parent().tooltip("show");
@@ -184,7 +189,7 @@ $(function() {
 				},1500);
 			},1500);
 		},1500);
-	}
 
-	clearData();
-});
+		popupView.clearData();
+	}
+} (window.tabHelp = window.tabHelp || {}, jQuery));
