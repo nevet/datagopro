@@ -11,6 +11,6 @@
     profile.email = res.email;
     profile.logintype = "facebook";
 
-    // update server
+    // TODO: update server
   });
 } (window.user = window.user || {}, jQuery));

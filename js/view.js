@@ -37,4 +37,28 @@
       }
     });
   }
+
+  $("html").on("sessionUpdate", function (event, res) {
+    var addDataButton = $("#add");
+    var addDataButtonCueword = $("#add p");
+    var addDataButtonIcon = $("#add i");
+
+    switch (res.opcode) {
+      case "clear":
+        addDataButton.removeClass("hasInput");
+        addDataButton.addClass("empty");
+
+        addDataButtonIcon.removeClass("fa-2x");
+        addDataButtonIcon.addClass("fa-5x");
+
+        addDataButtonCueword.removeClass("hasInput");
+        addDataButtonCueword.addClass("empty");
+        addDataButtonCueword.html("Click here to add data...");
+        break;
+      case "add":
+        break;
+      case "delete":
+        break;
+    }
+  });
 } (window.view = window.view || {}, jQuery));

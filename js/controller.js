@@ -27,7 +27,13 @@
     });
   }
 
-  $(function () {
+  function setup() {
     fbLogin();
+    dataSession.init();
+  }
+
+  // after DOM is ready, do initial setup
+  $(function () {
+    setup();
   });
 } (window.controller = window.controller || {}, jQuery));

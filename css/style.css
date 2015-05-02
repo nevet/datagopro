@@ -156,23 +156,52 @@ p.group-info {
 }
 
 div#add {
-	width: 200px;
 	position: absolute;
+}
+
+div#add.hasInput{
+	width: 200px;
 	bottom: 12%;
 }
+
+div#add.empty{
+	width: 450px;
+	top: 40%;
+	left: 15%;
+}
+
+div#add p {
+	line-height: 34px;
+	cursor: pointer;
+}
+
+div#add p.hasInput {
+	margin-top: 1%;
+	margin-left: 40px;
+  	font-size: 17px;
+}
+
+div#add p.empty {
+	margin-top: 5%;
+	margin-left: 80px;
+	font-size: 27px;
+}
+
 div#groupbutton {
 	width: 200px;
 	position: absolute;
 	bottom: 10%;
 	left: 300px;
 }
+
 div#add>i, div#groupbutton>i {
 	margin: 4px;
 	padding-left: 2px;
 	float: left;
 	cursor: pointer;
 }
-div#add>p, div#groupbutton>p {
+
+div#groupbutton>p {
 	margin-top: 1%;
 	margin-left: 40px;
   	line-height: 34px;
