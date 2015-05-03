@@ -1,7 +1,4 @@
 (function (preview, $, undefined) {
-  var display = $("#preview");
-  var div = "<div></div>";
-  var button = "<button class='dataCollapseButton fa fa-angle-down' data-toggle='collapse' aria-expanded='true'></button>"
   var previewPadding;
 
   var divs = [];
@@ -15,42 +12,6 @@
     }
 
     return [undefined, -1];
-  }
-
-  function getDivId() {
-    var date = new Date();
-    var time = date.getTime();
-    var id = "";
-
-    while (time) {
-      last = time % 62;
-
-      if (last < 10) {
-        id += last;
-      } else
-      if (last >= 10 && last < 36) {
-        id += String.fromCharCode(last + 55);
-      } else {
-        id += String.fromCharCode(last + 61);
-      }
-
-      time = ~~(time / 62);
-    }
-
-    return id;
-  }
-
-  function save(textToWrite) {
-    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-    var downloadLink = document.createElement("a");
-
-    downloadLink.download = "textFile";
-    downloadLink.innerHTML = "Download File";
-    if (window.URL != null) {
-      downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-    }
-
-    downloadLink.click();
   }
 
   function splitData(data, preview, collapse) {
@@ -124,16 +85,6 @@
     }
   }
 
-  preview.startLoading = function () {
-    display.removeClass("showContent");
-    display.addClass("loading");
-  }
-
-  preview.endLoading = function () {
-    display.addClass("showContent");
-    display.removeClass("loading");
-  }
-
   preview.render = function (element, data) {
     var check = exist(element);
     var newDiv = check[0];
@@ -201,30 +152,4 @@
       collapseButton.css("visibility", "hidden");
     }
   }
-
-  $("#preview").on("click", "button", function () {
-    var button = $(this);
-
-    if (button.attr("aria-expanded") == "true") {
-      button.removeClass("fa-angle-down");
-      button.addClass("fa-angle-right");
-    } else {
-      button.removeClass("fa-angle-right");
-      button.addClass("fa-angle-down");
-    }
-  });
-
-  $("#generate button").on("click", function () {
-    if (allData.length) {
-      var output = "";
-
-      for (var i = 0; i < allData.length; i ++) {
-        output += allData[i];
-      }
-      
-      save(output);
-    } else {
-      alert("There's no input so far!");
-    }
-  });
 }) (window.preview = window.preview || {}, jQuery);

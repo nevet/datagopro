@@ -12,26 +12,16 @@
       }
   }
 
-  view.startLoadingLogin = function () {
-    $(".loginLoadingCover").css("display", "block");
-  }
-
   view.finishLoadingLogin = function () {
     $(".loginLoadingCover").css("display", "none");
   }
 
-  view.udpateLoginRegion = function (name) {
-    $("span#profile").html("Welcome, " + name + "!");
-    $("#login").css("display", "none");
-    $("#afterlogin").css("display", "");
+  view.init = function () {
+    setHeights();
   }
 
-  view.refreshSaveRegion = function (scope) {
-    if (scope == "online") {
-      saveNotice.html("All changes saved");
-    } else {
-      saveNotice.html("All changes saved locally");
-    }
+  view.loadingSaveRegion = function () {
+    saveNotice.html("Saving changes...");
   }
 
   view.popupLoginClose = function () {
@@ -59,7 +49,21 @@
     });
   }
 
-  view.init = function () {
-    setHeights();
+  view.refreshSaveRegion = function (scope) {
+    if (scope == "online") {
+      saveNotice.html("All changes saved");
+    } else {
+      saveNotice.html("All changes saved locally");
+    }
+  }
+
+  view.startLoadingLogin = function () {
+    $(".loginLoadingCover").css("display", "block");
+  }
+
+  view.udpateLoginRegion = function (name) {
+    $("span#profile").html("Welcome, " + name + "!");
+    $("#login").css("display", "none");
+    $("#afterlogin").css("display", "");
   }
 } (window.view = window.view || {}, jQuery));

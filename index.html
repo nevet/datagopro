@@ -150,7 +150,6 @@
           </div>
 
           <div id="preview" class="showContent">
-            <div class="previewLoadingCover"></div>
           </div>
         </div>
 
@@ -266,7 +265,7 @@
               </div>
               <div class="row popup-btn">
                 <button class="btn btn-danger cancel b-close">Cancel</button>
-                <button class="btn btn-primary ok" value="number" onClick="okclicked(this)">OK</button>
+                <button class="btn btn-primary ok" value="number">OK</button>
               </div>
             </div>
             <div id="string" class="container popup">
@@ -340,7 +339,7 @@
               </div>
               <div class="row popup-btn">
                 <button class="btn btn-danger cancel b-close">Cancel</button>
-                <button class="btn btn-primary ok" value="string" onClick="okclicked(this)">OK</button>
+                <button class="btn btn-primary ok" value="string">OK</button>
               </div>
             </div>
             <div id="graph" class="container popup">
@@ -422,7 +421,7 @@
               </div>
               <div class="row popup-btn">
                 <button class="btn btn-danger cancel b-close">Cancel</button>
-                <button class="btn btn-primary ok" value="graph" onClick="okclicked(this)">OK</button>
+                <button class="btn btn-primary ok" value="graph">OK</button>
               </div>
             </div>
           </div>
@@ -521,26 +520,31 @@
         
         <script src="https://apis.google.com/js/plus.js"></script>
         <script src="js/lib/bootstrap.min.js"></script>
+
         <script async src="js/lib/jquery.bpopup.min.js"></script>
         <script async src="js/lib/jquery.cookie.js"></script>
         <script async src="js/lib/modernizr.mq.js"></script>
         <script async src="js/lib/jquery.joyride-2.1.js"></script>
 
+        <script src="js/validation.js"></script>
+        
         <script src='js/model/user.js'></script>
         <script src='js/model/dataSession.js'></script>
-        <script src='js/view.js'></script>
-        <script src='js/dataSessionView.js'></script>
-        <script src='js/popupView.js'></script>
-        <script src='js/controller.js'></script>
-        <script src='js/dataSessionController.js'></script>
-        <script src='js/popupController.js'></script>
-        <script src="js/validation.js"></script>
+        
+        <script src='js/view/view.js'></script>
+        <script src='js/view/dataSessionView.js'></script>
+        <script src='js/view/previewView.js'></script>
+        <script src='js/view/popupView.js'></script>
+
+        <script src='js/controller/controller.js'></script>
+        <script src='js/controller/dataSessionController.js'></script>
+        <script src='js/controller/previewController.js'></script>
+        <script src='js/controller/popupController.js'></script>
+        
         <script async src='js/group.js'></script>
         <script async src='js/grouplogic.js'></script>
         <script async src='js/generator.js'></script>
-        <script async src='js/inputInfo.js'></script>
         <script async src='js/dataInfo.js'></script>
-        <script async src='js/preview.js'></script>
         <script async src="js/tabcontent.js"></script>
         <script async src="js/tabHelp.js"></script>
         <script async src='js/help.js'></script>

@@ -35,6 +35,14 @@
     addDataButtonCueword.html("Add more data...");
   }
 
+  function addEntryConfirm(input) {
+    var activeEntry = dataSessionController.getLastActiveEntry();
+    var type = input.datatype;
+
+    activeEntry.attr("value", type.capitalizeFirstLetter());
+    changeInfoMessage(activeEntry, type, input);
+  }
+
   function createDataBlock() {
     var dataBlock = $(_dataBlock);
 
@@ -62,6 +70,72 @@
     addDataButtonMaximize();
   }
 
+  function changeInfoMessage(entry, type, input) {
+    var infoSpan = entry.find(".data-block-info");
+    var string = ""; 
+
+    switch (type) {
+      case "number":
+        string = numberInfoMessage(input);
+        break;
+      case "string":
+        string = stringInfoMessage(input);
+        break;
+      case "graph":
+        string = graphInfoMessage(input);
+        break;
+    }
+
+    string += " <b><i class='fa fa-times' style='padding-right: 5px;'></i> ";
+
+    if (input.repeattime) {
+      infoSpan.html(string + input.repeattime + "</b>");
+    } else {
+      var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + input.referto + '</i></span>');
+
+      infoSpan.html(string);
+      circle.appendTo(infoSpan);
+    }
+  }
+
+  function numberInfoMessage(object) {
+    var string;
+
+    switch (object.numbertype) {
+      case "integer":
+        string = "<b>Integer</b>" + 
+          " from " + object.numbermin + 
+          " to " + object.numbermax;
+        break;
+
+      case "float":
+        string = "<b>Float</b>" + 
+          " from " + object.numbermin + 
+          " to " + object.numbermax + 
+          " with precision " + object.floatprecision;
+        break;
+    }
+
+    return string;
+  }
+
+  function stringInfoMessage(object) {
+    var string;
+
+    string = "<b>String</b> with length of " + object.stringlength;
+
+    return string;
+  }
+
+  function graphInfoMessage(object) {
+    var string;
+
+    string = "<b>Graph</b> with " + object.node + 
+          " nodes and " + object.edge + " edges";
+
+    return string;
+  }
+
   dataSessionView.addEntry = function () {
     // add the data block into data field
     var dataBlock = createDataBlock();
@@ -80,6 +154,20 @@
     popupView.showPopup();
 
     return index;
+  }
+
+  dataSessionView.hoverEntryBackrefIn = function (event) {
+    var target = $(event.target);
+    var index = target.closest(".data-block").index();
+
+    previewView.highlightEntry(index);
+  }
+
+  dataSessionView.hoverEntryBackrefOut = function (event) {
+    var target = $(event.target);
+    var index = target.closest(".data-block").index();
+
+    previewView.diminishEntry(index);
   }
 
   dataSessionView.modifyEntry = function (index) {
@@ -105,13 +193,10 @@
         clearDataField();
         break;
       case "add":
+        addEntryConfirm(res.input);
         break;
       case "delete":
         break;
     }
-  });
-
-  $("html").on("popupConfirm", function (event, res) {
-
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));

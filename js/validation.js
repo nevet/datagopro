@@ -353,3 +353,14 @@ function permutationNotChecked() {
   $("#repeatNumber").attr("disabled", false);     
   $("#repeatTypeNumber").attr("disabled", false);
 }
+
+function validate(type) {
+  switch (type) {
+    case "number":
+      return checkNumberValidation();
+    case "string":
+      return checkStringValidation();
+    case "graph":
+      return checkGraphValidation();
+  }
+}

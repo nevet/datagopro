@@ -41,39 +41,23 @@
       $(".weightrange").css("display", "none");
     }
   });
+
+  $("#popup .ok").on("click", function (event) {
+    var target = $(event.target);
+    var type = target.val();
+    var input = popupView.getInput(type);
+
+    $("html").trigger("popupClose", [{"status": "ok", "input": input}]);
+  });
 } (window.popupController = window.popupController || {}, jQuery));
 
 var chosebutton;
-var worker = new Worker("js/dataInfo.js");
 var currentEntryIndex;
 
 var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
 var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"></span>';
 var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
 var backrefSelectHtml = '<select class="form-control" style="width: 121px"></select>';
-
-worker.onmessage = function(event) {
-  var data = event.data;
-  var curindex = data[1];
-  var refindex = data[2];
-
-  var chosenElement = $("#data-field").find("input")[curindex];
-
-  preview.endLoading();
-  preview.render(chosenElement, data[0]);
-
-  // we must handle reference updating here, since we need to wait the reference to
-  // be updated
-  if (refindex && refindex.length) {
-    for (var i = 0; i < refindex.length; i ++) {
-      var domObj = $("#data-field").find("input")[refindex[i]];
-      var internalIndex = inputInfo.checkExistence(domObj);
-      var refObj = inputInfo.getElement(internalIndex);
-      // TODO: this is only for demo, need to create new thread for each ref later!!
-      printEntry(jQuery.extend({}, refObj), worker);
-    }
-  }
-};
 
 function numberChanged(e) {
   var element = $(e);
@@ -217,143 +201,4 @@ function repeatTypeChanged(e) {
       backrefSelect.appendTo(inputGroup);
     }
   }
-}
-
-function printEntry(obj, thread) {
-  var curindex = $("#data-field").find("input").index(obj.identifier);
-  obj.identifier = undefined;
-
-  preview.startLoading();
-
-  if (!obj.repeattime) {
-    obj.repeattime = parseInt(preview.getData(obj.repeatref));
-    obj.repeatref = undefined;
-  }
-
-  thread.postMessage({"cmd":"start", "data": JSON.stringify(obj), "curindex": curindex, "refindex": obj.refindex});
-}
-
-function okclicked(e) {
-  var element = $(e);
-
-  switch (element.val()) {
-    case "number":
-      if (checkNumberValidation()) {
-        $("#popup").bPopup().close();
-        $(chosebutton).attr("value","Number");
-        inputInfo.createNewInfo("number",chosebutton);
-        changeInfoMessage("number");
-      };
-      break;
-
-    case "string":
-      if (checkStringValidation()) {
-        $("#popup").bPopup().close();
-        $(chosebutton).attr("value","String");
-        inputInfo.createNewInfo("string", chosebutton);
-        changeInfoMessage("string");
-      };
-      break;
-
-    case "graph":
-      if (checkGraphValidation()) {
-        $("#popup").bPopup().close();
-        $(chosebutton).attr("value","Graph");
-        inputInfo.createNewInfo("graph", chosebutton);
-        changeInfoMessage("graph");
-      };
-      break;
-
-    default:
-      break;
-  }
-
-  inputInfo.saveSession();
-
-  var obj = jQuery.extend({}, inputInfo.getLastElement());
-
-  printEntry(obj, worker);
-}
-
-function changeInfoMessage(type, info_span, data) {
-  if (info_span) {
-    element = info_span;
-    object = data;
-  }
-  else {
-    var element = $(chosebutton).closest("div.data-block").find(".data-block-info");
-    var object = inputInfo.getLastElement();
-  }
-
-  var string = ""; 
-
-  switch (type) {
-    case "number":
-      string = numberInfoMessage(object);
-      break;
-
-    case "string":
-      string = stringInfoMessage(object);
-      break;
-
-    case "graph":
-      string = graphInfoMessage(object);
-      break;
-
-    default:
-      break;
-  }
-
-  string += " <b>X ";
-
-  if (object.repeattime) {
-    element.html(string + object.repeattime + "</b>");
-  } else {
-    var ref = preview.getDivByIdentifier(object.repeatref);
-    var index = ref[0] + 1;
-    var refDiv = ref[1];
-
-    var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + index + '</i></span>');
-
-    element.html(string);
-    circle.appendTo(element);
-  }
-}
-
-function numberInfoMessage(object) {
-  var string;
-
-  switch (object.numbertype) {
-    case "integer":
-      string = "<b>Integer</b>" + 
-        " from " + object.numbermin + 
-        " to " + object.numbermax;
-      break;
-
-    case "float":
-      string = "<b>Float</b>" + 
-        " from " + object.numbermin + 
-        " to " + object.numbermax + 
-        " with precision " + object.floatprecision;
-      break;
-  }
-
-  return string;
-}
-
-function stringInfoMessage(object) {
-  var string;
-
-  string = "<b>String</b> with length of " + object.stringlength;
-
-  return string;
-}
-
-function graphInfoMessage(object) {
-  var string;
-
-  string = "<b>Graph</b> with " + object.node + 
-        " nodes and " + object.edge + " edges";
-
-  return string;
 }

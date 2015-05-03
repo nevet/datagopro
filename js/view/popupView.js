@@ -56,9 +56,71 @@
     target.attr("class","fa fa-angle-double-down");
   }
 
+  popupView.closePopup = function () {
+    popup.close();
+  }
+
   popupView.expandAdvance = function (target) {
     target.closest(".container").find(".advanced").css("display","block");
     target.attr("class","fa fa-angle-double-up");
+  }
+
+  popupView.getInput = function (type) {
+    var input;
+
+    switch (type) {
+      case "number":
+        input = {
+          "datatype": "number",
+          "parityindex": $("#parity")[0].selectedIndex,
+          "parity":  $("#parity").val(),
+          "orderindex": $("#order")[0].selectedIndex,
+          "order": $("#order").val(),
+          "numberindex" : $("#numbertype")[0].selectedIndex,
+          "numbertype": $("#numbertype").val(),
+          "permutation": $("#permutation")[0].checked,
+          "floatprecision": $("#precision").val(),
+          "numbermin": $("#min").val(),
+          "numbermax": $("#max").val(),
+          "repeatypeindex": $("#repeatTypeNumber")[0].selectedIndex
+        }
+        // some conditional fields need to be set here:
+        // 1. repeattime
+        // 2. referto
+        // 3. referby
+        break;
+      case "string":
+        input = {
+          "datatype": "string",
+          "stringlength": $("#stringlength").val(),
+          "chartype": $("#charset")[0].selectedIndex,
+          "caseindex":$("#case")[0].selectedIndex,
+          "casetype": $("#case").val(),
+          "hasnumber": $("#hasnumber")[0].checked,
+          "linelength": $("#linelength").val(),
+          "linebreak": $("#linebreak").val(),
+          "wordlength": $("#wordlength").val(),
+          "wordbreak": $("#wordbreak").val()
+        }
+        break;
+      case "graph":
+        input = {
+          "datatype": "graph",
+          "isconnect": $("#connect")[0].checked,
+          "isdirect": $("#direct")[0].checked,
+          "isweighted": $("#weight")[0].checked,
+          "isTree": $("#tree")[0].checked,
+          "weightmin": $("#weightmin").val(),
+          "weightmax": $("#weightmax").val(),
+          "node": $("#node").val(),
+          "edge": $("#edge").val(),
+          "graphformatindex": $("#graphformat")[0].selectedIndex,
+          "graphformat": $("#graphformat").val()
+        }
+      break;
+    }
+
+    return input;
   }
 
   popupView.preparePopup = function (index) {
