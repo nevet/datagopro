@@ -86,7 +86,7 @@
         break;
     }
 
-    string += " <b><i class='fa fa-times' style='padding-right: 5px;'></i> ";
+    string += " <b><i class='fa fa-times' style='padding-right: 5px;'></i>";
 
     if (input.repeattime) {
       infoSpan.html(string + input.repeattime + "</b>");

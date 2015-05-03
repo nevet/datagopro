@@ -16,7 +16,7 @@
     if (e.which == 13) {
       // find which tab are we in
       var tab = $(this).find("div[class*='container'][style*='block']").attr("id");
-      var okButton = $(this).find("button[value='" + tab + "'][onclick*='ok']");
+      var okButton = $(this).find("#popup .ok[value='" + tab + "']");
        
       if (okButton) {
         okButton.click();

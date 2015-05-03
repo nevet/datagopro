@@ -6,7 +6,7 @@
   var _spinner = "<i class='fa fa-spinner fa-spin'>";
 
   function getDiv(index) {
-    return $(preview.find("div")[index]);
+    return $(preview.children("div")[index]);
   }
 
   function getDivUID() {
@@ -133,5 +133,9 @@
     var collapseDiv = div.find("div div");
 
     splitData(dataSession.data[index], previewSpan, collapseDiv);
+
+    if (collapseDiv.html() != "") {
+      div.find("button").css("visibility", "visible");
+    }
   }
 } (window.previewView = window.previewView || {}, jQuery));
