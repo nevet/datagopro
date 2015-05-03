@@ -5,6 +5,9 @@
   var _collapseButton = "<button class='dataCollapseButton fa fa-angle-down' data-toggle='collapse' aria-expanded='true'></button>"
   var _spinner = "<i class='fa fa-spinner fa-spin'>";
 
+  var welcomeMsg = "Welcome to DataGoPro!";
+  var welcomeDiv = $(_div).html(welcomeMsg);
+
   function getDiv(index) {
     return $(preview.children("div")[index]);
   }
@@ -69,6 +72,10 @@
     var collapseDataDiv = $(_div);
     var divUid = getDivUID();
 
+    if (preview.find("#welcomeMsg").length) {
+      preview.find("#welcomeMsg").remove();
+    }
+
     collapseButton.attr("data-target", "#" + divUid);
     collapseButton.css("visibility", "hidden");
     collapseButton.appendTo(div);
@@ -94,6 +101,11 @@
   previewView.highlightEntry = function (index) {
     var div = getDiv(index);
     div.find("span").addClass("glowSpan");
+  }
+
+  previewView.init = function (index) {
+    welcomeDiv.attr("id", "welcomeMsg");
+    welcomeDiv.appendTo(preview);
   }
 
   previewView.startLoadingEntry = function (index) {

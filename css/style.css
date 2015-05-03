@@ -640,6 +640,10 @@ div#popular #show-all, #filter{
 	text-decoration: none;
 }
 
+#welcomeMsg {
+	margin-top: 20px;
+}
+
 /* login loading cover */
 .loginLoadingCover {
   display: none;

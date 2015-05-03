@@ -34,6 +34,7 @@
     fbLogin();
 
     view.init();
+    previewView.init();
     dataSession.init();
   });
 
