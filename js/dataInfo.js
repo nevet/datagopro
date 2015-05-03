@@ -10,7 +10,7 @@ onmessage = function (event) {
       var json = JSON.parse(data.data);
       var generatedData = generate([json]);
 
-      postMessage([generatedData, data.curindex, data.refindex]);
+      postMessage({"data": generatedData, "index": data.index, "referby": json.referby});
       break;
   }
 }

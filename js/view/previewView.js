@@ -66,30 +66,24 @@
     var collapseButton = $(_collapseButton);
     var dataDiv = $(_div);
     var previewSpan = $(_span);
+    var collapseDataDiv = $(_div);
     var divUid = getDivUID();
 
     collapseButton.attr("data-target", "#" + divUid);
+    collapseButton.css("visibility", "hidden");
     collapseButton.appendTo(div);
 
     dataDiv.css("padding-left", "10px");
 
-    previewDataSpan.appendTo(dataDiv);
+    previewSpan.appendTo(dataDiv);
     dataDiv.appendTo(div);
     div.appendTo(preview);
-
-    var collapseDataDiv = $(div);
     
     collapseDataDiv.attr("id", divUid);
     collapseDataDiv.attr("aria-expanded", true);
     collapseDataDiv.addClass("collapse");
     collapseDataDiv.addClass("in");
     collapseDataDiv.appendTo(dataDiv);
-
-    splitData(data, previewDataSpan, collapseDataDiv);
-
-    if (collapseDataDiv.html() == "") {
-      collapseButton.css("visibility", "hidden");
-    }
   }
 
   previewView.diminishEntry = function (index) {
@@ -121,9 +115,9 @@
     previewSpan.html("");
   }
 
-  $("#preview").on("click", "button", function (event) {
+  previewView.toggleCollapseButton = function (event) {
     var button = $(event.target);
-
+    
     if (button.attr("aria-expanded") == "true") {
       button.removeClass("fa-angle-down");
       button.addClass("fa-angle-right");
@@ -131,5 +125,13 @@
       button.removeClass("fa-angle-right");
       button.addClass("fa-angle-down");
     }
-  });
+  }
+
+  previewView.updateEntry = function (index) {
+    var div = getDiv(index);
+    var previewSpan = div.find("span");
+    var collapseDiv = div.find("div div");
+
+    splitData(dataSession.data[index], previewSpan, collapseDiv);
+  }
 } (window.previewView = window.previewView || {}, jQuery));

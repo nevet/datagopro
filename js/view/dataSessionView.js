@@ -39,7 +39,7 @@
     var activeEntry = dataSessionController.getLastActiveEntry();
     var type = input.datatype;
 
-    activeEntry.attr("value", type.capitalizeFirstLetter());
+    activeEntry.find("input").attr("value", type.capitalizeFirstLetter());
     changeInfoMessage(activeEntry, type, input);
   }
 

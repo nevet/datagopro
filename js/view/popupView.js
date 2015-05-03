@@ -1,6 +1,15 @@
 (function (popupView, $, undefined) {
   var popup = $("#popup");
 
+  function updateRepeat(input, type) {
+    var capType = type.capitalizeFirstLetter();
+    if (input.repeatypeindex == 0) {
+      input.repeattime = $("#repeat" + capType).val();
+    } else {
+      input.referto = parseInt($("#backref" + capType)).val();
+    }
+  }
+
   popupView.clearData = function() {
     $("#anumber").addClass("selected").siblings().removeClass("selected");
     $("#number").css("display","block").siblings().css("display", "none");
@@ -84,10 +93,6 @@
           "numbermax": $("#max").val(),
           "repeatypeindex": $("#repeatTypeNumber")[0].selectedIndex
         }
-        // some conditional fields need to be set here:
-        // 1. repeattime
-        // 2. referto
-        // 3. referby
         break;
       case "string":
         input = {
@@ -100,7 +105,8 @@
           "linelength": $("#linelength").val(),
           "linebreak": $("#linebreak").val(),
           "wordlength": $("#wordlength").val(),
-          "wordbreak": $("#wordbreak").val()
+          "wordbreak": $("#wordbreak").val(),
+          "repeatypeindex": $("#repeatTypeString")[0].selectedIndex
         }
         break;
       case "graph":
@@ -115,10 +121,13 @@
           "node": $("#node").val(),
           "edge": $("#edge").val(),
           "graphformatindex": $("#graphformat")[0].selectedIndex,
-          "graphformat": $("#graphformat").val()
+          "graphformat": $("#graphformat").val(),
+          "repeatypeindex": $("#repeatTypeGraph")[0].selectedIndex
         }
       break;
     }
+
+    updateRepeat(input, type);
 
     return input;
   }

@@ -2,6 +2,18 @@
   dataSession.input = [];
   dataSession.data = [];
 
+  function updateReferby(input) {
+    if (!input.referto) return;
+
+    var referee = dataSession.input[input.referto];
+
+    if (!referee.referby) {
+      referee.referby = [];
+    }
+    
+    referee.referby.push(dataSession.input.length);
+  }
+
   function printEntry(entry, entryIndex) {
     var dup = $.extend({}, entry);
 
@@ -24,11 +36,11 @@
     dataSession.data[data.index] = data.data;
 
     previewView.stopLoadingEntry(data.index);
-    previewView.loadData(data.index);
+    previewView.updateEntry(data.index);
 
     // update each input that refers to current index. We must handle the updating
     // here, since we need to wait for it to be updated
-    if (referby && referby.length) {
+    if (data.referby && data.referby.length) {
       for (var i = 0; i < referby.length; i ++) {
         var referbyIndex = referby[i];
         printEntry(dataSession.input[referbyIndex]);
@@ -38,9 +50,11 @@
 
   dataSession.add = function (userInput) {    
     // issue confirm add message before anything else
-    $("html").trigger("sessionUpdate", [{"datatype": userInput.datatype, "input": userInput}]);
+    $("html").trigger("sessionUpdate", [{"opcode": "add", "input": userInput}]);
 
     dataSession.input.push(userInput);
+    updateReferby(userInput);
+
     dataSession.save();
 
     previewView.addEntry();
@@ -60,7 +74,7 @@
     // future
     var serializedData = JSON.stringify(dataSession.input);
     
-    view.lodingSaveRegion();
+    view.loadingSaveRegion();
 
     if (localStorage.dataSid) {
       // we are online, upload the session to server
