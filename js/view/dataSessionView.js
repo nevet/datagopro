@@ -127,8 +127,18 @@
       dataField.children()[index].remove();
     }
 
+    renumberDatablocks();
+
     if (dataField.children().length == 0) {
       addDataButtonMaximize();
+    }
+  }
+
+  function renumberDatablocks() {
+    var dataBlocks = dataField.find(".data-block");
+
+    for (var i = 0; i < dataBlocks.length; i ++) {
+      $(dataBlocks[i]).find(".fa-stack-1x").html(i + 1);
     }
   }
 

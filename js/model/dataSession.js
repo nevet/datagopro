@@ -68,6 +68,46 @@
   }
 
   dataSession.remove = function (index) {
+    // take care of referto first. There are totally 3 cases:
+    // referto < index, this one won't be affected by deletion;
+    // referto == index, the data will become "undefined";
+    // referto > index, referto should be decreased by 1 since index is taken away.
+    for (var i = 0; i < dataSession.input.length; i ++) {
+      var input = dataSession.input[i];
+
+      if (i == index || input.referto < index) continue;
+      
+      if (input.referto > index) {
+        input.referto --;
+      } else
+      if (input.referto == index) {
+        dataSession.data[i] = undefined;
+        input.referto = -1;
+      }
+
+      $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": i}]);
+    }
+
+    // take care of referby. There are totally 3 cases:
+    // referby < index, this one won't be affected by deletion;
+    // referby == index, simply delete this entry;
+    // referby > index, simply decrease referby by 1 since index is taken away.
+    for (var i = 0; i < dataSession.input.length; i ++) {
+      var input = dataSession.input[i];
+
+      if (i == index || !input.referby) continue;
+
+      // need to do it from right to left since splice will mess up the index
+      for (var j = input.referby.length - 1; j >= 0; j --) {
+        if (input.referby[j] > index) {
+          input.referby[j] --;
+        } else
+        if (input.referby[j] == index) {
+          input.referby.splice(j, 1);
+        }
+      }
+    }
+
     dataSession.input.splice(index, 1);
     dataSession.data.splice(index, 1);
 
