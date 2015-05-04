@@ -5,9 +5,10 @@
     if(document.documentElement.clientWidth > 768){
       //big screen
         var cHeight = document.documentElement.clientHeight;
-        var np = 64/cHeight;
+        var navHeight = $("nav").height() + 2; // height + border-height * 2
         //main body height
-        var mbHeight = cHeight * (1-np);
+        var mbHeight = cHeight - navHeight;
+        $("#mainbody").css("min-height", mbHeight+"px");
         $("#mainbody").css("height", mbHeight+"px");
       }
   }
