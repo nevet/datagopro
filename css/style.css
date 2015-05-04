@@ -3,6 +3,9 @@ html body {
 	font-size: 14px;
 	font-weight: 400;
 }
+html::-webkit-scrollbar {
+	display: none;
+}
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
@@ -74,11 +77,23 @@ div#preview.showContent {
 	font-family: 'Lucida Console', Monaco, monospace;
 }
 
+#add-tags {
+  display: inline;
+  position: absolute;
+  padding: 5px 10px 5px 8px;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #0858B2;
+  background-color: #2272CB;
+  right: 2%;
+  margin-top: 1px;
+}
+
 div#editor .fa {
 	color: #0858B2;
 }
 div#editor>input.form-control {
-	width: 80%;
+	width: 70%;
 	float: left;
 	margin-right: 20px;
 }
@@ -455,7 +470,6 @@ div.timeline-content>a>i {
 
 #popup {
 	border-radius: 7px;
-	padding-top: 15px;
 	background-color: #E1E6FA;
 }
 .popup {

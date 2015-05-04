@@ -68,7 +68,7 @@
   $("#data-field").on("click", ".data-block div i", function (event) {
     var target = $(event.target);
     target.parent().children("input").click();
-  });  
+  });
 
   // delete data    
   $("#data-field").on("click", ".btn-delete", function (event) {

@@ -33,9 +33,9 @@
   $(function () {
     fbLogin();
 
+    dataSession.init();
     view.init();
     previewView.init();
-    dataSession.init();
   });
 
   //navigation
