@@ -36,7 +36,7 @@
       // user cancles the action, if user is currently adding an entry, 
       if (lastActiveEntryState === 0) {
         // remove the last entry
-        dataSessionView.removeEntry(lastActiveEntryIndex);
+        $("html").trigger("sessionUpdate", [{"opcode": "remove", "index": lastActiveEntryIndex}]);
       }
     } else {
       // some modification has been done, change data session
@@ -72,9 +72,9 @@
 
   // delete data    
   $("#data-field").on("click", ".btn-delete", function (event) {
-    var dataBlock = $(this).closest(".data-block");
-    inputInfo.removeElement(dataBlock.find("input")[0]);
-    dataBlock.remove();
+    var index = $(event.target).closest(".data-block").index();
+
+    dataSession.remove(index);
   });
 
   // hover on back reference

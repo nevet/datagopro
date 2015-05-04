@@ -35,8 +35,9 @@
     addDataButtonCueword.html("Add more data...");
   }
 
-  function addEntryConfirm(input) {
+  function addEntryConfirm() {
     var activeEntry = dataSessionController.getLastActiveEntry();
+    var input = dataSession.input[dataSession.input.length - 1];
     var type = input.datatype;
 
     activeEntry.find("input").attr("value", type.capitalizeFirstLetter());
@@ -119,6 +120,18 @@
     return string;
   }
 
+  function removeEntry (index) {
+    if (index == undefined) {
+      dataField.children().last().remove();
+    } else {
+      dataField.children()[index].remove();
+    }
+
+    if (dataField.children().length == 0) {
+      addDataButtonMaximize();
+    }
+  }
+
   function stringInfoMessage(object) {
     var string;
 
@@ -175,27 +188,16 @@
     popupView.showPopup();
   }
 
-  dataSessionView.removeEntry = function (index) {
-    if (index == undefined) {
-      dataField.children().last().remove();
-    } else {
-      dataField.children()[index].remove();
-    }
-
-    if (dataField.children().length == 0) {
-      addDataButtonMaximize();
-    }
-  }
-
   $("html").on("sessionUpdate", function (event, res) {
     switch (res.opcode) {
       case "clear":
         clearDataField();
         break;
       case "add":
-        addEntryConfirm(res.input);
+        addEntryConfirm();
         break;
-      case "delete":
+      case "remove":
+        removeEntry(res.index);
         break;
     }
   });

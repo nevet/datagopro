@@ -8,6 +8,39 @@
   var welcomeMsg = "Welcome to DataGoPro!";
   var welcomeDiv = $(_div).html(welcomeMsg);
 
+  function addEntry () {
+    var div = $(_div);
+    var collapseButton = $(_collapseButton);
+    var dataDiv = $(_div);
+    var previewSpan = $(_span);
+    var collapseDataDiv = $(_div);
+    var divUid = getDivUID();
+
+    if (preview.find("#welcomeMsg").length) {
+      preview.find("#welcomeMsg").remove();
+    }
+
+    collapseButton.attr("data-target", "#" + divUid);
+    collapseButton.css("visibility", "hidden");
+    collapseButton.appendTo(div);
+
+    dataDiv.css("padding-left", "10px");
+
+    previewSpan.appendTo(dataDiv);
+    dataDiv.appendTo(div);
+    div.appendTo(preview);
+    
+    collapseDataDiv.attr("id", divUid);
+    collapseDataDiv.attr("aria-expanded", true);
+    collapseDataDiv.addClass("collapse");
+    collapseDataDiv.addClass("in");
+    collapseDataDiv.appendTo(dataDiv);
+  }
+
+  function clearDataField() {
+    preview.html("");
+  }
+
   function getDiv(index) {
     return $(preview.children("div")[index]);
   }
@@ -33,6 +66,10 @@
     }
 
     return id;
+  }
+
+  function removeEntry (index) {
+    getDiv(index).remove();
   }
 
   function splitData(data, span, div) {
@@ -62,35 +99,6 @@
         }
       }
     }
-  }
-
-  previewView.addEntry = function () {
-    var div = $(_div);
-    var collapseButton = $(_collapseButton);
-    var dataDiv = $(_div);
-    var previewSpan = $(_span);
-    var collapseDataDiv = $(_div);
-    var divUid = getDivUID();
-
-    if (preview.find("#welcomeMsg").length) {
-      preview.find("#welcomeMsg").remove();
-    }
-
-    collapseButton.attr("data-target", "#" + divUid);
-    collapseButton.css("visibility", "hidden");
-    collapseButton.appendTo(div);
-
-    dataDiv.css("padding-left", "10px");
-
-    previewSpan.appendTo(dataDiv);
-    dataDiv.appendTo(div);
-    div.appendTo(preview);
-    
-    collapseDataDiv.attr("id", divUid);
-    collapseDataDiv.attr("aria-expanded", true);
-    collapseDataDiv.addClass("collapse");
-    collapseDataDiv.addClass("in");
-    collapseDataDiv.appendTo(dataDiv);
   }
 
   previewView.diminishEntry = function (index) {
@@ -150,4 +158,18 @@
       div.find("button").css("visibility", "visible");
     }
   }
+
+  $("html").on("sessionUpdate", function (event, res) {
+    switch (res.opcode) {
+      case "clear":
+        clearDataField();
+        break;
+      case "add":
+        addEntry();
+        break;
+      case "remove":
+        removeEntry(res.index);
+        break;
+    }
+  });
 } (window.previewView = window.previewView || {}, jQuery));

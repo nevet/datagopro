@@ -48,16 +48,14 @@
     }
   }
 
-  dataSession.add = function (userInput) {    
-    // issue confirm add message before anything else
-    $("html").trigger("sessionUpdate", [{"opcode": "add", "input": userInput}]);
-
+  dataSession.add = function (userInput) {
     dataSession.input.push(userInput);
     updateReferby(userInput);
 
     dataSession.save();
 
-    previewView.addEntry();
+    // issue confirm add message before anything else
+    $("html").trigger("sessionUpdate", [{"opcode": "add"}]);
 
     printEntry(userInput, dataSession.input.length - 1);
   }
@@ -67,6 +65,13 @@
     dataSession.data = [];
 
     $("html").trigger("sessionUpdate", [{"opcode": "clear"}]);
+  }
+
+  dataSession.remove = function (index) {
+    dataSession.input.splice(index, 1);
+    dataSession.data.splice(index, 1);
+
+    $("html").trigger("sessionUpdate", [{"opcode": "remove", "index": index}]);
   }
 
   dataSession.save = function () {
