@@ -90,20 +90,18 @@
         <div id="mainbody">
           <div id="editor" style="display:block">
             <input id="setname" class="form-control" type="text" placeholder="Your data set name here...">
-            <p data-toggle="tooltip" data-placement="bottom" data-original-title="Share via SNS">
-              <span>
-                <a href='https://twitter.com/home?status=http://datagopro.com' target='_blank' class='btn btn-twitter text-center'>
-                  <i class='fa fa-twitter'></i>
-                </a>
-                <a href='#' id="fbShare" target='_blank' class='btn btn-facebook'>
-                  <i class='fa fa-facebook'></i>
-                </a>
-                <a href='https://plus.google.com/share?url=http://datagopro.com' target='_blank' class='btn btn-google-plus'>
-                  <i class='fa fa-google-plus'></i>
-                </a>
-              </span>
-            </p>
-            <button id="add-tags" type="button" class="btn"><i class="fa fa-tags" style="color: white;"></i></button>
+            <div>
+              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Share via Twitter" href='https://twitter.com/home?status=http://datagopro.com' target='_blank' class='btn btn-twitter text-center sns-sharing'>
+                <i class='fa fa-twitter'></i>
+              </a>
+              <a href='#' data-toggle="tooltip" data-placement="bottom" data-original-title="Share via Facebook" id="fbShare" target='_blank' class='btn btn-facebook sns-sharing'>
+                <i class='fa fa-facebook'></i>
+              </a>
+              <a data-toggle="tooltip" data-placement="bottom" data-original-title="Share via Google" href='https://plus.google.com/share?url=http://datagopro.com' target='_blank' class='btn btn-google-plus sns-sharing'>
+                <i class='fa fa-google-plus'></i>
+              </a>
+              <button id="add-tags" type="button" data-toggle="tooltip" data-placement="bottom" data-original-title="Add tags" class="btn"><i class="fa fa-tags" style="color: white;"></i></button>
+            </div>
             <div id="data-field">
        	 	  </div>
             <div id="add" class="empty">
@@ -532,12 +530,12 @@
         <script src='js/view/view.js'></script>
         <script src='js/view/dataSessionView.js'></script>
         <script src='js/view/previewView.js'></script>
-        <script src='js/view/popupView.js'></script>
+        <script aysnc src='js/view/popupView.js'></script>
 
-        <script src='js/controller/controller.js'></script>
-        <script src='js/controller/dataSessionController.js'></script>
-        <script src='js/controller/previewController.js'></script>
-        <script src='js/controller/popupController.js'></script>
+        <script aysnc src='js/controller/controller.js'></script>
+        <script aysnc src='js/controller/dataSessionController.js'></script>
+        <script aysnc src='js/controller/previewController.js'></script>
+        <script aysnc src='js/controller/popupController.js'></script>
         
         <script async src='js/group.js'></script>
         <script async src='js/grouplogic.js'></script>
