@@ -92,7 +92,8 @@
     if (input.repeattime) {
       infoSpan.html(string + input.repeattime + "</b>");
     } else {
-      var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + input.referto + '</i></span>');
+      var index = input.referto + 1;
+      var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + index + '</i></span>');
 
       infoSpan.html(string);
       circle.appendTo(infoSpan);

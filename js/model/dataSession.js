@@ -19,7 +19,7 @@
 
     // set repeat time if it's backref type
     if (!dup.repeattime) {
-      dup.repeattime = dataSession.data[dup.repeatref];
+      dup.repeattime = dataSession.data[dup.referto];
     }
 
     previewView.startLoadingEntry(entryIndex);
@@ -58,6 +58,23 @@
     $("html").trigger("sessionUpdate", [{"opcode": "add"}]);
 
     printEntry(userInput, dataSession.input.length - 1);
+  }
+
+  dataSession.getValidBackrefOptions = function () {
+    var output = [];
+    var index = dataSessionController.getLastActiveEntryIndex();
+
+    for (var i = 0; i < index; i ++) {
+      var input = dataSession.input[i];
+
+      if (input.datatype == "number" &&
+          input.numbertype == "integer" &&
+          input.repeattime === "1") {
+        output.push(i + 1);
+      }
+    }
+
+    return output;
   }
 
   dataSession.init = function () {

@@ -1,4 +1,7 @@
 (function (popupController, $, undefined) {
+  var repInputHtml = '<input class="repeattime form-control" type="number" min="1">';
+  var backrefSelectHtml = '<select class="form-control" style="width: 163px"></select>';
+
   $("#popup").on("click", ".fa-angle-double-down",function(e){
     e.preventDefault();
     popupView.expandAdvance($(this));
@@ -49,31 +52,66 @@
 
     $("html").trigger("popupClose", [{"status": "ok", "input": input}]);
   });
+
+  $("#numbertype").on("change", function (event) {
+    popupView.numbertypeOnChange($(event.target));
+  });
+
+  $("select[id*='repeatType']").on("change", function (event) {
+    var repeatTypeSelect = $(event.target);
+    var parentForm = repeatTypeSelect.closest(".form-inline");
+    var inputGroup = repeatTypeSelect.parent(".input-group");
+    var dataType = repeatTypeSelect.attr("id").substr(10);
+
+    var backrefSelect = inputGroup.find("select[id*='backref']");
+    var customInput = inputGroup.find("input");
+    
+    if (repeatTypeSelect[0].selectedIndex == 0) {
+      repeatTypeSelect.css("width", "95px");
+
+      if (parentForm.children().last().html() != "Times") {
+        parentForm.append("<label>Times</label>");
+      }
+
+      if (!customInput.length) {
+        if (backrefSelect.length) {
+          backrefSelect.remove();
+        }
+
+        customInput = $(repInputHtml);
+        customInput.attr("id", "repeat" + dataType);
+        customInput.appendTo(inputGroup);
+      }
+    } else {
+      repeatTypeSelect.css("width", "110px");
+
+      if (parentForm.children().last().html() == "Times") {
+        parentForm.children().last().remove();
+      }
+
+      if (!backrefSelect.length) {
+        if (customInput.length) {
+          customInput.remove();
+        }
+
+        backrefSelect = $(backrefSelectHtml);
+        backrefSelect.attr("id", "backref" + dataType);
+
+        var validOptions = dataSession.getValidBackrefOptions();
+
+        if (!validOptions.length) {
+          backrefSelect.append("<option value='' disabled selected style='display:none;'>No Valid Option</option>");
+        } else {
+          for (var i = 0; i < validOptions.length; i ++) {
+            backrefSelect.append("<option value=" + (validOptions[i] - 1) + ">Data Entry " + validOptions[i] + "</option>");
+          }
+        }
+
+        backrefSelect.appendTo(inputGroup);
+      }
+    }
+  });
 } (window.popupController = window.popupController || {}, jQuery));
-
-var chosebutton;
-var currentEntryIndex;
-
-var repInputHtml = '<input class="repeattime form-control" type="number" min="1" style="background-color: white;">';
-var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"></span>';
-var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
-var backrefSelectHtml = '<select class="form-control" style="width: 121px"></select>';
-
-function numberChanged(e) {
-  var element = $(e);
-  if (element.val() == "float") {
-    $("#precisionDiv").show();
-    checkNumberValidation();
-    $("#parity")[0].selectedIndex = 0;
-    $("#parity").prop("disabled", "disabled");
-    $("#permutationDiv").hide();
-  } else {
-    $("#precisionDiv").hide();
-    noErrorHighlight($("#precision"));
-    $("#parity").prop("disabled", false);
-    $("#permutationDiv").show();
-  }
-}
 
 preparePopup = function (object) {
 
@@ -159,46 +197,4 @@ function prepareGraph(object) {
   $("#edge").val(object.edge);
   $("#graphformat")[0].selectedIndex = object.graphformatindex;
   $("#repeatGraph").val(object.repeattime);
-}
-
-function repeatTypeChanged(e) {
-  var repeatTypeSelect = $(e);
-  var inputGroup = repeatTypeSelect.parent(".input-group");
-  var dataType = repeatTypeSelect.attr("id").substr(10);
-
-  var backrefSelect = inputGroup.find("select[id*='backref']");
-  var customInput = inputGroup.find("input");
-  
-  if (repeatTypeSelect[0].selectedIndex == 0) {
-    if (!customInput.length) {
-      if (backrefSelect.length) {
-        backrefSelect.remove();
-      }
-
-      customInput = $(repInputHtml);
-      customInput.attr("id", "repeat" + dataType);
-      customInput.appendTo(inputGroup);
-    }
-  } else {
-    if (!backrefSelect.length) {
-      if (customInput.length) {
-        customInput.remove();
-      }
-
-      backrefSelect = $(backrefSelectHtml);
-      backrefSelect.attr("id", "backref" + dataType);
-
-      var validOptions = inputInfo.getValidBackref(currentEntryIndex);
-
-      if (!validOptions.length) {
-        backrefSelect.append("<option value='' disabled selected style='display:none;'>No Valid Reference</option>");
-      } else {
-        for (var i = 0; i < validOptions.length; i ++) {
-          backrefSelect.append("<option value=" + (validOptions[i] - 1) + ">Data Entry " + validOptions[i] + "</option>");
-        }
-      }
-
-      backrefSelect.appendTo(inputGroup);
-    }
-  }
 }

@@ -6,7 +6,7 @@
     if (input.repeatypeindex == 0) {
       input.repeattime = $("#repeat" + capType).val();
     } else {
-      input.referto = parseInt($("#backref" + capType)).val();
+      input.referto = parseInt($("#backref" + capType).val());
     }
   }
 
@@ -23,7 +23,6 @@
     $("#parity")[0].selectedIndex = 0;
     $("#order")[0].selectedIndex = 0;
     $("#repeatTypeNumber")[0].selectedIndex = 0;
-    repeatTypeChanged($("#repeatTypeNumber"));
     $("#repeatNumber").val(10);  
     correctHighlight($("#repeatNumber"));
     correctHighlight($("#max"));
@@ -58,6 +57,8 @@
     correctHighlight($("#edge"));
     noErrorHighlight($("#weightmax"));
     noErrorHighlight($("#weightmin"));
+
+    $("#repeatTypeNumber").trigger("change");
   }
 
   popupView.collapseAdvance = function (target) {
@@ -130,6 +131,21 @@
     updateRepeat(input, type);
 
     return input;
+  }
+
+  popupView.numbertypeOnChange = function (target) {
+    if (target.val() == "float") {
+      $("#precisionDiv").show();
+      checkNumberValidation();
+      $("#parity")[0].selectedIndex = 0;
+      $("#parity").prop("disabled", "disabled");
+      $("#permutationDiv").hide();
+    } else {
+      $("#precisionDiv").hide();
+      noErrorHighlight($("#precision"));
+      $("#parity").prop("disabled", false);
+      $("#permutationDiv").show();
+    }
   }
 
   popupView.preparePopup = function (index) {

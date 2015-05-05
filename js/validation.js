@@ -136,6 +136,9 @@ $(function(){
   });
 });
 
+var iconError = '<span class="glyphicon glyphicon-remove" style="color: #A94442"></span>';
+var iconCorrect = '<span class="glyphicon glyphicon-ok" style="color: #3C763D"></span>';
+
 function checkNumberValidation() {
   var isValid = true;
   var element;
