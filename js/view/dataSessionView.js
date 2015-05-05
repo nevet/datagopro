@@ -100,6 +100,10 @@
     }
   }
 
+  function modifyEntryConfirm(index) {
+    
+  }
+
   function numberInfoMessage(object) {
     var string;
 
@@ -182,16 +186,16 @@
 
   dataSessionView.hoverEntryBackrefIn = function (event) {
     var target = $(event.target);
-    var index = target.closest(".data-block").index();
+    var index = parseInt(target.html());
 
-    previewView.highlightEntry(index);
+    previewView.highlightEntry(index - 1);
   }
 
   dataSessionView.hoverEntryBackrefOut = function (event) {
     var target = $(event.target);
-    var index = target.closest(".data-block").index();
+    var index = parseInt(target.html());
 
-    previewView.diminishEntry(index);
+    previewView.diminishEntry(index - 1);
   }
 
   dataSessionView.modifyEntry = function (index) {
@@ -210,6 +214,8 @@
       case "remove":
         removeEntry(res.index);
         break;
+      case "modify":
+        modifyEntryConfirm(res.index);
     }
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));

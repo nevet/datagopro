@@ -16,7 +16,15 @@
   }
 
   dataSessionController.getLastActiveEntry = function () {
+    if (lastActiveEntryIndex == dataSession.input.length) {
+      return undefined;
+    }
+    
     return $($("#data-field").find(".data-block")[lastActiveEntryIndex]);
+  }
+
+  dataSessionController.getLastActiveEntryState = function () {
+    return lastActiveEntryState;
   }
 
   dataSessionController.getLastActiveEntryIndex = function () {
@@ -44,7 +52,12 @@
 
       if (validate(input.datatype)) {
         popupView.closePopup();
-        dataSession.add(input);
+
+        if (lastActiveEntryState == 0) {
+          dataSession.add(input);
+        } else {
+          dataSession.modify(lastActiveEntryIndex, input);
+        }
       }
     }
 
@@ -104,7 +117,7 @@
       var output = "";
 
       for (var i = 0; i < dataSession.data.length; i ++) {
-        output += allData[i];
+        output += dataSession.data[i] + "\r\n";
       }
       
       save(output);

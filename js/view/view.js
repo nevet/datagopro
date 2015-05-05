@@ -67,4 +67,8 @@
     $("#login").css("display", "none");
     $("#afterlogin").css("display", "");
   }
+
+  $(window).resize(function() {
+    setHeights();
+  });
 } (window.view = window.view || {}, jQuery));

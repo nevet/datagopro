@@ -75,6 +75,13 @@
   }
 
   function splitData(data, span, div) {
+    if (!data) {
+      span.html("undefined");
+      div.html("");
+
+      return;
+    }
+
     var temp = data.toString().trim();
 
     temp = temp.replace(/(?:\r\n|\r|\n)/g, '<br/>');
@@ -83,6 +90,8 @@
     var maxWidth = span.parent().width();
     var lastWidth = 0;
     var best = 0;
+
+    // TODO: here need to handle extra long first line case
 
     for (var i = 0; i < temp.length; i ++) {
       if (temp[i] == ' ' || temp[i] == '>') {
@@ -172,6 +181,8 @@
       case "remove":
         removeEntry(res.index);
         break;
+      case "modify":
+        previewView.updateEntry(res.index);
     }
   });
 } (window.previewView = window.previewView || {}, jQuery));

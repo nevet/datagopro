@@ -1,6 +1,103 @@
 (function (popupView, $, undefined) {
   var popup = $("#popup");
 
+  function preparePopup (input) {
+    switch (input.datatype) {
+      case "number":
+        prepareNumber(input);
+        checkNumberValidation();
+        break;
+      case "string":
+        prepareString(input);
+        checkStringValidation();
+        break;
+      case "graph":
+        prepareGraph(input);
+        checkGraphValidation();
+        break;
+    }
+  }
+
+  function prepareNumber(input) {
+    $("#anumber").addClass("selected").siblings().removeClass("selected");
+    $("#number").css("display","block").siblings().css("display", "none");
+
+    $("#numbertype")[0].selectedIndex = input.numberindex;
+    if (input.numberindex == 1) {
+      $("#precision").val(input.floatprecision);
+      $("#precisionDiv").show();
+      $("#parity").prop("disabled", "disabled");
+      $("#permutationDiv").hide();
+    } else {
+      $("#precisionDiv").hide();
+      $("#parity").prop("disabled", false);
+      noErrorHighlight($("#precision"));
+      $("#permutation")[0].checked = input.permutation;
+      $("#permutationDiv").show();
+      checkPermutation();
+    }
+    $("#min").val(input.numbermin);
+    $("#max").val(input.numbermax);
+    $("#parity")[0].selectedIndex = input.parityindex;
+    $("#order")[0].selectedIndex = input.orderindex;
+    $("#repeatTypeNumber")[0].selectedIndex = input.repeatypeindex;
+    
+    $("#repeatTypeNumber").trigger("change");
+
+    if (input.repeatypeindex == 0) {
+      $("#repeatNumber").val(input.repeattime);
+    } else {
+      $("#backrefNumber")[0].selectedIndex = input.referto;
+    }
+  }
+
+  function prepareString(input) {
+    $("#astring").addClass("selected").siblings().removeClass("selected");
+    $("#string").css("display","block").siblings().css("display", "none");
+
+    $("#stringlength").val(input.stringlength);
+    $("#charset")[0].selectedIndex = input.chartype;
+    $("#case")[0].selectedIndex = input.caseindex;
+    $("#hasnumber")[0].checked = input.hasnumber;
+    $("#linelength").val(input.linelength);
+    $("#linebreak").val(input.linebreak);
+    $("#wordlength").val(input.wordlength);
+    $("#wordbreak").val(input.wordbreak);
+    $("#repeatTypeString")[0].selectedIndex = input.repeatypeindex;
+    
+    $("#repeatTypeString").trigger("change");
+
+    if (input.repeatypeindex == 0) {
+      $("#repeatString").val(input.repeattime);
+    } else {
+      $("#backrefString")[0].selectedIndex = input.referto;
+    }
+  }
+
+  function prepareGraph(input) {
+    $("#agraph").addClass("selected").siblings().removeClass("selected");
+    $("#graph").css("display","block").siblings().css("display", "none");
+    
+    $("#connect")[0].checked = input.isconnect;
+    $("#direct")[0].checked = input.isdirect;
+    $("#weight")[0].checked = input.isweighted;
+    $("#weightmin").val(input.weightmin);
+    $("#weightmax").val(input.weightmax);
+    $("#tree")[0].checked = input.isTree;
+    $("#node").val(input.node);
+    $("#edge").val(input.edge);
+    $("#graphformat")[0].selectedIndex = input.graphformatindex;
+    $("#repeatTypeGraph")[0].selectedIndex = input.repeatypeindex;
+    
+    $("#repeatTypeGraph").trigger("change");
+
+    if (input.repeatypeindex == 0) {
+      $("#repeatGraph").val(input.repeattime);
+    } else {
+      $("#backrefGraph")[0].selectedIndex = input.referto;
+    }
+  }
+
   function updateRepeat(input, type) {
     var capType = type.capitalizeFirstLetter();
     if (input.repeatypeindex == 0) {
@@ -158,8 +255,13 @@
   }
 
   popupView.showPopup = function (noClear) {
-    if (noClear == undefined) {
-      popupView.clearData();
+    var activeEntry = dataSessionController.getLastActiveEntry();
+
+    popupView.clearData();
+
+    if (activeEntry) {
+      // open an old entry, populate the entry using old values
+      preparePopup(activeEntry);
     }
     
     $(".ok").show();
