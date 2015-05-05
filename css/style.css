@@ -651,10 +651,6 @@ div#popular #show-all, #filter{
 	text-decoration: none;
 }
 
-#welcomeMsg {
-	margin-top: 20px;
-}
-
 /* login loading cover */
 .loginLoadingCover {
   display: none;
@@ -668,6 +664,14 @@ div#popular #show-all, #filter{
 }
 
 /* dataset preview*/
+.data-div {
+	margin-top: -10px;
+}
+
+#welcomeMsg {
+	margin-top: 10px;
+}
+
 .dataCollapseButton {
 	position: relative;
 	top: 19px;

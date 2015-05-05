@@ -20,6 +20,8 @@
       preview.find("#welcomeMsg").remove();
     }
 
+    div.addClass("data-div");
+
     collapseButton.attr("data-target", "#" + divUid);
     collapseButton.css("visibility", "hidden");
     collapseButton.appendTo(div);
