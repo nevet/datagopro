@@ -125,4 +125,9 @@
       alert("There's no input so far!");
     }
   });
+
+  // regenerate
+  $("#saveDiv button").on("click", function () {
+    dataSession.regenerate();
+  });  
 } (window.dataSessionController = window.dataSessionController || {}, jQuery));

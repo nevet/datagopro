@@ -10,7 +10,8 @@
     referee.referby.push(dataSession.input.length - 1);
   }
 
-  function printInput(input, index) {
+  function printInput(index) {
+    var input = dataSession.input[index];
     var dup = $.extend({}, input);
 
     // set repeat time if it's backref type
@@ -39,7 +40,7 @@
     if (data.referby && data.referby.length) {
       for (var i = 0; i < data.referby.length; i ++) {
         var referbyIndex = data.referby[i];
-        printInput(dataSession.input[referbyIndex], referbyIndex);
+        printInput(referbyIndex);
       }
     }
   }
@@ -57,7 +58,7 @@
     // issue confirm add message before anything else
     $("html").trigger("sessionUpdate", [{"opcode": "add"}]);
 
-    printInput(userInput, dataSession.input.length - 1);
+    printInput(dataSession.input.length - 1);
   }
 
   dataSession.getValidBackrefOptions = function () {
@@ -78,6 +79,21 @@
     dataSession.data = [];
 
     $("html").trigger("sessionUpdate", [{"opcode": "clear"}]);
+  }
+
+  dataSession.load = function (sid) {
+    $.get("/api/datasession.php", {"cmd": "retrieveInp", "id": sid}, function (res) {
+      var json = JSON.parse(res);
+
+      if (json.status == "ok") {
+        var data = json.data;
+        dataSession.input = JSON.parse(data.input.replace(/\&quot\;/g, '\"'));
+
+        $("html").trigger("sessionUpdate", [{"opcode": "addBatch", "amount": dataSession.input.length}]);
+
+        dataSession.regenerate();
+      }
+    });
   }
 
   dataSession.modify = function (index, input) {
@@ -143,10 +159,20 @@
         }
       }
     }
+
+    dataSession.save();
     
     $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": index}]);
 
-    printInput(input, index);
+    printInput(index);
+  }
+
+  dataSession.regenerate = function () {
+    for (var i = 0; i < dataSession.input.length; i ++) {
+      if (dataSession.input[i].referto == undefined) {
+        printInput(i);
+      }
+    }
   }
 
   dataSession.remove = function (index) {
@@ -193,6 +219,8 @@
     dataSession.input.splice(index, 1);
     dataSession.data.splice(index, 1);
 
+    dataSession.save();
+
     $("html").trigger("sessionUpdate", [{"opcode": "remove", "index": index}]);
   }
 
@@ -203,10 +231,15 @@
     
     view.loadingSaveRegion();
 
-    if (localStorage.dataSid) {
+    if (user.getProfile().sysid != undefined) {
       // we are online, upload the session to server
       $.post("/api/datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": serializedData}, function (res) {
-        view.refreshSaveRegion("online");
+        var json = JSON.parse(res);
+
+        if (json.status == "ok") {
+          view.refreshSaveRegion("online");
+          localStorage.dataSid = json.sid;
+        }
       });
     } else {
       // we are offline, store the data in local storage

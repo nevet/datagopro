@@ -1,2 +1,3 @@
 RewriteEngine On
+RewriteRule   ^(editor|myinput|popular)$ / [L]
 RewriteRule   ^([1-9a-zA-Z]*)$ /api/detiny.php\?u=$1 [L]

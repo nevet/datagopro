@@ -1,5 +1,3 @@
-var alldata = [];
-
 function createPopularBlock(datasetName, createTime, tags, dataArray){
 	//block wrap
 	$("<div></div>", {
@@ -73,120 +71,6 @@ function createPopularBlock(datasetName, createTime, tags, dataArray){
   }).appendTo("#populartable > .popular-block:last .view:last");
 }
 
-function createTimelineBlock(datasetName, createTime, tags, dataArray){
-	//block wrap
-	$("<div></div>", {
-		"class": "timeline-block",
-		"click": function(e) {
-			
-		},
-	}).appendTo("#timeline");
-
-	//dot on timeline
-	$("<div></div>", {
-		"class": "timeline-dot",
-	}).appendTo("#timeline .timeline-block:last");
-
-	//content
-	$("<div></div>", {
-		"class": "timeline-content",
-		"click": function(e) {
-			highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
-		}
-	}).appendTo("#timeline .timeline-block:last");
-
-
-	//dataset name
-	$("<h4></h4>", {
-		"text": datasetName,
-		"click": function(e) {
-			e.stopPropagation();
-			$(this).closest('.timeline-content').trigger('click');
-		},
-	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-	//created time
-	$("<p></p>", {
-		"html": createTime,
-		"click": function(e) {
-			e.stopPropagation();
-			$(this).closest('.timeline-content').trigger('click');
-		},
-	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-	//tags
-	$("<i></i>",{
-		"class": "fa fa-tags fa-2x",
-	}).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-	for (var i=0; i < tags.length; i++){
-		$("<span></span>", {
-		  "class": "label-size",
-		}).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-		$("<a></a>", {
-			"text": tags[i],
-			"click": function(e) {
-  			e.stopPropagation();
-  		},
-		}).appendTo("#timeline > .timeline-block:last .label-size:last");
-  }
-
-  //clone
-  $("<a></a>",{
-  	"class":"clone",
-  	"data-target": "1",
-  	"text": "Clone",
-  	"click": function(e){
-  		e.stopPropagation();
-		  e.preventDefault();
-      var curBlock = $(e.target).parents(".timeline-block");
-      var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
-  		cloneDataSet(e, curIndex);
-  	},
-  }).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-  $("<i></i>", {
-  	"class": "fa fa-pencil",
-  }).appendTo("#timeline > .timeline-block:last .clone:last");
-
-  //view
-  $("<a></a>",{
-  	"class":"view",
-  	"data-target": "1",
-  	"text": "View",
-  	"click": function(e) {
-  		e.stopPropagation();
-		  e.preventDefault();
-      var curBlock = $(e.target).parents(".timeline-block");
-      var curIndex = curBlock.parent().find(".timeline-block").index(curBlock);
-  		viewDataSet(e, curIndex);
-  	}
-  }).appendTo("#timeline > .timeline-block:last > .timeline-content");
-
-  $("<i></i>", {
-  	"class": "fa fa-eye",
-  }).appendTo("#timeline > .timeline-block:last .view:last");
-}
-
-function createTimeLine() {
-  $.get("/api/datasession.php", {"cmd": "retrieveUInp"}, function (res) {
-    var data = JSON.parse(res);
-
-    alldata = data.data;
-
-    for (var i = 0; i < alldata.length; i ++) {
-
-      var input = alldata[i].input.replace(/(?:&quot;)/g, '\"');
-      // console.log(input);
-      input = JSON.parse(input);
-      alldata[i].input = input;
-      // console.log(input);
-      createTimelineBlock(alldata[i].setname, alldata[i].date, alldata[i].tag, input);
-    }
-  });
-}
-
 function createPopular() {
   $.get("/api/datasession.php", {"cmd": "retrievePInp"}, function (res) {
     var data = JSON.parse(res);
@@ -204,19 +88,6 @@ function createPopular() {
     }
   });
 }
-
-function highlightSelectedBlock(container, block){
-
-	if($(block).hasClass("selected")) {
-		$(block).removeClass("selected");
-	}
-	else {
-		var prev = $(container+".selected");
-		prev.removeClass("selected");
-		$(block).addClass("selected");
-	}
-}
-
 
 function viewDataSet(event, curIndex) {
 	$("#preview").children().not(".previewLoadingCover").remove();

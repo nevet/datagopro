@@ -1,4 +1,5 @@
 (function (dataSessionView, $, undefined) {
+  var editor = $("#editor");
   var dataField = $("#data-field");
   var addDataButton = $("#add");
   var addDataButtonCueword = $("#add p");
@@ -33,6 +34,13 @@
     addDataButtonCueword.removeClass("empty");
     addDataButtonCueword.addClass("hasInput");
     addDataButtonCueword.html("Add more data...");
+  }
+
+  function addEntryBatch (amount) {
+    for (var i = 0; i < amount; i ++) {
+      dataSessionView.addEntry(true);
+      modifyEntryConfirm(i);
+    }
   }
 
   function modifyEntryConfirm(index) {
@@ -168,7 +176,7 @@
     return string;
   }
 
-  dataSessionView.addEntry = function () {
+  dataSessionView.addEntry = function (noPopup) {
     // add the data block into data field
     var dataBlock = createDataBlock();
     dataBlock.appendTo(dataField);
@@ -183,7 +191,9 @@
       addDataButtonMinimize();
     }
 
-    popupView.showPopup();
+    if (!noPopup) {
+      popupView.showPopup();
+    }
 
     return index;
   }
@@ -214,11 +224,24 @@
       case "add":
         modifyEntryConfirm(dataSession.input.length - 1);
         break;
+      case "addBatch":
+        addEntryBatch(res.amount);
+        break;
       case "remove":
         removeEntry(res.index);
         break;
       case "modify":
         modifyEntryConfirm(res.index);
+    }
+  });
+
+  $("html").on("viewSwitch", function (event, res) {
+    if (res.fromView == "editor") {
+      editor.css("display", "none");
+    }
+
+    if (res.toView == "editor") {
+      editor.css("display", "block");
     }
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));

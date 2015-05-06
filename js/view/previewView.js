@@ -8,6 +8,8 @@
   var welcomeMsg = "Welcome to DataGoPro!";
   var welcomeDiv = $(_div).html(welcomeMsg);
 
+  var previewContent;
+
   function addEntry () {
     var div = $(_div);
     var collapseButton = $(_collapseButton);
@@ -37,6 +39,12 @@
     collapseDataDiv.addClass("collapse");
     collapseDataDiv.addClass("in");
     collapseDataDiv.appendTo(dataDiv);
+  }
+
+  function addEntryBatch (amount) {
+    for (var i = 0; i < amount; i ++) {
+      addEntry();
+    }
   }
 
   function clearDataField() {
@@ -185,11 +193,27 @@
       case "add":
         addEntry();
         break;
+      case "addBatch":
+        addEntryBatch(res.amount);
+        break;
       case "remove":
         removeEntry(res.index);
         break;
       case "modify":
         previewView.updateEntry(res.index);
+    }
+  });
+
+  $("html").on("viewSwitch", function (event, res) {
+    if (res.fromView == "editor") {
+      previewContent = preview.html();
+      clearDataField();
+      preview.css("font-family", "inherit");
+    }
+
+    if (res.toView == "editor") {
+      preview.html(previewContent);
+      preview.css("font-family", "'Lucida Console',Monaco,monospace");
     }
   });
 } (window.previewView = window.previewView || {}, jQuery));

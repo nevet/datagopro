@@ -1,5 +1,6 @@
 (function (view, $, undefined) {
   var saveNotice = $("#notice");
+  var currentView = "editor";
 
   function setHeights() {
     if(document.documentElement.clientWidth > 768){
@@ -62,6 +63,47 @@
 
   view.startLoadingLogin = function () {
     $(".loginLoadingCover").css("display", "block");
+  }
+
+  view.switchToEditor = function () {
+    if (currentView == "editor") return;
+
+    $("#newdata").parent().addClass("active");
+
+    $("html").trigger("viewSwitch", [{"fromView": currentView, "toView": "editor"}]);
+    currentView = "editor";
+
+    // if ($(prev.find("a")[0]).attr("id") != "newdata") {
+    //   if (prev.length == 0) {
+    //     // timeline is displayed now
+    //     $("#timeline").css("display", "none");
+    //   }
+    //   else if($(prev.find("a")[0]).attr("id") == "popularinput") {
+    //     prev.removeClass();
+    //     $("#popular").css("display", "none");
+    //   }
+    //   $(this).parent().addClass("active");
+    //   $("#editor").css("display", "block");
+    //   $("#preview").children().not(".previewLoadingCover").remove();
+    //   if(latestNewDataPreview != null && latestNewDataPreview.length != 0) {
+    //     $("#preview").append(latestNewDataPreview);
+    //   }
+    // }
+  }
+
+  view.switchToMyinput = function () {
+    if (currentView == "myinput") return;
+
+    $(".navbar-nav > li.active").removeClass();
+
+    // if ($(prev.find("a")[0]).attr("id") == "popularinput") {
+    //   $("#popular").css("display", "none");
+    //   $("#timeline").css("display", "block"); 
+    //   $("#preview").children().not(".previewLoadingCover").remove();
+    // }
+
+    $("html").trigger("viewSwitch", [{"fromView": currentView, "toView": "myinput"}]);
+    currentView = "myinput";
   }
 
   view.udpateLoginRegion = function (name) {
