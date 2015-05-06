@@ -36,6 +36,11 @@
     previewView.init();
   });
 
+  // login
+  $("#login").on("click", function () {
+
+  });
+
   //navigation
   $("#newdata").on("click", function () {
     history.pushState({"toView": "editor"}, null, "/");
@@ -86,8 +91,7 @@
   });
 
   // sharing
-  $("#fbShare").on("click", function (e) {
-    // TODO: need to revise this logic
+  $("#fbShare").on("click", function (event) {
     if (localStorage.dataSid) {
       // we logged in, all data has been pushed to server, and has been assigned
       // a data session id. In this case, we can share the input id directly
@@ -120,7 +124,7 @@
       });
     }
 
-    e.preventDefault();
+    event.preventDefault();
   });
 } (window.controller = window.controller || {}, jQuery));
 

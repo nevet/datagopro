@@ -143,6 +143,8 @@
         }
       }
     }
+
+    dataSession.save();
     
     $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": index}]);
 
@@ -193,6 +195,8 @@
     dataSession.input.splice(index, 1);
     dataSession.data.splice(index, 1);
 
+    dataSession.save();
+
     $("html").trigger("sessionUpdate", [{"opcode": "remove", "index": index}]);
   }
 
@@ -203,10 +207,15 @@
     
     view.loadingSaveRegion();
 
-    if (localStorage.dataSid) {
+    if (user.getProfile().sysid != undefined) {
       // we are online, upload the session to server
       $.post("/api/datasession.php", {"cmd": "upload", "id": localStorage.dataSid, "jsoninput": serializedData}, function (res) {
-        view.refreshSaveRegion("online");
+        var json = JSON.parse(res);
+
+        if (json.status == "ok") {
+          view.refreshSaveRegion("online");
+          localStorage.dataSid = json.sid;
+        }
       });
     } else {
       // we are offline, store the data in local storage
