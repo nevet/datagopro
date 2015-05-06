@@ -89,7 +89,7 @@
         var data = json.data;
         dataSession.input = JSON.parse(data.input.replace(/\&quot\;/g, '\"'));
 
-        $("html").on("sessionUpdate", [{"opcode": "addBatch", "amount": dataSession.input.length}]);
+        $("html").trigger("sessionUpdate", [{"opcode": "addBatch", "amount": dataSession.input.length}]);
 
         dataSession.regenerate();
       }
