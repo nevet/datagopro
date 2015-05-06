@@ -10,6 +10,8 @@
         var mbHeight = cHeight - navHeight;
         $("#mainbody").css("min-height", mbHeight+"px");
         $("#mainbody").css("height", mbHeight+"px");
+
+        $("#mainbody>div").css("min-height", mbHeight+"px");
       }
   }
 

@@ -45,7 +45,7 @@
   }
 
   function isValidBackrefOption(input) {
-    return input.datatype == "number" && input.numbertype == "integer" && input.repeattime === "1";
+    return input.datatype == "number" && input.numbertype == "integer" && input.repeattime === 1;
   }
 
   dataSession.add = function (userInput) {

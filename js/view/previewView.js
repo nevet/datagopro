@@ -98,11 +98,11 @@
 
         var curWidth = span.width();
 
-        if (curWidth <= maxWidth && curWidth != lastWidth) {
+        if (curWidth < maxWidth && curWidth != lastWidth) {
           best = i;
           lastWidth = curWidth;
         } else
-        if (curWidth <= maxWidth && curWidth == lastWidth) {
+        if (curWidth < maxWidth && curWidth == lastWidth) {
           span.html(temp.substr(0, best));
           div.html(temp.substr(best + 1).trim());
 
@@ -172,6 +172,8 @@
 
     if (collapseDiv.html() != "") {
       div.find("button").css("visibility", "visible");
+    } else {
+      div.find("button").css("visibility", "hidden");
     }
   }
 

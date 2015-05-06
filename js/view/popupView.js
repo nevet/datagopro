@@ -101,7 +101,7 @@
   function updateRepeat(input, type) {
     var capType = type.capitalizeFirstLetter();
     if (input.repeatypeindex == 0) {
-      input.repeattime = $("#repeat" + capType).val();
+      input.repeattime = parseInt($("#repeat" + capType).val());
     } else {
       input.referto = parseInt($("#backref" + capType).val());
     }
