@@ -6,10 +6,6 @@
     if (input.referto == undefined) return;
 
     var referee = dataSession.input[input.referto];
-
-    if (!referee.referby) {
-      referee.referby = [];
-    }
     
     referee.referby.push(dataSession.input.length - 1);
   }
@@ -18,13 +14,13 @@
     var dup = $.extend({}, input);
 
     // set repeat time if it's backref type
-    if (!dup.repeattime) {
+    if (dup.repeatypeindex) {
       dup.repeattime = dataSession.data[dup.referto];
     }
 
     previewView.startLoadingEntry(index);
 
-    var thread = new Worker("js/dataInfo.js");
+    var thread = new Worker("js/model/dataInfo.js");
 
     thread.onmessage = threadOnMessageHandler;
     thread.postMessage({"cmd":"start", "data": JSON.stringify(dup), "index": index});
@@ -111,11 +107,11 @@
     dataSession.input[index] = input;
 
     // handle referto first
-    if (!oldInput.referto && input.referto) {
+    if (oldInput.referto == undefined && input.referto != undefined) {
       // case 2
       dataSession.input[input.referto].referby.push(index);
     } else
-    if (oldInput.referto && oldInput.referto != input.referto) {
+    if (oldInput.referto != undefined && oldInput.referto != input.referto) {
       var oldRefer = dataSession.input[oldInput.referto];
 
       // case 4 && 5
@@ -127,20 +123,20 @@
       }
 
       // case 4
-      if (input.referto) {
+      if (input.referto != undefined) {
         dataSession.input[input.referto].referby.push(index);
       }
     }
 
     // handle referby
-    if (oldInput.referby) {
+    if (oldInput.referby.length) {
       if (isValidBackrefOption(input)) {
         // case 1
         dataSession.input[index].referby = oldInput.referby;
       } else {
         // case 2
         for (var i = 0; i < oldInput.referby.length; i ++) {
-          dataSession.input[oldInput.referby[i]].referto = -1;
+          dataSession.input[oldInput.referby[i]].referto = undefined;
           dataSession.data[oldInput.referby[i]] = undefined;
 
           $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": oldInput.referby[i]}]);
@@ -168,7 +164,7 @@
       } else
       if (input.referto == index) {
         dataSession.data[i] = undefined;
-        input.referto = -1;
+        input.referto = undefined;
       }
 
       $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": i}]);

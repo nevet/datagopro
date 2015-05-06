@@ -92,7 +92,7 @@
     if (input.repeattime) {
       infoSpan.html(string + input.repeattime + "</b>");
     } else {
-      if (input.referto == -1) {
+      if (input.referto == undefined) {
         infoSpan.html(string + "undefined.");
       } else {
         var index = input.referto + 1;

@@ -189,7 +189,8 @@
           "floatprecision": $("#precision").val(),
           "numbermin": $("#min").val(),
           "numbermax": $("#max").val(),
-          "repeatypeindex": $("#repeatTypeNumber")[0].selectedIndex
+          "repeatypeindex": $("#repeatTypeNumber")[0].selectedIndex,
+          "referby": []
         }
         break;
       case "string":
@@ -222,8 +223,9 @@
           "graphformat": $("#graphformat").val(),
           "repeatypeindex": $("#repeatTypeGraph")[0].selectedIndex
         }
-      break;
     }
+
+    input.referto = undefined;
 
     updateRepeat(input, type);
 

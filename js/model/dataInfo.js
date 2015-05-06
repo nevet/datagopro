@@ -8,7 +8,11 @@ onmessage = function (event) {
   switch (data.cmd) {
     case "start":
       var json = JSON.parse(data.data);
-      var generatedData = generate([json]);
+      var generatedData;
+
+      if (json.repeattime) {
+        generatedData = generate([json]);
+      }
 
       postMessage({"data": generatedData, "index": data.index, "referby": json.referby});
       close();
