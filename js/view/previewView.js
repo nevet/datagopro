@@ -194,7 +194,8 @@
         addEntry();
         break;
       case "addBatch":
-        addEntryBatch();
+        addEntryBatch(res.amount);
+        break;
       case "remove":
         removeEntry(res.index);
         break;
