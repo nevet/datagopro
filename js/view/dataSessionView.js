@@ -199,7 +199,6 @@
   }
 
   dataSessionView.modifyEntry = function (index) {
-    popupView.preparePopup(index);
     popupView.showPopup();
   }
 

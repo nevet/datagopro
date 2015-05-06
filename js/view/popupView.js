@@ -245,23 +245,15 @@
     }
   }
 
-  popupView.preparePopup = function (index) {
-    // chosebutton = e;
-    // $(e).blur();
-    // currentEntryIndex = inputInfo.checkExistence(chosebutton);
-    // if (currentEntryIndex >= 0) {
-    //   preparePopup( inputInfo.getElement(currentEntryIndex) );
-    // };
-  }
-
-  popupView.showPopup = function (noClear) {
-    var activeEntry = dataSessionController.getLastActiveEntry();
+  popupView.showPopup = function () {
+    var activeIndex = dataSessionController.getLastActiveEntryIndex();
+    var input = dataSession.input[activeIndex];
 
     popupView.clearData();
 
-    if (activeEntry) {
+    if (input) {
       // open an old entry, populate the entry using old values
-      preparePopup(activeEntry);
+      preparePopup(input);
     }
     
     $(".ok").show();
