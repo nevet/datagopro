@@ -8,6 +8,8 @@
   var welcomeMsg = "Welcome to DataGoPro!";
   var welcomeDiv = $(_div).html(welcomeMsg);
 
+  var previewContent;
+
   function addEntry () {
     var div = $(_div);
     var collapseButton = $(_collapseButton);
@@ -190,6 +192,19 @@
         break;
       case "modify":
         previewView.updateEntry(res.index);
+    }
+  });
+
+  $("html").on("viewSwitch", function (event, res) {
+    if (res.fromView == "editor") {
+      previewContent = preview.html();
+      clearDataField();
+      preview.css("font-family", "inherit");
+    }
+
+    if (res.toView == "editor") {
+      preview.html(previewContent);
+      preview.css("font-family", "'Lucida Console',Monaco,monospace");
     }
   });
 } (window.previewView = window.previewView || {}, jQuery));

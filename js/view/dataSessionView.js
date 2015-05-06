@@ -1,4 +1,5 @@
 (function (dataSessionView, $, undefined) {
+  var editor = $("#editor");
   var dataField = $("#data-field");
   var addDataButton = $("#add");
   var addDataButtonCueword = $("#add p");
@@ -219,6 +220,16 @@
         break;
       case "modify":
         modifyEntryConfirm(res.index);
+    }
+  });
+
+  $("html").on("viewSwitch", function (event, res) {
+    if (res.fromView == "editor") {
+      editor.css("display", "none");
+    }
+
+    if (res.toView == "editor") {
+      editor.css("display", "block");
     }
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));
