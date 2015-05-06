@@ -85,13 +85,12 @@
     var temp = data.toString().trim();
 
     temp = temp.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-    span.html(temp);
 
     var maxWidth = span.parent().width();
     var lastWidth = 0;
     var best = 0;
 
-    // TODO: here need to handle extra long first line case
+    temp += " ";
 
     for (var i = 0; i < temp.length; i ++) {
       if (temp[i] == ' ' || temp[i] == '>') {
@@ -99,12 +98,18 @@
 
         var curWidth = span.width();
 
-        if (curWidth < maxWidth && curWidth != lastWidth) {
+        if (curWidth <= maxWidth && curWidth != lastWidth) {
           best = i;
           lastWidth = curWidth;
-        } else {
+        } else
+        if (curWidth <= maxWidth && curWidth == lastWidth) {
           span.html(temp.substr(0, best));
-          div.html(temp.substr(best + 1));
+          div.html(temp.substr(best + 1).trim());
+
+          break;
+        } else
+        if (curWidth > maxWidth) {
+          span.html(temp.trim());
 
           break;
         }
