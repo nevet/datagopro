@@ -39,6 +39,7 @@
   function addEntryBatch (amount) {
     for (var i = 0; i < amount; i ++) {
       dataSessionView.addEntry(true);
+      modifyEntryConfirm(i);
     }
   }
 
