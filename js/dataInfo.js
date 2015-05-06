@@ -11,6 +11,6 @@ onmessage = function (event) {
       var generatedData = generate([json]);
 
       postMessage({"data": generatedData, "index": data.index, "referby": json.referby});
-      break;
+      close();
   }
 }

@@ -3,7 +3,7 @@
   dataSession.data = [];
 
   function updateReferby(input) {
-    if (!input.referto) return;
+    if (input.referto == undefined) return;
 
     var referee = dataSession.input[input.referto];
 
@@ -11,7 +11,7 @@
       referee.referby = [];
     }
     
-    referee.referby.push(dataSession.input.length);
+    referee.referby.push(dataSession.input.length - 1);
   }
 
   function printInput(input, index) {
@@ -41,9 +41,9 @@
     // update each input that refers to current index. We must handle the updating
     // here, since we need to wait for it to be updated
     if (data.referby && data.referby.length) {
-      for (var i = 0; i < referby.length; i ++) {
-        var referbyIndex = referby[i];
-        printInput(dataSession.input[referbyIndex]);
+      for (var i = 0; i < data.referby.length; i ++) {
+        var referbyIndex = data.referby[i];
+        printInput(dataSession.input[referbyIndex], referbyIndex);
       }
     }
   }
@@ -133,19 +133,21 @@
     }
 
     // handle referby
-    if (isValidBackrefOption(input)) {
-      // case 1
-      dataSession.input[index].referby = oldInput.referby;
-    } else {
-      // case 2
-      for (var i = 0; i < oldInput.referby.length; i ++) {
-        dataSession.input[i].referto = -1;
-        dataSession.data[i] = undefined;
+    if (oldInput.referby) {
+      if (isValidBackrefOption(input)) {
+        // case 1
+        dataSession.input[index].referby = oldInput.referby;
+      } else {
+        // case 2
+        for (var i = 0; i < oldInput.referby.length; i ++) {
+          dataSession.input[i].referto = -1;
+          dataSession.data[i] = undefined;
 
-        $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": i}]);
+          $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": i}]);
+        }
       }
     }
-
+    
     $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": index}]);
 
     printInput(input, index);
