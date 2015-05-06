@@ -35,13 +35,13 @@
     addDataButtonCueword.html("Add more data...");
   }
 
-  function addEntryConfirm(index) {
-    var activeEntry = dataSessionController.getLastActiveEntry();
+  function modifyEntryConfirm(index) {
+    var entry = getEntry(index);
     var input = dataSession.input[index];
     var type = input.datatype;
 
-    activeEntry.find("input").attr("value", type.capitalizeFirstLetter());
-    changeInfoMessage(activeEntry, type, input);
+    entry.find("input").attr("value", type.capitalizeFirstLetter());
+    changeInfoMessage(entry, type, input);
   }
 
   function createDataBlock() {
@@ -102,6 +102,10 @@
         circle.appendTo(infoSpan);
       }
     }
+  }
+
+  function getEntry(index) {
+    return $(dataField.children(".data-block")[index]);
   }
 
   function numberInfoMessage(object) {
@@ -208,13 +212,13 @@
         clearDataField();
         break;
       case "add":
-        addEntryConfirm(dataSession.input.length - 1);
+        modifyEntryConfirm(dataSession.input.length - 1);
         break;
       case "remove":
         removeEntry(res.index);
         break;
       case "modify":
-        addEntryConfirm(res.index);
+        modifyEntryConfirm(res.index);
     }
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));

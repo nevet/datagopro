@@ -140,10 +140,10 @@
       } else {
         // case 2
         for (var i = 0; i < oldInput.referby.length; i ++) {
-          dataSession.input[i].referto = -1;
-          dataSession.data[i] = undefined;
+          dataSession.input[oldInput.referby[i]].referto = -1;
+          dataSession.data[oldInput.referby[i]] = undefined;
 
-          $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": i}]);
+          $("html").trigger("sessionUpdate", [{"opcode": "modify", "index": oldInput.referby[i]}]);
         }
       }
     }
