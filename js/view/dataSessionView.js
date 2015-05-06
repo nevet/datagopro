@@ -35,9 +35,9 @@
     addDataButtonCueword.html("Add more data...");
   }
 
-  function addEntryConfirm() {
+  function addEntryConfirm(index) {
     var activeEntry = dataSessionController.getLastActiveEntry();
-    var input = dataSession.input[dataSession.input.length - 1];
+    var input = dataSession.input[index];
     var type = input.datatype;
 
     activeEntry.find("input").attr("value", type.capitalizeFirstLetter());
@@ -92,16 +92,16 @@
     if (input.repeattime) {
       infoSpan.html(string + input.repeattime + "</b>");
     } else {
-      var index = input.referto + 1;
-      var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + index + '</i></span>');
+      if (input.referto == -1) {
+        infoSpan.html(string + "undefined.");
+      } else {
+        var index = input.referto + 1;
+        var circle = $('<span class="fa-stack"><i class="fa fa-stack-2x fa-circle-thin"></i><i class="fa fa-stack-1x">' + index + '</i></span>');
 
-      infoSpan.html(string);
-      circle.appendTo(infoSpan);
+        infoSpan.html(string);
+        circle.appendTo(infoSpan);
+      }
     }
-  }
-
-  function modifyEntryConfirm(index) {
-    
   }
 
   function numberInfoMessage(object) {
@@ -143,7 +143,7 @@
     var dataBlocks = dataField.find(".data-block");
 
     for (var i = 0; i < dataBlocks.length; i ++) {
-      $(dataBlocks[i]).find(".fa-stack-1x").html(i + 1);
+      $(dataBlocks[i]).children("span.fa-stack .fa-stack-1x").html(i + 1);
     }
   }
 
@@ -208,13 +208,13 @@
         clearDataField();
         break;
       case "add":
-        addEntryConfirm();
+        addEntryConfirm(dataSession.input.length - 1);
         break;
       case "remove":
         removeEntry(res.index);
         break;
       case "modify":
-        modifyEntryConfirm(res.index);
+        addEntryConfirm(res.index);
     }
   });
 } (window.dataSessionView = window.dataSessionView || {}, jQuery));
