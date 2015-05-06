@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($cmd) {
       case "upload":
         $inputId = trim_input("id");
-        $userId = isset($_SESSION["curuserid"]) ? $_SESSION["curuserid"] : NULL;
+        $userId = isset($_SESSION["cursysid"]) ? $_SESSION["cursysid"] : NULL;
         $input = trim_input("jsoninput");
         $setname = trim_input("setname");
         $tag = trim_input("tag");
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
           // we need to increase the visitcnt by 1
           $assocId = $row["user"];
 
-          if (!isset($_SESSION["curuserid"]) || $assocId != $_SESSION["curuserid"]) {
+          if (!isset($_SESSION["cursysid"]) || $assocId != $_SESSION["cursysid"]) {
             $visCnt = $row["visitcnt"] + 1;
 
             $sql = "UPDATE input SET visitcnt=$visCnt WHERE id='$inputId'";
@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
       break;
     case "retrieveUInp":
-      $userId = $_SESSION["curuserid"];
+      $userId = $_SESSION["cursysid"];
 
       $sql = "SELECT * FROM input WHERE user=$userId";
       $res = $db->query($sql);
