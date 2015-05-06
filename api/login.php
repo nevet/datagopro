@@ -13,13 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	switch (trim_input("cmd")) {
 		case "session":
 			if (isset($_SESSION["tinyInput"])) {
-				echo json_encode(array("status" => "tiny", "id" => $_SESSION["tinyInput"]));
+				echo json_encode(array("status" => "tiny", "sid" => $_SESSION["tinyInput"]));
 				unset($_SESSION["tinyInput"]);
-			} else
-			if (isset($_SESSION["curname"])) {
-				echo json_encode(array("status" => "return", "username" => $_SESSION["curname"]));
-			} else {
-				echo json_encode(array("status" => "new", "sid" => $sessionid));
+			} else{
+				echo json_encode(array("status" => "normal"));
 			}
 
 			break;

@@ -36,6 +36,12 @@
     addDataButtonCueword.html("Add more data...");
   }
 
+  function addEntryBatch (amount) {
+    for (var i = 0; i < amount; i ++) {
+      dataSession.addEntry(true);
+    }
+  }
+
   function modifyEntryConfirm(index) {
     var entry = getEntry(index);
     var input = dataSession.input[index];
@@ -169,7 +175,7 @@
     return string;
   }
 
-  dataSessionView.addEntry = function () {
+  dataSessionView.addEntry = function (noPopup) {
     // add the data block into data field
     var dataBlock = createDataBlock();
     dataBlock.appendTo(dataField);
@@ -184,7 +190,9 @@
       addDataButtonMinimize();
     }
 
-    popupView.showPopup();
+    if (!noPopup) {
+      popupView.showPopup();
+    }
 
     return index;
   }
@@ -214,6 +222,9 @@
         break;
       case "add":
         modifyEntryConfirm(dataSession.input.length - 1);
+        break;
+      case "addBatch":
+        addEntryBatch(res.amount);
         break;
       case "remove":
         removeEntry(res.index);

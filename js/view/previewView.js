@@ -41,6 +41,12 @@
     collapseDataDiv.appendTo(dataDiv);
   }
 
+  function addEntryBatch (amount) {
+    for (var i = 0; i < amount; i ++) {
+      addEntry();
+    }
+  }
+
   function clearDataField() {
     preview.html("");
   }
@@ -187,6 +193,8 @@
       case "add":
         addEntry();
         break;
+      case "addBatch":
+        addEntryBatch();
       case "remove":
         removeEntry(res.index);
         break;

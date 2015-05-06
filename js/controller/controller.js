@@ -31,14 +31,17 @@
   $(function () {
     fbLogin();
 
-    dataSession.init();
-    view.init();
-    previewView.init();
-  });
+    $.post("/api/login.php", {"cmd": "session"}, function (res) {
+      var json = JSON.parse(res);
 
-  // login
-  $("#login").on("click", function () {
-
+      if (json.status == "tiny") {
+        dataSession.load(json.sid);
+      } else {
+        dataSession.init();
+        view.init();
+        previewView.init();
+      }
+    });
   });
 
   //navigation
