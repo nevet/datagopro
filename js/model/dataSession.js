@@ -75,6 +75,8 @@
   }
 
   dataSession.init = function () {
+    localStorage.clear();
+
     dataSession.input = [];
     dataSession.data = [];
 
