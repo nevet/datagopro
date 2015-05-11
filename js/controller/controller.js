@@ -29,7 +29,7 @@
 
   // after DOM is ready, do initial setup
   $(function () {
-    fbLogin();
+    // fbLogin();
 
     $.post("/api/login.php", {"cmd": "session"}, function (res) {
       var json = JSON.parse(res);
