@@ -31,17 +31,17 @@
   $(function () {
     // fbLogin();
 
-    $.post("/api/login.php", {"cmd": "session"}, function (res) {
-      var json = JSON.parse(res);
+    // $.post("/api/login.php", {"cmd": "session"}, function (res) {
+    //   var json = JSON.parse(res);
 
-      if (json.status == "tiny") {
-        dataSession.load(json.sid);
-      } else {
+    //   if (json.status == "tiny") {
+    //     dataSession.load(json.sid);
+    //   } else {
         dataSession.init();
         view.init();
         previewView.init();
-      }
-    });
+    //   }
+    // });
   });
 
   //navigation
@@ -51,25 +51,8 @@
   });
 
   $("#popularinput").on("click", function(e){
-    var prev = $(".navbar-nav > li.active");
-    if (prev.length == 0) {
-      // timeline is displayed now
-      $("#timeline").css("display", "none");
-      $(this).parent().addClass("active");
-      $("#popular").css("display", "block");  
-      $("#preview").children().not(".previewLoadingCover").remove();
-    }
-    else if($(prev.find("a")[0]).attr("id") == "newdata"){
-      prev.removeClass();
-      $("#editor").css("display", "none");
-      $(this).parent().addClass("active");
-      $("#popular").css("display", "block");  
-      latestNewDataPreview = $("#preview").children().not(".previewLoadingCover").remove();
-    }
-
-    $("#populartable").children().remove();
-    $("#tag").children().not("h4").remove();
-    createPopular();
+    history.pushState({"toView": "popinput"}, null, "popinput");
+    view.switchToPopinput();
   });
 
   $("#myinput").on("click", function(e){
@@ -90,6 +73,9 @@
     } else
     if (state && state.toView == "myinput") {
       view.switchToMyinput();
+    } else
+    if (state && state.toView == "popinput") {
+      view.switchToPopinput();
     }
   });
 
