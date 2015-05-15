@@ -155,7 +155,7 @@
     var dataBlocks = dataField.find(".data-block");
 
     for (var i = 0; i < dataBlocks.length; i ++) {
-      $(dataBlocks[i]).children("span.fa-stack .fa-stack-1x").html(i + 1);
+      $(dataBlocks[i]).find(">span.fa-stack .fa-stack-1x").html(i + 1);
     }
   }
 
