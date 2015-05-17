@@ -313,7 +313,7 @@ div#saveDiv i {
 }
 div.savewindow {
 	position: absolute;
-	width: 400px;
+	width: 362px;
 	height: 200px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -328,17 +328,17 @@ div.cover {
 div.savewindow::before {
 	position: absolute;
 	content: "";
-	border-color: transparent #fff transparent transparent ;
+	border-color: transparent transparent #fff transparent;
 	border-width: 7px; 
 	border-style: solid;
-	right: 100%;
-	top:85%;
+	top: -7%;
+	right: 2%;
 	width:0;
 	height:0;
 }
 div.savewindow>.buttoncontainer {
 	width: 100%;
-	text-align: center;
+	text-align: right;
 }
 div.savewindow button {
 	height: 26px;

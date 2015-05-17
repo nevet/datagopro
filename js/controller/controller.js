@@ -115,6 +115,13 @@
 
     event.preventDefault();
   });
+
+  // add tag
+  $("#add-tags").on("click", function (event) {
+    event.preventDefault();
+
+    view.showTags();
+  });
 } (window.controller = window.controller || {}, jQuery));
 
 String.prototype.capitalizeFirstLetter = function() {
