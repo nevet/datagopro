@@ -19,11 +19,7 @@
     //content
     $("<div></div>", {
       "class": "timeline-content",
-      "click": function(e) {
-        highlightSelectedBlock("#timeline .timeline-content", $(e.target).closest(".timeline-content"));
-      }
     }).appendTo("#timeline .timeline-block:last");
-
 
     //dataset name
     $("<h4></h4>", {
@@ -106,12 +102,14 @@
     });
   }
 
-  function highlightSelectedBlock(container, block){
+  myinputView.highlightSelectedBlock = function (block) {
+    var container = "#timeline .timeline-content";
+
     if($(block).hasClass("selected")) {
       $(block).removeClass("selected");
-    }
-    else {
+    } else {
       var prev = $(container+".selected");
+
       prev.removeClass("selected");
       $(block).addClass("selected");
     }
