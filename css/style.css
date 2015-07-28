@@ -44,6 +44,10 @@ html::-webkit-scrollbar {
 	cursor: default;
 }
 
+.hide {
+	display: none;
+}
+
 div#mainbody {
 	width: 100%;
 	height: 90%;

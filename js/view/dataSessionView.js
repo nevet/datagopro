@@ -4,6 +4,7 @@
   var addDataButton = $("#add");
   var addDataButtonCueword = $("#add p");
   var addDataButtonIcon = $("#add i");
+  var groupDataButton = $("#groupbutton");
 
   var _dataBlock = "<div class='data-block'>";
   var _serialNumber = "<i class='fa fa-stack-1x'><i>";
@@ -112,6 +113,10 @@
     }
   }
 
+  function hideGroupDataButton () {
+    groupDataButton.addClass("hide");
+  }
+
   function getEntry(index) {
     return $(dataField.children(".data-block")[index]);
   }
@@ -148,6 +153,7 @@
 
     if (dataField.children().length == 0) {
       addDataButtonMaximize();
+      hideGroupDataButton();
     }
   }
 
@@ -157,6 +163,10 @@
     for (var i = 0; i < dataBlocks.length; i ++) {
       $(dataBlocks[i]).find(">span.fa-stack .fa-stack-1x").html(i + 1);
     }
+  }
+
+  function showGroupDataButton() {
+    groupDataButton.removeClass("hide");
   }
 
   function stringInfoMessage(object) {
@@ -189,6 +199,7 @@
     // if this is the first entry, minimize add data area
     if (index == 0) {
       addDataButtonMinimize();
+      showGroupDataButton();
     }
 
     if (!noPopup) {
