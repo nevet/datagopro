@@ -117,21 +117,6 @@ function findGroupEnd(arr) {
 
 $(function() {
 
-	$(document).on("click","#groupbutton>i,#groupbutton>p", function(){
-		if (grouparray.length < 2) {
-			alert("You have less than two portions of data, which cannot be grouped.");
-		}
-		else {
-		    $("#grouppopup").bPopup({ //uses jQuery easing plugin
-		    speed: 500,
-		    transition: 'slideDown',
-		    transitionClose: 'slideUp'});
-		    $("#from").children().remove();
-		    $("#to").children().remove();
-		    $("#repeatGroup").val("10");
-		    fillFromTo();
-		}
-	});
 	$(document).on("click", ".group-info .btn-delete", function(e) {
 		var group = $(e.target);
 		deleteGroup(group.attr("start"), group.attr("endding"));

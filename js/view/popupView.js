@@ -264,7 +264,7 @@
     $("#popup select").attr("disabled", false);
     
     popup.bPopup({
-      speed: 300,
+      speed: 200,
       transition: 'slideDown',
       transitionClose: 'fadeIn',
       onClose: function () {

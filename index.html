@@ -156,27 +156,26 @@
     </div>
     
     <div id="grouppopup" style="display:none">
-      <div class="from form-inline">
+      <div class="grp-popup-ctrl form-inline">
           <label> From: </label>
           <select id="from"class='grp-from form-control' onchange="adjustTo(this)" style="width:100px">
-                
           </select>
       </div>
 
-      <div class = "to form-inline">
+      <div class = "grp-popup-ctrl form-inline">
          <label> To: </label>
           <select id="to" class='grp-to form-control' onchange="adjustFrom(this)"style="width: 100px">
                 
           </select>
       </div>
 
-      <div class = "grouprepeat form-inline">
+      <div class = "grp-popup-ctrl form-inline">
          <label> Repeat: </label>
          <input id="repeatGroup" class='repeattime grp-rep form-control' type='number' min='1' style="width: 100px">
          <label> times. </label>
       </div>
       
-      <div class="groupcanok row popup-btn">
+      <div class="grp-popup-ctrl row popup-btn">
             <button class="btn btn-danger cancel" onClick="groupCancelled()">Cancel</button>
             <button class="btn btn-primary ok" value="graph" onClick="groupDone()">OK</button>
       </div>
@@ -536,14 +535,13 @@
     <script src='js/view/myinputView.js'></script>
     <script src='js/view/popinputView.js'></script>
     <script aysnc src='js/view/popupView.js'></script>
+    <script aysnc src='js/view/popupGroupView.js'></script>
 
     <script aysnc src='js/controller/controller.js'></script>
     <script aysnc src='js/controller/dataSessionController.js'></script>
     <script aysnc src='js/controller/previewController.js'></script>
     <script aysnc src='js/controller/popupController.js'></script>
     
-    <script async src='js/group.js'></script>
-    <script async src='js/grouplogic.js'></script>
     <script async src="js/tabcontent.js"></script>
     <script async src="js/tabHelp.js"></script>
   </body>

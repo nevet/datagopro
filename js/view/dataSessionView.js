@@ -113,12 +113,21 @@
     }
   }
 
-  function hideGroupDataButton () {
-    groupDataButton.addClass("hide");
-  }
-
   function getEntry(index) {
     return $(dataField.children(".data-block")[index]);
+  }
+
+  function graphInfoMessage(object) {
+    var string;
+
+    string = "<b>Graph</b> with " + object.node + 
+          " nodes and " + object.edge + " edges";
+
+    return string;
+  }
+
+  function hideGroupDataButton() {
+    groupDataButton.addClass("hide");
   }
 
   function numberInfoMessage(object) {
@@ -142,7 +151,7 @@
     return string;
   }
 
-  function removeEntry (index) {
+  function removeEntry(index) {
     if (index == undefined) {
       dataField.children().last().remove();
     } else {
@@ -151,9 +160,13 @@
 
     renumberDatablocks();
 
-    if (dataField.children().length == 0) {
-      addDataButtonMaximize();
+    var remainEntries = dataField.children().length;
+
+    if (remainEntries == 1) {
       hideGroupDataButton();
+    } else
+    if (remainEntries == 0) {
+      addDataButtonMaximize();
     }
   }
 
@@ -177,15 +190,6 @@
     return string;
   }
 
-  function graphInfoMessage(object) {
-    var string;
-
-    string = "<b>Graph</b> with " + object.node + 
-          " nodes and " + object.edge + " edges";
-
-    return string;
-  }
-
   dataSessionView.addEntry = function (noPopup) {
     // add the data block into data field
     var dataBlock = createDataBlock();
@@ -196,9 +200,11 @@
     // scroll to bottom
     dataField.scrollTop(dataField[0].scrollHeight);
 
-    // if this is the first entry, minimize add data area
+    // if this is the first entry, minimize add data area and show group data button
     if (index == 0) {
       addDataButtonMinimize();
+    } else
+    if (index == 1) {
       showGroupDataButton();
     }
 

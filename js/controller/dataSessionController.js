@@ -90,6 +90,11 @@
     dataSession.remove(index);
   });
 
+  // group data
+  $("#groupbutton i,#groupbutton p").on("click", function () {
+    popupGroupView.showPopup();
+  });
+
   // hover on back reference
   $("#data-field").on("mouseenter", ".data-block-info .fa-stack", dataSessionView.hoverEntryBackrefIn)
                   .on("mouseleave", ".data-block-info .fa-stack", dataSessionView.hoverEntryBackrefOut);

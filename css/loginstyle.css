@@ -28,7 +28,7 @@
   overflow: hidden;
 }
 
-.from, .to, .grouprepeat, .groupcanok{
+.grp-popup-ctrl{
   padding:4px;
 }
 
